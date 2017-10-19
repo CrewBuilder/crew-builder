@@ -1,12 +1,12 @@
-# Project Name
+> # Tribe Builder
 
-> Pithy project description
+> Build and cultivate a street team for grass-roots support
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Iona Olive
+  - __Scrum Master__: Zack Biernat
+  - __Development Team Members__: Ed Plato, Meghana Sarikonda
 
 ## Table of Contents
 
@@ -25,8 +25,8 @@
 ## Requirements
 
 - Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
+- React Native
+- Firebase
 - etc
 - etc
 
@@ -44,9 +44,11 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/TribeIO/Tribe-Builder/issues)
 
 
 ## Contributing
 
 See [CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines.
+
+> Written with [StackEdit](https://stackedit.io/).
