@@ -1,0 +1,24 @@
+{
+  "name": "crew-builder",
+  "version": "1.0.0",
+  "description": "Build and cultivate grass-roots support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrewBuilder/crew-builder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CrewBuilder/crew-builder/issues"
+  },
+  "homepage": "https://github.com/CrewBuilder/crew-builder#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
