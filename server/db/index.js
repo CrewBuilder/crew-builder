@@ -21,4 +21,4 @@ db
     console.error('Unable to connect to the database:', err);
   });
 
-exports = db;
+exports.db = db;
