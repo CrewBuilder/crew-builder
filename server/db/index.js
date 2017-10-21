@@ -1,6 +1,7 @@
 const sequelize = require('sequelize');
+require('dotenv').config();
 
-const db = new sequelize('crewbuilder', 'meghanasarikonda', '', {
+const db = new sequelize('crewbuilder', process.env.DB_USER, process.env.DB_PASSWORD, {
   host: 'localhost',
   dialect: 'postgres',
 
