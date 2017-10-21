@@ -1,5 +1,6 @@
 const db = require('../index.js');
 const Sequelize = require('sequelize');
+const Crew = require('./Crew');
 
 const User = db.db.define('user', {
   name: Sequelize.STRING
