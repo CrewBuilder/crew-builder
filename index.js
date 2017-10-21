@@ -11,11 +11,8 @@ const app = express();
 app.use(express.static((__dirname + '/client/public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
 
-// ROUTES
-app.get('*', (req, res) => {
-  res.send('Server is Running');
-});
 
 // PASSPORT START
 passport.serializeUser(function(user, done) {
@@ -41,11 +38,26 @@ passport.use(new FacebookStrategy({
     // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
     //   return cb(err, user);
     // });
+    return cb(null, profile)
   }
 ));
 
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 // PASSPORT END
 
+// ROUTES
+app.get('*', (req, res) => {
+  res.send('Server is Running');
+});
 // CHECK PORT AND START SERVER
 const port = process.env.PORT || 3000;
 

@@ -14,31 +14,40 @@ export default class App extends React.Component {
 
   render() {
     function checkLoginState(e) {
-      e.preventDefault()
+      e.preventDefault();
       FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
       });
     }
-    function componentClicked(e) {
+    function loginClickHandler(e) {
+      e.preventDefault();
+      window.location = "/auth/facebook"
       console.log('Clicked login!');
     }
     function logoutClickHandler(e) {
-      e.preventDefault()
-      FB.logout(function(response) {
-        console.log('logged out', response);
-      });
+      e.preventDefault();
+      // TODO: Make this logout work correctly
+      // FB.logout(function(response) {
+      //   console.log('logged out', response);
+      // });
     }
+
     return(
       <div>
-        <FacebookLogin
-          appId="356644548109752" //TODO: hide this potentially sensitive info
-          autoLoad={true}
-          fields="name,email,picture" // TODO: subject to change if different fields are required
-          onClick={componentClicked}
-          callback={responseFacebook} />
-        <button onClick={logoutClickHandler}>Logout</button>
+
+        <button onClick={loginClickHandler}>Login with FB</button>
+
+        <button onClick={logoutClickHandler}>Logout of FB</button>
       </div>
     )
   }
 }
+/* Old FB button
+    <FacebookLogin
+        appId="356644548109752" //TODO: hide this potentially sensitive info
+        autoLoad={true}
+        fields="name,email,picture" // TODO: subject to change if different fields are required
+        onClick={loginClickHandler}
+        callback={responseFacebook} />
+*/
 
