@@ -1,8 +1,6 @@
 ## Mac OSX ##
 .DS_Store
 
-### node etc ###
-
 # Logs
 logs
 *.log
@@ -24,7 +22,6 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 dist/
-client/compiled/
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
