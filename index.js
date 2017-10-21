@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
-
+require('dotenv').config();
 
 // INIT APP
 const app = express();
