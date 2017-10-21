@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 // ROUTES
 app.get('*', (req, res) => {
-  res.send('Server Running');
+  res.send('Server is Running');
 });
 
 // PASSPORT START
