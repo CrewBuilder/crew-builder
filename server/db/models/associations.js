@@ -3,7 +3,14 @@ const sequelize = require('sequelize')
 const Users = require('./Users');
 const Crews = require('./Crew');
 
-const Users_Crews = db.define('users_crews', {});
+const Users_Crews = db.define('users_crews', {
+  id: {
+    type: sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  }
+});
 
 Promise.all([Users, Crews])
   .then(values => {
