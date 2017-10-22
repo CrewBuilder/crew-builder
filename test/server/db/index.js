@@ -2,7 +2,7 @@ const sequelize = require('sequelize');
 require('dotenv').config();
 const expect = require('chai').expect;
 
-describe('Postgres crewbuilder db', () => {
+describe('Postgres crewbuilder db', function() {
   var dbConnection;
 
   beforeEach(function(done) {
