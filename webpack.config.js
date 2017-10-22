@@ -1,14 +1,44 @@
-const path = require('path');
+const
+  path = require('path'),
+  webpack = require('webpack');
+
 module.exports = {
-  entry: './client/compiled/index.js',
+  entry: './client/components/index.jsx',
+  devtool: 'inline-source-map',
+  watch: true,
   output: {
-    path: path.resolve('client/public/dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'client/public/dist')
   },
   module: {
-    loaders: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
-    ]
-  }
-}
+    rules: [
+      {
+        test: /\.jsx$/,
+        exclude: [/node_modules/],
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: ['env', 'react']
+          },
+        }],
+      }, {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      }, {
+        test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'file-loader'
+        ]
+      }
+    ],
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      React: 'react',
+      ReactDOM: 'react-dom'
+    })
+  ]
+};
