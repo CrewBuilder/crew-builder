@@ -86,7 +86,7 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log('Server Started: Listening on port:' + port);
+  console.log('SERVER STARTED: Listening on port:' + port);
 });
 
 module.exports = app;
