@@ -1,9 +1,9 @@
 const db = require('../index.js');
 const Sequelize = require('sequelize');
-const Crew = require('./Crew');
+// const Crew = require('./Crew');
 
-const User = db.db.define('user', {
-  name: Sequelize.STRING
+const User = db.define('user', {
+  facebook: Sequelize.JSON
 });
 
 // force: true will drop the table if it already exists
@@ -11,4 +11,4 @@ User.sync({
   force: true
 });
 
-exports.User = User;
+module.exports = User;
