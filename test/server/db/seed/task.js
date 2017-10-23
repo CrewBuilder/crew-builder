@@ -683,7 +683,7 @@ module.exports = [
     "expiry": "2017-09-15T00:06:43-07:00",
     "limit": 88
   },
-  {,
+  {
     "name": "ac",
     "description": "pretium aliquet, metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis,",
     "points": 55,
