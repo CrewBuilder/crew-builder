@@ -1,11 +1,11 @@
 const db = require('../index.js');
 const Sequelize = require('sequelize');
 
-const Task = db.db.define('task', {
+const Task = db.define('task', {
   name: Sequelize.STRING,
   description: Sequelize.STRING,
-  points: Sequelize.Integer,
-  limit: Sequelize.,
+  points: Sequelize.INTEGER,
+  limit: Sequelize.INTEGER,
   expiry: Sequelize.DATE
 });
 
@@ -14,4 +14,4 @@ Task.sync({
   force: true
 });
 
-exports.Task = Task;
+module.exports = Task;
