@@ -1,29 +1,37 @@
 const db = require('../index.js');
-const sequelize = require('sequelize');
-const Users = require('./User');
-const Tasks = require('./Task');
+const Sequelize = require('sequelize');
+const User = require('./User');
+const Task = require('./Task');
 
-const Users_Tasks = db.define('users_tasks', {
+const UsersTasks = db.define('users_tasks', {
   id: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
+  },
+  complete: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  verified: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 });
 
 // create a junction table when both Users and Tasks are resolved
-Promise.all([Users, Tasks])
+Promise.all([User, Task])
   .then(values => {
-    Users.belongsToMany(Tasks, {through: Users_Tasks, foreignKey: 'userId'});
-    Tasks.belongsToMany(Users, {through: Users_Tasks, foreignKey: 'taskId'});
+    User.belongsToMany(Task, {through: UsersTasks, foreignKey: 'userId'});
+    Task.belongsToMany(User, {through: UsersTasks, foreignKey: 'taskId'});
   })
   .catch(error => {
-    console.log('error!')
-  })
+    console.log('error!');
+  });
 
 db.sync({
   force: true
 });
 
-module.exports = Users_Tasks;
+module.exports = UsersTasks;

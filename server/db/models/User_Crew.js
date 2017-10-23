@@ -1,29 +1,35 @@
 const db = require('../index.js');
-const sequelize = require('sequelize')
-const Users = require('./User');
-const Crews = require('./Crew');
+const Sequelize = require('sequelize');
+const User = require('./User');
+const Crew = require('./Crew');
 
-const Users_Crews = db.define('users_crews', {
+const UsersCrews = db.define('users_crews', {
   id: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
-  }
+  },
+  points: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  achievement: Sequelize.STRING,
+  role: Sequelize.STRING
 });
 
 // create a junction table when both Users and Crews are resolved
-Promise.all([Users, Crews])
+Promise.all([User, Crew])
   .then(values => {
-    Users.belongsToMany(Crews, {through: Users_Crews, foreignKey: 'userId'});
-    Crews.belongsToMany(Users, {through: Users_Crews, foreignKey: 'crewId'});
+    User.belongsToMany(Crew, {through: UsersCrews, foreignKey: 'userId'});
+    Crew.belongsToMany(User, {through: UsersCrews, foreignKey: 'crewId'});
   })
   .catch(error => {
-    console.log('error!')
-  })
+    console.log('error!');
+  });
 
 db.sync({
   force: true
 });
 
-module.exports = Users_Crews;
+module.exports = UsersCrews;
