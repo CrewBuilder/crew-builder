@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 
+import Landing from './Landing.jsx';
 import Dashboard from './dashboard/dashboard.jsx';
 import Sidebar from './dashboard/sidebar.jsx';
 
@@ -21,7 +22,7 @@ export default class App extends Component {
             this.state.isLoggedIn ? (
               <Redirect to="/dashboard"/>
             ) : (
-              <Sidebar/>
+              <Landing/>
             )
           )}/>
           <Route path="/dashboard" component={Dashboard}/>
