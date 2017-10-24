@@ -105,6 +105,7 @@ module.exports = {
     })
     .then((data) => {
       console.log(data);
+      return data;
       // REDIRECT IF CAN'T GET CURRENTUSER!!
     }).catch((error) => console.log('ERROR', error));
   }
