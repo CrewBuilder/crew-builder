@@ -28,17 +28,9 @@ let corsOption = {
 };
 app.use(cors(corsOption));
 
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 //Add ROUTES
 app.use(fbRouting);
 app.use(modelRouting);
-
 
 // ROUTES
 app.get('*', (req, res) => {

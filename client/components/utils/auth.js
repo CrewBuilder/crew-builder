@@ -50,13 +50,9 @@ module.exports = {
   // trigger FB login dialog popup and auth with /auth/facebook API route
   // add localStorage 'id_token'
   Login: () => {
-    console.log('LOGIN TRIGGERED');
     return new Promise((resolve, reject) => {
-      console.log('LOGIN PROMISE INITIALIZED');
       FB.login(result => {
-        console.log('LOGIN FB.LOGIN RESULT:', result);
         if(result.authResponse) {
-          // CORS ???
           var options = {
             method: 'POST',
             body: JSON.stringify({access_token: result.authResponse.accessToken}),
@@ -64,12 +60,10 @@ module.exports = {
               'Content-Type': 'application/json'
             })
           };
-          console.log(options);
 
           fetch('http://localhost:3000/auth/facebook', options)
-          .then((res) => res.json())
+          // .then((res) => res.json())
           .then((data) => {
-            console.log('LOGIN FETCH RES:', data);
             var token = data.headers.get('x-auth-token');
             if(token) {
               localStorage.setItem('id_token', token);
@@ -85,26 +79,34 @@ module.exports = {
   },
   // logout via FB method and removing localStorage 'id_token'
   Logout: () => {
-    return new Promise((resolve, reject) => {
-      FB.logout((response) => {
-        localStorage.removeItem('id_token');
-        response.authResponse ? resolve(response) : reject(response);
-      });
-    });
+    // LOOK INTO LOGGING OUT VIA FACEBOOK SERVER SIDE LATER
+
+    // return new Promise((resolve, reject) => {
+    //   FB.logout((response) => {
+    //     localStorage.removeItem('id_token');
+    //     response.authResponse ? resolve(response) : reject(response);
+    //   });
+    // });
+    localStorage.removeItem('id_token');
+    // REDIRECT
   },
   // check current user from /auth/me API route
   GetCurrentUser: () => {
-    let myHeaders = new Headers();
     let options = {
       method: 'GET',
-      headers: myHeaders,
-      mode: 'cors'
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('id_token')
+      })
     };
-    return new Promise((resolve, reject) => {
-      return fetch(`http://localhost:3000/auth/me`, options).then(response => {
-        resolve(response.json());
-      }).catch(() => reject());
-    });
+    return fetch('http://localhost:3000/auth/me', options)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      // REDIRECT IF CAN'T GET CURRENTUSER!!
+    }).catch((error) => console.log('ERROR', error));
   }
 }
 
