@@ -5,17 +5,26 @@ let router = express.Router();
 let FacebookTokenStrategy = require('passport-facebook-token');
 let passport = require('passport')
 let User = require('./../../db/models/User.js');
+let upsertFbUser = require('./../../db/utils/userHelpers.js').upsertFbUser;
+let findUserById = require('./../../db/utils/userHelpers.js').findUserById;
 
+// Define strategy
 passport.use(new FacebookTokenStrategy({
   clientID: process.env.FB_CLIENT_ID,
   clientSecret: process.env.FB_SECRET,
 }, function (accessToken, refreshToken, profile, done) {
-  // TODO: must define upsertFbUser method. This will find or create a new user with facebook
-  // User.upsertFbUser(accessToken, refreshToken, profile, function(err, user) {
-  //   return done(err, user);
-  // });
+  //make profile data manageable in our DB
+  let userProfile = {
+    FACEBOOK_ID: profile.id,
+    DISPLAY_NAME: profile.name,
+    EMAIL: profile.emails[0].value,
+    IMAGE_URL: profile.photos[0].value,
+    TOKEN: accessToken
+  }
+  upsertFbUser(userProfile, done);
 }));
 
+// Hashes a unique JWT for our user
 let createToken = (auth) => {
   return jwt.sign({
     id: auth.id
@@ -24,16 +33,19 @@ let createToken = (auth) => {
   });
 };
 
+// Sets req.token property
 let generateToken = (req, res, next) => {
-  req.token = create(req.auth);
+  req.token = createToken(req.auth);
   next();
 }
 
+// Sends token to client
 let sendToken = (req, res) => {
   res.setHeader('x-auth-token', req.token);
   res.status(200).send(req.auth);
 };
 
+// Matches a user's token to ours
 let authenticate = expressJwt({
   secret: 'crew-bldr-secret',
   requestProperty: 'auth',
@@ -44,41 +56,44 @@ let authenticate = expressJwt({
   }
 });
 
+// Handles /auth route for facebook
 router.route('/auth/facebook')
-  .post(passport.authenticate('facebook-token', {session: false}), (req, res, next) => {
-    if (!req.user) {
-      return res.status(401, 'User not authenticated');
+.post(passport.authenticate('facebook-token', {session: false}), (req, res, next) => {
+  if (!req.user) {
+    return res.status(401, 'User not authenticated');
+  } else {
+    req.auth = {
+      id: req.user.id
+    };
+    next();
+  }
+
+}, generateToken, sendToken);
+
+// Returns User data by id
+let getCurrentUser = (req, res, next) => {
+  findUserById(req.auth.id, (err, user) => {
+    if (err) {
+      next(err);
     } else {
-      req.auth = {
-        id: req.user.id
-      };
+      req.user = user;
       next();
     }
+  });
+}
 
-  }, generateToken, sendToken);
+let getOne = (req, res) => {
+  let user = req.user.toObject();
+  // TODO: Determine if we need any of this 'facebook' data sent to the client. Probably we want to keep it here
+  delete user['facebook'];
+  // TODO: Determine if this makes things cleaner
+  //delete user['__v'];
 
-  let getCurrentUser = (req, res, next) => {
-    // TODO: Find user by ID helper function
-    //User.findById(req.auth.id, function (err, user) {
-      // if (err) {
-      //   next(err)
-      // } else {
-      //   req.user = user;
-      //   next();
-      // }
-    // })
-  }
+  res.json(user);
+}
 
-  let getOne = (req, res) => {
-    let user = req.user.toObject();
-
-    delete user['facebookProvider'];
-    delete user['__v'];
-
-    res.json(user);
-  }
-
-  router.route('/auth/me')
-  .get(authenticate, getCurrentUser, getOne);
+// Expects req.user.id to be defined. Queries DB and returns the User's data
+router.route('/auth/me')
+.get(authenticate, getCurrentUser, getOne);
 
 module.exports = router;
