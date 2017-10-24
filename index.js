@@ -23,6 +23,7 @@ let corsOption = {
 };
 app.use(cors(corsOption));
 
+
 // MIDDLEWARE
 app.use(express.static((__dirname + '/client/public')));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +33,6 @@ app.use(bodyParser.json());
 //Add ROUTES
 app.use(fbRouting);
 app.use(modelRouting);
-
 
 // ROUTES
 app.get('*', (req, res) => {

@@ -5,6 +5,7 @@ require('dotenv').config();
 const db = new sequelize('crewbuilder', process.env.DB_USER, process.env.DB_PASSWORD, {
   host: 'localhost',
   dialect: 'postgres',
+  port: process.env.DB_PORT,
 
   pool: {
     max: 5,

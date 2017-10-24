@@ -1,12 +1,12 @@
 {
   "name": "crew-builder",
   "version": "1.0.0",
-  "description": "Build and cultivate grass-roots support",
+  "description": "Build and cultivate grass roots support",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/**/*.js --exit",
     "start": "nodemon index.js",
-    "build": "webpack"
+    "build": "webpack --watch"
   },
   "repository": {
     "type": "git",
