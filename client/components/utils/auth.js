@@ -47,6 +47,27 @@ module.exports = {
   // trigger FB login dialog popup and auth with /auth/facebook API route
   // add localStorage 'id_token'
   Login: () => {
+
+    // var options = {
+    //   method: 'POST',
+    //   body: JSON.stringify({hey: '1234125'}),
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json'
+    //   })
+    // };
+
+    // // this console.log is valuable when working with login/register
+    // // console.log('POST SUBMITTED, credentials');
+    // fetch('http://localhost:3000/auth/facebook', options)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     callback(data);
+    //   })
+    //   .catch((errors) => {
+    //     console.log('Login Error: ', errors);
+    //   })
+
+
     console.log('LOGIN TRIGGERED');
     return new Promise((resolve, reject) => {
       console.log('LOGIN PROMISE INITIALIZED');
@@ -54,22 +75,24 @@ module.exports = {
         console.log('LOGIN FB.LOGIN RESULT:', result);
         if(result.authResponse) {
           // CORS ???
-          let myHeaders = new Headers();
-          let options = {
+          var options = {
             method: 'POST',
-            headers: myHeaders,
-            mode: 'cors',
-            access_token: result.authResponse.accessToken
+            body: JSON.stringify({access_token: result.authResponse.accessToken}),
+            headers: new Headers({
+              'Content-Type': 'application/json'
+            })
           };
-          // return fetch(`http://localhost:3000/auth/facebook`, {access_token: result.authResponse.accessToken })
-          return fetch(`http://localhost:3000/auth/facebook`, options)
-          .then((response) => {
-            console.log('LOGIN FETCH RES:', response);
-            var token = response.headers.get('x-auth-token');
+          console.log(options);
+
+          fetch('http://localhost:3000/auth/facebook', options)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log('LOGIN FETCH RES:', data);
+            var token = data.headers.get('x-auth-token');
             if(token) {
               localStorage.setItem('id_token', token);
             }
-            resolve(response.json());
+            resolve(data);
           })
           .catch(() => reject());
         } else {
