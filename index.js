@@ -6,21 +6,19 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const fbRouting = require('./server/auth/utils/facebookTokens.js');
 const modelRouting = require('./server/db/routing/config.js');
-let cors = require('cors');
+const cors = require('cors');
+const passportConfig = require('./server/auth/passport.js');
 require('dotenv').config();
 
-
+passportConfig();
 // INIT APP
 const app = express();
 
 // MIDDLEWARE
 app.use(express.static((__dirname + '/client/public')));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(session({secret: 'build crew', resave: false, saveUninitialized: false}));
-app.use(passport.initialize());
-app.use(passport.session());
+
 //CORS config
 let corsOption = {
   origin: true,

@@ -1,28 +1,12 @@
-let jwt = require('jsonwebtoken');
-let expressJwt = require('express-jwt');
-let express = require('express');
-let router = express.Router();
-let FacebookTokenStrategy = require('passport-facebook-token');
-let passport = require('passport')
-let User = require('./../../db/models/User.js');
-let upsertFbUser = require('./../../db/utils/userHelpers.js').upsertFbUser;
-let findUserById = require('./../../db/utils/userHelpers.js').findUserById;
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
+const express = require('express');
+const router = express.Router();
+const FacebookTokenStrategy = require('passport-facebook-token');
+const passport = require('passport')
+const findUserById = require('./../../db/utils/userHelpers.js').findUserById;
 
-// Define strategy
-passport.use(new FacebookTokenStrategy({
-  clientID: process.env.FB_CLIENT_ID,
-  clientSecret: process.env.FB_SECRET,
-}, function (accessToken, refreshToken, profile, done) {
-  //make profile data manageable in our DB
-  let userProfile = {
-    FACEBOOK_ID: profile.id,
-    DISPLAY_NAME: profile.name,
-    EMAIL: profile.emails[0].value,
-    IMAGE_URL: profile.photos[0].value,
-    TOKEN: accessToken
-  }
-  upsertFbUser(userProfile, done);
-}));
+
 
 // Hashes a unique JWT for our user
 let createToken = (auth) => {
