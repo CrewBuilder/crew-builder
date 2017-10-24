@@ -33,7 +33,6 @@ app.use(bodyParser.json());
 app.use(fbRouting);
 app.use(modelRouting);
 
-
 // ROUTES
 app.get('*', (req, res) => {
   res.send('Server is Running');

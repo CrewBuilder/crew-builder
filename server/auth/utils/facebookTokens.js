@@ -1,12 +1,11 @@
-const jwt = require('jsonwebtoken');
-const expressJwt = require('express-jwt');
-const express = require('express');
-const router = express.Router();
-const FacebookTokenStrategy = require('passport-facebook-token');
-const passport = require('passport')
-const findUserById = require('./../../db/utils/userHelpers.js').findUserById;
-
-
+let jwt = require('jsonwebtoken');
+let expressJwt = require('express-jwt');
+let express = require('express');
+let router = express.Router();
+let passport = require('passport')
+let User = require('./../../db/models/User.js');
+let upsertFbUser = require('./../../db/utils/userHelpers.js').upsertFbUser;
+let findUserById = require('./../../db/utils/userHelpers.js').findUserById;
 
 // Hashes a unique JWT for our user
 let createToken = (auth) => {
@@ -67,9 +66,9 @@ let getCurrentUser = (req, res, next) => {
 }
 
 let getOne = (req, res) => {
-  let user = req.user.toObject();
+  let user = req.user;
   // TODO: Determine if we need any of this 'facebook' data sent to the client. Probably we want to keep it here
-  delete user['facebook'];
+  delete user['facebook']['TOKEN'];
   // TODO: Determine if this makes things cleaner
   //delete user['__v'];
 
