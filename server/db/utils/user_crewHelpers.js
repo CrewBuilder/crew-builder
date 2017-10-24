@@ -6,7 +6,8 @@ exports.getCrewsByUser = (id, cb) => {
     where: {
       userId: id
     }
-  }, (err, crews) => {
+  })
+  .then(crews => {
     if (!crews.length) {
       cb(err, null);
     } else {

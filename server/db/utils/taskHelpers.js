@@ -19,13 +19,14 @@ exports.findAllTasksByIds = (ids, cb) => {
         $in: ids
       }
     }
-  }, (err, tasksData) => {
+  })
+  .then(tasksData => {
     if (!tasksData.length) {
       cb(err, null);
     } else {
       cb(null, tasksData);
     }
-  });
+  })
 }
 
 
