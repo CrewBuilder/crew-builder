@@ -18,10 +18,4 @@ Promise.all([Crew, Task])
   })
   .catch(err => console.log('Error in crew-task association'));
 
-
-// force: true will drop the table if it already exists
-// Task.sync({
-//   force: true
-// });
-
 module.exports = Task;

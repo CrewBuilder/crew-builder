@@ -5,6 +5,7 @@ const db = new sequelize('crewbuilder', process.env.DB_USER, process.env.DB_PASS
   host: 'localhost',
   dialect: 'postgres',
   port: process.env.DB_PORT,
+  logging: false,
 
   pool: {
     max: 5,

@@ -9,9 +9,4 @@ const Reward = db.define('rewards', {
   expiry: Sequelize.DATE
 });
 
-// force: true will drop the table if it already exists
-Reward.sync({
-  force: true
-});
-
 module.exports = Reward;

@@ -9,9 +9,4 @@ const Crew = db.define('crew', {
 });
 
 
-// force: true will drop the table if it already exists
-// Crew.sync({
-//   force: true
-// });
-
 module.exports = Crew;

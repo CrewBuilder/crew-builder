@@ -7,9 +7,4 @@ const User = db.define('user', {
   facebook: Sequelize.JSONB
 });
 
-// force: true will drop the table if it already exists
-// User.sync({
-//   force: true
-// });
-
 module.exports = User;
