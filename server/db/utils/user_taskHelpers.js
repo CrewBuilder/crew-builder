@@ -7,11 +7,12 @@ exports.getTasksByUser = (id, cb) => {
     where: {
       userId: id
     }
-  }, (err, tasksData) => {
+  })
+  .then(tasksData => {
     if (!tasksData.length) {
       cb(err, null);
     } else {
-      cb(null, tasksData);
+
     }
   });
 }

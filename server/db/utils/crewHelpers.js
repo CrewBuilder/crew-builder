@@ -20,11 +20,12 @@ exports.findAllCrewsByIds = (ids, cb) => {
         $in: ids
       }
     }
-  }, (err, crewsData) => {
+  })
+  .then(crewsData => {
     if (!crewsData.length) {
       cb(err, null);
     } else {
       cb(null, crewsData);
     }
-  });
+  })
 }
