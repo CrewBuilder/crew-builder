@@ -39,7 +39,7 @@ router.get('/user/tasks', (req, res) => {
   });
 });
 
-// '/crew/tasks' endpoint returns ALL crew's tasks. Will have to filter by conpletion using user data on the front end.
+// '/crew/tasks' endpoint returns ALL crew's tasks. Will have to filter by completion using user data on the front end.
 router.get('/crew/tasks', (req, res) => {
   // Expects req.body.crewId
   let id = req.body.crewId;
