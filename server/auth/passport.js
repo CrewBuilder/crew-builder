@@ -10,6 +10,9 @@ module.exports = () => {
   clientSecret: process.env.FB_SECRET,
   },
   function (accessToken, refreshToken, profile, done) {
+    console.log('ACCESS TOKEN:', accessToken);
+    console.log('REFRESH TOKEN:', refreshToken);
+    console.log('PROFILE:', profile);
   //make profile data manageable in our DB
     let userProfile = {
       FACEBOOK_ID: profile.id,

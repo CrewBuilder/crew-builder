@@ -4,6 +4,9 @@
 // -cors support needed client side or will npm cors handle that?
 // -add dynamic localhost/process.env.PORT access for fetch requests
 
+// authResponse will be null or undefined if not there
+// status "connected" OR IT WILL BE "unknown" IF NOT LOGGED IN
+
 module.exports = {
   // initialize Facebook SDK
   Init: () => {
@@ -47,27 +50,6 @@ module.exports = {
   // trigger FB login dialog popup and auth with /auth/facebook API route
   // add localStorage 'id_token'
   Login: () => {
-
-    // var options = {
-    //   method: 'POST',
-    //   body: JSON.stringify({hey: '1234125'}),
-    //   headers: new Headers({
-    //     'Content-Type': 'application/json'
-    //   })
-    // };
-
-    // // this console.log is valuable when working with login/register
-    // // console.log('POST SUBMITTED, credentials');
-    // fetch('http://localhost:3000/auth/facebook', options)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     callback(data);
-    //   })
-    //   .catch((errors) => {
-    //     console.log('Login Error: ', errors);
-    //   })
-
-
     console.log('LOGIN TRIGGERED');
     return new Promise((resolve, reject) => {
       console.log('LOGIN PROMISE INITIALIZED');
