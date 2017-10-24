@@ -4,7 +4,8 @@ const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const fbRouting = require('./server/auth/utils/facebookTokens');
+const fbRouting = require('./server/auth/utils/facebookTokens.js');
+const modelRouting = require('./server/db/routing/config.js');
 let cors = require('cors');
 require('dotenv').config();
 
@@ -28,8 +29,10 @@ let corsOption = {
   exposedHeaders: ['x-auth-token']
 };
 app.use(cors(corsOption));
+
 //Add ROUTES
 app.use(fbRouting);
+app.use(modelRouting);
 
 
 // ROUTES
