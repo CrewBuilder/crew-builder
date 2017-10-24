@@ -28,8 +28,8 @@ Promise.all([User, Crew])
     console.log('error!');
   });
 
-db.sync({
-  force: true
-});
+// db.sync({
+//   force: true
+// });
 
 module.exports = UsersCrews;

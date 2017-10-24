@@ -1,4 +1,4 @@
-module.exports.userData = [
+module.exports = [
   {
     facebook: '{"DISPLAY_NAME": "ionajewel", "EMAIL": "ipjwilli@gmail.com", "IMAGE_URL": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg", "FACEBOOK_ID": ""}'
   },

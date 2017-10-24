@@ -30,8 +30,8 @@ Promise.all([User, Task])
     console.log('error!');
   });
 
-db.sync({
-  force: true
-});
+// db.sync({
+//   force: true
+// });
 
 module.exports = UsersTasks;

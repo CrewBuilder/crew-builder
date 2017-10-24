@@ -1,5 +1,6 @@
 const db = require('../index.js');
 const Sequelize = require('sequelize');
+const Crew = require('./Crew.js');
 
 const Task = db.define('task', {
   name: Sequelize.STRING,
@@ -9,11 +10,18 @@ const Task = db.define('task', {
   expiry: Sequelize.DATE
 });
 
+// create an association when both Crew and Task are resolved
+Promise.all([Crew, Task])
+  .then(values => {
+    Crew.hasMany(Task);
+    Task.belongsTo(Crew);
+  })
+  .catch(err => console.log('Error in crew-task association'));
 
 
 // force: true will drop the table if it already exists
-Task.sync({
-  force: true
-});
+// Task.sync({
+//   force: true
+// });
 
 module.exports = Task;

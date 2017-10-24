@@ -7,8 +7,8 @@ const User = db.define('user', {
 });
 
 // force: true will drop the table if it already exists
-User.sync({
-  force: true
-});
+// User.sync({
+//   force: true
+// });
 
 module.exports = User;
