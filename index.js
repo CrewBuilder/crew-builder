@@ -31,26 +31,6 @@ app.use(cors(corsOption));
 //Add ROUTES
 app.use(fbRouting);
 
-// TODO: this may be important for requesting more permissions from FB
-// passport.use(new FacebookStrategy({
-//     clientID: process.env.FB_CLIENT_ID,
-//     clientSecret: process.env.FB_SECRET,
-//     callbackURL: "/auth/facebook/callback",
-//     profileFields: ['id', 'photos', 'emails', 'displayName'],
-//     scope: ['manage_pages']
-//   },
-//   function(accessToken, refreshToken, profile, cb) {
-//     console.log('AccessToken', accessToken);
-//     // TODO: Add CRUD database command here
-//     //                                   |
-//     //                                   v
-//     // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-//     //   return cb(err, user);
-//     // });
-//     return cb(null, profile)
-//   }
-// ));
-
 
 // ROUTES
 app.get('*', (req, res) => {
