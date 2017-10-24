@@ -14,11 +14,6 @@ passportConfig();
 // INIT APP
 const app = express();
 
-// MIDDLEWARE
-app.use(express.static((__dirname + '/client/public')));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 //CORS config
 let corsOption = {
   origin: true,
@@ -27,6 +22,12 @@ let corsOption = {
   exposedHeaders: ['x-auth-token']
 };
 app.use(cors(corsOption));
+
+// MIDDLEWARE
+app.use(express.static((__dirname + '/client/public')));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 //Add ROUTES
 app.use(fbRouting);
