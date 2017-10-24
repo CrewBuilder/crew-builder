@@ -5,7 +5,6 @@ const
 module.exports = {
   entry: './client/components/index.jsx',
   devtool: 'inline-source-map',
-  watch: true,
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'client/public/dist')
