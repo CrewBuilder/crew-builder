@@ -37,6 +37,7 @@ export default class App extends Component {
         </Switch>
         <button onClick={Login}>facebook login</button>
         <button onClick={Logout}>facebook logout</button>
+        <button onClick={GetCurrentUser}>facebook getCurrentUser</button>
       </div>
     )
   }

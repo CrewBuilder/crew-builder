@@ -6,25 +6,20 @@ exports.upsertFbUser = (profile, cb) => {
   User.findOne(
     {
       where: {
-        facebook: {
-          FACEBOOK_ID: profile.id
-        }
+        facebookId: profile.facebookId
       }
     })
   .then(user => {
     if (!user) {
       // No user found...let's create one
-      User.create(
-      {
-        facebook: profile
-      })
+      User.create(profile)
       .then(user => {
         console.log('Created a new user', user);
         // Callback with user data
         return cb(null, user);
       });
     } else {
-      return cb(err, user);
+      return cb(err, null);
     }
   })
 }
