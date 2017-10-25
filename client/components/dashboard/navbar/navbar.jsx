@@ -26,6 +26,9 @@ export default class NavBar extends Component {
           <Navbar.Form>
             <Button type="submit">Browse</Button>
           </Navbar.Form>
+          <NavDropdown eventKey={3} title="More" id="dropdown">
+            <MenuItem eventKey={3.1}>Logout</MenuItem>
+          </NavDropdown>
         </Navbar>
       </div>
     )
