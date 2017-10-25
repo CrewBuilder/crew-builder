@@ -5,13 +5,18 @@ import Landing from './Landing.jsx';
 import Dashboard from './dashboard/dashboard.jsx';
 import Sidebar from './dashboard/sidebar.jsx';
 
-import { Init, CheckLogin, GetCurrentUser, Login, Logout } from './utils/auth.js';
+import { Init, CheckLogin, GetCurrentUser, Login, Logout } from './utils/auth.jsx';
+import PrivateRoute from './utils/private.jsx';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        isLoggedIn: false
+        isLoggedIn: false,
+      }
+
+      this.authLogin = () => {
+        return this.state.isLoggedIn;
       }
     }
 
@@ -23,22 +28,16 @@ export default class App extends Component {
 
   render() {
 
-    return (
-      <div>
-        <Switch>
-          <Route exact path="/" render={() => (
-            this.state.isLoggedIn ? (
-              <Redirect to="/dashboard"/>
-            ) : (
-              <Landing/>
-            )
-          )}/>
-          <Route path="/dashboard" component={Dashboard}/>
-        </Switch>
-        <button onClick={Login}>facebook login</button>
-        <button onClick={Logout}>facebook logout</button>
-        <button onClick={GetCurrentUser}>facebook getCurrentUser</button>
-      </div>
-    )
+      return (
+        <div>
+          <Switch>
+            <PrivateRoute exact path='/' checkAuth={this.authLogin} component={Landing} name="landing"/>
+            <PrivateRoute path='/dashboard' checkAuth={this.authLogin} component={Dashboard}/>
+          </Switch>
+          <button onClick={Login}>facebook login</button>
+          <button onClick={Logout}>facebook logout</button>
+          <button onClick={GetCurrentUser}>facebook getCurrentUser</button>
+        </div>
+      )
   }
 }
