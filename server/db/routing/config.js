@@ -54,6 +54,43 @@ router.get('/crew/tasks', (req, res) => {
   });
 });
 
+// TODO: Need to also postTask to Crew_Task join table
+let postTask = require('./../utils/taskHelpers.js').postTask;
+// '/task' endpoint POSTs a task to the task table.
+router.post('/task', (req, res) => {
+  let task = {
+    name: req.body.name,
+    description: req.body.description,
+    points: req.body.points,
+    limit: req.body.limit,
+    expiry: req.body.expiry
+  }
+  postTask(task, (err, task) => {
+    if (err) {
+      res.status(401).send('Could not post task');
+    } else {
+      res.status(200).send(task);
+    }
+  });
+});
+
+let postCrew = require('./../utils/crewHelpers.js').postCrew;
+// '/crew' endpoint POSTs a task to the crew table.
+router.post('/crew', (req, res) => {
+  let crew = {
+    name: req.body.name,
+    description: req.body.description,
+    image: req.body.image
+  }
+  postTask(crew, (err, crew) => {
+    if (err) {
+      res.status(401).send('Could not post crew');
+    } else {
+      res.status(200).send(crew);
+    }
+  });
+});
+
 
 
 module.exports = router;
