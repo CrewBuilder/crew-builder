@@ -12,7 +12,7 @@ let findAllCrewsByIds = require('./../utils/crewHelpers.js').findAllCrewsByIds;
 // '/user/crews' endpoint returns user's crew(s) data
 router.get('/user/crews', (req, res) => {
   // Expects req.user.id
-  let id = req.user.id;
+  let id = req.query.id;
   getCrewsByUser(id, (err, crewsIds) => {
     if (err) {
       res.status(401).send('User has not signed up for any crews');
@@ -27,7 +27,7 @@ router.get('/user/crews', (req, res) => {
 // '/user/tasks' endpoint returns ALL user's tasks. Will have to filter tasks by crew on the front end.
 router.get('/user/tasks', (req, res) => {
   // Expects req.user.id
-  let id = req.user.id;
+  let id = req.query.id;
   getTasksByUser(id, (err, tasks) => {
     if (err) {
       res.status(401).send('No tasks available. Try signing up for a Crew!');
@@ -42,7 +42,7 @@ router.get('/user/tasks', (req, res) => {
 // '/crew/tasks' endpoint returns ALL crew's tasks. Will have to filter by completion using user data on the front end.
 router.get('/crew/tasks', (req, res) => {
   // Expects req.body.crewId
-  let id = req.body.crewId;
+  let id = req.query.crewId;
   getTasksByCrew(id, (err, tasks) => {
     if (err) {
       res.status(401).send('No tasks available. Tell your Crew Leader to add some!');
