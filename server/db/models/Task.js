@@ -1,17 +1,16 @@
-const db = require('../index.js');
-const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  var Task = sequelize.define('Task', {
+    name: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    points: DataTypes.INTEGER,
+    limit: DataTypes.INTEGER,
+    expiry: DataTypes.DATE
+  });
 
-const Task = db.define('task', {
-  name: Sequelize.STRING,
-  description: Sequelize.STRING,
-  points: Sequelize.INTEGER,
-  limit: Sequelize.INTEGER,
-  expiry: Sequelize.DATE
-});
+  Task.associate = function(models) {
+    Task.belongsTo(models.Crew);
+    Task.belongsToMany(models.User, {through: models.User_Task, foreignKey: 'taskId'});
+  };
 
-// force: true will drop the table if it already exists
-Task.sync({
-  force: true
-});
-
-module.exports = Task;
+  return Task;
+};

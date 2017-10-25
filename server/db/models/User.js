@@ -1,14 +1,13 @@
-const db = require('../index.js');
-const Sequelize = require('sequelize');
-// const Crew = require('./Crew');
+module.exports = function(sequelize, DataTypes) {
+  var User = sequelize.define('User', {
+    facebookId: DataTypes.STRING,
+    facebook: DataTypes.JSON
+  });
 
-const User = db.define('user', {
-  facebook: Sequelize.JSON
-});
+  User.associate = function(models) {
+    User.belongsToMany(models.Task, {through: models.User_Task, foreignKey: 'userId'});
+    User.belongsToMany(models.Crew, {through: models.User_Crew, foreignKey: 'userId'});
+  };
 
-// force: true will drop the table if it already exists
-User.sync({
-  force: true
-});
-
-module.exports = User;
+  return User;
+};
