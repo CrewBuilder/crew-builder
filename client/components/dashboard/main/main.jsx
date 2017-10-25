@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {GetCurrentUser} from '../../utils/auth.js';
-import { getUserCrews, getUserTasks } from '../../utils/requests.js';
+import {GetCurrentUser} from '../../utils/auth.jsx';
+import { getUserCrews, getUserTasks } from '../../utils/requests.jsx';
 
 export default class Main extends Component {
 
