@@ -16,7 +16,7 @@ export default class Sidebar extends Component {
           {this.props.crew.name}
         </div>
         <div className="crew-image">
-          <img src={this.props.crew.image}>
+          <img src={this.props.crew.image} />
         </div>
         <div className="crew-description">
           {this.props.crew.description}
