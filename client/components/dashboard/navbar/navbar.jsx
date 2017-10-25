@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import Search from './search.jsx';
-
-export default class Navbar extends Component {
+import { Navbar, FormGroup, FormControl, Button } from 'react-bootstrap';
+export default class NavBar extends Component {
 
   constructor(props) {
     super(props);
@@ -11,7 +11,19 @@ export default class Navbar extends Component {
   render() {
     return (
       <div>
-        <p>NAVBAR COMPONENT</p>
+        <Navbar>
+          <Navbar.Header>
+             <Navbar.Brand>
+              <a href="#">Crew</a>
+             </Navbar.Brand>
+          </Navbar.Header>
+          <Navbar.Form pullLeft>
+            <FormGroup>
+              <FormControl type="text" placeholder="Search" />
+            </FormGroup>
+            <Button type="submit">Submit</Button>
+          </Navbar.Form>
+        </Navbar>
       </div>
     )
   }
