@@ -6,11 +6,11 @@ export default class Sidebar extends Component {
     super(props);
     // Expect 'props' to contain 'user', 'userCrews', and 'handleCrewClick' function which sets current crew in main view
     let userData = {
-      facebookId: '1',
-      facebook: {
-        DISPLAY_NAME: "ionajewel",
-        EMAIL: "ipjwilli@gmail.com",
-        IMAGE_URL: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+      "facebookId": '1',
+      "facebook": {
+        "DISPLAY_NAME": "ionajewel",
+        "EMAIL": "ipjwilli@gmail.com",
+        "IMAGE_URL": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
       }
     };
     let crewData = [{
@@ -37,19 +37,23 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div>
-        <div className="sidebar-crew-list">
-          {this.state.userCrews.map((crew, key) => {
-            return (
-              <div onClick={e => this.handleCrewClick(crew, e)} value={crew.name} key={key} className="sidebar-crew-name">{crew.name}</div>
-            )
-          })}
+        <div className="sidebar-user-name">{this.state.user.facebook.DISPLAY_NAME}'s Profile
         </div>
-        {this.state.userCrews.length === 0 ?
+        <div>
+          <div className="sidebar-crew-list">
+            {this.state.userCrews.map((crew, key) => {
+              return (
+                <div onClick={e => this.handleCrewClick(crew, e)} value={crew.name} key={key} className="sidebar-crew-name">{crew.name}</div>
+              )
+            })}
+          </div>
+          {this.state.userCrews.length === 0 ?
           <div className="no-crews-message">
             <h2><em>
               You don't have any crews! Use the searchbar to find one.
             </em></h2>
           </div> : ''}
+        </div>
       </div>
     )
   }
