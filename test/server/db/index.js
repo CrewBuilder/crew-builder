@@ -14,6 +14,7 @@ describe('Postgres crewbuilder db', function() {
     return db.sequelize.authenticate();
   });
 
+  /* *************** User Tests *************** */
   it('Should create a new user if facebook id is not yet in the db', function(done) {
     // this might eventually test upsert helper function, for now query is written here
     let profile = '{"DISPLAY_NAME":"maryjane","EMAIL":"maryjane@maryjane.com","IMAGE_URL":"https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"}';
@@ -54,6 +55,8 @@ describe('Postgres crewbuilder db', function() {
 
   });
 
+
+  /* *************** User_Crew Tests *************** */
   it('Should associate a user with crews via the users_crews join table', function(done) {
     // seed data has user 1 belonging to 5 crews
     db.User.findOne( { where: { id: 1 } } )
@@ -69,6 +72,8 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
+
+  /* *************** Crew Tests *************** */
   it('Should create a new crew by id', function(done) {
     db.Crew.findById(1)
       .then(crew => {
@@ -80,7 +85,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should return all crews given an array of ids', function(done) {
+  it('Should return all crews matching an array of ids', function(done) {
     db.Crew.findAll({
       where: {
         id: {
@@ -107,6 +112,55 @@ describe('Postgres crewbuilder db', function() {
     db.Crew.create(crewData)
       .then(crew => {
         expect(crew.name).to.equal(crewData.name);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  /* *************** Task Tests *************** */
+  it('Should find a task by Id', function(done) {
+    db.Task.findById(25)
+      .then(task => {
+        expect(task.id).to.equal(25);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  it('Should find al crews matching an array of ids', function(done) {
+    db.Task.findAll({
+      where: {
+        id: {
+          $in: [1, 2, 3, 4, 5]
+        }
+      }
+    })
+      .then(tasksData => {
+        if (!tasksData.length) {
+          done(err);
+        } else {
+          expect(tasksData.length).to.equal(5);
+          done();
+        }
+      });
+  });
+
+  it('Should create a new task', function(done) {
+    var taskData = {
+      "name": "Viola clauseniana Baker",
+      "description": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.",
+      "points": 89,
+      "crewId": 4,
+      "expiry": "2017-01-25T19:10:29Z",
+      "limit": 66
+    };
+    db.Task.create(taskData)
+      .then(task => {
+        expect(task.name).to.equal(taskData.name);
         done();
       })
       .catch(err => {
