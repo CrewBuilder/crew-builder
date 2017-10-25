@@ -20,20 +20,22 @@ export default class NavBar extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <Navbar.Form pullLeft>
-                <FormGroup>
-                  <FormControl type="text" placeholder="Search" />
-                </FormGroup>
-                <Button type="submit">Submit</Button>
-              </Navbar.Form>
-            </Nav>
-            <Nav>
-              <Navbar.Form pullLeft>
-                <Button type="submit">Browse</Button>
-              </Navbar.Form>
+              <NavItem>
+                <Navbar.Form pullLeft>
+                  <FormGroup>
+                    <FormControl type="text" placeholder="Search" />
+                  </FormGroup>
+                  <Button type="submit">Submit</Button>
+                </Navbar.Form>
+              </NavItem>
+              <NavItem>
+                <Navbar.Form pullLeft>
+                  <Button type="submit">Browse</Button>
+                </Navbar.Form>
+              </NavItem>
             </Nav>
             <Nav pullRight>
-              <NavDropdown eventKey={1} title="More" id="dropdown">
+              <NavDropdown eventKey={1} title={<img className="avatar" src="https://avatars1.githubusercontent.com/u/15957141?s=40&amp;v=4" height="30" width="30"/>} id="dropdown">
                 <MenuItem eventKey={1.1}>Logout</MenuItem>
               </NavDropdown>
             </Nav>
@@ -43,3 +45,8 @@ export default class NavBar extends Component {
     )
   }
 }
+
+
+
+
+
