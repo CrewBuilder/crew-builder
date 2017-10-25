@@ -29,3 +29,13 @@ exports.findAllCrewsByIds = (ids, cb) => {
     }
   })
 }
+
+// Allows crew creation
+exports.postCrew = (crewData, cb) => {
+  Crew.create(crewData)
+  .then(crew => {
+    console.log('Created a new task', crew);
+    // Callback with crew data
+    return cb(null, crew);
+  })
+}
