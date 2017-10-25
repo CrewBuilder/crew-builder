@@ -39,7 +39,7 @@ export default class Sidebar extends Component {
     return (
       <div>
 
-        <div className="sidebar-user-name">'s Profile
+        <div className="sidebar-user-name">
         <h2>{this.state.user.facebook.DISPLAY_NAME} <Label>My Crews</Label></h2>
         </div>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
