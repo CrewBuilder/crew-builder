@@ -57,17 +57,42 @@ describe('Postgres crewbuilder db', function() {
 
 
   /* *************** User_Crew Tests *************** */
-  it('Should associate a user with crews via the users_crews join table', function(done) {
+  it('Should find all crews associated with a user via the User_Crew join table', function(done) {
     // seed data has user 1 belonging to 5 crews
-    db.User.findOne( { where: { id: 1 } } )
-      .then(function(user) {
-        return db.User_Crew.findAll({ where: { userId: 1 } });
+    db.User_Crew.findAll({
+      where: {
+        userId: 1
+      }
+    })
+      .then(crews => {
+        if (!crews.length) {
+          done('No crews found for user 1');
+        } else {
+          expect(crews.length).to.equal(5);
+          done();
+        }
       })
-      .then(function(crews) {
-        expect(crews.length).to.equal(5);
-        done();
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  /* *************** User_Task Tests *************** */
+  it('Should find all tasks associated with a user via the User_Task join table', function(done) {
+    db.User_Task.findAll({
+      where: {
+        userId: 1
+      }
+    })
+      .then(tasksData => {
+        if (!tasksData.length) {
+          done('No tasks found for user 1');
+        } else {
+          expect(tasksData.length).to.equal(7);
+          done();
+        }
       })
-      .catch(function(err) {
+      .catch(err => {
         done(err);
       });
   });
@@ -131,7 +156,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should find al crews matching an array of ids', function(done) {
+  it('Should find all crews matching an array of ids', function(done) {
     db.Task.findAll({
       where: {
         id: {
