@@ -12,7 +12,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        isLoggedIn: false,
+        isLoggedIn: true,
       }
 
       this.authLogin = () => {
@@ -31,12 +31,9 @@ export default class App extends Component {
       return (
         <div>
           <Switch>
-            <PrivateRoute exact path='/' checkAuth={this.authLogin} component={Landing} name="landing"/>
             <PrivateRoute path='/dashboard' checkAuth={this.authLogin} component={Dashboard}/>
+            <PrivateRoute path='/' checkAuth={this.authLogin} component={Landing} name="landing"/>
           </Switch>
-          <button onClick={Login}>facebook login</button>
-          <button onClick={Logout}>facebook logout</button>
-          <button onClick={GetCurrentUser}>facebook getCurrentUser</button>
         </div>
       )
   }
