@@ -1,17 +1,19 @@
-let Users_Crews = require('./../models/User_Crew.js');
-// Queries the User_Crew table, returns all of a User's crews by Id
+const db = require('../index.js'); // Queries the User_Crew table, returns all of a User's crews by Id
 exports.getCrewsByUser = (id, cb) => {
-  Users_Crews.findAll({
-    attributes: ['crewId'],
+  //this query tested OK
+  db.User_Crew.findAll({
     where: {
       userId: id
     }
   })
-  .then(crews => {
-    if (!crews.length) {
+    .then(crews => {
+      if (!crews.length) {
+        cb(`No crews for user: ${id}`, null);
+      } else {
+        cb(null, crews);
+      }
+    })
+    .catch(err => {
       cb(err, null);
-    } else {
-      cb(null, crews);
-    }
-  });
-}
+    });
+};
