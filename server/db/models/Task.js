@@ -1,21 +1,16 @@
-const db = require('../index.js');
-const Sequelize = require('sequelize');
-const Crew = require('./Crew.js');
+module.exports = function(sequelize, DataTypes) {
+  var Task = sequelize.define('Task', {
+    name: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    points: DataTypes.INTEGER,
+    limit: DataTypes.INTEGER,
+    expiry: DataTypes.DATE
+  });
 
-const Task = db.define('task', {
-  name: Sequelize.STRING,
-  description: Sequelize.TEXT,
-  points: Sequelize.INTEGER,
-  limit: Sequelize.INTEGER,
-  expiry: Sequelize.DATE
-});
+  Task.associate = function(models) {
+    Task.belongsTo(models.Crew);
+    Task.belongsToMany(models.User, {through: models.User_Task, foreignKey: 'taskId'});
+  };
 
-// create an association when both Crew and Task are resolved
-Promise.all([Crew, Task])
-  .then(values => {
-    Crew.hasMany(Task);
-    Task.belongsTo(Crew);
-  })
-  .catch(err => console.log('Error in crew-task association'));
-
-module.exports = Task;
+  return Task;
+};

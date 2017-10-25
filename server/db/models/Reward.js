@@ -1,12 +1,11 @@
-const db = require('../index.js');
-const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  var Reward = sequelize.define('Reward', {
+    name: DataTypes.STRING,
+    description: DataTypes.STRING,
+    points: DataTypes.INTEGER,
+    limit: DataTypes.INTEGER,
+    expiry: DataTypes.DATE
+  });
 
-const Reward = db.define('rewards', {
-  name: Sequelize.STRING,
-  description: Sequelize.STRING,
-  points: Sequelize.INTEGER,
-  limit: Sequelize.INTEGER,
-  expiry: Sequelize.DATE
-});
-
-module.exports = Reward;
+  return Reward;
+};

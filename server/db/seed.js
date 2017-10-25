@@ -1,10 +1,5 @@
 //load db and all tables
 const db = require('./index.js');
-const User = require('./models/User.js');
-const Crew = require('./models/Crew.js');
-const Task = require('./models/Task.js');
-const UserCrew = require('./models/User_Crew.js');
-const UserTask = require('./models/User_Task.js');
 
 //load seed data
 const UserSeed = require('../../test/server/db/seed/user.js');
@@ -14,12 +9,12 @@ const UserCrewSeed = require('../../test/server/db/seed/user_crew.js');
 const UserTaskSeed = require('../../test/server/db/seed/user_task.js');
 
 module.exports = function() {
-  return db.drop()
-    .then(() => { return db.sync(); })
-    .then(() => { return User.bulkCreate(UserSeed); })
-    .then(() => { return Crew.bulkCreate(CrewSeed); })
-    .then(() => { return Task.bulkCreate(TaskSeed); })
-    .then(() => { return UserCrew.bulkCreate(UserCrewSeed); })
-    .then(() => { return UserTask.bulkCreate(UserTaskSeed); })
+  return db.sequelize.drop()
+    .then(() => { return db.sequelize.sync(); })
+    .then(() => { return db.User.bulkCreate(UserSeed); })
+    .then(() => { return db.Crew.bulkCreate(CrewSeed); })
+    .then(() => { return db.Task.bulkCreate(TaskSeed); })
+    .then(() => { return db.User_Crew.bulkCreate(UserCrewSeed); })
+    .then(() => { return db.User_Task.bulkCreate(UserTaskSeed); })
     .catch(err => { console.log('Database did not sync: ', err); });
 };
