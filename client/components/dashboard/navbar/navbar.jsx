@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Search from './search.jsx';
-import { Navbar, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Navbar, FormGroup, FormControl, Button, NavItem, Nav } from 'react-bootstrap';
 export default class NavBar extends Component {
 
   constructor(props) {
@@ -22,6 +22,9 @@ export default class NavBar extends Component {
               <FormControl type="text" placeholder="Search" />
             </FormGroup>
             <Button type="submit">Submit</Button>
+          </Navbar.Form>
+          <Navbar.Form>
+            <Button type="submit">Browse</Button>
           </Navbar.Form>
         </Navbar>
       </div>
