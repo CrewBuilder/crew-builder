@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import CrewSummary from './crewSummary.jsx';
 import TasksInProgress from './tasksInProgress.jsx';
 import TasksAvailable from './tasksAvailable.jsx';
+import {Panel, PanelGroup} from 'react-bootstrap'
 // Compares userTasks to crewTasks => sends to tasksInProgress and tasksAvailable respectively
 
 
@@ -64,9 +65,17 @@ export default class CrewView extends Component {
   render() {
     return (
       <div>
-        <CrewSummary userId={userIdData} crew={crewData} />
-        <TasksInProgress userId={userIdData} userTasks={tasksInProgress} />
-        <TasksAvailable userId={userIdData} availableTasks={crewTaskAvailableData} />
+        <PanelGroup>
+          <Panel collapsible defaultExpanded={true} header="Crew Summary" eventKey="1">
+            <CrewSummary userId={userIdData} crew={crewData} />
+          </Panel>
+          <Panel collapsible defaultExpanded={true} header="Tasks in Progress" eventKey="2">
+            <TasksInProgress userId={userIdData} userTasks={tasksInProgress} />
+          </Panel>
+          <Panel collapsible defaultExpanded={true} header="Tasks Available" eventKey="3">
+            <TasksAvailable userId={userIdData} availableTasks={crewTaskAvailableData} />
+          </Panel>
+        </PanelGroup>
       </div>
     )
   }
