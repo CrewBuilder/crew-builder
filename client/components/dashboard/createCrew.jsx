@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class CreateCrew extends Component {
   constructor(props) {
     super(props);
-    // props contain name and unique details of user, so we can keep track of who created this crew
+    // props contain name and unique details of user, so we can keep track of who created this crew  and store it in database accordingly
   }
 
   render() {
