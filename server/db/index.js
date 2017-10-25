@@ -21,11 +21,13 @@ fs
   .readdirSync(path.join(__dirname, '/models'))
   .forEach(function(file) {
     var model = sequelize.import(path.join(__dirname, '/models/', file));
-    db[model.name] = model;
+    // TODO: Not sure what is going on here, but made changes due to syntax errors.
+    db[model] = model;
   });
 
+// TODO: Not sure what is going on here, but made changes due to syntax errors.
 Object.keys(db).forEach(function(modelName) {
-  if ('associate' in db[modelName]) {
+  if ('associate' in db) {
     db[modelName].associate(db);
   }
 });
