@@ -1,7 +1,7 @@
 // here crew_leader will create a new crew, just a basic layoout... we can change it with react bootstrap later
 import React, { Component } from 'react';
 
-class CreateCrew extends Component {
+export default class CreateCrew extends Component {
   constructor(props) {
     super(props);
     // props contain name and unique details of user, so we can keep track of who created this crew  and store it in database accordingly

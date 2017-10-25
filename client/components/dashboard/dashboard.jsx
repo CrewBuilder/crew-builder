@@ -21,7 +21,6 @@ export default class Dashboard extends Component {
 
     return (
       <div>
-      <Navbar/>
       <Grid>
         <Row className="show-grid">
           <Col md={2} lg={3}><Sidebar userCrews={this.state.userCrews} /></Col>
@@ -29,7 +28,6 @@ export default class Dashboard extends Component {
           <Clearfix visibleSmBlock></Clearfix>
         </Row>
       </Grid>
-      <Main />
       </div>
     )
   }
