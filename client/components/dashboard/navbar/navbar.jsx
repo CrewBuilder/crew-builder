@@ -6,6 +6,7 @@ export default class NavBar extends Component {
 
   constructor(props) {
     super(props);
+    // notifications may go into dropdown
   }
 
   render() {
@@ -17,18 +18,26 @@ export default class NavBar extends Component {
               <a href="#">Crew</a>
              </Navbar.Brand>
           </Navbar.Header>
-          <Navbar.Form pullLeft>
-            <FormGroup>
-              <FormControl type="text" placeholder="Search" />
-            </FormGroup>
-            <Button type="submit">Submit</Button>
-          </Navbar.Form>
-          <Navbar.Form>
-            <Button type="submit">Browse</Button>
-          </Navbar.Form>
-          <NavDropdown eventKey={3} title="More" id="dropdown">
-            <MenuItem eventKey={3.1}>Logout</MenuItem>
-          </NavDropdown>
+          <Navbar.Collapse>
+            <Nav>
+              <Navbar.Form pullLeft>
+                <FormGroup>
+                  <FormControl type="text" placeholder="Search" />
+                </FormGroup>
+                <Button type="submit">Submit</Button>
+              </Navbar.Form>
+            </Nav>
+            <Nav>
+              <Navbar.Form pullLeft>
+                <Button type="submit">Browse</Button>
+              </Navbar.Form>
+            </Nav>
+            <Nav pullRight>
+              <NavDropdown eventKey={1} title="More" id="dropdown">
+                <MenuItem eventKey={1.1}>Logout</MenuItem>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
       </div>
     )
