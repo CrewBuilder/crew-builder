@@ -29,4 +29,15 @@ exports.findAllTasksByIds = (ids, cb) => {
   })
 }
 
+// Allows task creation
+exports.postTask = (taskData, cb) => {
+  Task.create(taskData)
+  .then(task => {
+    console.log('Created a new task', task);
+    // Callback with task data
+    return cb(null, task);
+  })
+}
+
+
 
