@@ -35,7 +35,7 @@ export default class NavBar extends Component {
               </NavItem>
             </Nav>
             <Nav pullRight>
-              <NavDropdown eventKey={1} title={<span><i className="fa fa-user fa-fw"></i> </span>} id="dropdown">
+              <NavDropdown eventKey={1} title={<img className="avatar" src="https://avatars1.githubusercontent.com/u/15957141?s=40&amp;v=4" height="30" width="30"/>} id="dropdown">
                 <MenuItem eventKey={1.1}>Logout</MenuItem>
               </NavDropdown>
             </Nav>
