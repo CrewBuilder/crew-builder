@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Search from './search.jsx';
-import { Navbar, FormGroup, FormControl, Button, NavItem, Nav } from 'react-bootstrap';
+import { Navbar, FormGroup, FormControl, Button, NavItem, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 export default class NavBar extends Component {
 
   constructor(props) {
