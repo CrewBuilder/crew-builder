@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Row, Col, Nav, NavItem, Tab, TagContainer, TabContent, TabPane, Label} from 'react-bootstrap';
 
 export default class Sidebar extends Component {
 
@@ -37,24 +38,50 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div>
-        <div className="sidebar-user-name">{this.state.user.facebook.DISPLAY_NAME}'s Profile
+
+        <div className="sidebar-user-name">'s Profile
+        <h2>{this.state.user.facebook.DISPLAY_NAME} <Label>My Crews</Label></h2>
         </div>
-        <div>
-          <div className="sidebar-crew-list">
-            {this.state.userCrews.map((crew, key) => {
-              return (
-                <div onClick={e => this.handleCrewClick(crew, e)} value={crew.name} key={key} className="sidebar-crew-name">{crew.name}</div>
-              )
-            })}
-          </div>
-          {this.state.userCrews.length === 0 ?
-          <div className="no-crews-message">
-            <h2><em>
-              You don't have any crews! Use the searchbar to find one.
-            </em></h2>
-          </div> : ''}
-        </div>
+        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+          <Row className="clearfix">
+            <Col sm={4}>
+              <Nav bsStyle="pills" stacked>
+                {this.state.userCrews.map((crew, key) => {
+                  return (
+                    <NavItem eventKey={key}
+                      onClick={e => this.handleCrewClick(crew, e)} value={crew.name} key={key} className="sidebar-crew-name">
+                      {crew.name}
+                    </NavItem>
+                  )
+                })}
+              </Nav>
+            </Col>
+          </Row>
+        </Tab.Container>
       </div>
+
+
     )
   }
 }
+
+
+      // <div>
+      //   <div className="sidebar-user-name">{this.state.user.facebook.DISPLAY_NAME}'s Profile
+      //   </div>
+      //   <div>
+      //     <div className="sidebar-crew-list">
+            // {this.state.userCrews.map((crew, key) => {
+            //   return (
+            //     <div onClick={e => this.handleCrewClick(crew, e)} value={crew.name} key={key} className="sidebar-crew-name">{crew.name}</div>
+            //   )
+            // })}
+      //     </div>
+      //     {this.state.userCrews.length === 0 ?
+      //     <div className="no-crews-message">
+      //       <h2><em>
+      //         You don't have any crews! Use the searchbar to find one.
+      //       </em></h2>
+      //     </div> : ''}
+      //   </div>
+      // </div>
