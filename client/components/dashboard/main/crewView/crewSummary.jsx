@@ -1,0 +1,1 @@
+// This component renders a crewSummary card with some information and a picture
