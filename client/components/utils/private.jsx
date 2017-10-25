@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import Dashboard from '../dashboard/dashboard.jsx';
+import Landing from '../Landing.jsx';
 
 // Redirects to '/' (i.e., Landing) if checkAuth returns false...
 // if 'landing' and checkAuth is true, redirect to '/dashboard' - NECESSARY TO TEST WITH DATA?
@@ -21,7 +22,15 @@ const PrivateRoute = ({ component: Component, checkAuth, name }) => {
         )
       )
     } else {
-      return null;
+      return(
+          (
+          <Route render={(props) => (
+            (
+              <Landing {...props}/>
+            )
+          )}/>
+        )
+      )
     }
   }
 
