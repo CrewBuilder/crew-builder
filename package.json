@@ -4,7 +4,7 @@
   "description": "Build and cultivate grass roots support",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**/*.js --exit",
+    "test": "mocha test --recursive --exit",
     "start": "nodemon index.js",
     "build": "webpack --watch"
   },
