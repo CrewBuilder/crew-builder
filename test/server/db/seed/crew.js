@@ -1,8 +1,8 @@
 module.exports = [
   {
     "name": 'Strings Attached',
-    "decription": 'I started Strings Attached as a genre-blurring collaboration with folk artists. Our vision was to fuse jazz and classical flavors with the contemporary singer/songwriter genre; to dress it up with a little different jewelry. From the classical tradition we borrowed the architectural precision of composition and arranging. From jazz we brought the performance ethic. The ability to abandon the score and make choices spontaneously, in response to each other and the present musical moment. And then there\'s that irresistable sense of"swing" - the thing that gets people dancing.',
-    "image": 'http://www.celebratewithstringsattached.com/western-swing.html'
+    "description": 'I started Strings Attached as a genre-blurring collaboration with folk artists. Our vision was to fuse jazz and classical flavors with the contemporary singer/songwriter genre; to dress it up with a little different jewelry. From the classical tradition we borrowed the architectural precision of composition and arranging. From jazz we brought the performance ethic. The ability to abandon the score and make choices spontaneously, in response to each other and the present musical moment. And then there\'s that irresistable sense of"swing" - the thing that gets people dancing.',
+    "image": 'http://www.celebratewithstringsattached.com/uploads/3/5/4/6/3546135/1090860.jpg'
   },
   {
     "name": "Zieme, Nitzsche and Murazik",
