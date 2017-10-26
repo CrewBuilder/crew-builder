@@ -12,7 +12,17 @@ export default class Sidebar extends Component {
   render() {
     return (
 
-      <p>SEARCH CARD</p>
+      <div className="crew-card">
+        <h1 className="crew-name">
+          {this.props.crew.name}
+        </h1>
+        <div className="crew-image">
+          <img src={this.props.crew.image} />
+        </div>
+        <div className="crew-description">
+          {this.props.crew.description}
+        </div>
+      </div>
     )
   }
 }
