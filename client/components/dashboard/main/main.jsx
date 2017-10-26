@@ -43,7 +43,6 @@ export default class Main extends Component {
           <Switch>
           <Route path="/dashboard/newcrew" currentPath="/dashboard" component={CreateCrew}/>
           <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
-          <Redirect from="*" to='/dashboard' />
           </Switch>
         </div>
       )

@@ -16,20 +16,28 @@ export default class SearchResults extends Component {
   render() {
     return (
       <div>
-        <div className="search-crew-list">
-          {this.props.crews.map((crew, i) => {
-            return (
-              <SearchCard crew={crew} />
-            )
-          })}
-        </div>
-        {this.props.crews.length === 0 ?
-          <div className="no-crew-message">
-            <h2><em>
-              No crews match that query. Try again or click browse!
-            </em></h2>
-          </div> : ''}
+        <SearchCard/>
+        <SearchCard/>
+        <SearchCard/>
       </div>
     )
   }
 }
+
+
+// MOVED DOWN TO TEST WITHOUT PROPS
+// <div>
+//   <div className="search-crew-list">
+//     {this.props.crews.map((crew, i) => {
+//       return (
+//         <SearchCard crew={crew} />
+//       )
+//     })}
+//   </div>
+//   {this.props.crews.length === 0 ?
+//     <div className="no-crew-message">
+//       <h2><em>
+//         No crews match that query. Try again or click browse!
+//       </em></h2>
+//     </div> : ''}
+// </div>
