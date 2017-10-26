@@ -43,7 +43,7 @@ export default class NavBar extends Component {
               </NavItem>
               <NavItem>
                 <Navbar.Form pullLeft>
-                  <Button type="submit">Browse</Button>
+                  <Button type="submit" onClick={this.props.browseSearch}>Browse</Button>
                 </Navbar.Form>
               </NavItem>
             </Nav>

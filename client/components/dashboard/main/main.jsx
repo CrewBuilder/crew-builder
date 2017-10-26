@@ -27,7 +27,7 @@ export default class Main extends Component {
     if(this.props.isSearching){
       return (
         <div>
-          <h2>Loading...</h2>
+          <SearchResults />
         </div>
       )
     } else {
