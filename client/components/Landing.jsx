@@ -1,8 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import FacebookLogin from 'react-facebook-login';
-
+import React, { Component } from 'react';
 import { Init, CheckLogin, GetCurrentUser, Login, Logout } from './utils/auth.jsx';
+import {Jumbotron, Button} from 'react-bootstrap';
 
 const responseFacebook = (response) => {
   //TODO: re-direct, query users endpoint
@@ -21,13 +19,11 @@ export default class Landing extends React.Component {
     }
     return(
       <div>
-
-      <button onClick={Login}>facebook login</button>
-      <button onClick={Logout}>facebook logout</button>
-      <button onClick={GetCurrentUser}>facebook getCurrentUser</button>
-        <div onClick={loginClickHandler}>
-          Continue with Facebook
-        </div>
+        <Jumbotron>
+          <h1>Crew Builder</h1>
+          <p>Contribute to you crew...earn rewards</p>
+          <p><Button onClick={Login} bsStyle="primary">Sign up with Facebook</Button></p>
+      </Jumbotron>
       </div>
 
     )
