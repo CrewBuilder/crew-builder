@@ -11,7 +11,7 @@ import {Panel, PanelGroup} from 'react-bootstrap';
 const crewData = {
   "name": 'Strings Attached',
   "decription": 'Our vision is to fuse jazz and classical flavors with the contemporary singer/songwriter genre. From the classical tradition we borrowed the precision of composition and arranging. From jazz we brought the performance ethic. The ability to abandon the score and make choices spontaneously. And then there\'s that irresistable sense of"swing" - the thing that gets people dancing.',
-  "image": 'http://www.celebratewithstringsattached.com/western-swing.html'
+  "image": 'http://www.celebratewithstringsattached.com/uploads/3/5/4/6/3546135/7648083.jpg'
 };
 
 const userIdData = '1';

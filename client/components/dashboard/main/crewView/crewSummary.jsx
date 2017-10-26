@@ -13,7 +13,7 @@ export default class CrewSummary extends Component {
       <div>
         <Media>
           <Media.Left>
-            <Image src={this.props.crew.image} alt='Image'/>
+            <Image width={150} src={this.props.crew.image} alt='Image'/>
           </Media.Left>
           <Media.Body>
             <Media.Heading>{this.props.crew.name}</Media.Heading>

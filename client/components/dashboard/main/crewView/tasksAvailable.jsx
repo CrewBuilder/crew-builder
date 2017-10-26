@@ -28,10 +28,6 @@ export default class TasksAvailable extends Component {
     };
   }
 
-  componentDidMount() {
-    this.setState({selectedTask: this.tasks[0]});
-  }
-
   render() {
     return (
       <div>
