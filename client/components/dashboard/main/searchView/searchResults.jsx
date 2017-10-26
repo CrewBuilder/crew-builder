@@ -33,7 +33,9 @@ export default class SearchResults extends Component {
   render() {
     return (
       <div>
-        {this.props.}
+        {crews.map((crew) =>
+          <SearchCard crew={crew}/>
+        )}
       </div>
     )
   }
