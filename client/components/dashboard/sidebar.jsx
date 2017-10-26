@@ -44,7 +44,7 @@ export default class Sidebar extends Component {
         </div>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row className="clearfix">
-            <Col sm={4}>
+            <Col>
               <Nav bsStyle="pills" stacked>
                 {this.state.userCrews.map((crew, key) => {
                   return (

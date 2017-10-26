@@ -5,7 +5,7 @@ import {GetCurrentUser} from '../../utils/auth.jsx';
 import { getUserCrews, getUserTasks } from '../../utils/requests.jsx';
 
 import CreateCrew from '../createCrew.jsx';
-import SearchCard from '../../searchView/searchCard.jsx';
+import SearchResults from './searchView/searchResults.jsx';
 
 export default class Main extends Component {
 
@@ -23,37 +23,28 @@ export default class Main extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Route path="/dashboard/CreateCrew" currentPath="/dashboard" component={CreateCrew}/>
-        <Route path="/dashboard/SearchCard" currentPath="/dashboard" component={SearchCard}/>
-        <Link to="/dashboard/CreateCrew">
-          CreateCrew with React
-        </Link>
-        <Link to="/dashboard/SearchCard">
-          SearchCard with React
-        </Link>
-      </div>
-    )
+    if(this.props.isSearching){
+      return (
+        <div>
+          <h2>Loading...</h2>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <Link to="/dashboard/newcrew">
+            CreateCrew with React
+          </Link>
+          <Link to="/dashboard/results">
+            SearchResults with React
+          </Link>
+          <Switch>
+          <Route path="/dashboard/newcrew" currentPath="/dashboard" component={CreateCrew}/>
+          <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
+          <Redirect from="*" to='/dashboard' />
+          </Switch>
+        </div>
+      )
+    }
   }
 }
-
-
-
-
-        // <Switch>
-        //   <Route exact path="/dashboard/xxx" component={CreateCrew}/>
-        //   <Route path="/dashboard/yyy" component={SearchCard}/>
-        //   <Redirect from="/dashboard" to="/dashboard/xxx"/>
-        // </Switch>
-
-
-    // if (this.state.user !== null) {
-    //   return (
-    //     <div>
-    //      {this.props.user}
-    //     </div>
-    // )
-    // } else {
-    //   return (<div>Not logged in</div>)
-    // }
