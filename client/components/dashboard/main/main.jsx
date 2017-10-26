@@ -6,6 +6,7 @@ import { getUserCrews, getUserTasks } from '../../utils/requests.jsx';
 
 import CreateCrew from '../createCrew.jsx';
 import SearchResults from './searchView/searchResults.jsx';
+import CrewView from './crewView/crewView.jsx';
 
 export default class Main extends Component {
 
@@ -38,6 +39,7 @@ export default class Main extends Component {
           <Link to="/dashboard/results">
             SearchResults with React
           </Link>
+          <CrewView />
           <Switch>
           <Route path="/dashboard/newcrew" currentPath="/dashboard" component={CreateCrew}/>
           <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
