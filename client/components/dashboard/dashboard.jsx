@@ -14,6 +14,14 @@ export default class Dashboard extends Component {
       user: null,
       userCrews: [],
       userTasks: [],
+      isSearching: false,
+    }
+
+    this.submitSearch = (query) => {
+      console.log('search query made');
+    }
+    this.browseSearch = () => {
+      console.log('search browse made');
     }
   }
 
@@ -21,15 +29,25 @@ export default class Dashboard extends Component {
 
     return (
       <div>
-      <Navbar/>
+      <Navbar
+        submitSearch={this.submitSearch}
+        browseSearch={this.browseSearch}
+      />
       <Grid>
         <Row className="show-grid">
-          <Col md={2} lg={3}><Sidebar userCrews={this.state.userCrews} /></Col>
-          <Col md={10} lg={9}><Main /></Col>
+          <Col md={2} lg={3} className="outlineBox">
+            <Sidebar
+              userCrews={this.state.userCrews}
+            />
+          </Col>
+          <Col md={10} lg={9} className="outlineBox">
+            <Main
+              isSearching={this.state.isSearching}
+            />
+          </Col>
           <Clearfix visibleSmBlock></Clearfix>
         </Row>
       </Grid>
-      <Main />
       </div>
     )
   }

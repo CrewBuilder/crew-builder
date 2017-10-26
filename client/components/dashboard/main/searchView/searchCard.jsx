@@ -11,18 +11,21 @@ export default class Sidebar extends Component {
 
   render() {
     return (
-      <div className="crew-card">
-        <div className="crew-name">
-          {this.props.crew.name}
-        </div>
-        <div className="crew-image">
-          <img src={this.props.crew.image} />
-        </div>
-        <div className="crew-description">
-          {this.props.crew.description}
-        </div>
-      </div>
 
+      <p>SEARCH CARD</p>
     )
   }
 }
+
+
+      // <div className="crew-card">
+      //   <div className="crew-name">
+      //     {this.props.crew.name}
+      //   </div>
+      //   <div className="crew-image">
+      //     <img src={this.props.crew.image} />
+      //   </div>
+      //   <div className="crew-description">
+      //     {this.props.crew.description}
+      //   </div>
+      // </div>

@@ -32,7 +32,8 @@ export default class App extends Component {
         <div>
           <Switch>
             <PrivateRoute path='/dashboard' checkAuth={this.authLogin} component={Dashboard}/>
-            <PrivateRoute path='/' checkAuth={this.authLogin} component={Landing} name="landing"/>
+            <PrivateRoute exact path='/' checkAuth={this.authLogin} component={Landing} name="landing"/>
+            <Redirect to='/' />
           </Switch>
         </div>
       )

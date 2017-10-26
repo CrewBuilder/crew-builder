@@ -4,7 +4,7 @@
   //This can be all the crews for starters. The search engine should eventually filter it down.
 
 import React, { Component } from 'react';
-import SearchCard from './searchCard';
+import SearchCard from './searchCard.jsx';
 
 export default class SearchResults extends Component {
 

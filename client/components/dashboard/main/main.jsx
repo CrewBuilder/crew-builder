@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { Route, Link, Redirect, Switch } from 'react-router-dom';
+
 import {GetCurrentUser} from '../../utils/auth.jsx';
 import { getUserCrews, getUserTasks } from '../../utils/requests.jsx';
+
+import CreateCrew from '../createCrew.jsx';
+import SearchResults from './searchView/searchResults.jsx';
 
 export default class Main extends Component {
 
@@ -18,18 +23,28 @@ export default class Main extends Component {
   }
 
   render() {
-
-
-
-    if (this.state.user !== null) {
+    if(this.props.isSearching){
       return (
         <div>
-         {this.props.user}
+          <h2>Loading...</h2>
         </div>
-    )
+      )
     } else {
-      return (<div>Not logged in</div>)
+      return (
+        <div>
+          <Link to="/dashboard/newcrew">
+            CreateCrew with React
+          </Link>
+          <Link to="/dashboard/results">
+            SearchResults with React
+          </Link>
+          <Switch>
+          <Route path="/dashboard/newcrew" currentPath="/dashboard" component={CreateCrew}/>
+          <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
+          <Redirect from="*" to='/dashboard' />
+          </Switch>
+        </div>
+      )
     }
-
   }
 }
