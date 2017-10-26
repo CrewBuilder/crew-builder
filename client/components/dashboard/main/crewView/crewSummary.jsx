@@ -13,15 +13,16 @@ export default class CrewSummary extends Component {
       <div>
         <Media>
           <Media.Left>
-            <Image src={this.props.crew.image} alt='Image'/>
+            <Image width={150} src={this.props.crew.image} alt='Image'/>
           </Media.Left>
           <Media.Body>
             <Media.Heading>{this.props.crew.name}</Media.Heading>
-            <p>You have 150 points with this crew!</p>
-            <p>Your achievement level with this crew is GOLD</p>
+            <p>{this.props.crew.description}</p>
           </Media.Body>
         </Media>
       </div>
     );
   }
 }
+            // <p>You have 150 points with this crew!</p>
+            // <p>Your achievement level with this crew is GOLD</p>
