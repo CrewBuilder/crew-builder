@@ -45,6 +45,7 @@ export default class Sidebar extends Component {
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row className="clearfix">
             <Col>
+              <h4>My Crews:</h4>
               <Nav bsStyle="pills" stacked>
                 {this.state.userCrews.map((crew, key) => {
                   return (
@@ -54,13 +55,26 @@ export default class Sidebar extends Component {
                     </NavItem>
                   )
                 })}
+
+                <NavItem eventKey='createCrew'
+                  onClick={e => this.handleCrewClick('createCrew', e)} value='createCrew' key='createCrew' className="sidebar-crew-name">
+                  <strong>+ create crew</strong>
+                </NavItem>
               </Nav>
+              <hr />
+
+              <h4>Top Members:</h4>
+                <p>Lois Griffin</p>
+                <p>Homer Simpson</p>
+              <hr />
+
+              <h4>Member of:</h4>
+                <p>GreenPeace Meetup</p>
+                <p>The Clash</p>
             </Col>
           </Row>
         </Tab.Container>
       </div>
-
-
     )
   }
 }
