@@ -24,28 +24,47 @@ export default class Main extends Component {
   }
 
   render() {
-    if(this.props.isSearching){
       return (
         <div>
-          <h2>Loading...</h2>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <Link to="/dashboard/newcrew">
-            CreateCrew with React
-          </Link>
-          <Link to="/dashboard/results">
-            SearchResults with React
-          </Link>
-          <CrewView />
           <Switch>
-          <Route path="/dashboard/newcrew" currentPath="/dashboard" component={CreateCrew}/>
-          <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
+            <Route path="/dashboard/crewview" currentPath="/dashboard" component={CrewView}/>
+            <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
           </Switch>
         </div>
       )
-    }
+
   }
 }
+
+    // if(this.props.isSearching){
+    //   return (
+    //     <div>
+    //       <Switch>
+    //         <Route path="/dashboard/newcrew" currentPath="/dashboard" component={CreateCrew}/>
+    //         <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
+    //       </Switch>
+    //     </div>
+    //   )
+    // } else {
+    //   return (
+    //     <div>
+    //       <CrewView />
+    //     </div>
+    //   )
+    // }
+
+
+// <div>
+//   <Link to="/dashboard/newcrew">
+//     CreateCrew with React
+//   </Link>
+//   <Link to="/dashboard/results">
+//     SearchResults with React
+//   </Link>
+//   <CrewView />
+//   <Switch>
+//   <Route path="/dashboard/newcrew" currentPath="/dashboard" component={CreateCrew}/>
+//   <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
+//   </Switch>
+// </div>
+          // <SearchResults/>

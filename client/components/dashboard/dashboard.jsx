@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
 
 import Navbar from './navbar/navbar.jsx';
@@ -14,14 +15,14 @@ export default class Dashboard extends Component {
       user: null,
       userCrews: [],
       userTasks: [],
-      isSearching: false,
+      isSearching: true,
     }
 
     this.submitSearch = (query) => {
       console.log('search query made');
     }
-    this.browseSearch = () => {
-      console.log('search browse made');
+    this.browserSearch = () => {
+      this.setState({isSearching: !this.state.isSearching});
     }
   }
 
@@ -29,9 +30,15 @@ export default class Dashboard extends Component {
 
     return (
       <div>
+      <Link to="/dashboard/results">
+        Browse Results
+      </Link>
+      <Link to="/dashboard/crewview">
+        CrewView
+      </Link>
       <Navbar
         submitSearch={this.submitSearch}
-        browseSearch={this.browseSearch}
+        browserSearch={this.browserSearch}
       />
       <Grid>
         <Row className="show-grid">
