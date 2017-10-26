@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import createBrowserHistory from 'history/createBrowserHistory';
+
 import Search from './search.jsx';
 import { Navbar, FormGroup, FormControl, Button, NavItem, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 export default class NavBar extends Component {
@@ -11,8 +13,13 @@ export default class NavBar extends Component {
     this.handleClickLogout = (e) => {
       e.preventDefault();
       localStorage.removeItem('id_token');
+      // access BrowserRouter history
+      const customHistory = createBrowserHistory();
+      // push root '/' path and reload window
+      customHistory.push('/');
       window.location.reload();
     }
+
   }
 
   render() {
