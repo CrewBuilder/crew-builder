@@ -64,24 +64,3 @@ export default class Sidebar extends Component {
     )
   }
 }
-
-
-      // <div>
-      //   <div className="sidebar-user-name">{this.state.user.facebook.DISPLAY_NAME}'s Profile
-      //   </div>
-      //   <div>
-      //     <div className="sidebar-crew-list">
-            // {this.state.userCrews.map((crew, key) => {
-            //   return (
-            //     <div onClick={e => this.handleCrewClick(crew, e)} value={crew.name} key={key} className="sidebar-crew-name">{crew.name}</div>
-            //   )
-            // })}
-      //     </div>
-      //     {this.state.userCrews.length === 0 ?
-      //     <div className="no-crews-message">
-      //       <h2><em>
-      //         You don't have any crews! Use the searchbar to find one.
-      //       </em></h2>
-      //     </div> : ''}
-      //   </div>
-      // </div>
