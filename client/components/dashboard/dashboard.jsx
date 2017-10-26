@@ -19,9 +19,11 @@ export default class Dashboard extends Component {
 
     this.submitSearch = (query) => {
       console.log('search query made');
+
     }
     this.browseSearch = () => {
       console.log('search browse made');
+      this.setState({isSearching: true})
     }
   }
 
