@@ -7,11 +7,11 @@ export default class TasksAvailable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTask: props.availableTasks[0],
+      selectedTask: props.userTasks[0],
       showModal: false
     };
 
-    this.tasks = this.props.availableTasks;
+    this.tasks = this.props.userTasks;
 
     this.handleSelectTask = (task) => {
       this.setState({selectedTask: task});
