@@ -165,6 +165,21 @@
 
 ##PUT Endpoints
 //TODO: Leader verify task endpoint, Member claim complete
+###'user/tasks'
+####req.body
+{
+  userId: INT,
+  taskId: INT,
+  completed: BOOL
+}
+
+OR
+
+{
+  userId: INT,
+  taskId: INT,
+  verified: BOOL
+}
 
 ##DELETE Endpoints
 //TODO: Leader delete task endpoint
