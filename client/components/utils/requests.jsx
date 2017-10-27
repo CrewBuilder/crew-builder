@@ -4,9 +4,8 @@ module.exports = {
 
   // Returns all of current user's crews. Will be rendered in sidebar view.
   // Should only be used in 'main.jsx' to pass crew data to 'sidebar.jsx'
-  GetUserCrews: () => {
-    let id = this.state.user.id;
-    let route = host + 'user/crews?id=' + id;
+  GetUserCrews: (userId) => {
+    let route = `${module.exports.host}user/crews?id=${userId}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -20,15 +19,14 @@ module.exports = {
       // })
       .then((data) => {
         console.log(data);
-        return this.setState({userCrews: data});
+        return data;
       }).catch((error) => console.log('ERROR', error));
   },
 
   // Returns all of current user's tasks. Will be rendered in crew view.
   // Should only be used in 'main.jsx' to pass task data to 'crewView'
-  GetUserTasks: () => {
-    let id = this.state.user.id;
-    let route = host + 'user/tasks?id=' + id;
+  GetUserTasks: (userId, crewId) => {
+    let route = `${module.exports.host}user/tasks?id=${userId}&crewId=${crewId}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -42,15 +40,15 @@ module.exports = {
     // })
       .then((data) => {
         console.log(data);
-        return this.setState({userTasks: data});
+        return data;
       }).catch((error) => console.log('ERROR', error));
   },
 
   // Returns all of current crew's tasks. Will be rendered in crew view.
   // Should only be used in 'crewView' to render tasks.
-  GetCrewTasks: () => {
-    let id = this.state.crew.id;
-    let route = host + 'crew/tasks?crewId=' + id;
+  GetCrewTasks: (crewId) => {
+    let id = crewId;
+    let route = `${module.exports.host}crew/tasks?crewId=${crewId}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -64,7 +62,9 @@ module.exports = {
     // })
       .then((data) => {
         console.log(data);
-        return this.setState({crewTasks: data});
+        return data;
       }).catch((error) => console.log('ERROR', error));
-  }
+  },
+
+
 };
