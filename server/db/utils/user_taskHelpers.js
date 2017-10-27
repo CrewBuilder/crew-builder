@@ -1,20 +1,34 @@
 const db = require('../index.js');
 
 // Returns all of a user's tasks. Used in config.js.
-exports.getTasksByUser = (id, cb) => {
-  db.User_Task.findAll({
+exports.getTasksByUser = (userId, cb) => {
+  db.user_task.findAll({
     where: {
-      userId: id
+      userId: userId
     }
   })
     .then(tasksData => {
+      let ids = [];
+
       if (!tasksData.length) {
         cb(`No tasks for user: ${id}`, null);
       } else {
-        cb(null, tasksData);
+        tasksData.forEach((task) => {
+          ids.push(task.dataValues.id);
+        })
+        cb(null, tasksData, ids);
       }
     })
     .catch(err => {
-      cb(err, null);
+      console.log('Caught err', err)
+      // cb(err, null);
     });
 };
+
+// // Find all projects with a least one task where task.state === project.state
+// Project.findAll({
+//     include: [{
+//         model: Task,
+//         where: { state: Sequelize.col('project.state') }
+//     }]
+// })

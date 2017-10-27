@@ -1,12 +1,12 @@
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define('User', {
-    facebookId: DataTypes.STRING,
+  var User = sequelize.define('user', {
+    facebook_id: DataTypes.STRING,
     facebook: DataTypes.JSON
   });
 
   User.associate = function(models) {
-    User.belongsToMany(models.Task, {through: models.User_Task, foreignKey: 'userId'});
-    User.belongsToMany(models.Crew, {through: models.User_Crew, foreignKey: 'userId'});
+    User.belongsToMany(models.task, {through: models.user_task, foreignKey: 'user_id'});
+    User.belongsToMany(models.crew, {through: models.user_crew, foreignKey: 'user_id'});
   };
 
   return User;
