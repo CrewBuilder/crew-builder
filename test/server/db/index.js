@@ -15,7 +15,7 @@ describe('Postgres crewbuilder db', function() {
   });
 
   /* *************** user Tests *************** */
-  it('Should create a new user if facebook id is not yet in the db', function(done) {
+  xit('Should create a new user if facebook id is not yet in the db', function(done) {
     // this might eventually test upsert helper function, for now query is written here
     let profile = '{"DISPLAY_NAME":"maryjane","EMAIL":"maryjane@maryjane.com","IMAGE_URL":"https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"}';
     let facebook_id = '123456';
@@ -33,7 +33,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should not create a new user if facebook_id already exists', function(done) {
+  xit('Should not create a new user if facebook_id already exists', function(done) {
     // this might eventually test upsert helper function, for now query is written here
     let profile = '{"DISPLAY_NAME":"maryjane","EMAIL":"maryjane@maryjane.com","IMAGE_URL":"https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"}';
     let facebook_id = '123456';
@@ -57,7 +57,7 @@ describe('Postgres crewbuilder db', function() {
 
 
   /* *************** user_crew Tests *************** */
-  it('Should find all crews associated with a user via the user_crew join table', function(done) {
+  xit('Should find all crews associated with a user via the user_crew join table', function(done) {
     // seed data has user 1 belonging to 5 crews
     db.user_crew.findAll({
       where: {
@@ -78,7 +78,7 @@ describe('Postgres crewbuilder db', function() {
   });
 
   /* *************** user_task Tests *************** */
-  it('Should find all tasks associated with a user via the user_task join table', function(done) {
+  xit('Should find all tasks associated with a user via the user_task join table', function(done) {
     db.user_task.findAll({
       where: {
         user_id: 1
@@ -99,7 +99,7 @@ describe('Postgres crewbuilder db', function() {
 
 
   /* *************** crew Tests *************** */
-  it('Should create a new crew by id', function(done) {
+  xit('Should create a new crew by id', function(done) {
     db.crew.findById(1)
       .then(crew => {
         expect(crew.id).to.equal(1);
@@ -110,7 +110,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should return all crews matching an array of ids', function(done) {
+  xit('Should return all crews matching an array of ids', function(done) {
     db.crew.findAll({
       where: {
         id: {
@@ -128,7 +128,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should create a new crew', function(done) {
+  xit('Should create a new crew', function(done) {
     let crewData = {
       "name": "Christiansen, Grimes and Rosenbaum",
       "description": "Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim.",
@@ -145,7 +145,7 @@ describe('Postgres crewbuilder db', function() {
   });
 
   /* *************** task Tests *************** */
-  it('Should find a task by Id', function(done) {
+  xit('Should find a task by Id', function(done) {
     db.task.findById(25)
       .then(task => {
         expect(task.id).to.equal(25);
@@ -156,7 +156,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should find all crews matching an array of ids', function(done) {
+  xit('Should find all crews matching an array of ids', function(done) {
     db.task.findAll({
       where: {
         id: {
@@ -174,7 +174,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should create a new task', function(done) {
+  xit('Should create a new task', function(done) {
     var taskData = {
       "name": "Viola clauseniana Baker",
       "description": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.",
@@ -186,6 +186,26 @@ describe('Postgres crewbuilder db', function() {
     db.task.create(taskData)
       .then(task => {
         expect(task.name).to.equal(taskData.name);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  it('Should build a custom task table based on the user_tasks and tasks tables', function(done) {
+    db.user.findOne({
+      where: {id: 1},
+      include: [{
+        model: db.task,
+        where: {crewId: 5},
+        through: {
+          attributes: ['completed', 'verified']
+        }
+      }]
+    })
+      .then(user => {
+        expect(user.tasks.length).to.equal();
         done();
       })
       .catch(err => {
