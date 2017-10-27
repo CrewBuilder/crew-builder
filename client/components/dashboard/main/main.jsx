@@ -12,59 +12,32 @@ export default class Main extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      user: null,
-      userCrews: null,
-      userTasks: null,
-    }
-  }
-
-  componentDidMount() {
-
   }
 
   render() {
-      return (
-        <div>
-          <Switch>
-            <Route path="/dashboard/crewview" currentPath="/dashboard" component={CrewView}/>
-            <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
-          </Switch>
-        </div>
-      )
-
+    return (
+      <div>
+        <Switch>
+          <Route path="/dashboard/crews" render={(props) => (
+          <CrewView {...props}
+            user={this.props.user}
+            currentCrew={this.props.currentCrew}
+            userTasks={this.props.userTasks}
+            />
+          )}/>
+          <Route exact path="/dashboard/newcrew" render={(props) => (
+            <CreateCrew {...props}
+            />
+          )}/>
+          <Route path="/dashboard/results" render={(props) => (
+            <SearchResults {...props}
+            searchResults={this.props.searchResults}
+            searchField={this.props.searchField}
+            />
+          )}/>
+        </Switch>
+      </div>
+    )
   }
 }
 
-    // if(this.props.isSearching){
-    //   return (
-    //     <div>
-    //       <Switch>
-    //         <Route path="/dashboard/newcrew" currentPath="/dashboard" component={CreateCrew}/>
-    //         <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
-    //       </Switch>
-    //     </div>
-    //   )
-    // } else {
-    //   return (
-    //     <div>
-    //       <CrewView />
-    //     </div>
-    //   )
-    // }
-
-
-// <div>
-//   <Link to="/dashboard/newcrew">
-//     CreateCrew with React
-//   </Link>
-//   <Link to="/dashboard/results">
-//     SearchResults with React
-//   </Link>
-//   <CrewView />
-//   <Switch>
-//   <Route path="/dashboard/newcrew" currentPath="/dashboard" component={CreateCrew}/>
-//   <Route path="/dashboard/results" currentPath="/dashboard" component={SearchResults}/>
-//   </Switch>
-// </div>
-          // <SearchResults/>

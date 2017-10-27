@@ -13,10 +13,6 @@ export default class Landing extends React.Component {
 
   render() {
 
-    function loginClickHandler(e) {
-      e.preventDefault();
-      window.location = "/auth/facebook"
-    }
     return(
       <div>
         <Jumbotron>
