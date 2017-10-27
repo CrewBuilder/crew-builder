@@ -7,29 +7,31 @@
 {
   leader: [
     {
-        "id": 2,
         "points": 0,
         "achievement": "none",
-        "role": "member",
-        "createdAt": "2017-10-27T03:15:45.179Z",
-        "updatedAt": "2017-10-27T03:15:45.179Z",
-        "crew_id": 2,
-        "user_id": 1,
-        "crew": {crewData}
+        "role": "leader",
+        "crew": {
+          id: 4
+          name: '',
+          description: '',
+          image: ''
+        }
     }
   ],
   member: [
     {
-        "id": 2,
+        {
         "points": 0,
         "achievement": "none",
         "role": "member",
-        "createdAt": "2017-10-27T03:15:45.179Z",
-        "updatedAt": "2017-10-27T03:15:45.179Z",
-        "crew_id": 2,
-        "user_id": 1,
-        "crew: {crewData}"
-    }]
+        "crew": {
+          id: 5
+          name: '',
+          description: '',
+          image: ''
+        }
+    }
+  ]
 }
 
 ###'/user/tasks?id={USER_ID}&crewId={CREW_ID}'

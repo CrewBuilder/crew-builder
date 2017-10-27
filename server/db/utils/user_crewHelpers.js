@@ -26,11 +26,14 @@ exports.getCrewsByUser = (id, cb) => {
 
 const parseData = (user) => {
   let crews = user.crews;
-  let response = [[], []];
+  let response = {
+    leader: [],
+    member: []
+  };
   crews.forEach(crew => {
 
     if (crew.user_crew.role === 'leader') {
-      response[0].push({
+      response.leader.push({
         points: crew.user_crew.points,
         achievement: crew.user_crew.achievement,
         role: crew.user_crew.role,
@@ -43,7 +46,7 @@ const parseData = (user) => {
       });
 
     } else {
-      response[1].push({
+      response.member.push({
         points: crew.user_crew.points,
         achievement: crew.user_crew.achievement,
         role: crew.user_crew.role,
