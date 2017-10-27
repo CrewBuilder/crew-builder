@@ -3,11 +3,10 @@ exports.getCrewsByUser = (id, cb) => {
   //this query tested OK
   db.user_crew.findAll({
     where: {
-      userId: id
+      user_id: id
     }
   })
     .then(crews => {
-      console.log('CREWS', crews)
       if (!crews.length) {
         cb(`No crews for user: ${id}`, null);
       } else {

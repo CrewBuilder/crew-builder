@@ -21,7 +21,6 @@ exports.findAllTasksByIds = (ids, crewId, cb) => {
     }
   })
     .then(tasksData => {
-      console.log('ddd',tasksData)
       if (!tasksData.length) {
         cb(err, null);
       } else {
@@ -49,12 +48,23 @@ exports.findAllTasksByNotIds = (ids, crewId, cb) => {
     });
 };
 
+exports.getTasksByCrew = (crewId, cb) => {
+  db.task.findAll({
+    where: {crewId: crewId}
+  })
+    .then(tasks => {
+      if (!tasks.length) {
+        cb('No tasks found.', null);
+      } else {
+        cb(null, tasks);
+      }
+    });
+};
 
 // Allows task creation
 exports.postTask = (taskData, cb) => {
   db.task.create(taskData)
     .then(task => {
-      console.log('Created a new task', task);
       // Callback with task data
       return cb(null, task);
     })

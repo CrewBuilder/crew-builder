@@ -6,7 +6,7 @@ exports.upsertFbUser = (profile, cb) => {
   db.user.findOne(
     {
       where: {
-        facebookId: profile.facebookId
+        facebook_id: profile.facebookId
       }
     })
     .then(user => {

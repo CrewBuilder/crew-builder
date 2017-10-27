@@ -99,7 +99,7 @@ describe('Postgres crewbuilder db', function() {
 
 
   /* *************** crew Tests *************** */
-  xit('Should create a new crew by id', function(done) {
+  xit('Should find a new crew by id', function(done) {
     db.crew.findById(1)
       .then(crew => {
         expect(crew.id).to.equal(1);
