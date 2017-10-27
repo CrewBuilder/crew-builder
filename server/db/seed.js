@@ -11,10 +11,10 @@ const UserTaskSeed = require('../../test/server/db/seed/user_task.js');
 module.exports = function() {
   return db.sequelize.drop()
     .then(() => { return db.sequelize.sync(); })
-    .then(() => { return db.User.bulkCreate(UserSeed); })
-    .then(() => { return db.Crew.bulkCreate(CrewSeed); })
-    .then(() => { return db.Task.bulkCreate(TaskSeed); })
-    .then(() => { return db.User_Crew.bulkCreate(UserCrewSeed); })
-    .then(() => { return db.User_Task.bulkCreate(UserTaskSeed); })
+    .then(() => { return db.user.bulkCreate(UserSeed); })
+    .then(() => { return db.crew.bulkCreate(CrewSeed); })
+    .then(() => { return db.task.bulkCreate(TaskSeed); })
+    .then(() => { return db.user_crew.bulkCreate(UserCrewSeed); })
+    .then(() => { return db.user_task.bulkCreate(UserTaskSeed); })
     .catch(err => { console.log('Database did not sync: ', err); });
 };

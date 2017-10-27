@@ -1,175 +1,175 @@
 module.exports = [
   {
-    "userId": 1,
-    "crewId": 1,
+    "user_id": 1,
+    "crew_id": 1,
     "points": 0,
     "achievement": "none",
     "role": "leader"
   },
   {
-    "userId": 1,
-    "crewId": 2,
+    "user_id": 1,
+    "crew_id": 2,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 1,
-    "crewId": 3,
+    "user_id": 1,
+    "crew_id": 3,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 1,
-    "crewId": 4,
+    "user_id": 1,
+    "crew_id": 4,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 1,
-    "crewId": 5,
+    "user_id": 1,
+    "crew_id": 5,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 2,
-    "crewId": 1,
+    "user_id": 2,
+    "crew_id": 1,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 2,
-    "crewId": 2,
+    "user_id": 2,
+    "crew_id": 2,
     "points": 0,
     "achievement": "none",
     "role": "leader"
   },
   {
-    "userId": 2,
-    "crewId": 3,
+    "user_id": 2,
+    "crew_id": 3,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 2,
-    "crewId": 4,
+    "user_id": 2,
+    "crew_id": 4,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 2,
-    "crewId": 5,
+    "user_id": 2,
+    "crew_id": 5,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 3,
-    "crewId": 1,
+    "user_id": 3,
+    "crew_id": 1,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 3,
-    "crewId": 2,
+    "user_id": 3,
+    "crew_id": 2,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 3,
-    "crewId": 3,
+    "user_id": 3,
+    "crew_id": 3,
     "points": 0,
     "achievement": "none",
     "role": "leader"
   },
   {
-    "userId": 3,
-    "crewId": 4,
+    "user_id": 3,
+    "crew_id": 4,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 3,
-    "crewId": 5,
+    "user_id": 3,
+    "crew_id": 5,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 4,
-    "crewId": 1,
+    "user_id": 4,
+    "crew_id": 1,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 4,
-    "crewId": 2,
+    "user_id": 4,
+    "crew_id": 2,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 4,
-    "crewId": 3,
+    "user_id": 4,
+    "crew_id": 3,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 4,
-    "crewId": 4,
+    "user_id": 4,
+    "crew_id": 4,
     "points": 0,
     "achievement": "none",
     "role": "leader"
   },
   {
-    "userId": 4,
-    "crewId": 5,
+    "user_id": 4,
+    "crew_id": 5,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 5,
-    "crewId": 1,
+    "user_id": 5,
+    "crew_id": 1,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 5,
-    "crewId": 2,
+    "user_id": 5,
+    "crew_id": 2,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 5,
-    "crewId": 3,
+    "user_id": 5,
+    "crew_id": 3,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 5,
-    "crewId": 4,
+    "user_id": 5,
+    "crew_id": 4,
     "points": 0,
     "achievement": "none",
     "role": "member"
   },
   {
-    "userId": 5,
-    "crewId": 5,
+    "user_id": 5,
+    "crew_id": 5,
     "points": 0,
     "achievement": "none",
     "role": "leader"

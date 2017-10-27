@@ -1,7 +1,7 @@
 const db = require('../index.js');
 // Returns a single task by its unique id
 exports.findTaskById = (id, cb) => {
-  db.Task.findById(id)
+  db.task.findById(id)
     .then(task => {
       cb(null, task);
     })
@@ -11,11 +11,32 @@ exports.findTaskById = (id, cb) => {
 };
 
 // Returns all tasks for array of id(s). Used by '/user/tasks' endpoint in config.js.
-exports.findAllTasksByIds = (ids, cb) => {
-  db.Task.findAll({
+exports.findAllTasksByIds = (ids, crewId, cb) => {
+  db.task.findAll({
     where: {
+      crewId: crewId,
       id: {
         $in: ids
+      }
+    }
+  })
+    .then(tasksData => {
+      console.log('ddd',tasksData)
+      if (!tasksData.length) {
+        cb(err, null);
+      } else {
+        cb(null, tasksData);
+      }
+    });
+};
+
+// Returns all tasks not in array of id(s). User by '/user/tasks' endpoint in config.js.
+exports.findAllTasksByNotIds = (ids, crewId, cb) => {
+  db.task.findAll({
+    where: {
+      crewId: crewId,
+      id: {
+        $notIn: ids
       }
     }
   })
@@ -28,9 +49,10 @@ exports.findAllTasksByIds = (ids, cb) => {
     });
 };
 
+
 // Allows task creation
 exports.postTask = (taskData, cb) => {
-  db.Task.create(taskData)
+  db.task.create(taskData)
     .then(task => {
       console.log('Created a new task', task);
       // Callback with task data
