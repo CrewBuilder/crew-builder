@@ -1,12 +1,12 @@
 module.exports = function(sequelize, DataTypes) {
-  var UserTask = sequelize.define('User_Task', {
+  var UserTask = sequelize.define('user_task', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
     },
-    complete: {
+    completed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },

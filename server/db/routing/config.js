@@ -3,43 +3,45 @@ let router = express.Router();
 
 // Get id's for Join tables
 let getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
-let getTasksByUser = require('./../utils/user_taskHelpers.js').findAllTasksByUser;
-let getTasksByCrew = require('./../utils/crew_taskHelpers.js').getTasksByCrew;
+let getTasksByUser = require('./../utils/user_taskHelpers.js').getTasksByUser;
+let getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByUserCrew;
+let getTasksByCrew = require('./../utils/taskHelpers.js').getTasksByCrew;
 // Get list of data rows from array of id's
 let findAllTasksByIds = require('./../utils/taskHelpers.js').findAllTasksByIds;
 let findAllCrewsByIds = require('./../utils/crewHelpers.js').findAllCrewsByIds;
+let getAllCrews = require('./../utils/crewHelpers.js').findAllCrews;
+let findAllTasksByNotIds = require('./../utils/taskHelpers.js').findAllTasksByNotIds;
 
 // '/user/crews' endpoint returns user's crew(s) data
-router.get('/user/crews', (req, res) => {
+router.get('/user/crews', (req, res) => { // tested with postman, returns array of user_crew data for user
   // Expects req.user.id
   let id = req.query.id;
-  getCrewsByUser(id, (err, crewsIds) => {
+  getCrewsByUser(id, (err, crews) => {
     if (err) {
       res.status(401).send('User has not signed up for any crews');
     } else {
-      findAllCrewsByIds(crewsIds, (err, crewList) => {
-        res.status(200).send(crewList);
-      });
+      res.status(200).send(crews);
     }
   });
 });
 
-// '/user/tasks' endpoint returns ALL user's tasks. Will have to filter tasks by crew on the front end.
-router.get('/user/tasks', (req, res) => {
+// '/user/tasks' endpoint returns ALL user's tasks in progress
+router.get('/user/tasks', (req, res) => { // test with postman, returns object with three different arrays: userTasks, tasksInProgress (for the crew in question), and tasksAvailable (for the crew in question)
   // Expects req.user.id
   let id = req.query.id;
-  getTasksByUser(id, (err, tasks) => {
+  let crewId = req.query.crewId;
+
+  getTasksByUserCrew(id, crewId, (err, user) => {
+    console.log(id, crewId);
     if (err) {
-      res.status(401).send('No tasks available. Try signing up for a Crew!');
+      res.status(401).send(err);
     } else {
-      findAllTasksByIds(tasks, (err, taskList) => {
-        res.status(200).send(taskList);
-      });
+      res.status(200).send(user);
     }
   });
 });
 
-// '/crew/tasks' endpoint returns ALL crew's tasks. Will have to filter by completion using user data on the front end.
+// '/crew/tasks' endpoint returns ALL crew's tasks
 router.get('/crew/tasks', (req, res) => {
   // Expects req.body.crewId
   let id = req.query.crewId;
@@ -47,14 +49,23 @@ router.get('/crew/tasks', (req, res) => {
     if (err) {
       res.status(401).send('No tasks available. Tell your Crew Leader to add some!');
     } else {
-      findAllTasksByIds(tasks, (err, taskList) => {
-        res.status(200).send(taskList);
-      });
+      res.status(200).send(tasks);
     }
   });
 });
 
-// TODO: Need to also postTask to Crew_Task join table
+// '/crews' endpoint returns all crews in current db
+router.get('/crews', (req, res) => {
+  getAllCrews((err, crews) => {
+    if (err) {
+      res.status(401).send('No crews yet exist.');
+    } else {
+      res.status(200).send(crews);
+    }
+  });
+});
+
+// tested with postman
 let postTask = require('./../utils/taskHelpers.js').postTask;
 // '/task' endpoint POSTs a task to the task table.
 router.post('/task', (req, res) => {
@@ -63,8 +74,9 @@ router.post('/task', (req, res) => {
     description: req.body.description,
     points: req.body.points,
     limit: req.body.limit,
-    expiry: req.body.expiry
-  }
+    expiry: req.body.expiry,
+    crewId: req.body.crewId
+  };
   postTask(task, (err, task) => {
     if (err) {
       res.status(401).send('Could not post task');
@@ -75,14 +87,14 @@ router.post('/task', (req, res) => {
 });
 
 let postCrew = require('./../utils/crewHelpers.js').postCrew;
-// '/crew' endpoint POSTs a task to the crew table.
+// '/crew' endpoint POSTs a new crew.
 router.post('/crew', (req, res) => {
   let crew = {
     name: req.body.name,
     description: req.body.description,
     image: req.body.image
-  }
-  postTask(crew, (err, crew) => {
+  };
+  postCrew(crew, (err, crew) => {
     if (err) {
       res.status(401).send('Could not post crew');
     } else {
@@ -94,3 +106,23 @@ router.post('/crew', (req, res) => {
 
 
 module.exports = router;
+
+// {userTasks: [], crewTasks: []}
+// getTasksByUser(id, (err, tasks, ids) => {
+//   if (err) {
+//     console.log('err35', err)
+//     res.status(401).send('No tasks available. Try signing up for a Crew!');
+//   } else {
+//     console.log('Tasks', tasks, 'Ids', ids)
+//     findAllTasksByIds(ids, crewId, (err, tasksInProgress) => {
+//       findAllTasksByNotIds(ids, crewId, (err, tasksAvailable) => {
+//         let response = {
+//           userTasks: tasks,
+//           tasksInProgress: tasksInProgress,
+//           tasksAvailable: tasksAvailable
+//         };
+//         res.status(200).send(response);
+//       });
+//     });
+//   }
+// });
