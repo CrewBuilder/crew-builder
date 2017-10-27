@@ -16,10 +16,17 @@ export default class crewLeaderSummary extends Component {
           </Media.Left>
           <Media.Body>
             <Media.Heading>
+              {this.props.currentCrew.name}
             </Media.Heading>
+            <p>list members</p>
+            <p>Edit crew profile</p>
           </Media.Body>
         </Media>
       </div>
     )
   }
 }
+
+// when you click on list members it should pop over a model showing all the current members
+
+// when you click on a edit profile it should popover a model, which is actually our createcrew form to update and change
