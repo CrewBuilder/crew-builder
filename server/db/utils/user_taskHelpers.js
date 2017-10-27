@@ -30,7 +30,7 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
     where: {id: userId},
     include: [{
       model: db.task,
-      where: {crew_id: crewId},
+      where: {crewId: crewId},
       through: {
         attributes: ['completed', 'verified']
       }
