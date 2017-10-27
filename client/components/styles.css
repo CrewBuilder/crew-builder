@@ -1,3 +1,14 @@
 .outlineBox {
   border: 1px solid #555;
+  min-height: 500px;
+}
+
+.background-image {
+  background-image: url('/images/crew.png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cover-background {
+  background-color: #fff;
 }
