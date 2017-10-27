@@ -4,7 +4,7 @@ const db = require('../index.js');
 exports.getTasksByUser = (userId, cb) => {
   db.user_task.findAll({
     where: {
-      user_id: userId
+      userId: userId
     }
   })
     .then(tasksData => {
@@ -30,7 +30,7 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
     where: {id: userId},
     include: [{
       model: db.task,
-      where: {crew_id: crewId},
+      where: {crewId: crewId},
       through: {
         attributes: ['completed', 'verified']
       }
