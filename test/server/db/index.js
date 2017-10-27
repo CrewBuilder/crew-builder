@@ -18,12 +18,12 @@ describe('Postgres crewbuilder db', function() {
   it('Should create a new user if facebook id is not yet in the db', function(done) {
     // this might eventually test upsert helper function, for now query is written here
     let profile = '{"DISPLAY_NAME":"maryjane","EMAIL":"maryjane@maryjane.com","IMAGE_URL":"https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"}';
-    let facebookId = '123456';
-    db.user.findOne({ where: { facebookId: facebookId } })
+    let facebook_id = '123456';
+    db.user.findOne({ where: { facebook_id: facebook_id } })
       .then(function(user) {
         if (!user) {
           // No user found... one should be created
-          db.user.create({ facebookId: facebookId, facebook: profile })
+          db.user.create({ facebook_id: facebook_id, facebook: profile })
             .then(function(user) {
               console.log('user created');
               expect(user.facebook).to.equal(profile);
@@ -33,17 +33,17 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should not create a new user if facebookId already exists', function(done) {
+  it('Should not create a new user if facebook_id already exists', function(done) {
     // this might eventually test upsert helper function, for now query is written here
     let profile = '{"DISPLAY_NAME":"maryjane","EMAIL":"maryjane@maryjane.com","IMAGE_URL":"https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"}';
-    let facebookId = '123456';
+    let facebook_id = '123456';
     // create user
-    db.user.create({ facebookId: facebookId, facebook: profile })
-      .then(function() { return db.user.findOne({ where: { facebookId: facebookId } }); })
+    db.user.create({ facebook_id: facebook_id, facebook: profile })
+      .then(function() { return db.user.findOne({ where: { facebook_id: facebook_id } }); })
       .then(function(user) {
         if (!user) {
           // should not enter this conditional
-          db.user.create({ facebookId: facebookId, facebook: profile })
+          db.user.create({ facebook_id: facebook_id, facebook: profile })
             .then(function(user) {
               done(user); // should fail if this is reached
             });
@@ -61,7 +61,7 @@ describe('Postgres crewbuilder db', function() {
     // seed data has user 1 belonging to 5 crews
     db.user_crew.findAll({
       where: {
-        userId: 1
+        user_id: 1
       }
     })
       .then(crews => {
@@ -81,7 +81,7 @@ describe('Postgres crewbuilder db', function() {
   it('Should find all tasks associated with a user via the user_task join table', function(done) {
     db.user_task.findAll({
       where: {
-        userId: 1
+        user_id: 1
       }
     })
       .then(tasksData => {
@@ -179,29 +179,13 @@ describe('Postgres crewbuilder db', function() {
       "name": "Viola clauseniana Baker",
       "description": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.",
       "points": 89,
-      "crewId": 4,
+      "crew_id": 4,
       "expiry": "2017-01-25T19:10:29Z",
       "limit": 66
     };
     db.task.create(taskData)
       .then(task => {
         expect(task.name).to.equal(taskData.name);
-        done();
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
-
-  it('Should use the many to many relationship between users and tasks to build a custom tsk table', function(done) {
-    db.user_task.findAll({
-      model: db.task,
-      attributes: ['userId', 'taskId', 'completed', 'verified'],
-      where: {userId: 1}
-    })
-      .then(tasks => {
-        expect(tasks).to.exist;
-        console.log(tasks);
         done();
       })
       .catch(err => {
