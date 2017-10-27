@@ -4,7 +4,7 @@ import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import {GetCurrentUser} from '../../utils/auth.jsx';
 import { getUserCrews, getUserTasks } from '../../utils/requests.jsx';
 
-import CreateCrew from '../createCrew.jsx';
+import CreateCrew from '../forms/createCrew.jsx';
 import SearchResults from './searchView/searchResults.jsx';
 import CrewView from './crewView/crewView.jsx';
 
