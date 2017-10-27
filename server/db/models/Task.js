@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Task = sequelize.define('Task', {
+  var Task = sequelize.define('task', {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
     points: DataTypes.INTEGER,
@@ -8,8 +8,8 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Task.associate = function(models) {
-    Task.belongsTo(models.Crew);
-    Task.belongsToMany(models.User, {through: models.User_Task, foreignKey: 'taskId'});
+    Task.belongsTo(models.crew);
+    Task.belongsToMany(models.user, {through: models.user_task, foreignKey: 'taskId'});
   };
 
   return Task;

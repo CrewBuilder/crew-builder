@@ -3,37 +3,47 @@ let router = express.Router();
 
 // Get id's for Join tables
 let getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
-let getTasksByUser = require('./../utils/user_taskHelpers.js').findAllTasksByUser;
-let getTasksByCrew = require('./../utils/crew_taskHelpers.js').getTasksByCrew;
+let getTasksByUser = require('./../utils/user_taskHelpers.js').getTasksByUser;
 // Get list of data rows from array of id's
 let findAllTasksByIds = require('./../utils/taskHelpers.js').findAllTasksByIds;
 let findAllCrewsByIds = require('./../utils/crewHelpers.js').findAllCrewsByIds;
+let findAllTasksByNotIds = require('./../utils/taskHelpers.js').findAllTasksByNotIds;
 
 // '/user/crews' endpoint returns user's crew(s) data
-router.get('/user/crews', (req, res) => {
+router.get('/user/crews', (req, res) => { // tested with postman, returns array of user_crew data for user
   // Expects req.user.id
   let id = req.query.id;
-  getCrewsByUser(id, (err, crewsIds) => {
+  getCrewsByUser(id, (err, crews) => {
     if (err) {
       res.status(401).send('User has not signed up for any crews');
     } else {
-      findAllCrewsByIds(crewsIds, (err, crewList) => {
-        res.status(200).send(crewList);
-      });
+      res.status(200).send(crews);
     }
   });
 });
 
 // '/user/tasks' endpoint returns ALL user's tasks. Will have to filter tasks by crew on the front end.
-router.get('/user/tasks', (req, res) => {
+router.get('/user/tasks', (req, res) => { // test with postman, returns object with three different arrays: userTasks, tasksInProgress (for the crew in question), and tasksAvailable (for the crew in question)
   // Expects req.user.id
+  // | userId | taskId | crewId | task name (from tasks) | task description..... (from tasks) | isVerified (from user-task) | isComplete (From userTask)
   let id = req.query.id;
-  getTasksByUser(id, (err, tasks) => {
+  let crewId = req.query.crewId;
+  // {userTasks: [], crewTasks: []}
+  getTasksByUser(id, (err, tasks, ids) => {
     if (err) {
+      console.log('err35', err)
       res.status(401).send('No tasks available. Try signing up for a Crew!');
     } else {
-      findAllTasksByIds(tasks, (err, taskList) => {
-        res.status(200).send(taskList);
+      console.log('Tasks', tasks, 'Ids', ids)
+      findAllTasksByIds(ids, crewId, (err, tasksInProgress) => {
+        findAllTasksByNotIds(ids, crewId, (err, tasksAvailable) => {
+          let response = {
+            userTasks: tasks,
+            tasksInProgress: tasksInProgress,
+            tasksAvailable: tasksAvailable
+          };
+          res.status(200).send(response);
+        });
       });
     }
   });
@@ -47,9 +57,7 @@ router.get('/crew/tasks', (req, res) => {
     if (err) {
       res.status(401).send('No tasks available. Tell your Crew Leader to add some!');
     } else {
-      findAllTasksByIds(tasks, (err, taskList) => {
-        res.status(200).send(taskList);
-      });
+      res.status(200).send(tasks);
     }
   });
 });

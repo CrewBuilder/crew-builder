@@ -29,4 +29,9 @@ dist/
 node_modules/
 bower_components/
 
+# dotenv file
 .env
+
+# floobits
+.floo
+.flooignore
