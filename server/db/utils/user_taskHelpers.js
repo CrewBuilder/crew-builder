@@ -15,20 +15,35 @@ exports.getTasksByUser = (userId, cb) => {
       } else {
         tasksData.forEach((task) => {
           ids.push(task.dataValues.id);
-        })
+        });
         cb(null, tasksData, ids);
       }
     })
     .catch(err => {
-      console.log('Caught err', err)
+      console.log('Caught err', err);
       // cb(err, null);
     });
 };
 
-// // Find all projects with a least one task where task.state === project.state
-// Project.findAll({
-//     include: [{
-//         model: Task,
-//         where: { state: Sequelize.col('project.state') }
-//     }]
-// })
+exports.getTasksByUserCrew = (userId, crewId, cb) => {
+  db.user.findOne({
+    where: {id: userId},
+    include: [{
+      model: db.task,
+      where: {crewId: crewId},
+      through: {
+        attributes: ['completed', 'verified']
+      }
+    }]
+  })
+    .then(user => {
+      if (!user) {
+        cb('no data found', null);
+      } else {
+        cb(null, user);
+      }
+    })
+    .catch(err => {
+      cb(err, null);
+    });
+};

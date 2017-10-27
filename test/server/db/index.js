@@ -179,7 +179,7 @@ describe('Postgres crewbuilder db', function() {
       "name": "Viola clauseniana Baker",
       "description": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.",
       "points": 89,
-      "crew_id": 4,
+      "crewId": 4,
       "expiry": "2017-01-25T19:10:29Z",
       "limit": 66
     };
@@ -198,14 +198,15 @@ describe('Postgres crewbuilder db', function() {
       where: {id: 1},
       include: [{
         model: db.task,
-        where: {crewId: 5},
+        where: {crewId: 4},
         through: {
           attributes: ['completed', 'verified']
         }
       }]
     })
       .then(user => {
-        expect(user.tasks.length).to.equal();
+        console.log(user.tasks[0]);
+        expect(user.tasks.length).to.equal(3);
         done();
       })
       .catch(err => {

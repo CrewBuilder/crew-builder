@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    complete: {
+    completed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },

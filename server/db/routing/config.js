@@ -4,9 +4,11 @@ let router = express.Router();
 // Get id's for Join tables
 let getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
 let getTasksByUser = require('./../utils/user_taskHelpers.js').getTasksByUser;
+let getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByUserCrew;
 // Get list of data rows from array of id's
 let findAllTasksByIds = require('./../utils/taskHelpers.js').findAllTasksByIds;
 let findAllCrewsByIds = require('./../utils/crewHelpers.js').findAllCrewsByIds;
+let getAllCrews = require('./../utils/crewHelpers.js').findAllCrews;
 let findAllTasksByNotIds = require('./../utils/taskHelpers.js').findAllTasksByNotIds;
 
 // '/user/crews' endpoint returns user's crew(s) data
@@ -29,22 +31,30 @@ router.get('/user/tasks', (req, res) => { // test with postman, returns object w
   let id = req.query.id;
   let crewId = req.query.crewId;
   // {userTasks: [], crewTasks: []}
-  getTasksByUser(id, (err, tasks, ids) => {
+  // getTasksByUser(id, (err, tasks, ids) => {
+  //   if (err) {
+  //     console.log('err35', err)
+  //     res.status(401).send('No tasks available. Try signing up for a Crew!');
+  //   } else {
+  //     console.log('Tasks', tasks, 'Ids', ids)
+  //     findAllTasksByIds(ids, crewId, (err, tasksInProgress) => {
+  //       findAllTasksByNotIds(ids, crewId, (err, tasksAvailable) => {
+  //         let response = {
+  //           userTasks: tasks,
+  //           tasksInProgress: tasksInProgress,
+  //           tasksAvailable: tasksAvailable
+  //         };
+  //         res.status(200).send(response);
+  //       });
+  //     });
+  //   }
+  // });
+  getTasksByUserCrew(id, crewId, (err, user) => {
+    console.log(id, crewId);
     if (err) {
-      console.log('err35', err)
-      res.status(401).send('No tasks available. Try signing up for a Crew!');
+      res.status(401).send(err);
     } else {
-      console.log('Tasks', tasks, 'Ids', ids)
-      findAllTasksByIds(ids, crewId, (err, tasksInProgress) => {
-        findAllTasksByNotIds(ids, crewId, (err, tasksAvailable) => {
-          let response = {
-            userTasks: tasks,
-            tasksInProgress: tasksInProgress,
-            tasksAvailable: tasksAvailable
-          };
-          res.status(200).send(response);
-        });
-      });
+      res.status(200).send(user);
     }
   });
 });
@@ -58,6 +68,17 @@ router.get('/crew/tasks', (req, res) => {
       res.status(401).send('No tasks available. Tell your Crew Leader to add some!');
     } else {
       res.status(200).send(tasks);
+    }
+  });
+});
+
+// '/crews' endpoitn returns all crews in current db
+router.get('/crews', (req, res) => {
+  getAllCrews((err, crews) => {
+    if (err) {
+      res.status(401).send('No crews yet exist.');
+    } else {
+      res.status(200).send(crews);
     }
   });
 });

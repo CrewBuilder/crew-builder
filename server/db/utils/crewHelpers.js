@@ -31,6 +31,19 @@ exports.findAllCrewsByIds = (ids, cb) => {
     });
 };
 
+// Returns all crews in the database
+exports.findAllCrews = (cb) => {
+  //this query has been test OK
+  db.crew.findAll()
+    .then(crewsData => {
+      if (!crewsData.length) {
+        cb(err, null);
+      } else {
+        cb(null, crewsData);
+      }
+    });
+};
+
 // Allows crew creation
 exports.postCrew = (crewData, cb) => {
   //this query has been tested OK

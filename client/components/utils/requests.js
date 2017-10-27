@@ -36,10 +36,10 @@ module.exports = {
       })
     };
     return fetch(route, options)
-    // TODO: test the data format of these API requests
-    // .then((response) => {
-    //   return response.json();
-    // })
+      // TODO: test the data format of these API requests
+      // .then((response) => {
+      //   return response.json();
+      // })
       .then((data) => {
         console.log(data);
         return this.setState({userTasks: data});
@@ -58,10 +58,10 @@ module.exports = {
       })
     };
     return fetch(route, options)
-    // TODO: test the data format of these API requests
-    // .then((response) => {
-    //   return response.json();
-    // })
+      // TODO: test the data format of these API requests
+      // .then((response) => {
+      //   return response.json();
+      // })
       .then((data) => {
         console.log(data);
         return this.setState({crewTasks: data});
