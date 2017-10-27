@@ -1,19 +1,61 @@
 const db = require('../index.js'); // Queries the User_Crew table, returns all of a User's crews by Id
 exports.getCrewsByUser = (id, cb) => {
   //this query tested OK
-  db.user_crew.findAll({
+  db.user.findOne({
     where: {
-      user_id: id
-    }
+      id: id
+    },
+    include: [{
+      model: db.crew,
+      through: {
+        attributes: ['points', 'role', 'achievement']
+      }
+    }]
   })
-    .then(crews => {
-      if (!crews.length) {
+    .then(user => {
+      if (!user.crews.length) {
         cb(`No crews for user: ${id}`, null);
       } else {
-        cb(null, crews);
+        cb(null, parseData(user));
       }
     })
     .catch(err => {
       cb(err, null);
     });
+};
+
+const parseData = (user) => {
+  let crews = user.crews;
+  let response = [[], []];
+  crews.forEach(crew => {
+
+    if (crew.user_crew.role === 'leader') {
+      response[0].push({
+        points: crew.user_crew.points,
+        achievement: crew.user_crew.achievement,
+        role: crew.user_crew.role,
+        crew: {
+          id: crew.id,
+          name: crew.name,
+          description: crew.description,
+          image: crew.image
+        }
+      });
+
+    } else {
+      response[1].push({
+        points: crew.user_crew.points,
+        achievement: crew.user_crew.achievement,
+        role: crew.user_crew.role,
+        crew: {
+          id: crew.id,
+          name: crew.name,
+          description: crew.description,
+          image: crew.image
+        }
+      });
+    }
+  });
+
+  return response;
 };
