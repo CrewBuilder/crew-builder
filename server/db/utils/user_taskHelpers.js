@@ -1,6 +1,6 @@
 const db = require('../index.js');
 
-// Returns all of a user's tasks. Used in config.js.
+// Returns all of a user's tasks. not currently in use, replaced by query below
 exports.getTasksByUser = (userId, cb) => {
   db.user_task.findAll({
     where: {
@@ -40,7 +40,7 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
       if (!user) {
         cb('no data found', null);
       } else {
-        cb(null, user);
+        cb(null, user.tasks);
       }
     })
     .catch(err => {
