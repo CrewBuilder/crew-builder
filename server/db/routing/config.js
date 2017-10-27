@@ -1,12 +1,11 @@
 let express = require('express');
 let router = express.Router();
 
-// Get id's for Join tables
+// at some point we may want to refactor this to just import certain files and call methods from those helpers
 let getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
 let getTasksByUser = require('./../utils/user_taskHelpers.js').getTasksByUser;
 let getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByUserCrew;
 let getTasksByCrew = require('./../utils/taskHelpers.js').getTasksByCrew;
-// Get list of data rows from array of id's
 let findAllTasksByIds = require('./../utils/taskHelpers.js').findAllTasksByIds;
 let findAllCrewsByIds = require('./../utils/crewHelpers.js').findAllCrewsByIds;
 let getAllCrews = require('./../utils/crewHelpers.js').findAllCrews;

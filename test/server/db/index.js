@@ -205,9 +205,34 @@ describe('Postgres crewbuilder db', function() {
       }]
     })
       .then(user => {
-        console.log(user.tasks[0]);
         expect(user.tasks.length).to.equal(3);
         done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  it('Should build a custom crew list for a user', function(done) {
+    db.user.findOne({
+      where: {
+        id: 1
+      },
+      include: [{
+        model: db.crew,
+        through: {
+          attributes: ['points', 'role', 'achievement']
+        }
+      }]
+    })
+      .then(user => {
+        if (!user.crews.length) {
+          done(`No crews for user: ${id}`);
+        } else {
+          console.log(user.crews[0].user_crew.points);
+          expect(user.crews.length).to.equal(5);
+          done();
+        }
       })
       .catch(err => {
         done(err);
