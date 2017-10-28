@@ -13,19 +13,11 @@ export default class CreateCrew extends Component {
     console.log(this.desc);
     console.log(this.img)
     var obj = {
-      name: this.name,
-      desc: this.desc,
+      name: this.name.value,
+      desc: this.description.value,
       img: this.img
     }
     console.log(obj)
-  }
-
-  name(e) {
-    this.name = e.target.value
-  }
-
-  desc(e) {
-    this.desc = e.target.value
   }
 
   image(e) {
@@ -37,9 +29,9 @@ export default class CreateCrew extends Component {
       <div>
       <form onSubmit={this.handleSubmit.bind(this)}>
         <FormGroup>
-         <FormControl type="text" placeholder="Enter the name of Crew" name="crewname" onChange={this.name.bind(this)}/><br/>
-         <FormControl componentClass="textarea" placeholder="textarea" onChange={this.desc.bind(this)} /><br/>
-         <FormControl type="file" name="img" className="img" onChange={this.image.bind(this)}/><br/>
+         <FormControl type="text" placeholder="Enter the name of Crew" name="crewname" inputRef={ref => this.name = ref} defaultValue={this.props.name}/><br/>
+         <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description = ref} defaultValue={this.props.desc}/><br/>
+         <FormControl type="file" name="img" className="img" accept="image/*" onChange={this.image.bind(this)}/><br/>
          <Button type="submit">
            Create/Update
         </Button>
