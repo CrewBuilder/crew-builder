@@ -55,7 +55,7 @@ export default class ManageTasks extends Component {
         </ListGroup>
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            Add a new Task
+            Add/Update a Task
           </Modal.Header>
           <Modal.Body>
             <AddTask taskData={this.addTaskData}/>
