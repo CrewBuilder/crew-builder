@@ -40,6 +40,20 @@ exports.postUserCrew = (userId, crewId, cb) => {
     });
 };
 
+exports.getCrewMembers = (crewId, cb) => {
+  db.user_crew.findAll({
+    where: {
+      crew_id: crewId
+    }
+  })
+    .then(members => {
+      cb(null, members);
+    })
+    .catch(err => {
+      cb(err, null);
+    });
+};
+
 const parseData = (user) => {
   let crews = user.crews;
   let response = {

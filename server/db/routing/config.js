@@ -130,6 +130,18 @@ router.post('/user/tasks', (req, res) => {
   });
 });
 
+let getCrewMembers = require('./../utils/user_crewHelpers.js').getCrewMembers;
+router.get('/leader/members', (req, res) => {
+  let crewId = req.query.crewId;
+  getCrewMembers(crewId, (err, members) => {
+    if (err) {
+      res.status(401).send('Could not claim task');
+    } else {
+      res.status(200).send(members);
+    }
+  });
+});
+
 
 
 module.exports = router;

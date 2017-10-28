@@ -58,6 +58,25 @@ module.exports = {
       }).catch((error) => console.log('ERROR', error));
   },
 
+  // Returns all of a Crew's users
+  GetCrewMembers: (crewId, cb) => {
+    let id = crewId;
+    let route = `${module.exports.host}leader/members?crewId=${crewId}`;
+    let options = {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    };
+    return fetch(route, options)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        cb(data);
+      }).catch((error) => console.log('ERROR', error));
+  },
+
   // Lets user create a Crew for which they will serve as leader
   PostCrew: (crew, userId, cb) => {
     let route = `${module.exports.host}crew/`;

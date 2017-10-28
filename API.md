@@ -78,6 +78,7 @@
 ]
 
 ###'/crews'
+###Returns all crews.
 ####Response
 [{
   id: INT
@@ -86,6 +87,15 @@
   image: STRING,
 }]
 
+###'/leader/crewmembers'
+###Leader gets a list of Users
+####Response
+//TODO
+
+###'/leader/tasks'
+###Leader gets a list of tasks that are 'completed'. Lets Leader know which Users are claiming which Tasks to be completed.
+####Response
+//
 
 ##POST Endpoints
 
@@ -99,6 +109,18 @@
   userId: INT
 }
 
+###'/task'
+###Leader adds task to Crew. Only Leader of Crew should be able to do this.
+####req.body
+{
+  name: STRING,
+  description: STRING,
+  points: INT,
+  limit: INT,
+  expiry: DATE,
+  crewId: INT
+}
+
 ###'/user/crews'
 ###Member joins a crew, creates corresponding user_crew row
 ####req.body
@@ -108,7 +130,7 @@
 }
 
 ###'/user/tasks'
-###User adds a task to the user_task join table
+###User adds a task to the user_task join table. Task must be connected to the appropriate Crew.
 ####req.body
 {
   taskId: INT,
