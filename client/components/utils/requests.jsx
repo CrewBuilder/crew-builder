@@ -112,7 +112,25 @@ module.exports = {
         cb(data);
       })
       .catch(err => console.log('ERROR', err));
-  }
+  },
 
+  // Returns all crews. Meant for Browse functionality
+  GetAllCrews: (cb) => {
+    let route = `${module.exports.host}crews/`;
+    let options = {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    };
+    return fetch(route, options)
+    // TODO: test the data format of these API requests
+      .then((response) => {
+        return response.json();
+      }).then(data => {
+        cb(data);
+      })
+      .catch((error) => console.log('ERROR', error));
+  },
 
 }
