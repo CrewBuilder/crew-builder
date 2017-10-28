@@ -37,7 +37,7 @@ export default class ManageTasks extends Component {
             Add a new Task
           </Modal.Header>
           <Modal.Body>
-
+            <AddTask />
           </Modal.Body>
         </Modal>
       </div>
