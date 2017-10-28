@@ -133,4 +133,29 @@ module.exports = {
       .catch((error) => console.log('ERROR', error));
   },
 
+  // POSTs a new relation of User to Crew. User joins selected Crew.
+  JoinACrew: (userId, crewId, cb) => {
+    let route = `${module.exports.host}user/crews/`;
+    let body = {
+      userId: userId,
+      crewId: crewId
+    };
+    let options = {
+      method: 'post',
+      body: JSON.stringify(body),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        cb(data);
+      })
+      .catch(err => console.log('ERROR', err));
+  }
+
 }

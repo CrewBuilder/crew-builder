@@ -103,26 +103,21 @@ router.post('/crew', (req, res) => {
   });
 });
 
+let postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
+// User joins a crew! POSTs to User_Crew table
+router.post('/user/crews', (req, res) => {
+  let userId = req.body.userId;
+  let crewId = req.body.crewId;
+  console.log(userId, crewId)
+  postUserCrew(userId, crewId, (err, userCrew) => {
+    if (err) {
+      res.status(401).send('Could not post crew');
+    } else {
+      res.status(200).send(userCrew);
+    }
+  });
+});
+
 
 
 module.exports = router;
-
-// {userTasks: [], crewTasks: []}
-// getTasksByUser(id, (err, tasks, ids) => {
-//   if (err) {
-//     console.log('err35', err)
-//     res.status(401).send('No tasks available. Try signing up for a Crew!');
-//   } else {
-//     console.log('Tasks', tasks, 'Ids', ids)
-//     findAllTasksByIds(ids, crewId, (err, tasksInProgress) => {
-//       findAllTasksByNotIds(ids, crewId, (err, tasksAvailable) => {
-//         let response = {
-//           userTasks: tasks,
-//           tasksInProgress: tasksInProgress,
-//           tasksAvailable: tasksAvailable
-//         };
-//         res.status(200).send(response);
-//       });
-//     });
-//   }
-// });
