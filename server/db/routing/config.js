@@ -31,7 +31,6 @@ router.get('/user/tasks', (req, res) => { // test with postman, returns object w
   let crewId = req.query.crewId;
 
   getTasksByUserCrew(id, crewId, (err, user) => {
-    console.log(id, crewId);
     if (err) {
       res.status(401).send(err);
     } else {
@@ -108,12 +107,25 @@ let postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
 router.post('/user/crews', (req, res) => {
   let userId = req.body.userId;
   let crewId = req.body.crewId;
-  console.log(userId, crewId)
   postUserCrew(userId, crewId, (err, userCrew) => {
     if (err) {
-      res.status(401).send('Could not post crew');
+      res.status(401).send('Could not join crew');
     } else {
       res.status(200).send(userCrew);
+    }
+  });
+});
+
+let postUserTask = require('./../utils/user_taskHelpers.js').postUserTask;
+// User claims a task! POSTs to User_Task table
+router.post('/user/tasks', (req, res) => {
+  let userId = req.body.userId;
+  let taskId = req.body.taskId;
+  postUserTask(userId, taskId, (err, userTask) => {
+    if (err) {
+      res.status(401).send('Could not claim task');
+    } else {
+      res.status(200).send(userTask);
     }
   });
 });

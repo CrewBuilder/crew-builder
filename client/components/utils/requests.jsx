@@ -156,6 +156,31 @@ module.exports = {
         cb(data);
       })
       .catch(err => console.log('ERROR', err));
-  }
+  },
+
+  // POSTs a new relation of User to Task. User claims selected Task
+  ClaimATask: (userId, taskId, cb) => {
+    let route = `${module.exports.host}user/tasks/`;
+    let body = {
+      userId: userId,
+      taskId: taskId
+    };
+    let options = {
+      method: 'post',
+      body: JSON.stringify(body),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        cb(data);
+      })
+      .catch(err => console.log('ERROR', err));
+  },
 
 }
