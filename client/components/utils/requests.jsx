@@ -73,7 +73,36 @@ module.exports = {
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
-      },
+      }
+    };
+    fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        cb(data);
+      })
+      .catch(err => console.log('ERROR', err));
+  },
+
+  // Let's user post task to crew. Should only be available to the Leader of that crew.
+  PostTask: (task, crewId, cb) => {
+    let route = `${module.exports.host}task/`;
+    let body = {
+      name: task.name,
+      description: task.description,
+      limit: task.limit,
+      expiry: task.expiry,
+      crewId: crewId,
+      points: task.points
+    };
+    let options = {
+      method: 'post',
+      body: JSON.stringify(body),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
     };
     fetch(route, options)
       .then(response => {
@@ -84,7 +113,6 @@ module.exports = {
       })
       .catch(err => console.log('ERROR', err));
   }
-
 
 
 }
