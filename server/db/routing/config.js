@@ -93,7 +93,8 @@ router.post('/crew', (req, res) => {
     description: req.body.description,
     image: req.body.image
   };
-  postCrew(crew, (err, crew) => {
+  let userId = req.body.userId;
+  postCrew(crew, userId, (err, crew) => {
     if (err) {
       res.status(401).send('Could not post crew');
     } else {

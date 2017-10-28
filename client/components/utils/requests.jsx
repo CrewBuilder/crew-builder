@@ -61,7 +61,28 @@ module.exports = {
   // Lets user create a Crew for which they will serve as leader
   PostCrew: (crew, userId, cb) => {
     let route = `${module.exports.host}crew/`;
-
+    let body = {
+      name: crew.name,
+      description: crew.description,
+      image: crew.image,
+      userId: userId
+    };
+    let options = {
+      method: 'post',
+      body: JSON.stringify(body),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+    };
+    fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        cb(data);
+      })
+      .catch(err => console.log('ERROR', err));
   }
 
 
