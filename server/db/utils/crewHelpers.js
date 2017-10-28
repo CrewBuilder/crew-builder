@@ -45,11 +45,24 @@ exports.findAllCrews = (cb) => {
 };
 
 // Allows crew creation
-exports.postCrew = (crewData, cb) => {
+exports.postCrew = (crewData, userId, cb) => {
   //this query has been tested OK
+  let user = userId;
   db.crew.create(crewData)
     .then(crew => {
-      return cb(null, crew);
+      return crew.id;
+    })
+    .then(crewId => {
+      db.user_crew.create({
+        crew_id: crewId,
+        user_id: user,
+        points: 0,
+        achievement: "none",
+        role: "leader"
+      })
+      .then(crew => {
+        cb(null, crew);
+      });
     })
     .catch(err => {
       return cb(err, null);
