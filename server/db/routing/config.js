@@ -31,7 +31,6 @@ router.get('/user/tasks', (req, res) => { // test with postman, returns object w
   let crewId = req.query.crewId;
 
   getTasksByUserCrew(id, crewId, (err, user) => {
-    console.log(id, crewId);
     if (err) {
       res.status(401).send(err);
     } else {
@@ -103,26 +102,46 @@ router.post('/crew', (req, res) => {
   });
 });
 
+let postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
+// User joins a crew! POSTs to User_Crew table
+router.post('/user/crews', (req, res) => {
+  let userId = req.body.userId;
+  let crewId = req.body.crewId;
+  postUserCrew(userId, crewId, (err, userCrew) => {
+    if (err) {
+      res.status(401).send('Could not join crew');
+    } else {
+      res.status(200).send(userCrew);
+    }
+  });
+});
+
+let postUserTask = require('./../utils/user_taskHelpers.js').postUserTask;
+// User claims a task! POSTs to User_Task table
+router.post('/user/tasks', (req, res) => {
+  let userId = req.body.userId;
+  let taskId = req.body.taskId;
+  postUserTask(userId, taskId, (err, userTask) => {
+    if (err) {
+      res.status(401).send('Could not claim task');
+    } else {
+      res.status(200).send(userTask);
+    }
+  });
+});
+
+let getCrewMembers = require('./../utils/user_crewHelpers.js').getCrewMembers;
+router.get('/leader/members', (req, res) => {
+  let crewId = req.query.crewId;
+  getCrewMembers(crewId, (err, members) => {
+    if (err) {
+      res.status(401).send('Could not claim task');
+    } else {
+      res.status(200).send(members);
+    }
+  });
+});
+
 
 
 module.exports = router;
-
-// {userTasks: [], crewTasks: []}
-// getTasksByUser(id, (err, tasks, ids) => {
-//   if (err) {
-//     console.log('err35', err)
-//     res.status(401).send('No tasks available. Try signing up for a Crew!');
-//   } else {
-//     console.log('Tasks', tasks, 'Ids', ids)
-//     findAllTasksByIds(ids, crewId, (err, tasksInProgress) => {
-//       findAllTasksByNotIds(ids, crewId, (err, tasksAvailable) => {
-//         let response = {
-//           userTasks: tasks,
-//           tasksInProgress: tasksInProgress,
-//           tasksAvailable: tasksAvailable
-//         };
-//         res.status(200).send(response);
-//       });
-//     });
-//   }
-// });

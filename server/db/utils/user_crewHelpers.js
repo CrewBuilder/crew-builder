@@ -24,6 +24,36 @@ exports.getCrewsByUser = (id, cb) => {
     });
 };
 
+exports.postUserCrew = (userId, crewId, cb) => {
+  db.user_crew.create({
+    user_id: userId,
+    crew_id: crewId,
+    points: 0,
+    achievement: "none",
+    role: "member"
+  })
+    .then(userCrew => {
+      cb(null, userCrew);
+    })
+    .catch(err => {
+      cb(err, null);
+    });
+};
+
+exports.getCrewMembers = (crewId, cb) => {
+  db.user_crew.findAll({
+    where: {
+      crew_id: crewId
+    }
+  })
+    .then(members => {
+      cb(null, members);
+    })
+    .catch(err => {
+      cb(err, null);
+    });
+};
+
 const parseData = (user) => {
   let crews = user.crews;
   let response = {
@@ -62,3 +92,4 @@ const parseData = (user) => {
 
   return response;
 };
+

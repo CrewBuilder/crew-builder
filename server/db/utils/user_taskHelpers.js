@@ -47,3 +47,18 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
       cb(err, null);
     });
 };
+
+exports.postUserTask = (userId, taskId, cb) => {
+  db.user_task.create({
+    user_id: userId,
+    task_id: taskId,
+    completed: false,
+    verified: false
+  })
+    .then(userTask => {
+      cb(null, userTask);
+    })
+    .catch(err => {
+      cb(err, null);
+    });
+}
