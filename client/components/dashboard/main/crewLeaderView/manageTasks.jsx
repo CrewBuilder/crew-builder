@@ -12,7 +12,7 @@ export default class ManageTasks extends Component {
       <div>
         <ListGroup>
           {this.props.userTasks.map((task, i) => (
-            <h1 key={i}>Hello</h1>
+            <ListGroupItem key={i}>{task.name}</ListGroupItem>
           )) }
         </ListGroup>
       </div>
