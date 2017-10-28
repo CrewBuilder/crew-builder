@@ -15,7 +15,21 @@ describe('Postgres crewbuilder db', function() {
   });
 
   /* *************** associations *************** */
-  it('Should retrieve a list of a crew\'s tasks in progress using the associations between crews, tasks, and users', function(done) {
+  xit('Should create a new entry in user_task when a user claims a task', function(done) {
+    db.user_task.create({
+      user_id: 1,
+      task_id: 45
+    })
+      .then(userTask => {
+        expect(userTask.completed).to.equal(false);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  xit('Should retrieve a list of a crew\'s tasks in progress using the associations between crews, tasks, and users', function(done) {
     db.user_crew.findAll({
       attributes: ['user_id'],
       where: {crew_id: 4}
