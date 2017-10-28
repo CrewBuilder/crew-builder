@@ -17,6 +17,7 @@ export default class CrewLeaderView extends Component {
   }
 
   render() {
+    //console.log(this.props, 'props for CrewLeaderView')
     return (
       <div className="cover-background">
         <PanelGroup>
