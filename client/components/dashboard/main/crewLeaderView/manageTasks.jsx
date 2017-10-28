@@ -6,7 +6,8 @@ export default class ManageTasks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      newTask: ''
     };
 
     this.open = () => {
@@ -20,9 +21,27 @@ export default class ManageTasks extends Component {
         showModal: false
       })
     }
+
+    this.addTaskData = (data) => {
+      console.log(data)
+      this.setState({
+        newTask: data
+      }, function(err, data) {
+        if (err)
+          console.log(err);
+        else
+          this.func();
+      })
+    }
+
+    this.func = () => {
+      if (this.state.newTask.length !== 0)
+      this.props.userTasks.push({name: this.state.newTask})
+    }
   }
 
   render() {
+    console.log(this.state.newTask, 'newTask')
     console.log(this.props.userTasks, 'props for ManageTasks')
     return (
       <div>
@@ -37,7 +56,7 @@ export default class ManageTasks extends Component {
             Add a new Task
           </Modal.Header>
           <Modal.Body>
-            <AddTask />
+            <AddTask taskData={this.addTaskData}/>
           </Modal.Body>
         </Modal>
       </div>
