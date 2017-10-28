@@ -7,6 +7,9 @@ import { getUserCrews, getUserTasks } from '../../utils/requests.jsx';
 import CreateCrew from '../forms/createCrew.jsx';
 import SearchResults from './searchView/searchResults.jsx';
 import CrewView from './crewView/crewView.jsx';
+// added
+import CrewLeaderView from './crewLeaderView/crewLeader.jsx';
+//
 
 export default class Main extends Component {
 
