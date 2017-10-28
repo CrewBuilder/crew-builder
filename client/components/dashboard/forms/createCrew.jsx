@@ -20,14 +20,6 @@ export default class CreateCrew extends Component {
     console.log(obj)
   }
 
-  namefn(e) {
-    this.name = e.target.value
-  }
-
-  description(e) {
-    this.desc = e.target.value
-  }
-
   image(e) {
     this.img = e.target.value
   }
