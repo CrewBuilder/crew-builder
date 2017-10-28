@@ -38,7 +38,7 @@ export default class CreateCrew extends Component {
       <form onSubmit={this.handleSubmit.bind(this)}>
         <FormGroup>
          <FormControl type="text" placeholder="Enter the name of Crew" name="crewname" inputRef={ref => this.name = ref} defaultValue={this.props.name}/><br/>
-         <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description} defaultValue={this.props.desc}/><br/>
+         <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description = ref} defaultValue={this.props.desc}/><br/>
          <FormControl type="file" name="img" className="img" accept="image/*" onChange={this.image.bind(this)}/><br/>
          <Button type="submit">
            Create/Update
