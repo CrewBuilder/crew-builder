@@ -9,7 +9,13 @@ export default class ManageTasks extends Component {
   render() {
     console.log(this.props.userTasks, 'props for ManageTasks')
     return (
-      <h1>Hello</h1>
+      <div>
+        <ListGroup>
+          {this.props.userTasks.map((task, i) => (
+            <h1 key={i}>Hello</h1>
+          )) }
+        </ListGroup>
+      </div>
     )
   }
 }
