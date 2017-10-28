@@ -36,7 +36,9 @@ export default class ManageTasks extends Component {
 
     this.func = () => {
       if (this.state.newTask.length !== 0)
-      this.props.userTasks.push({name: this.state.newTask})
+        this.props.userTasks.push({name: this.state.newTask})
+      // TODO:
+      // should update the newly added in database
     }
   }
 
