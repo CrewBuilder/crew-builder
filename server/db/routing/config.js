@@ -1,19 +1,13 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-// at some point we may want to refactor this to just import certain files and call methods from those helpers
-let getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
-let getTasksByUser = require('./../utils/user_taskHelpers.js').getTasksByUser;
-let getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByUserCrew;
-let getTasksByCrew = require('./../utils/taskHelpers.js').getTasksByCrew;
-let findAllTasksByIds = require('./../utils/taskHelpers.js').findAllTasksByIds;
-let findAllCrewsByIds = require('./../utils/crewHelpers.js').findAllCrewsByIds;
-let getAllCrews = require('./../utils/crewHelpers.js').findAllCrews;
-let findAllTasksByNotIds = require('./../utils/taskHelpers.js').findAllTasksByNotIds;
+/**************************************************************/
+/************************ GET REQUESTS ************************/
+/**************************************************************/
 
-// '/user/crews' endpoint returns user's crew(s) data
+// GET: /user/crews => returns user's crew(s) data
+const getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
 router.get('/user/crews', (req, res) => { // tested with postman, returns array of user_crew data for user
-  // Expects req.user.id
   let id = req.query.id;
   getCrewsByUser(id, (err, crews) => {
     if (err) {
@@ -24,9 +18,9 @@ router.get('/user/crews', (req, res) => { // tested with postman, returns array 
   });
 });
 
-// '/user/tasks' endpoint returns ALL user's tasks in progress
-router.get('/user/tasks', (req, res) => { // test with postman, returns object with three different arrays: userTasks, tasksInProgress (for the crew in question), and tasksAvailable (for the crew in question)
-  // Expects req.user.id
+// GET: /user/tasks => retrieves a list of user's tasks in progress, and a list of all available tasks for the crew in view
+const getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByUserCrew;
+router.get('/user/tasks', (req, res) => {
   let id = req.query.id;
   let crewId = req.query.crewId;
 
@@ -39,9 +33,9 @@ router.get('/user/tasks', (req, res) => { // test with postman, returns object w
   });
 });
 
-// '/crew/tasks' endpoint returns ALL crew's tasks
+// GET: /crew/tasks => retrieves all tasks for a given crew
+const getTasksByCrew = require('./../utils/taskHelpers.js').getTasksByCrew;
 router.get('/crew/tasks', (req, res) => {
-  // Expects req.body.crewId
   let id = req.query.crewId;
   getTasksByCrew(id, (err, tasks) => {
     if (err) {
@@ -52,7 +46,8 @@ router.get('/crew/tasks', (req, res) => {
   });
 });
 
-// '/crews' endpoint returns all crews in current db
+// GET: /crews => retrieves all crews in current db
+const getAllCrews = require('./../utils/crewHelpers.js').findAllCrews;
 router.get('/crews', (req, res) => {
   getAllCrews((err, crews) => {
     if (err) {
@@ -63,9 +58,25 @@ router.get('/crews', (req, res) => {
   });
 });
 
-// tested with postman
+// GET: leader/members => leader requests members, retrieves list of user data for the crew
+const getCrewMembers = require('./../utils/user_crewHelpers.js').getCrewMembers;
+router.get('/leader/members', (req, res) => {
+  let crewId = req.query.crewId;
+  getCrewMembers(crewId, (err, members) => {
+    if (err) {
+      res.status(401).send('Could not claim task');
+    } else {
+      res.status(200).send(members);
+    }
+  });
+});
+
+/***************************************************************/
+/************************ POST REQUESTS ************************/
+/***************************************************************/
+
+// POST: /task => crew leader creates a task, creates a new row in task table.
 let postTask = require('./../utils/taskHelpers.js').postTask;
-// '/task' endpoint POSTs a task to the task table.
 router.post('/task', (req, res) => {
   let task = {
     name: req.body.name,
@@ -84,8 +95,8 @@ router.post('/task', (req, res) => {
   });
 });
 
-let postCrew = require('./../utils/crewHelpers.js').postCrew;
-// '/crew' endpoint POSTs a new crew.
+// POST: /crew => user creates a new crew, creates a new row in crew table
+const postCrew = require('./../utils/crewHelpers.js').postCrew;
 router.post('/crew', (req, res) => {
   let crew = {
     name: req.body.name,
@@ -102,8 +113,8 @@ router.post('/crew', (req, res) => {
   });
 });
 
-let postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
-// User joins a crew! POSTs to User_Crew table
+// POST: user/crews => user joins a crew, creates a new row in user_crew table
+const postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
 router.post('/user/crews', (req, res) => {
   let userId = req.body.userId;
   let crewId = req.body.crewId;
@@ -116,8 +127,8 @@ router.post('/user/crews', (req, res) => {
   });
 });
 
-let postUserTask = require('./../utils/user_taskHelpers.js').postUserTask;
-// User claims a task! POSTs to User_Task table
+// POST: user/tasks => user claims a task, creates a new row in user_task table
+const postUserTask = require('./../utils/user_taskHelpers.js').postUserTask;
 router.post('/user/tasks', (req, res) => {
   let userId = req.body.userId;
   let taskId = req.body.taskId;
@@ -130,18 +141,14 @@ router.post('/user/tasks', (req, res) => {
   });
 });
 
-let getCrewMembers = require('./../utils/user_crewHelpers.js').getCrewMembers;
-router.get('/leader/members', (req, res) => {
-  let crewId = req.query.crewId;
-  getCrewMembers(crewId, (err, members) => {
-    if (err) {
-      res.status(401).send('Could not claim task');
-    } else {
-      res.status(200).send(members);
-    }
-  });
-});
+/**************************************************************/
+/************************ PUT REQUESTS ************************/
+/**************************************************************/
 
 
+
+/*****************************************************************/
+/************************ DELETE REQUESTS ************************/
+/*****************************************************************/
 
 module.exports = router;
