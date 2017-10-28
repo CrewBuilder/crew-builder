@@ -7,7 +7,8 @@ export default class ManageTasks extends Component {
     super(props);
     this.state = {
       showModal: false,
-      newTask: ''
+      newTask: '',
+      selectedTask: props.userTasks[0]
     };
 
     this.open = () => {
@@ -40,6 +41,11 @@ export default class ManageTasks extends Component {
       // TODO:
       // should update the newly added in database
     }
+
+    this.handleSelect = (task) => {
+      console.log(task, 'task')
+      this.open()
+    }
   }
 
   render() {
@@ -49,7 +55,7 @@ export default class ManageTasks extends Component {
       <div>
         <ListGroup>
           {this.props.userTasks.map((task, i) => (
-            <ListGroupItem key={i}>{task.name}</ListGroupItem>
+            <ListGroupItem key={i} onClick={() => this.handleSelect(task.name)}>{task.name}</ListGroupItem>
           )) }
           <ListGroupItem onClick={this.open}>+ addTask</ListGroupItem>
         </ListGroup>
@@ -58,7 +64,7 @@ export default class ManageTasks extends Component {
             Add/Update a Task
           </Modal.Header>
           <Modal.Body>
-            <AddTask taskData={this.addTaskData}/>
+            <AddTask taskData={this.addTaskData} updateData={this.handleSelect}/>
           </Modal.Body>
         </Modal>
       </div>
