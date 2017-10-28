@@ -17,7 +17,12 @@ export default class AddTask extends Component {
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <FormGroup>
-            <FormControl type="text" placeholder="Add a new Task" inputRef={ref => this.input = ref}/>
+            <FormControl type="text" placeholder="Add a new Task" inputRef={ref => this.input = ref}/><br/>
+            <FormControl componentClass="textarea" placeholder="description" inputRef={ref => this.description = ref}/><br/>
+            <FormControl componentClass="select" placeholder="select">
+              <option value="one">1</option>
+              <option value="two">2</option>
+            </FormControl>
             <Button type="submit">
                Add a task
             </Button>
