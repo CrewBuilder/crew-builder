@@ -71,6 +71,18 @@ router.get('/leader/members', (req, res) => {
   });
 });
 
+// GET: /leader/tasks?crewId={CREW_ID} => retrieves unverified tasks for a crew
+const getUnverifiedTasks = require('./../utils/taskHelpers.js').getUnverifiedTasks;
+router.get('/leader/tasks', (req, res) => {
+  let crewId = req.query.crewId;
+  getUnverifiedTasks(crewId, (err, tasks) => {
+    if (err) {
+      res.status(401).send('Could not complete request for unverified tasks.');
+    } else {
+      res.status(200).send(tasks);
+    }
+  });
+});
 /***************************************************************/
 /************************ POST REQUESTS ************************/
 /***************************************************************/

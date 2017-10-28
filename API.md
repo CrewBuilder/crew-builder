@@ -117,9 +117,32 @@
 ]
 
 ###'/leader/tasks?crewId={CREW_ID}'
-###Leader gets a list of tasks that are 'completed'. Lets Leader know which Users are claiming which Tasks to be completed.
-####Response
-//TODO
+###Leader gets a list of tasks that are completed but still need verification.
+#### Example Response from seed data user crewId=4
+    {
+        "taskId": 65,
+        "taskName": "Jerde, Bauch and Barrows",
+        "taskDescription": "Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat.",
+        "points": 85,
+        "userId": 2,
+        "userName": "johndoe",
+        "userEmail": "johndoe@johndoe.com",
+        "userImg": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+        "userTaskId": 15
+    },
+    {
+        "taskId": 35,
+        "taskName": "Kshlerin-Herman",
+        "taskDescription": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
+        "points": 68,
+        "userId": 2,
+        "userName": "johndoe",
+        "userEmail": "johndoe@johndoe.com",
+        "userImg": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+        "userTaskId": 24
+    }
+]
+
 
 ##POST Endpoints
 

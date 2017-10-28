@@ -14,7 +14,105 @@ describe('Postgres crewbuilder db', function() {
     return db.sequelize.authenticate();
   });
 
-  /* *************** user Tests *************** */
+  /* *************** associations *************** */
+  it('Should retrieve a list of a crew\'s tasks in progress using the associations between crews, tasks, and users', function(done) {
+    db.user_crew.findAll({
+      attributes: ['user_id'],
+      where: {crew_id: 4}
+    })
+      .then(userCrews => {
+        if (!userCrews.length) {
+          done('no users found for this crew');
+        } else {
+          userIds = userCrews.map(userCrew => {
+            return userCrew.user_id;
+          });
+          return db.user.findAll({
+            where: { id: userIds},
+            include: [{
+              model: db.task,
+              where: {crewId: 4},
+              through: {
+                where: {completed: true, verified: false},
+                attributes: ['id']
+              }
+            }]
+          });
+        }
+      })
+      .then(users => {
+        var taskList = [ ];
+        users.forEach(user => {
+          let profile = JSON.parse(user.facebook);
+          user.tasks.forEach(task => {
+            taskList.push({
+              taskId: task.id,
+              taskName: task.name,
+              taskDescription: task.description,
+              points: task.points,
+              userId: user.id,
+              userName: profile.DISPLAY_NAME,
+              userEmail: profile.EMAIL,
+              userImg: profile.IMAGE_URL,
+              userTaskId: task.user_task.id
+            });
+          });
+        });
+        expect(taskList.length).to.equal(2);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  xit('Should build a custom task table based on the user_tasks and tasks tables', function(done) {
+    db.user.findOne({
+      where: {id: 1},
+      include: [{
+        model: db.task,
+        where: {crewId: 4},
+        through: {
+          attributes: ['completed', 'verified']
+        }
+      }]
+    })
+      .then(user => {
+        expect(user.tasks.length).to.equal(3);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  xit('Should build a custom crew list for a user', function(done) {
+    db.user.findOne({
+      where: {
+        id: 1
+      },
+      include: [{
+        model: db.crew,
+        through: {
+          attributes: ['points', 'role', 'achievement']
+        }
+      }]
+    })
+      .then(user => {
+        if (!user.crews.length) {
+          done(`No crews for user: ${id}`);
+        } else {
+          console.log(user.crews[0].user_crew.points);
+          expect(user.crews.length).to.equal(5);
+          done();
+        }
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  /* *************** user *************** */
   xit('Should create a new user if facebook id is not yet in the db', function(done) {
     // this might eventually test upsert helper function, for now query is written here
     let profile = '{"DISPLAY_NAME":"maryjane","EMAIL":"maryjane@maryjane.com","IMAGE_URL":"https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"}';
@@ -55,8 +153,7 @@ describe('Postgres crewbuilder db', function() {
 
   });
 
-
-  /* *************** user_crew Tests *************** */
+  /* *************** user_crew *************** */
   xit('Should find all crews associated with a user via the user_crew join table', function(done) {
     // seed data has user 1 belonging to 5 crews
     db.user_crew.findAll({
@@ -77,7 +174,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  /* *************** user_task Tests *************** */
+  /* *************** user_task *************** */
   xit('Should find all tasks associated with a user via the user_task join table', function(done) {
     db.user_task.findAll({
       where: {
@@ -97,8 +194,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-
-  /* *************** crew Tests *************** */
+  /* *************** crew *************** */
   xit('Should find a new crew by id', function(done) {
     db.crew.findById(1)
       .then(crew => {
@@ -144,7 +240,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  /* *************** task Tests *************** */
+  /* *************** task *************** */
   xit('Should find a task by Id', function(done) {
     db.task.findById(25)
       .then(task => {
@@ -193,49 +289,4 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should build a custom task table based on the user_tasks and tasks tables', function(done) {
-    db.user.findOne({
-      where: {id: 1},
-      include: [{
-        model: db.task,
-        where: {crewId: 4},
-        through: {
-          attributes: ['completed', 'verified']
-        }
-      }]
-    })
-      .then(user => {
-        expect(user.tasks.length).to.equal(3);
-        done();
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
-
-  it('Should build a custom crew list for a user', function(done) {
-    db.user.findOne({
-      where: {
-        id: 1
-      },
-      include: [{
-        model: db.crew,
-        through: {
-          attributes: ['points', 'role', 'achievement']
-        }
-      }]
-    })
-      .then(user => {
-        if (!user.crews.length) {
-          done(`No crews for user: ${id}`);
-        } else {
-          console.log(user.crews[0].user_crew.points);
-          expect(user.crews.length).to.equal(5);
-          done();
-        }
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
 });
