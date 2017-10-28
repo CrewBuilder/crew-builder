@@ -7,7 +7,8 @@ export default class AddTask extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.input.value)
+    //console.log(this.input.value)
+    this.props.taskData(this.input.value)
   }
 
 
