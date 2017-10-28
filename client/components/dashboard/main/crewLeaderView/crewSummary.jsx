@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import { Media, Image } from 'react-bootstrap';
+import { Media, Image, Modal } from 'react-bootstrap';
 
 export default class crewLeaderSummary extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showModal: false
+    };
+
+    this.close = () => {
+    this.setState({showModal: false})
+  }
   }
 
   render() {
@@ -18,10 +25,16 @@ export default class crewLeaderSummary extends Component {
             <Media.Heading>
               {this.props.currentCrew.name}
             </Media.Heading>
-            <p>list members</p>
+            <p onClick={() => this.setState({showModal: true})}>list members</p>
             <p>Edit crew profile</p>
           </Media.Body>
         </Media>
+
+        <Modal show={this.state.showModal} onHide={this.close}>
+          <Modal.Header closeButton>
+            <Modal.Title>Heading</Modal.Title>
+          </Modal.Header>
+            </Modal>
       </div>
     )
   }
