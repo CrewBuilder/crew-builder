@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { Media, Image, Modal } from 'react-bootstrap';
+// import editForm from './../../forms/createCrew.jsx'
 
 export default class crewLeaderSummary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      editForm: false
     };
 
+    this.open = () => {
+      this.setState({editForm: true})
+    }
+
     this.close = () => {
-    this.setState({showModal: false})
-  }
+      this.setState({showModal: false});
+      this.setState({editForm: false})
+    }
   }
 
   render() {
@@ -26,7 +33,7 @@ export default class crewLeaderSummary extends Component {
               {this.props.currentCrew.name}
             </Media.Heading>
             <p onClick={() => this.setState({showModal: true})}>list members</p>
-            <p>Edit crew profile</p>
+            <p onClick={this.open}>Edit crew profile</p>
           </Media.Body>
         </Media>
 
@@ -34,7 +41,13 @@ export default class crewLeaderSummary extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Heading</Modal.Title>
           </Modal.Header>
-            </Modal>
+        </Modal>
+
+        <Modal show={this.state.editForm} onHide={this.close}>
+          <Modal.Header closeButton>
+            Edit
+          </Modal.Header>
+        </Modal>
       </div>
     )
   }
