@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Media, Image, Modal } from 'react-bootstrap';
 // import editForm from './../../forms/createCrew.jsx'
+import CreateCrew from './../../forms/createCrew.jsx'
 
 export default class crewLeaderSummary extends Component {
   constructor(props) {
@@ -45,8 +46,11 @@ export default class crewLeaderSummary extends Component {
 
         <Modal show={this.state.editForm} onHide={this.close}>
           <Modal.Header closeButton>
-            Edit
+            Update
           </Modal.Header>
+          <Modal.Body>
+            <CreateCrew name={this.props.currentCrew.name} desc={this.props.currentCrew.description}/>
+          </Modal.Body>
         </Modal>
       </div>
     )
