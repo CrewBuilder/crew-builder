@@ -14,14 +14,19 @@ describe('Postgres crewbuilder db', function() {
     return db.sequelize.authenticate();
   });
 
-  /* *************** associations *************** */
-  xit('Should create a new entry in user_task when a user claims a task', function(done) {
-    db.user_task.create({
-      user_id: 1,
-      task_id: 45
-    })
+  it('Should mark a task as complete in user_task', function(done) {
+    db.user_task.update(
+      {
+        completed: true
+      },
+      {
+        where: {id: 34}
+      })
+      .then(userTask =>{
+        return db.user_task.findOne({where: {id: 34}});
+      })
       .then(userTask => {
-        expect(userTask.completed).to.equal(false);
+        expect(userTask.completed).to.be.true;
         done();
       })
       .catch(err => {
@@ -29,6 +34,7 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
+  /* *************** associations *************** */
   xit('Should retrieve a list of a crew\'s tasks in progress using the associations between crews, tasks, and users', function(done) {
     db.user_crew.findAll({
       attributes: ['user_id'],
@@ -189,6 +195,21 @@ describe('Postgres crewbuilder db', function() {
   });
 
   /* *************** user_task *************** */
+  xit('Should create a new entry in user_task when a user claims a task', function(done) {
+    db.user_task.create({
+      user_id: 1,
+      task_id: 45
+    })
+      .then(userTask => {
+        expect(userTask.completed).to.equal(false);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+
   xit('Should find all tasks associated with a user via the user_task join table', function(done) {
     db.user_task.findAll({
       where: {
