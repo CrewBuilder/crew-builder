@@ -18,23 +18,22 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div>
-
         <div className="sidebar-user-name">
         <h2>{this.props.user.facebook.DISPLAY_NAME}</h2>
         </div>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row className="clearfix">
             <Col>
-              <h4>My Crews:</h4>
+              <h4>Crews I Lead:</h4>
               <Nav bsStyle="pills" stacked>
-                {this.props.userCrews.map((crew, key) => {
+                {this.props.userLeaderCrews.map((container) => {
                   return (
-                    <LinkContainer to={`/dashboard/crews/${key}`} key={key} onClick={e => this.props.setCurrentCrew(crew)}>
-                      <NavItem activeKey={key}
-                        value={crew.name}
-                        key={key}
+                    <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={container.crew.id} onClick={e => this.props.setCurrentCrew(container)}>
+                      <NavItem activeKey={container.crew.id}
+                        value={container.crew.name}
+                        key={container.crew.id}
                         className="sidebar-crew-name">
-                        {crew.name}
+                        {container.crew.name}
                       </NavItem>
                     </LinkContainer>
                   )
@@ -48,13 +47,28 @@ export default class Sidebar extends Component {
                     <strong>+ create crew</strong>
                   </NavItem>
                 </LinkContainer>
+              </Nav>
 
+              <hr />
+
+              <h4>Crews I Belong To:</h4>
+              <Nav bsStyle="pills" stacked>
+                {this.props.userMemberCrews.map((container) => {
+                  return (
+                    <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={container.crew.id} onClick={e => this.props.setCurrentCrew(container)}>
+                      <NavItem activeKey={container.crew.id}
+                        value={container.crew.name}
+                        key={container.crew.id}
+                        className="sidebar-crew-name">
+                        {container.crew.name}
+                      </NavItem>
+                    </LinkContainer>
+                  )
+                })}
               </Nav>
               <hr />
 
-              <h4>Member of:</h4>
-                <p>GreenPeace Meetup</p>
-                <p>The Clash</p>
+              <p><em>{this.props.userMemberCrews && this.props.userMemberCrews.length === 0 ? 'Just getting started or looking to find that next crew for you? Try our browse or search features to find some crews to join today!' : null}</em></p>
             </Col>
           </Row>
         </Tab.Container>
@@ -63,3 +77,45 @@ export default class Sidebar extends Component {
   }
 }
 
+// <Nav bsStyle="pills" stacked>
+//                 {this.props.userCrews.leader.map((crew) => {
+//                   return (
+//                     <LinkContainer to={`/dashboard/crews/${key}`} key={crew.id} onClick={e => this.props.setCurrentCrew(crew)}>
+//                       <NavItem activeKey={crew.id}
+//                         value={crew.name}
+//                         key={crew.id}
+//                         className="sidebar-crew-name">
+//                         {crew.name}
+//                       </NavItem>
+//                     </LinkContainer>
+//                   )
+//                 })}
+
+//                 <LinkContainer to={`/dashboard/newcrew`} key='createCrew' onClick={e => this.handleCreateCrew('createCrew')}>
+//                   <NavItem activeKey='createCrew'
+//                     value='createCrew'
+//                     key='createCrew'
+//                     className="sidebar-crew-name">
+//                     <strong>+ create crew</strong>
+//                   </NavItem>
+//                 </LinkContainer>
+
+//               </Nav>
+//               <hr />
+
+//               <h4>Crews I Belong To:</h4>
+//               <Nav bsStyle="pills" stacked>
+//                 {this.props.userCrews.member.map((crew) => {
+//                   return (
+//                     <LinkContainer to={`/dashboard/crews/${key}`} key={crew.id} onClick={e => this.props.setCurrentCrew(crew)}>
+//                       <NavItem activeKey={crew.id}
+//                         value={crew.name}
+//                         key={crew.id}
+//                         className="sidebar-crew-name">
+//                         {crew.name}
+//                       </NavItem>
+//                     </LinkContainer>
+//                   )
+//                 })}
+
+//               </Nav>

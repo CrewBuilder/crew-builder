@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
 
+import { GetUserCrews } from '../utils/requests.jsx';
+// import { GetAllCrews } from '../utils/requests.jsx';
+
+import { GetCurrentUser } from '../utils/auth.jsx';
+
 import Navbar from './navbar/navbar.jsx';
 import Sidebar from './sidebar.jsx';
 import Main from './main/main.jsx';
@@ -13,54 +18,46 @@ export default class Dashboard extends Component {
     super(props);
     this.state = {
       user: '',
-      userCrews: [],
+      userLeaderCrews: [],
+      userMemberCrews: [],
       userTasks: [],
-      currentCrew: {},
+      currentCrew: null,
       searchResults: [],
-      searchField: ''
+      searchField: '',
+      loaded: false
     };
 
     this.submitSearch = (query, e) => {
       console.log('SEARCH: ', query);
       this.setState({searchField: query});
     };
+
     this.browseSearch = () => {
       console.log('NAV BROWSE CLICKED');
+      // GetAllCrews((res) => {
+      //   this.setState({searchResults: res});
+      // })
       this.setState({searchField: null});
     };
+
     this.setCurrentCrew = (crew, e) => {
       console.log('SIDEBAR SET CURRENT CREW CLICKED');
       this.setState({currentCrew: crew});
     };
+
   }
 
   componentWillMount() {
+    // set initial data while building out with apis
     this.setState({
       user: {
         "facebookId": '1',
         "facebook": {
-          "DISPLAY_NAME": "ionajewel",
-          "EMAIL": "ipjwilli@gmail.com",
+          "DISPLAY_NAME": "",
+          "EMAIL": "",
           "IMAGE_URL": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
         }
       },
-      userCrews: [{
-        "name": "Zieme, Nitzsche and Murazik",
-        "description": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.",
-        "image": "http://dummyimage.com/201x122.jpg/ff4444/ffffff"
-      }, {
-        "name": "Wisoky, Reynolds and Runte",
-        "description": "Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus.",
-        "image": "http://dummyimage.com/201x122.jpg/44ffff/ffffff"
-      }, {
-        "name": "Leannon-Lehner",
-        "description": "Maecenas pulvinar lobortis est. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
-        "image": "http://dummyimage.com/201x122.jpg/ffa244/000000"
-      }, {
-        "name": "Dooley Group",
-        "description": "Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Praesent blandit.",
-        "image": "http://dummyimage.com/201x122.jpg/44ff44/ffffff"
-      }],
       userTasks: [{
         "name": "Bergstrom, Blanda and Hamill",
         "description": "Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.",
@@ -128,23 +125,61 @@ export default class Dashboard extends Component {
     });
   }
 
+
+  componentDidMount() {
+    // get user info
+    GetCurrentUser((res) => {
+      return res;
+    })
+      .then((user) => {
+        if (user === false) {
+          this.props.changeLoginStatus();
+          console.log('NOT LOGGED IN');
+        } else {
+          this.setState({user: user});
+          return user;
+        }
+      }).then((userId) => {
+        // get user crews using userId.id
+        GetUserCrews(12, (err, res) => {
+          if (err) {
+            console.log('ERROR:', err);
+            this.setState({ loaded: true });
+          } else {
+            // LOADED IS IMPORTANT TO PREVENT SIDEBAR ISSUES
+            this.setState({
+              userLeaderCrews: res.leader,
+              userMemberCrews: res.member,
+              loaded: true
+            });
+          }
+        });
+      });
+
+  }
+
+
   render() {
 
     return (
       <div>
         <Navbar
           user={this.state.user}
+          changeLoginStatus={this.props.changeLoginStatus}
           submitSearch={this.submitSearch}
           browseSearch={this.browseSearch}
         />
         <Grid>
           <Row className="show-grid">
             <Col md={2} lg={3} className="outlineBox">
+              { this.state.loaded ?
               <Sidebar
                 user={this.state.user}
-                userCrews={this.state.userCrews}
+                userLeaderCrews={this.state.userLeaderCrews}
+                userMemberCrews={this.state.userMemberCrews}
                 setCurrentCrew={this.setCurrentCrew}
               />
+              : null }
             </Col>
             <Col md={10} lg={9} className="outlineBox background-image">
               <Main

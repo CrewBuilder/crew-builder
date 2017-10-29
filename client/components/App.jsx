@@ -12,30 +12,76 @@ export default class App extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        isLoggedIn: true,
+        isLoggedIn: false
       }
-
-      this.authLogin = () => {
+      // check auth with local token
+      this.authLogin = (callback) => {
+        let userCheck = window.localStorage.getItem('id_token');
+        if(userCheck) {
+          GetCurrentUser((res) => {
+            return res;
+          })
+          .then((user) => {
+            if (user === false) {
+              window.reload.location();
+            } else {
+              this.setState({isLoggedIn: true});
+            }
+          });
+        }
         return this.state.isLoggedIn;
       }
+
+      // will log out/remove token or change state for log in
+      this.changeLoginStatus = () => {
+        if(this.state.isLoggedIn) {
+          let userCheck = window.localStorage.getItem('id_token');
+          if(userCheck) {
+            window.localStorage.removeItem('id_token');
+          }
+        }
+        this.setState({isLoggedIn: !this.state.isLoggedIn});
+      }
+
     }
 
   componentDidMount() {
-    // Initializes facebook sdk - required for other FB functions(login,logout,etc)
-    // may need to incorporate further throughout individual app routes?
+    // Initializes facebook sdk
     Init();
+    this.authLogin();
   }
 
   render() {
 
+    if(!this.state.isLoggedIn) {
       return (
         <div>
           <Switch>
-            <PrivateRoute path='/dashboard' checkAuth={this.authLogin} component={Dashboard}/>
-            <PrivateRoute exact path='/' checkAuth={this.authLogin} component={Landing} name="landing"/>
-            <Redirect to='/' />
+            <Route exact path="/" render={(props) => (
+              <Landing {...props}
+              changeLoginStatus={this.changeLoginStatus}
+              />
+            )}/>
+            <Redirect to="/" />
           </Switch>
         </div>
       )
+
+    } else {
+
+      return (
+        <div>
+          <Switch>
+            <Route path="/dashboard" render={(props) => (
+              <Dashboard {...props}
+              isLoggedIn={this.state.isLoggedIn}
+              changeLoginStatus={this.changeLoginStatus}
+              />
+            )}/>
+            <Redirect to="/dashboard" />
+          </Switch>
+        </div>
+      )
+    }
   }
 }
