@@ -52,8 +52,6 @@ exports.postUserTask = (userId, taskId, cb) => {
   db.user_task.create({
     user_id: userId,
     task_id: taskId,
-    completed: false,
-    verified: false
   })
     .then(userTask => {
       cb(null, userTask);
@@ -61,4 +59,24 @@ exports.postUserTask = (userId, taskId, cb) => {
     .catch(err => {
       cb(err, null);
     });
-}
+};
+
+exports.claimComplete = (userTaskId, verified, cb) => {
+  db.user_task.update(
+    {
+      completed: true, // this may already be true, but doing this makes the request work for both verifiying and completing
+      verified: verified
+    },
+    {
+      where: {id: userTaskId}
+    })
+    .then(userTask => {
+      return db.user_task.findOne({where: {id: userTaskId}});
+    })
+    .then(userTask => {
+      cb(null, userTask);
+    })
+    .catch(err => {
+      cb(err, null);
+    });
+};

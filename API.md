@@ -189,11 +189,10 @@
 ##PUT Endpoints
 //TODO: Leader verify task endpoint, Member claim complete
 ###'user/tasks'
-####req.body
+####req.body (request will know which action to do based on fields included)
 {
   userId: INT,
   taskId: INT,
-  completed: BOOL
 }
 
 OR
