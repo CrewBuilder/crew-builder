@@ -8,9 +8,9 @@ export default class addTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name : '',
-      description: '',
-      Points: '',
+      name : this.props.name || '',
+      description: this.props.description || '',
+      Points: this.props.Points || '',
       Limit: '',
       expiry: '',
       createdAt: '',
@@ -21,7 +21,11 @@ export default class addTask extends Component {
       var date = moment(e)
       console.log(date._d, 'date');
       console.log(date.format(), 'format')
-      this.setState({expiry: date.format()})
+      this.setState({expiry: date.format()}, function(err, data) {
+        if (data) {
+          return data
+        }
+      })
       console.log(this.state.expiry, 'expirtttt')
     }
 
@@ -34,17 +38,31 @@ export default class addTask extends Component {
       else if (isNaN(Number(limitVal)) || isNaN(Number(pointsVal))) return 'error';
       return null;
     }
+
+    this.setCurrDate = () => {
+      this.setState({updatedAt: moment().format()});
+      if (this.state.createdAt.length === 0) {
+        this.setState({createdAt: moment().format()})
+      }
+    }
+
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.taskInput);
-    var obj = {
-      updatedAt: moment().format(),
-      expiry: ''
-    }
-    var date = moment();
-    console.log(date.format())
+    // var date = moment();
+    // console.log(date.format())
+    // note: never set state in handleSubmit...
+      var objState = {
+        name: this.state.name,
+        description: this.state.description,
+        Points: this.state.Points,
+        Limit: this.state.Points,
+        expiry: this.state.expiry,
+        createdAt: this.state.createdAt,
+        updatedAt: this.state.updatedAt
+      }
+      console.log('whole object', objState)
   }
 
   task(e) {
@@ -73,7 +91,7 @@ export default class addTask extends Component {
             <ControlLabel>Expiry Date</ControlLabel>
             <DateTime utc={true} onChange={(e) => this.show(e)}/>
           </FormGroup>
-            <Button type="submit">
+            <Button type="submit" onClick={this.setCurrDate}>
                Add a task
             </Button>
         </form>
