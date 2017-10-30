@@ -201,7 +201,6 @@ module.exports = {
       userId: userId,
       crewId: crewId
     };
-    console.log('Body', body);
     let options = {
       method: 'post',
       body: JSON.stringify(body),
