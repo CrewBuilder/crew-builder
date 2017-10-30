@@ -11,9 +11,9 @@ export default class addTask extends Component {
       name : this.props.name || '',
       description: this.props.description || '',
       Points: this.props.Points || '',
-      Limit: '',
+      Limit: this.props.Limit || '',
       expiry: '',
-      createdAt: '',
+      createdAt: this.props.createdAt || '',
       updatedAt: ''
     }
 
