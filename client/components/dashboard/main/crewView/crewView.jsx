@@ -22,20 +22,20 @@ export default class CrewView extends Component {
         <PanelGroup>
           <Panel collapsible defaultExpanded={true} header="Crew Summary" eventKey="1">
             <CrewSummary
-              userId={this.props.user.facebookId}
+              userId={this.props.user.id}
               currentCrew={this.props.currentCrew}
             />
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Tasks in Progress" eventKey="2">
             <TasksInProgress
-              userId={this.props.user.facebookId}
+              userId={this.props.user.id}
               userTasks={this.props.userTasks}
             />
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Tasks Available" eventKey="3">
             <TasksAvailable
-              userId={this.props.user.facebookId}
-              userTasks={this.props.userTasks}
+              userId={this.props.user.id}
+              currentCrewTasks={this.props.currentCrewTasks}
             />
           </Panel>
         </PanelGroup>

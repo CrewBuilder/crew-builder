@@ -36,10 +36,14 @@ module.exports = {
     // TODO: test the data format of these API requests
       .then((response) => {
         return response.json();
-      }).then(data => {
-        cb(data);
+      }).then((data) => {
+        console.log('RESPONSE DATA:', data);
+        cb(null, data);
       })
-      .catch((error) => console.log('ERROR', error));
+      .catch((error) => {
+        console.log('ERROR', error)
+        cb(error, null);
+      });
   },
 
   // Returns all of selected crew's tasks.
@@ -57,8 +61,12 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        cb(data);
-      }).catch((error) => console.log('ERROR', error));
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('ERROR', error)
+        cb(error, null);
+      });
   },
 
   // Returns all of a Crew's users
@@ -76,8 +84,12 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        cb(data);
-      }).catch((error) => console.log('ERROR', error));
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
   },
 
   // Lets user create a Crew for which they will serve as leader
@@ -101,10 +113,13 @@ module.exports = {
       .then(response => {
         return response.json();
       })
-      .then(data => {
-        cb(data);
+      .then((data) => {
+        cb(null, data);
       })
-      .catch(err => console.log('ERROR', err));
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
   },
 
   // Let's user post task to crew. Should only be available to the Leader of that crew.
@@ -130,10 +145,13 @@ module.exports = {
       .then(response => {
         return response.json();
       })
-      .then(data => {
-        cb(data);
+      .then((data) => {
+        cb(null, data);
       })
-      .catch(err => console.log('ERROR', err));
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
   },
 
   // Returns all crews. Meant for Browse functionality
@@ -149,10 +167,14 @@ module.exports = {
     // TODO: test the data format of these API requests
       .then((response) => {
         return response.json();
-      }).then(data => {
-        cb(data);
       })
-      .catch((error) => console.log('ERROR', error));
+      .then((data) => {
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
   },
 
   // POSTs a new relation of User to Crew. User joins selected Crew.
@@ -174,10 +196,13 @@ module.exports = {
       .then(response => {
         return response.json();
       })
-      .then(data => {
-        cb(data);
+      .then((data) => {
+        cb(null, data);
       })
-      .catch(err => console.log('ERROR', err));
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
   },
 
   // POSTs a new relation of User to Task. User claims selected Task
@@ -199,10 +224,13 @@ module.exports = {
       .then(response => {
         return response.json();
       })
-      .then(data => {
-        cb(data);
+      .then((data) => {
+        cb(null, data);
       })
-      .catch(err => console.log('ERROR', err));
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
   },
 
 }

@@ -6,7 +6,7 @@ export default class TasksInProgress extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      focusTask: props.userTasks[0],
+      focusTask: props.userTasks,
       showModal: false
     };
 

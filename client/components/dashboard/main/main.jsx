@@ -25,6 +25,7 @@ export default class Main extends Component {
           <CrewView {...props}
             user={this.props.user}
             currentCrew={this.props.currentCrew}
+            currentCrewTasks={this.props.currentCrewTasks}
             userTasks={this.props.userTasks}
             />
           )}/>
