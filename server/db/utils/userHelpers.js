@@ -19,7 +19,7 @@ exports.upsertFbUser = (profile, cb) => {
             return cb(null, user);
           });
       } else {
-        return cb(err, null);
+        return cb(null, user);
       }
     });
 };
