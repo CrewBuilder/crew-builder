@@ -81,7 +81,8 @@ export default class Dashboard extends Component {
       }
     }).then((userId) => {
       // get user crews using userId.id
-      GetUserCrews(1, (err, res) => {
+      let id = userId.id
+      GetUserCrews(id, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         } else {

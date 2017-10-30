@@ -128,6 +128,7 @@ router.post('/crew', (req, res) => {
 // POST: user/crews => user joins a crew, creates a new row in user_crew table
 const postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
 router.post('/user/crews', (req, res) => {
+  console.log('Body',req.body);
   let userId = req.body.userId;
   let crewId = req.body.crewId;
   postUserCrew(userId, crewId, (err, userCrew) => {

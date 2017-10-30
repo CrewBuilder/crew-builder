@@ -5,12 +5,21 @@
 
 import React, { Component } from 'react';
 import SearchCard from './searchCard.jsx';
+import { JoinACrew } from '../../../utils/requests.jsx';
 
 export default class SearchResults extends Component {
 
   constructor(props) {
     super(props);
     // Expect 'props' to contain 'crews'
+    this.joinCrew = (crew) => {
+      let crewId = crew.id;
+      let userId = this.props.user.id;
+      JoinACrew(userId, crewId, (err, data) => {
+        console.log('Data', data);
+        console.log('Error', err);
+      });
+    };
   }
 
   render() {
@@ -32,7 +41,7 @@ export default class SearchResults extends Component {
           <div className="search-crew-list">
             {this.props.searchResults.map((crew, i) => {
               return (
-                <SearchCard key={i} crew={crew} />
+                <SearchCard key={i} crew={crew} joinCrew={this.joinCrew} />
               )
             })}
           </div>
