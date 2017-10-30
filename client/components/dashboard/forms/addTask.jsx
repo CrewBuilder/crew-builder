@@ -26,6 +26,14 @@ export default class addTask extends Component {
     }
 
     this.task = this.task.bind(this);
+
+    this.getValidationState = () => {
+      const limitVal = this.state.Limit;
+      const pointsVal = this.state.Points;
+      if (!isNaN(Number(limitVal)) && !isNaN(Number(pointsVal))) return 'success';
+      else if (isNaN(Number(limitVal)) || isNaN(Number(pointsVal))) return 'error';
+      return null;
+    }
   }
 
   handleSubmit(e) {
@@ -49,17 +57,17 @@ export default class addTask extends Component {
         <form onSubmit={this.handleSubmit.bind(this)}>
           <FormGroup>
             <ControlLabel>Name of the task</ControlLabel>
-            <FormControl type="text" placeholder="Add a new Task" onChange={(e) => this.setState({taskInput: e.target.value})}/>
+            <FormControl type="text" placeholder="Add a new Task" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
           </FormGroup>
           <FormGroup>
             <ControlLabel>Description</ControlLabel>
-            <FormControl componentClass="textarea" placeholder="description"/>
+            <FormControl componentClass="textarea" placeholder="description" value={this.state.description} onChange={(event) => this.setState({description: event.target.value})}/>
           </FormGroup>
-          <FormGroup>
+          <FormGroup validationState={this.getValidationState()}>
             <ControlLabel>Points</ControlLabel>
-            <FormControl type="text"/>
+            <FormControl type="text" value={this.state.Points} value={this.state.Points} onChange={(event) => this.setState({Points: event.target.value})}/>
             <ControlLabel>Limit</ControlLabel>
-            <FormControl type="text"/>
+            <FormControl type="text" value={this.state.Limit} value={this.state.Limit} onChange={(event) => this.setState({Limit: event.target.value})} />
           </FormGroup>
           <FormGroup>
             <ControlLabel>Expiry Date</ControlLabel>
