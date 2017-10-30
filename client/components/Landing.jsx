@@ -14,6 +14,10 @@ export default class Landing extends Component {
 
     // triggers login and app state change to redirect to dashboard
     this.handleLogin = () => {
+      let userCheck = window.localStorage.getItem('id_token');
+      if(userCheck) {
+        window.localStorage.removeItem('id_token');
+      }
       Login((res) => {
         return res;
       })

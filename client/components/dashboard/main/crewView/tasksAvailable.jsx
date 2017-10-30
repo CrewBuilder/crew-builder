@@ -7,11 +7,11 @@ export default class TasksAvailable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTask: props.userTasks[0],
+      selectedTask: props.currentCrewTasks,
       showModal: false
     };
 
-    this.tasks = this.props.userTasks;
+    this.tasks = this.props.currentCrewTasks;
 
     this.handleSelectTask = (task) => {
       this.setState({selectedTask: task});
@@ -29,11 +29,12 @@ export default class TasksAvailable extends Component {
   }
 
   render() {
+
     return (
       <div>
         <div>
           <ListGroup>
-            {this.tasks.map((task, i) => <ListGroupItem onClick={() => this.handleSelectTask(task)} key={i}>{task.name}</ListGroupItem>)}
+            {this.props.currentCrewTasks.map((task, i) => <ListGroupItem onClick={() => this.handleSelectTask(task)} key={i}>{task.name}</ListGroupItem>)}
           </ListGroup>
         </div>
         <div>
@@ -55,3 +56,5 @@ export default class TasksAvailable extends Component {
     );
   }
 }
+
+
