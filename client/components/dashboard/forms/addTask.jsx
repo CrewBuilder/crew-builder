@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap'
 var moment = require('moment');
 require('moment/locale/en-ca');
 
+// expect props from manageTasks, related to updation of current tasks
 var DateTime = require('react-datetime');
 export default class addTask extends Component {
   constructor(props) {
