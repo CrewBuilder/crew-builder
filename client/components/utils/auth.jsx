@@ -49,7 +49,7 @@ module.exports = {
   },
   // trigger FB login dialog popup and auth with /auth/facebook API route
   // add localStorage 'id_token'
-  Login: () => {
+  Login: (cb) => {
     return new Promise((resolve, reject) => {
       FB.login(result => {
         if(result.authResponse) {
@@ -62,17 +62,23 @@ module.exports = {
           };
 
           fetch('http://localhost:3000/auth/facebook', options)
-          // .then((res) => res.json())
           .then((data) => {
             var token = data.headers.get('x-auth-token');
             if(token) {
               localStorage.setItem('id_token', token);
             }
-            resolve(data);
           })
-          .catch(() => reject());
+          .then((loggedIn) => {
+            cb('success');
+            resolve();
+          })
+          .catch((e) => {
+            cb(e);
+            reject(e);
+          });
         } else {
-          reject();
+          cb('failure');
+          reject(result);
         }
       }, {scope: 'public_profile,email'})
     })
@@ -101,13 +107,16 @@ module.exports = {
     };
     return fetch('http://localhost:3000/auth/me', options)
     .then((response) => {
+      if(!response.ok){
+        return false
+      }
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       return data;
-      // REDIRECT IF CAN'T GET CURRENTUSER!!
-    }).catch((error) => console.log('ERROR', error));
+    }).catch((error) => {
+      return null;
+    });
   }
 }
 

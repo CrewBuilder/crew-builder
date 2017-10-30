@@ -16,8 +16,11 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        cb(data);
-      }).catch((error) => console.log('ERROR', error));
+        cb(null, data);
+      }).catch((error) => {
+        console.log('ERROR', error)
+        cb(error, null);
+      });
   },
 
   // Returns all of current user's tasks for selected crew.
