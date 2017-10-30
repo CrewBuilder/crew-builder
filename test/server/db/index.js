@@ -14,6 +14,47 @@ describe('Postgres crewbuilder db', function() {
     return db.sequelize.authenticate();
   });
 
+  it('Should return two lists of tasks for a user: tasksInProgress and tasksAvailable', function(done) {
+    let tasksInProgress = [];
+    db.user.findOne({
+      where: {id: 1},
+      include: [{
+        model: db.task,
+        where: {crewId: 4},
+        through: {
+          attributes: ['completed', 'verified']
+        }
+      }]
+    })
+      .then(user => {
+        if (!user) {
+          done('no data found');
+        } else {
+          tasksInProgress = user.tasks;
+          let excludeIds = user.tasks.map(task => task.id);
+          return db.task.findAll({
+            where: {
+              id: {
+                $notIn: excludeIds
+              },
+              crewId: 4
+            }
+          });
+        }
+      })
+      .then(tasks => {
+        let response = {
+          tasksInProgress: tasksInProgress,
+          tasksAvailable: tasks
+        };
+        expect(response.tasksAvailable.length).to.equal(7);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
   xit('Should mark a task as complete in user_task', function(done) {
     db.user_task.update(
       {

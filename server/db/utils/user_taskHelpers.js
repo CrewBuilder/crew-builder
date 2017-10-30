@@ -26,6 +26,7 @@ exports.getTasksByUser = (userId, cb) => {
 };
 
 exports.getTasksByUserCrew = (userId, crewId, cb) => {
+  let tasksInProgress = [];
   db.user.findOne({
     where: {id: userId},
     include: [{
@@ -40,8 +41,23 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
       if (!user) {
         cb('no data found', null);
       } else {
-        cb(null, user.tasks);
+        tasksInProgress = user.tasks;
+        let excludeIds = user.tasks.map(task => task.id);
+        return db.task.findAll({
+          where: {
+            id: {
+              $notIn: excludeIds
+            },
+            crewId: crewId
+          }
+        });
       }
+    })
+    .then(tasks => {
+      cb(null, {
+        tasksInProgress: tasksInProgress,
+        tasksAvailable: tasks
+      });
     })
     .catch(err => {
       cb(err, null);
