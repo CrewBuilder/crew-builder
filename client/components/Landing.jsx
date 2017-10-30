@@ -1,29 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import FacebookLogin from 'react-facebook-login';
+import React, { Component } from 'react';
+
+import { Init, CheckLogin, GetCurrentUser, Login, Logout } from './utils/auth.jsx';
+import {Jumbotron, Button} from 'react-bootstrap';
 
 const responseFacebook = (response) => {
   //TODO: re-direct, query users endpoint
 }
 
-export default class Landing extends React.Component {
+export default class Landing extends Component {
+
   constructor(props) {
     super(props);
+
+    // triggers login and app state change to redirect to dashboard
+    this.handleLogin = () => {
+      Login((res) => {
+        return res;
+      })
+      .then((loggedIn) => {
+        this.props.changeLoginStatus();
+      })
+      .catch((error) => {
+        console.log('Login Error: ', error);
+      })
+    }
   }
 
   render() {
 
-    function loginClickHandler(e) {
-      e.preventDefault();
-      window.location = "/auth/facebook"
-    }
     return(
       <div>
-        <div onClick={loginClickHandler}>
-          Continue with Facebook
-        </div>
+        <Jumbotron>
+          <h1>Crew Builder</h1>
+          <p>Contribute to you crew...earn rewards</p>
+          <p><Button onClick={this.handleLogin} bsStyle="primary">Sign up with Facebook</Button></p>
+        </Jumbotron>
       </div>
-
     )
   }
 }

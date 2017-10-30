@@ -1,24 +1,41 @@
-const sequelize = require('sequelize');
 require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
 
-const db = new sequelize('crewbuilder', process.env.DB_USER, process.env.DB_PASSWORD, {
-  host: 'localhost',
-  dialect: 'postgres',
+if (process.env.DATABASE_URL) {
+  var sequelize = new Sequelize(process.env.DATABASE_URL);
+} else {
+  var sequelize = new Sequelize('crewbuilder', process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: 'localhost',
+    dialect: 'postgres',
+    port: process.env.DB_PORT,
+    logging: false,
 
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    }
+  });
+}
+
+var db = {};
+
+fs
+  .readdirSync(path.join(__dirname, '/models'))
+  .forEach(function(file) {
+    var model = sequelize.import(path.join(__dirname, '/models/', file));
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach(function(modelName) {
+  if ('associate' in db[modelName]) {
+    db[modelName].associate(db);
   }
 });
 
-db
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-exports = db;
+module.exports = db;
