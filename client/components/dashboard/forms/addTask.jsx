@@ -8,8 +8,13 @@ export default class addTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      taskInput : '',
-      expiry: ''
+      name : '',
+      description: '',
+      Points: '',
+      Limit: '',
+      expiry: '',
+      createdAt: '',
+      updatedAt: ''
     }
 
     this.show = (e) => {
