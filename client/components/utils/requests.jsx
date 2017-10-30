@@ -18,7 +18,7 @@ module.exports = {
       .then((data) => {
         cb(null, data);
       }).catch((error) => {
-        console.log('ERROR', error)
+        console.log('ERROR', error);
         cb(error, null);
       });
   },
@@ -78,6 +78,23 @@ module.exports = {
       .then((data) => {
         cb(data);
       }).catch((error) => console.log('ERROR', error));
+  },
+
+  GetLeaderTasks: (crewId, cb) => {
+    let route = `${module.exports.host}leader/tasks?crewId=${crewId}`;
+    let options = {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    };
+    return fetch(route, options)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        cb(data);
+      }).catch((error) => console.log('Unable to fetch leader/tasks', error));
   },
 
   // Lets user create a Crew for which they will serve as leader
@@ -205,4 +222,28 @@ module.exports = {
       .catch(err => console.log('ERROR', err));
   },
 
-}
+  UpdateTask: (userTaskId, cb, verified = false) => {
+    let route = `${module.exports.host}user/tasks/`;
+    let body = {
+      userTaskId: userTaskId,
+      verified: verified
+    };
+    let options = {
+      method: 'put',
+      body: JSON.stringify(body),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        cb(data);
+      })
+      .catch(err => console.log('Unable to update task', err));
+  }
+
+};
