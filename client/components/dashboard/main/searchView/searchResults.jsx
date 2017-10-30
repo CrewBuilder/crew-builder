@@ -15,29 +15,36 @@ export default class SearchResults extends Component {
 
   render() {
 
-    const browseOrSearch = this.props.searchField ?
-      `Search results for ${this.props.searchField}` :
-      `Browse some of our crews to join`;
+    if(!this.props.searchResults){
+      return (
+        <div />
+      )
+    } else {
 
-    return (
-      <div className="cover-background">
-        <h4>{browseOrSearch}...</h4>
-        <hr />
-        <div className="search-crew-list">
-          {this.props.searchResults.map((crew, i) => {
-            return (
-              <SearchCard key={i} crew={crew} />
-            )
-          })}
+      const browseOrSearch = this.props.searchField ?
+        `Search results for ${this.props.searchField}` :
+        `Browse some of our crews to join`;
+
+      return (
+        <div className="cover-background">
+          <h4>{browseOrSearch}...</h4>
+          <hr />
+          <div className="search-crew-list">
+            {this.props.searchResults.map((crew, i) => {
+              return (
+                <SearchCard key={i} crew={crew} />
+              )
+            })}
+          </div>
+          {this.props.searchResults.length === 0 ?
+            <div className="no-crew-message">
+              <h2><em>
+                No crews match that query. Try again or click browse!
+              </em></h2>
+            </div> : ''}
         </div>
-        {this.props.searchResults.length === 0 ?
-          <div className="no-crew-message">
-            <h2><em>
-              No crews match that query. Try again or click browse!
-            </em></h2>
-          </div> : ''}
-      </div>
-    )
+      )
+    }
   }
 }
 

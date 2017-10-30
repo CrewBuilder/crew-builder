@@ -191,16 +191,8 @@
 ###'user/tasks'
 ####req.body (request will know which action to do based on fields included)
 {
-  userId: INT,
-  taskId: INT,
-}
-
-OR
-
-{
-  userId: INT,
-  taskId: INT,
-  verified: BOOL
+  userTaskId: INT, unique identifier for the user_task selected
+  verified: BOOL, optional, only include for leader verification
 }
 
 ##DELETE Endpoints
