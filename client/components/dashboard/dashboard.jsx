@@ -26,25 +26,21 @@ export default class Dashboard extends Component {
       searchField: ''
     };
 
-    this.submitSearch = (query, e) => {
-      console.log('SEARCH: ', query);
-      this.setState({searchField: query});
-    };
-
-    this.browseSearch = () => {
-      GetAllCrews((err, res) => {
+    this.crewSearch = (query) => {
+      GetAllCrews(query, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         }
+
         this.setState({
           searchResults: res || [],
-          searchField: null
+          searchField: query
         });
       });
-    };
+    }
 
     // TEMP USERID FOR TESTING
-    this.setCurrentCrew = (crew, e) => {
+    this.setCurrentCrew = (crew) => {
       let crewId = crew.crew.id;
       let userId = this.state.user.id;
       GetUserTasks(userId, crewId, (err, response) => {
@@ -137,7 +133,7 @@ export default class Dashboard extends Component {
 
 
   render() {
-    if(!this.state.user) {
+    if (!this.state.user) {
       return (
         <div />
       );
@@ -147,9 +143,8 @@ export default class Dashboard extends Component {
         <div className='fadeIn-container'>
           <Navbar
             user={this.state.user}
+            crewSearch={this.crewSearch}
             changeLoginStatus={this.props.changeLoginStatus}
-            submitSearch={this.submitSearch}
-            browseSearch={this.browseSearch}
           />
           <Grid>
             <Row className="show-grid">

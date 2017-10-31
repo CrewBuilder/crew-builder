@@ -7,8 +7,7 @@ export default class ManageTasks extends Component {
     super(props);
     this.state = {
       showModal: false,
-      newTask: '',
-      selectedTask: props.userTasks[0]
+      newTask: ''
     };
 
     this.open = () => {
@@ -49,12 +48,11 @@ export default class ManageTasks extends Component {
   }
 
   render() {
-    console.log(this.state.newTask, 'newTask')
-    console.log(this.props.userTasks, 'props for ManageTasks')
+
     return (
       <div>
         <ListGroup>
-          {this.props.userTasks.map((task, i) => (
+          {this.props.currentCrewTasks.map((task, i) => (
             <ListGroupItem key={i} onClick={() => this.handleSelect(task.name)}>{task.name}</ListGroupItem>
           )) }
           <ListGroupItem onClick={this.open}>+ addTask</ListGroupItem>

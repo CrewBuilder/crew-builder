@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Media, Image, Modal } from 'react-bootstrap';
+import { Media, Image, Modal, ButtonGroup, Button } from 'react-bootstrap';
 // import editForm from './../../forms/createCrew.jsx'
 import CreateCrew from './../../forms/createCrew.jsx'
 
@@ -8,7 +8,8 @@ export default class crewLeaderSummary extends Component {
     super(props);
     this.state = {
       showModal: false,
-      editForm: false
+      editForm: false,
+      checkMembers: false
     };
 
     this.open = () => {
@@ -19,29 +20,59 @@ export default class crewLeaderSummary extends Component {
       this.setState({showModal: false});
       this.setState({editForm: false})
     }
+
+    this.checkMembers = () => {
+        this.props.getCrewMember(this.props.currentCrew.crew.id);
+        this.setState({
+          checkMembers: true,
+          showModal: true
+        });
+    }
   }
 
+  // componentDidMount() {
+  //   // this.props.getCrewMember(this.props.currentCrew.crew.id);
+  //   console.log(this.props.currentCrew.crew.id);
+  // }
+
   render() {
-    console.log(this.props)
+    if(!this.props.currentCrew) {
+      return (
+        <div />
+      )
+    } else {
     return (
       <div>
         <Media>
           <Media.Left>
-            <Image src={this.props.currentCrew.image} alt='Image'/>
+            <Image src={this.props.currentCrew.crew.image} alt='Image'/>
           </Media.Left>
           <Media.Body>
             <Media.Heading>
-              {this.props.currentCrew.name}
+              {this.props.currentCrew.crew.name}
             </Media.Heading>
-            <p onClick={() => this.setState({showModal: true})}>list members</p>
-            <p onClick={this.open}>Edit crew profile</p>
+            <ButtonGroup>
+              <Button onClick={this.checkMembers}>Show Members</Button>
+              <Button onClick={this.open}>Edit Crew</Button>
+            </ButtonGroup>
+            <Media.Heading>
+              <small>Description</small>
+            </Media.Heading>
+            {this.props.currentCrew.crew.description}
           </Media.Body>
         </Media>
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Heading</Modal.Title>
+            <Modal.Title>Crew Members</Modal.Title>
           </Modal.Header>
+          <Modal.Body>
+            <ul>
+              {this.props.crewMembers.map((member, i) => (
+                <li key={i}><strong>Member ID:</strong> {member.id} - <strong>Points:</strong> {member.points}</li>
+              )) }
+            </ul>
+          </Modal.Body>
         </Modal>
 
         <Modal show={this.state.editForm} onHide={this.close}>
@@ -49,14 +80,23 @@ export default class crewLeaderSummary extends Component {
             Update
           </Modal.Header>
           <Modal.Body>
-            <CreateCrew name={this.props.currentCrew.name} desc={this.props.currentCrew.description}/>
+            <CreateCrew name={this.props.currentCrew.crew.name} desc={this.props.currentCrew.crew.description}/>
           </Modal.Body>
         </Modal>
       </div>
     )
+  }
   }
 }
 
 // when you click on list members it should pop over a model showing all the current members
 
 // when you click on a edit profile it should popover a model, which is actually our createcrew form to update and change
+
+
+            // <p onClick={() => this.setState({showModal: true})}>list members</p>
+            // <p onClick={this.open}>Edit crew profile</p>
+
+
+
+            // <Button onClick={() => this.setState({showModal: true})}>Show Members</Button>
