@@ -16,5 +16,10 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
+  UserTask.associate = models => {
+    UserTask.belongsTo(models.user, {foreignKey: 'user_id'});
+    UserTask.belongsTo(models.task, {foreignKey: 'task_id'});
+  };
+
   return UserTask;
 };

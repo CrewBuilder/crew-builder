@@ -6,8 +6,9 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Crew.associate = function(models) {
-    Crew.hasMany(models.task);
+    Crew.hasMany(models.task, {foreignKey: 'crew_id'});
     Crew.belongsToMany(models.user, {through: models.user_crew, foreignKey: 'crew_id'});
+    Crew.hasMany(models.user_crew, {foreignKey: 'crew_id'});
   };
 
   return Crew;
