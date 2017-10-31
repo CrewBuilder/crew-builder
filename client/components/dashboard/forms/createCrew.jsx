@@ -1,6 +1,9 @@
 // here crew_leader will create a new crew, just a basic layoout... we can change it with react bootstrap later
 import React, { Component } from 'react';
-import { FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap'
+import { FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import { PostCrew } from '../../utils/requests.jsx';
+import {Image} from 'cloudinary-react';
+
 export default class CreateCrew extends Component {
   constructor(props) {
     super(props);
@@ -14,24 +17,38 @@ export default class CreateCrew extends Component {
     console.log(this.img)
     var obj = {
       name: this.name.value,
-      desc: this.description.value,
-      img: this.img
+      description: this.description.value,
+      image: this.img
     }
     console.log(obj)
+    PostCrew(obj, 1, function (err, data) {
+      if (err) {
+        console.log('error in posting');
+      }
+      if (data) {
+        console.log(data, 'data from posting')
+      }
+    })
   }
 
   image(e) {
     this.img = e.target.value
+    console.log(this.img, 'thisimg')
   }
 
   render() {
+    console.log(typeof PostCrew, 'Postcrew')
+    console.log(this.props, 'thisprops')
     return (
       <div>
       <form onSubmit={this.handleSubmit.bind(this)}>
         <FormGroup>
          <FormControl type="text" placeholder="Enter the name of Crew" name="crewname" inputRef={ref => this.name = ref} defaultValue={this.props.name}/><br/>
          <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description = ref} defaultValue={this.props.desc}/><br/>
-         <FormControl type="file" name="img" className="img" accept="image/*" onChange={this.image.bind(this)}/><br/>
+         <input name="file" type="file"
+           className="file-upload" data-cloudinary-field="image_id"
+           data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"
+           onChange={this.image.bind(this)}/>
          <Button type="submit">
            Create/Update
         </Button>
@@ -41,3 +58,5 @@ export default class CreateCrew extends Component {
     )
   }
 }
+
+// <Image cloudName="sarikonda" publicId="flower" width="300" crop="scale"/>
