@@ -37,8 +37,6 @@ export default class CreateCrew extends Component {
   }
 
   render() {
-    console.log(typeof PostCrew, 'Postcrew')
-    console.log(this.props, 'thisprops')
     return (
       <div>
       <form onSubmit={this.handleSubmit.bind(this)}>
