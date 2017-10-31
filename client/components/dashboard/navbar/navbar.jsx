@@ -23,8 +23,12 @@ export default class NavBar extends Component {
     };
 
     this.submitSearchField = () => {
-      this.props.submitSearch(this.state.searchQuery);
+      this.props.crewSearch(this.state.searchQuery)
       this.setState({searchQuery: ''});
+    };
+
+    this.submitBrowse = () => {
+      this.props.crewSearch('');
     };
 
   }
@@ -53,7 +57,7 @@ export default class NavBar extends Component {
                 </NavLink>
 
                 <NavLink to="/dashboard/results">
-                  <Button type="submit" onClick={this.props.browseSearch}>Browse</Button>
+                  <Button type="submit" onClick={this.submitBrowse}>Browse</Button>
                 </NavLink>
               </form>
             </Navbar.Form>

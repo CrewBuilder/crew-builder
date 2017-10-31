@@ -34,6 +34,7 @@ export default class TasksAvailable extends Component {
         if (err) {
           console.log('Error', err);
         } else {
+          console.log('Data', data);
           this.props.getUserTasks(userId, this.state.selectedTask.crewId);
         }
       });
