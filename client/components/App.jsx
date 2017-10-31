@@ -53,9 +53,9 @@ export default class App extends Component {
 
   render() {
 
-    if(!this.state.isLoggedIn) {
+    if(!window.localStorage.getItem('id_token') || !this.state.isLoggedIn) {
       return (
-        <div>
+        <div className="fadeIn-landing">
           <Switch>
             <Route exact path="/" render={(props) => (
               <Landing {...props}
@@ -70,7 +70,7 @@ export default class App extends Component {
     } else {
 
       return (
-        <div>
+        <div className="fadeIn-container">
           <Switch>
             <Route path="/dashboard" render={(props) => (
               <Dashboard {...props}

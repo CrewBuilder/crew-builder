@@ -105,7 +105,7 @@ export default class Dashboard extends Component {
     } else {
 
       return (
-        <div>
+        <div className='fadeIn-container'>
           <Navbar
             user={this.state.user}
             changeLoginStatus={this.props.changeLoginStatus}
