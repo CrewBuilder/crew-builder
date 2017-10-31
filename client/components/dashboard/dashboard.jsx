@@ -145,8 +145,6 @@ export default class Dashboard extends Component {
             user={this.state.user}
             crewSearch={this.crewSearch}
             changeLoginStatus={this.props.changeLoginStatus}
-            submitSearch={this.submitSearch}
-            browseSearch={this.browseSearch}
           />
           <Grid>
             <Row className="show-grid">
