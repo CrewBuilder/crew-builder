@@ -77,7 +77,8 @@ exports.postUserTask = (userId, taskId, cb) => {
     });
 };
 
-exports.claimComplete = (userTaskId, verified, cb) => {
+exports.updateTask = (userTaskId, verified, cb) => {
+  let points, newPoints, userId, crewId, taskId;
   db.user_task.update(
     {
       completed: true, // this may already be true, but doing this makes the request work for both verifiying and completing
@@ -86,11 +87,28 @@ exports.claimComplete = (userTaskId, verified, cb) => {
     {
       where: {id: userTaskId}
     })
-    .then(userTask => {
-      return db.user_task.findOne({where: {id: userTaskId}});
+    .then((updated) => {
+      return db.user_task.findOne({ where: {id: userTaskId}});
     })
     .then(userTask => {
-      cb(null, userTask);
+      userId = userTask.user_id;
+      taskId = userTask.task_id;
+      return db.task.findOne({where: {id: taskId}});
+    })
+    .then(task => {
+      points = task.points;
+      crewId = task.crewId;
+      return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+    })
+    .then(userCrew => {
+      newPoints = verified ? userCrew.points + points : points; //will only add points when being verified
+      return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crewId}});
+    })
+    .then(updated => {
+      return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+    })
+    .then(userCrew => {
+      cb(null, userCrew);
     })
     .catch(err => {
       cb(err, null);

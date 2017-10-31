@@ -55,6 +55,49 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
+  it('Should update a task as verified and add points to user_crews', function(done) {
+    let userId, taskId, crewId, points, newPoints, userCrew;
+    const verified = true;
+    it('Should update a task as verified and add points to user_crews', function(done) {
+    let userId, taskId, crewId, points, newPoints, userCrew;
+    const verified = true;
+    db.user_task.update(
+      {
+        completed: true, // this may already be true, but doing this makes the request work for both verifiying and completing
+        verified: verified
+      },
+      {
+        where: {id: userTaskId}
+      })
+      .then((updated) => {
+        return db.user_task.findOne({ where: {id: userTaskId}});
+      })
+      .then(userTask => {
+        userId = userTask.user_id;
+        taskId = userTask.task_id;
+        return db.task.findOne({where: {id: taskId}});
+      })
+      .then(task => {
+        points = task.points;
+        crewId = task.crewId;
+        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+      })
+      .then(userCrew => {
+        newPoints = verified ? userCrew.points + points : points; //will only add points when being verified
+        return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crewId}});
+      })
+      .then(updated => {
+        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+      })
+      .then(userCrew => {
+        expect(userCrew.points).to.equal(newPoints);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
   xit('Should mark a task as complete in user_task', function(done) {
     db.user_task.update(
       {
