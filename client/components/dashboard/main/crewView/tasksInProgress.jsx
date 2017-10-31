@@ -10,7 +10,7 @@ export default class TasksInProgress extends Component {
       showModal: false
     };
 
-    this.openModal = (taskTarget, e) => {
+    this.openModal = (e, taskTarget) => {
       this.setState({ focusTask: taskTarget });
       this.setState({ showModal: true });
     };
@@ -29,14 +29,7 @@ export default class TasksInProgress extends Component {
     return (
       <div>
         <ListGroup>
-          {this.props.userTasks.map((task, key) => {
-            return (
-              <ListGroupItem className="task-in-progress" key={key} >
-                <span onClick={e => this.openModal(task, e)} >{task.name}</span>
-              </ListGroupItem>
-            );
-          })}
-
+          {this.props.userTasks.map((task, i) => <ListGroupItem onClick={(e, task) => this.handleSelectTask(task)} key={i}>{task.name}</ListGroupItem>)}
         </ListGroup>
         <Modal show={this.state.showModal} onHide={this.closeModal}>
           <Modal.Header closeButton>
