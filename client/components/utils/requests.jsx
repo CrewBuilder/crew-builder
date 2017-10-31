@@ -173,15 +173,16 @@ module.exports = {
   },
 
   // Returns all crews. Meant for Browse functionality
-  GetAllCrews: (cb) => {
-    let route = `${module.exports.host}crews/`;
+  GetAllCrews: (qs, cb) => {
+    let route = qs === '' ? `${module.exports.host}crews` : `${module.exports.host}crews?qs=${qs}`;
+
     let options = {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json'
       })
     };
-    return fetch(route, options)
+    fetch(route, options)
     // TODO: test the data format of these API requests
       .then((response) => {
         return response.json();
