@@ -33,14 +33,14 @@ export default class Dashboard extends Component {
 
     this.browseSearch = () => {
       GetAllCrews((err, res) => {
-        if(err) {
+        if (err) {
           console.log('ERROR:', err);
         }
-          this.setState({
-            searchResults: res || [],
-            searchField: null
-          });
-      })
+        this.setState({
+          searchResults: res || [],
+          searchField: null
+        });
+      });
     };
 
     // TEMP USERID FOR TESTING
@@ -61,8 +61,8 @@ export default class Dashboard extends Component {
             currentCrewTasks: response.tasksAvailable || [],
             currentCrew: crew
           });
-        })
-      })
+        });
+      });
     };
   }
 
@@ -71,37 +71,37 @@ export default class Dashboard extends Component {
     GetCurrentUser((res) => {
       return res;
     })
-    .then((user) => {
-      if (user === false) {
-        this.props.changeLoginStatus();
-        console.log('NOT LOGGED IN');
-      } else {
-        this.setState({user: user});
-        return user;
-      }
-    }).then((userId) => {
-      // get user crews using userId.id
-      let id = userId.id
-      GetUserCrews(id, (err, res) => {
-        if (err) {
-          console.log('ERROR:', err);
+      .then((user) => {
+        if (user === false) {
+          this.props.changeLoginStatus();
+          console.log('NOT LOGGED IN');
         } else {
-          this.setState({
-            userLeaderCrews: res.leader,
-            userMemberCrews: res.member
-          });
+          this.setState({user: user});
+          return user;
         }
+      }).then((userId) => {
+        // get user crews using userId.id
+        let id = userId.id;
+        GetUserCrews(id, (err, res) => {
+          if (err) {
+            console.log('ERROR:', err);
+          } else {
+            this.setState({
+              userLeaderCrews: res.leader,
+              userMemberCrews: res.member
+            });
+          }
+        });
       });
-    });
   }
 
 
   render() {
 
-    if(!this.state.user) {
+    if (!this.state.user) {
       return (
         <div />
-      )
+      );
     } else {
 
       return (
