@@ -137,7 +137,7 @@ export default class Dashboard extends Component {
 
 
   render() {
-    if(!this.state.user) {
+    if (!this.state.user) {
       return (
         <div />
       );
