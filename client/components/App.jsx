@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 
-import Landing from './Landing.jsx';
+import Landing from './landing.jsx';
 import Dashboard from './dashboard/dashboard.jsx';
 import Sidebar from './dashboard/sidebar.jsx';
 
 import { Init, CheckLogin, GetCurrentUser, Login, Logout } from './utils/auth.jsx';
-import PrivateRoute from './utils/private.jsx';
 
 export default class App extends Component {
   constructor(props) {
