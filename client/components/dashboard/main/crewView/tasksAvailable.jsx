@@ -31,13 +31,12 @@ export default class TasksAvailable extends Component {
       let userId = props.userId;
       let task = this.state.selectedTask.id;
       ClaimATask(userId, task, (err, data) => {
-        if(err) {
+        if (err) {
           console.log('Error', err);
         } else {
-        console.log('Data', data);
-        this.props.getUserTasks(userId, this.state.selectedTask.crewId);
+          this.props.getUserTasks(userId, this.state.selectedTask.crewId);
         }
-      })
+      });
     };
   }
 

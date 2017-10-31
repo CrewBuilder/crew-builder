@@ -24,7 +24,6 @@ router.get('/user/tasks', (req, res) => {
   let id = req.query.id;
   let crewId = req.query.crewId;
   getTasksByUserCrew(id, crewId, (err, user) => {
-    console.log('user', user)
     if (err) {
       res.status(401).send(err);
     } else {
@@ -163,11 +162,11 @@ const updateTask = require('./../utils/user_taskHelpers.js').updateTask;
 router.put('/user/tasks', (req, res) => {
   let userTaskId = req.body.userTaskId;
   let verified = req.body.verified || false; // verified should remain false if it is not in the request
-  updateTask(userTaskId, verified, (err, userTask) => {
+  updateTask(userTaskId, verified, (err, userCrew) => {
     if (err) {
       res.status(401).send('Task not updated');
     } else {
-      res.status(200).send(userTask);
+      res.status(200).send(userCrew);
     }
   });
 });
