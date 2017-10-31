@@ -17,7 +17,8 @@ module.exports = {
       })
       .then((data) => {
         cb(null, data);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.log('ERROR', error);
         cb(error, null);
       });
@@ -36,12 +37,13 @@ module.exports = {
     // TODO: test the data format of these API requests
       .then((response) => {
         return response.json();
-      }).then((data) => {
+      })
+      .then((data) => {
         console.log('RESPONSE DATA:', data);
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error)
+        console.log('ERROR', error);
         cb(error, null);
       });
   },
@@ -106,7 +108,8 @@ module.exports = {
       })
       .then((data) => {
         cb(data);
-      }).catch((error) => console.log('Unable to fetch leader/tasks', error));
+      })
+      .catch((error) => console.log('Unable to fetch leader/tasks', error));
   },
 
   // Lets user create a Crew for which they will serve as leader
