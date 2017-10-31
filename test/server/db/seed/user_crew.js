@@ -99,7 +99,7 @@ module.exports = [
   },
   {
     "user_id": 3,
-    "crew_id": 5,
+    "crew_id": 9,
     "points": 0,
     "achievement": "none",
     "role": "member"

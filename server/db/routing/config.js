@@ -158,11 +158,11 @@ router.post('/user/tasks', (req, res) => {
 /**************************************************************/
 
 // PUT: user/tasks => changes user_task completed status from false to true
-const claimComplete = require('./../utils/user_taskHelpers.js').claimComplete;
+const updateTask = require('./../utils/user_taskHelpers.js').updateTask;
 router.put('/user/tasks', (req, res) => {
   let userTaskId = req.body.userTaskId;
   let verified = req.body.verified || false; // verified should remain false if it is not in the request
-  claimComplete(userTaskId, verified, (err, userTask) => {
+  updateTask(userTaskId, verified, (err, userTask) => {
     if (err) {
       res.status(401).send('Task not updated');
     } else {
