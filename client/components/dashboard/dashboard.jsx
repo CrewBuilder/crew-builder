@@ -58,18 +58,14 @@ export default class Dashboard extends Component {
           }
 
           let userTasks;
-          let currentCrewTasks;
-
           if (!response) {
             userTasks = [];
-            currentCrewTasks = [];
           } else {
             userTasks = response.tasksInProgress;
-            currentCrewTasks = response.tasksAvailable;
           }
           this.setState({
             userTasks: userTasks,
-            currentCrewTasks: currentCrewTasks,
+            currentCrewTasks: res || [],
             currentCrew: crew
           });
         });
@@ -89,11 +85,35 @@ export default class Dashboard extends Component {
       });
     };
 
+    this.getUserTasks = (userId, crewId) => {
+      GetUserTasks(userId, crewId, (err, res) => {
+        if (err) {
+          console.log('ERROR:', err);
+        }
+
+        let userTasks;
+        let currentCrewTasks;
+
+        if (!res) {
+          userTasks = [];
+          currentCrewTasks = [];
+        } else {
+          userTasks = res.tasksInProgress;
+          currentCrewTasks = res.tasksAvailable;
+        }
+        this.setState({
+          userTasks: userTasks,
+          currentCrewTasks: currentCrewTasks,
+          currentCrew: crew
+        });
+      });
+    };
+
   }
 
   componentDidMount() {
     // get user info
-    GetCurrentUser((res) => {
+    GetCurrentUser(() => {
       return res;
     })
       .then((user) => {
@@ -151,6 +171,7 @@ export default class Dashboard extends Component {
                 <Main
                   user={this.state.user}
                   getCurrentCrews={this.getCurrentCrews}
+                  getUserTasks={this.getUserTasks}
                   currentCrew={this.state.currentCrew}
                   currentCrewTasks={this.state.currentCrewTasks}
                   userTasks={this.state.userTasks}
