@@ -8,7 +8,7 @@ const server = require('../../index.js');
 // Test Server and Client Are Active
 // ##################################
 
-xdescribe('Server and Client Are Active', function() {
+describe('Server and Client Are Active', function() {
 
   it('Respond with 200 at localhost', function(done) {
     request(server)
@@ -23,5 +23,31 @@ xdescribe('Server and Client Are Active', function() {
       .expect(200)
       .then(res => expect(res.text).to.contain('<div id="app"></div>'));
     done();
+  });
+
+  it('Responds with a list of all crews', function(done) {
+    request(server)
+      .get('/crews')
+      .expect(200)
+      .then(res => {
+        expect(res.body.length).to.equal(15);
+        done();
+      })
+      .catch(err =>{
+        done(err);
+      });
+  });
+
+  it('Responds with a list of all crews that match a search string', function(done) {
+    request(server)
+      .get('/crews?qs=\'Integer\'')
+      .expect(200)
+      .then(res => {
+        expect(res.body.length).to.equal(3);
+        done();
+      })
+      .catch(err =>{
+        done(err);
+      });
   });
 });

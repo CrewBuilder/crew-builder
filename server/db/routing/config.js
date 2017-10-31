@@ -47,15 +47,16 @@ router.get('/crew/tasks', (req, res) => {
 });
 
 // GET: /crews => retrieves all crews in current db
-const getAllCrews = require('./../utils/crewHelpers.js').findAllCrews;
+const searchCrews = require('./../utils/crewHelpers.js').searchCrews;
 router.get('/crews', (req, res) => {
-  getAllCrews((err, crews) => {
-    if (err) {
-      res.status(401).send('No crews yet exist.');
-    } else {
+  qs = req.query.qs || null;
+  searchCrews(qs)
+    .then(crews => {
       res.status(200).send(crews);
-    }
-  });
+    })
+    .catch(err => {
+      res.status(401).send(err);
+    });
 });
 
 // GET: leader/members => leader requests members, retrieves list of user data for the crew
