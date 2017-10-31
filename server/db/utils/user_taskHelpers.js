@@ -101,7 +101,7 @@ exports.updateTask = (userTaskId, verified, cb) => {
       return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
     })
     .then(userCrew => {
-      newPoints = verified ? userCrew.points + points : points; //will only add points when being verified
+      newPoints = verified ? userCrew.points + points : userCrew.points; //will only add points when being verified
       return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crewId}});
     })
     .then(updated => {
