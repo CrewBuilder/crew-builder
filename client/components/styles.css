@@ -12,3 +12,29 @@
 .cover-background {
   background-color: #fff;
 }
+
+
+
+.fadeIn-landing {
+  -webkit-animation: fadein .8s ease-in 1 forwards;
+  animation: fadein .8s ease-in 1 forwards;
+  opacity: 0;
+}
+
+.fadeIn-container {
+  -webkit-animation: fadein .4s ease-in 1 forwards;
+  animation: fadein .4s ease-in 1 forwards;
+  opacity: 0;
+}
+
+@-webkit-keyframes fadein {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  to {
+    opacity: 1;
+  }
+}
