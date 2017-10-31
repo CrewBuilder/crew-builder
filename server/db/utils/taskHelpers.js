@@ -14,7 +14,7 @@ exports.findTaskById = (id, cb) => {
 exports.findAllTasksByIds = (ids, crewId, cb) => {
   db.task.findAll({
     where: {
-      crewId: crewId,
+      crew_id: crewId,
       id: {
         $in: ids
       }
@@ -33,7 +33,7 @@ exports.findAllTasksByIds = (ids, crewId, cb) => {
 exports.findAllTasksByNotIds = (ids, crewId, cb) => {
   db.task.findAll({
     where: {
-      crewId: crewId,
+      crew_id: crewId,
       id: {
         $notIn: ids
       }
@@ -50,7 +50,7 @@ exports.findAllTasksByNotIds = (ids, crewId, cb) => {
 
 exports.getTasksByCrew = (crewId, cb) => {
   db.task.findAll({
-    where: {crewId: crewId}
+    where: {crew_id: crewId}
   })
     .then(tasks => {
       if (!tasks.length) {
@@ -77,7 +77,7 @@ exports.getUnverifiedTasks = (crewId, cb) => {
           where: { id: userIds},
           include: [{
             model: db.task,
-            where: {crewId: crewId},
+            where: {crew_id: crewId},
             through: {
               where: {completed: true, verified: false},
               attributes: ['id']

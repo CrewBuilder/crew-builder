@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Task.associate = function(models) {
-    Task.belongsTo(models.crew);
+    Task.belongsTo(models.crew, {foreignKey: 'crew_id'});
     Task.belongsToMany(models.user, {through: models.user_task, foreignKey: 'task_id'});
   };
 
