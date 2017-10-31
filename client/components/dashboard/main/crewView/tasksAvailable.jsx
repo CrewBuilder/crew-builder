@@ -10,14 +10,16 @@ export default class TasksAvailable extends Component {
     super(props);
     this.state = {
       selectedTask: props.currentCrewTasks,
-      showModal: false
+      showModal: false,
+      crew: null
     };
 
-    this.tasks = this.props.currentCrewTasks;
+    //this.tasks = this.props.currentCrewTasks;
 
     this.handleSelectTask = (task) => {
       this.setState({selectedTask: task});
       this.setState({showModal: true});
+      this.setState({crew: this.props.currentCrew})
     };
 
     this.closeModal = () => {
@@ -28,8 +30,11 @@ export default class TasksAvailable extends Component {
       this.setState({showModal: false});
       let user = props.userId;
       let task = this.state.selectedTask.id;
-      ClaimATask(user, task, (data) => {
+      ClaimATask(user, task, (err, data) => {
         console.log('Data', data);
+        let current = this.state.crew;
+        console.log('curr', current);
+        props.setCurrentCrew(current);
       })
     };
   }
