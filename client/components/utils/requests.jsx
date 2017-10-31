@@ -209,7 +209,7 @@ module.exports = {
         'Content-Type': 'application/json'
       }
     };
-    fetch(route, options)
+    return fetch(route, options)
       .then(response => {
         return response.json();
       })

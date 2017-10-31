@@ -56,14 +56,39 @@ export default class Dashboard extends Component {
           if (err) {
             console.log('ERROR:', err);
           }
+
+          let userTasks;
+          let currentCrewTasks;
+
+          if (!response) {
+            userTasks = [];
+            currentCrewTasks = [];
+          } else {
+            userTasks = response.tasksInProgress;
+            currentCrewTasks = response.tasksAvailable;
+          }
           this.setState({
-            userTasks: response.tasksInProgress || [],
-            currentCrewTasks: response.tasksAvailable || [],
+            userTasks: userTasks,
+            currentCrewTasks: currentCrewTasks,
             currentCrew: crew
           });
         });
       });
     };
+
+    this.getCurrentCrews = (userId) => {
+      GetUserCrews(userId, (err, res) => {
+        if (err) {
+          console.log('ERROR:', err);
+        } else {
+          this.setState({
+            userLeaderCrews: res.leader,
+            userMemberCrews: res.member
+          });
+        }
+      });
+    };
+
   }
 
   componentDidMount() {
@@ -125,6 +150,7 @@ export default class Dashboard extends Component {
               <Col md={10} lg={9} className="outlineBox">
                 <Main
                   user={this.state.user}
+                  getCurrentCrews={this.getCurrentCrews}
                   currentCrew={this.state.currentCrew}
                   currentCrewTasks={this.state.currentCrewTasks}
                   userTasks={this.state.userTasks}

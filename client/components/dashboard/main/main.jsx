@@ -37,6 +37,7 @@ export default class Main extends Component {
           <Route path="/dashboard/results" render={(props) => (
             <SearchResults {...props}
             user={this.props.user}
+            getCurrentCrews={this.props.getCurrentCrews}
             searchResults={this.props.searchResults}
             searchField={this.props.searchField}
             />

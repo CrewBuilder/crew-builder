@@ -16,9 +16,12 @@ export default class SearchResults extends Component {
       let crewId = crew.id;
       let userId = this.props.user.id;
       JoinACrew(userId, crewId, (err, data) => {
-        console.log('Data', data);
-        console.log('Error', err);
-        this.forceUpdate();
+        if(err) {
+          console.log('Error', err);
+        } else {
+          console.log('Data', data);
+          props.getCurrentCrews(userId);
+        }
       });
 
     };
