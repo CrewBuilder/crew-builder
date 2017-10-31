@@ -47,8 +47,7 @@ export default class Dashboard extends Component {
     this.setCurrentCrew = (crew, e) => {
       let crewId = crew.crew.id;
       let userId = this.state.user.id;
-
-      GetCrewTasks(crewId, (err, res) => {
+      GetCrewTasks(1, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         }
@@ -142,8 +141,7 @@ export default class Dashboard extends Component {
 
 
   render() {
-
-    if (!this.state.user) {
+    if(!this.state.user) {
       return (
         <div />
       );

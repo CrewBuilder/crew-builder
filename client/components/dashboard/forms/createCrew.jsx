@@ -45,8 +45,6 @@ export default class CreateCrew extends Component {
         <FormGroup>
          <FormControl type="text" placeholder="Enter the name of Crew" name="crewname" inputRef={ref => this.name = ref} defaultValue={this.props.name}/><br/>
          <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description = ref} defaultValue={this.props.desc}/><br/>
-         <FormControl type="file" name="img" className="img" accept="image/*"/><br/>
-
          <input name="file" type="file"
            className="file-upload" data-cloudinary-field="image_id"
            data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"
