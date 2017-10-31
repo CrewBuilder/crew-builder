@@ -37,7 +37,6 @@ module.exports = {
       .then((response) => {
         return response.json();
       }).then((data) => {
-        console.log('RESPONSE DATA:', data);
         cb(null, data);
       })
       .catch((error) => {
