@@ -33,14 +33,14 @@ export default class Dashboard extends Component {
 
     this.browseSearch = () => {
       GetAllCrews((err, res) => {
-        if(err) {
+        if (err) {
           console.log('ERROR:', err);
         }
-          this.setState({
-            searchResults: res || [],
-            searchField: null
-          });
-      })
+        this.setState({
+          searchResults: res || [],
+          searchField: null
+        });
+      });
     };
 
     // TEMP USERID FOR TESTING
@@ -56,33 +56,24 @@ export default class Dashboard extends Component {
           if (err) {
             console.log('ERROR:', err);
           }
+
+          let userTasks;
+          if (!response) {
+            userTasks = [];
+          } else {
+            userTasks = response.tasksInProgress;
+          }
           this.setState({
-            userTasks: response.tasksInProgress || [],
-            currentCrewTasks: response.tasksAvailable || [],
+            userTasks: userTasks,
+            currentCrewTasks: res || [],
             currentCrew: crew
           });
-        })
-      })
+        });
+      });
     };
-  }
 
-  componentDidMount() {
-    // get user info
-    GetCurrentUser((res) => {
-      return res;
-    })
-    .then((user) => {
-      if (user === false) {
-        this.props.changeLoginStatus();
-        console.log('NOT LOGGED IN');
-      } else {
-        this.setState({user: user});
-        return user;
-      }
-    }).then((userId) => {
-      // get user crews using userId.id
-      let id = userId.id
-      GetUserCrews(id, (err, res) => {
+    this.getCurrentCrews = (userId) => {
+      GetUserCrews(userId, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         } else {
@@ -92,20 +83,74 @@ export default class Dashboard extends Component {
           });
         }
       });
-    });
+    };
+
+    this.getUserTasks = (userId, crewId) => {
+      GetUserTasks(userId, crewId, (err, res) => {
+        if (err) {
+          console.log('ERROR:', err);
+        }
+
+        let userTasks;
+        let currentCrewTasks;
+
+        if (!res) {
+          userTasks = [];
+          currentCrewTasks = [];
+        } else {
+          userTasks = res.tasksInProgress;
+          currentCrewTasks = res.tasksAvailable;
+        }
+        this.setState({
+          userTasks: userTasks,
+          currentCrewTasks: currentCrewTasks,
+          currentCrew: crew
+        });
+      });
+    };
+
+  }
+
+  componentDidMount() {
+    // get user info
+    GetCurrentUser(() => {
+      return res;
+    })
+      .then((user) => {
+        if (user === false) {
+          this.props.changeLoginStatus();
+          console.log('NOT LOGGED IN');
+        } else {
+          this.setState({user: user});
+          return user;
+        }
+      }).then((userId) => {
+        // get user crews using userId.id
+        let id = userId.id;
+        GetUserCrews(id, (err, res) => {
+          if (err) {
+            console.log('ERROR:', err);
+          } else {
+            this.setState({
+              userLeaderCrews: res.leader,
+              userMemberCrews: res.member
+            });
+          }
+        });
+      });
   }
 
 
   render() {
 
-    if(!this.state.user) {
+    if (!this.state.user) {
       return (
         <div />
-      )
+      );
     } else {
 
       return (
-        <div>
+        <div className='fadeIn-container'>
           <Navbar
             user={this.state.user}
             changeLoginStatus={this.props.changeLoginStatus}
@@ -125,6 +170,8 @@ export default class Dashboard extends Component {
               <Col md={10} lg={9} className="outlineBox">
                 <Main
                   user={this.state.user}
+                  getCurrentCrews={this.getCurrentCrews}
+                  getUserTasks={this.getUserTasks}
                   currentCrew={this.state.currentCrew}
                   currentCrewTasks={this.state.currentCrewTasks}
                   userTasks={this.state.userTasks}

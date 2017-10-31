@@ -16,9 +16,12 @@ export default class SearchResults extends Component {
       let crewId = crew.id;
       let userId = this.props.user.id;
       JoinACrew(userId, crewId, (err, data) => {
-        console.log('Data', data);
-        console.log('Error', err);
-        this.forceUpdate();
+        if(err) {
+          console.log('Error', err);
+        } else {
+          console.log('Data', data);
+          props.getCurrentCrews(userId);
+        }
       });
 
     };
@@ -37,7 +40,7 @@ export default class SearchResults extends Component {
         `Browse some of our crews to join`;
 
       return (
-        <div className="cover-background">
+        <div className="fadeIn-container">
           <h4>{browseOrSearch}...</h4>
           <hr />
           <div className="search-crew-list">
@@ -47,7 +50,7 @@ export default class SearchResults extends Component {
               )
             })}
           </div>
-          {this.props.searchResults.length === 0 ?
+          {this.props.searchField && this.props.searchResults.length === 0 ?
             <div className="no-crew-message">
               <h2><em>
                 No crews match that query. Try again or click browse!

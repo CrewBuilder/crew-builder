@@ -24,6 +24,8 @@ export default class Main extends Component {
           <Route path="/dashboard/crews" render={(props) => (
           <CrewView {...props}
             user={this.props.user}
+            getCurrentCrews={this.props.getCurrentCrews}
+            getUserTasks={this.props.getUserTasks}
             currentCrew={this.props.currentCrew}
             currentCrewTasks={this.props.currentCrewTasks}
             userTasks={this.props.userTasks}
@@ -32,11 +34,14 @@ export default class Main extends Component {
           )}/>
           <Route exact path="/dashboard/newcrew" render={(props) => (
             <CreateCrew {...props}
+            getCurrentCrews={this.props.getCurrentCrews}
             />
           )}/>
           <Route path="/dashboard/results" render={(props) => (
             <SearchResults {...props}
             user={this.props.user}
+            getCurrentCrews={this.props.getCurrentCrews}
+            currentCrewTasks={this.props.currentCrewTasks}
             searchResults={this.props.searchResults}
             searchField={this.props.searchField}
             />

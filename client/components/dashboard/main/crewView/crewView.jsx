@@ -28,6 +28,7 @@ export default class CrewView extends Component {
             <TasksInProgress
               userId={this.props.user.id}
               userTasks={this.props.userTasks}
+              getCurrentCrews={this.props.getCurrentCrews}
             />
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Tasks Available" eventKey="3">

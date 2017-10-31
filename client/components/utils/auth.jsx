@@ -111,9 +111,6 @@ module.exports = {
         return false
       }
       return response.json();
-    })
-    .then((data) => {
-      return data;
     }).catch((error) => {
       return null;
     });
