@@ -4,7 +4,7 @@ const expect = require('chai').expect;
 const seed = require('../../../server/db/seed.js');
 const db = require('../../../server/db/index.js');
 
-xdescribe('Postgres crewbuilder db', function() {
+describe('Postgres crewbuilder db', function() {
 
   beforeEach(function(done) {
     seed().then(function() { done(); });
@@ -16,7 +16,7 @@ xdescribe('Postgres crewbuilder db', function() {
 
 
   /* *************** associations *************** */
-  it('Should retrieve a list of a crew\'s tasks in progress using the associations between crews, tasks, and users', function(done) {
+  xit('Should retrieve a list of a crew\'s tasks in progress using the associations between crews, tasks, and users', function(done) {
     db.user_crew.findAll({
       attributes: ['user_id'],
       where: {crew_id: 4}
@@ -67,7 +67,7 @@ xdescribe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should build a custom task table based on the user_tasks and tasks tables', function(done) {
+  xit('Should build a custom task table based on the user_tasks and tasks tables', function(done) {
     db.user.findOne({
       where: {id: 1},
       include: [{
@@ -427,7 +427,7 @@ xdescribe('Postgres crewbuilder db', function() {
       });
   });
 
-  it('Should return crews that match a search term', function(done) {
+  xit('Should return crews that match a search term', function(done) {
     db.crew.findAll({
       where: {
         $or: {
