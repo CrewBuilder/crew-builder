@@ -10,8 +10,6 @@ export default class CrewView extends Component {
 
   constructor(props) {
     super(props);
-    // Needed props: currentCrew, user
-
     // this.getCrewTasks
     // gets tasks from crewId
   }
@@ -36,6 +34,8 @@ export default class CrewView extends Component {
             <TasksAvailable
               userId={this.props.user.id}
               currentCrewTasks={this.props.currentCrewTasks}
+              setCurrentCrew={this.props.setCurrentCrew}
+              currentCrew={this.props.currentCrew}
             />
           </Panel>
         </PanelGroup>

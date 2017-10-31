@@ -18,7 +18,9 @@ export default class SearchResults extends Component {
       JoinACrew(userId, crewId, (err, data) => {
         console.log('Data', data);
         console.log('Error', err);
+        this.forceUpdate();
       });
+
     };
   }
 

@@ -130,6 +130,7 @@ export default class Dashboard extends Component {
                   userTasks={this.state.userTasks}
                   searchResults={this.state.searchResults}
                   searchField={this.state.searchField}
+                  setCurrentCrew={this.setCurrentCrew}
                 />
               </Col>
               <Clearfix visibleSmBlock></Clearfix>

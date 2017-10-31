@@ -38,29 +38,28 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
     }]
   })
     .then(user => {
-      if (!user) {
-        cb('no data found', null);
-      } else {
+      let excludeIds = [];
+      if (user) {
         tasksInProgress = user.tasks;
-        let excludeIds = user.tasks.map(task => task.id);
-        return db.task.findAll({
-          where: {
-            id: {
-              $notIn: excludeIds
-            },
-            crewId: crewId
-          }
-        });
+        excludeIds = user.tasks.map(task => task.id);
       }
+      return db.task.findAll({
+        where: {
+          id: {
+            $notIn: excludeIds
+          },
+          crewId: crewId
+        }
+      });
     })
     .then(tasks => {
-      cb(null, {
+      return cb(null, {
         tasksInProgress: tasksInProgress,
         tasksAvailable: tasks
       });
     })
     .catch(err => {
-      cb(err, null);
+      return cb(err, null);
     });
 };
 

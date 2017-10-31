@@ -23,8 +23,8 @@ const getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByU
 router.get('/user/tasks', (req, res) => {
   let id = req.query.id;
   let crewId = req.query.crewId;
-
   getTasksByUserCrew(id, crewId, (err, user) => {
+    console.log('user', user)
     if (err) {
       res.status(401).send(err);
     } else {
