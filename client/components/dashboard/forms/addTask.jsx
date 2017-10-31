@@ -30,8 +30,6 @@ export default class addTask extends Component {
       console.log(this.state.expiry, 'expirtttt')
     }
 
-    this.task = this.task.bind(this);
-
     this.getValidationState = () => {
       const limitVal = this.state.Limit;
       const pointsVal = this.state.Points;
@@ -45,6 +43,10 @@ export default class addTask extends Component {
       if (this.state.createdAt.length === 0) {
         this.setState({createdAt: moment().format()})
       }
+    }
+
+    this.task = (e) => {
+      this.task = e.target.value;
     }
 
   }
@@ -64,10 +66,6 @@ export default class addTask extends Component {
         updatedAt: this.state.updatedAt
       }
       console.log('whole object', objState)
-  }
-
-  task(e) {
-    this.task = e.target.value;
   }
 
   render() {
