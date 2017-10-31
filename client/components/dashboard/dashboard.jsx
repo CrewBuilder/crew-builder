@@ -47,27 +47,24 @@ export default class Dashboard extends Component {
     this.setCurrentCrew = (crew, e) => {
       let crewId = crew.crew.id;
       let userId = this.state.user.id;
-
-      GetCrewTasks(crewId, (err, res) => {
+      GetUserTasks(userId, crewId, (err, response) => {
         if (err) {
           console.log('ERROR:', err);
         }
-        GetUserTasks(userId, crewId, (err, response) => {
-          if (err) {
-            console.log('ERROR:', err);
-          }
 
-          let userTasks;
-          if (!response) {
-            userTasks = [];
-          } else {
-            userTasks = response.tasksInProgress;
-          }
-          this.setState({
-            userTasks: userTasks,
-            currentCrewTasks: res || [],
-            currentCrew: crew
-          });
+        let userTasks;
+        let crewTasks;
+        if (!response) {
+          userTasks = [];
+          crewTasks = [];
+        } else {
+          userTasks = response.tasksInProgress;
+          crewTasks = response.tasksAvailable;
+        }
+        this.setState({
+          userTasks: userTasks,
+          currentCrewTasks: crewTasks,
+          currentCrew: crew
         });
       });
     };
@@ -93,7 +90,6 @@ export default class Dashboard extends Component {
 
         let userTasks;
         let currentCrewTasks;
-
         if (!res) {
           userTasks = [];
           currentCrewTasks = [];
@@ -104,7 +100,6 @@ export default class Dashboard extends Component {
         this.setState({
           userTasks: userTasks,
           currentCrewTasks: currentCrewTasks,
-          currentCrew: crew
         });
       });
     };

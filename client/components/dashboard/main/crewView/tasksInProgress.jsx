@@ -1,6 +1,6 @@
 // This component renders all the tasks a user has claimed for their crew
 import React, { Component } from 'react';
-import {Modal, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
+import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 export default class TasksInProgress extends Component {
 
   constructor(props) {
@@ -10,7 +10,8 @@ export default class TasksInProgress extends Component {
       showModal: false
     };
 
-    this.openModal = (e, taskTarget) => {
+    this.openModal = (taskTarget) => {
+      console.log('TT',taskTarget)
       this.setState({ focusTask: taskTarget });
       this.setState({ showModal: true });
     };
@@ -29,7 +30,9 @@ export default class TasksInProgress extends Component {
     return (
       <div>
         <ListGroup>
-          {this.props.userTasks.map((task, i) => <ListGroupItem onClick={(e, task) => this.handleSelectTask(task)} key={i}>{task.name}</ListGroupItem>)}
+          {this.props.userTasks.map((task, i) => {
+            return (<ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.name}</ListGroupItem>)
+          })}
         </ListGroup>
         <Modal show={this.state.showModal} onHide={this.closeModal}>
           <Modal.Header closeButton>

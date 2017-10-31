@@ -11,6 +11,10 @@ export default class SearchResults extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      user: props.user,
+
+    };
     // Expect 'props' to contain 'crews'
     this.joinCrew = (crew) => {
       let crewId = crew.id;

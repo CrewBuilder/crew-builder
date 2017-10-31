@@ -19,7 +19,7 @@ export default class TasksAvailable extends Component {
     this.handleSelectTask = (task) => {
       this.setState({selectedTask: task});
       this.setState({showModal: true});
-      this.setState({crew: this.props.currentCrew})
+      this.setState({crew: this.props.currentCrew});
     };
 
     this.closeModal = () => {
