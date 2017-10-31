@@ -1,6 +1,8 @@
 // This component renders a list of tasks that the user has not undertaken yet
 import React, { Component } from 'react';
 import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ClaimATask } from '../../../utils/requests.jsx';
+
 
 export default class TasksAvailable extends Component {
 
@@ -24,7 +26,11 @@ export default class TasksAvailable extends Component {
 
     this.claimTask = () => {
       this.setState({showModal: false});
-      console.log('Send task to server: ', this.state.selectedTask.name);
+      let user = props.userId;
+      let task = this.state.selectedTask.id;
+      ClaimATask(user, task, (data) => {
+        console.log('Data', data);
+      })
     };
   }
 

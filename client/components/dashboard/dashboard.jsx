@@ -52,13 +52,13 @@ export default class Dashboard extends Component {
         if (err) {
           console.log('ERROR:', err);
         }
-        GetUserTasks(2, crewId, (err, response) => {
+        GetUserTasks(userId, crewId, (err, response) => {
           if (err) {
             console.log('ERROR:', err);
           }
           this.setState({
-            userTasks: response || [],
-            currentCrewTasks: res || [],
+            userTasks: response.tasksInProgress || [],
+            currentCrewTasks: response.tasksAvailable || [],
             currentCrew: crew
           });
         })
