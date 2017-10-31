@@ -14,126 +14,6 @@ describe('Postgres crewbuilder db', function() {
     return db.sequelize.authenticate();
   });
 
-  it('Should return two lists of tasks for a user: tasksInProgress and tasksAvailable', function(done) {
-    let tasksInProgress = [];
-    db.user.findOne({
-      where: {id: 1},
-      include: [{
-        model: db.task,
-        where: {crewId: 4},
-        through: {
-          attributes: ['completed', 'verified']
-        }
-      }]
-    })
-      .then(user => {
-        if (!user) {
-          done('no data found');
-        } else {
-          tasksInProgress = user.tasks;
-          let excludeIds = user.tasks.map(task => task.id);
-          return db.task.findAll({
-            where: {
-              id: {
-                $notIn: excludeIds
-              },
-              crewId: 4
-            }
-          });
-        }
-      })
-      .then(tasks => {
-        let response = {
-          tasksInProgress: tasksInProgress,
-          tasksAvailable: tasks
-        };
-        expect(response.tasksAvailable.length).to.equal(7);
-        done();
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
-
-  it('Should update a task as verified and add points to user_crews', function(done) {
-    let userId, taskId, crewId, points, newPoints, userCrew;
-    const verified = true;
-    db.user_task.update(
-      {
-        completed: true, // this may already be true, but doing this makes the request work for both verifiying and completing
-        verified: verified
-      },
-      {
-        where: {id: 10}
-      })
-      .then((updated) => {
-        return db.user_task.findOne({ where: {id: 10}});
-      })
-      .then(userTask => {
-        userId = userTask.user_id;
-        taskId = userTask.task_id;
-        return db.task.findOne({where: {id: taskId}});
-      })
-      .then(task => {
-        points = task.points;
-        crewId = task.crewId;
-        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
-      })
-      .then(userCrew => {
-        newPoints = verified ? userCrew.points + points : userCrew.points; //will only add points when being verified
-        return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crewId}});
-      })
-      .then(updated => {
-        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
-      })
-      .then(userCrew => {
-        expect(userCrew.points).to.equal(newPoints);
-        done();
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
-
-  it('Should mark a task as complete in user_task without adding any points', function(done) {
-    let userId, taskId, crewId, points, newPoints, userCrew;
-    const verified = false;
-    db.user_task.update(
-      {
-        completed: true, // this may already be true, but doing this makes the request work for both verifiying and completing
-        verified: verified
-      },
-      {
-        where: {id: 4}
-      })
-      .then((updated) => {
-        return db.user_task.findOne({ where: {id: 4}});
-      })
-      .then(userTask => {
-        userId = userTask.user_id;
-        taskId = userTask.task_id;
-        return db.task.findOne({where: {id: taskId}});
-      })
-      .then(task => {
-        points = task.points;
-        crewId = task.crewId;
-        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
-      })
-      .then(userCrew => {
-        newPoints = verified ? userCrew.points + points : userCrew.points; //will only add points when being verified
-        return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crewId}});
-      })
-      .then(updated => {
-        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
-      })
-      .then(userCrew => {
-        expect(userCrew.points).to.equal(0);
-        done();
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
 
   /* *************** associations *************** */
   xit('Should retrieve a list of a crew\'s tasks in progress using the associations between crews, tasks, and users', function(done) {
@@ -362,9 +242,9 @@ describe('Postgres crewbuilder db', function() {
 
   xit('Should create a new crew', function(done) {
     let crewData = {
-      "name": "Christiansen, Grimes and Rosenbaum",
-      "description": "Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim.",
-      "image": "http://dummyimage.com/160x231.jpg/cc0000/ffffff"
+      'name': 'Christiansen, Grimes and Rosenbaum',
+      'description': 'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim.',
+      'image': 'http://dummyimage.com/160x231.jpg/cc0000/ffffff'
     };
     db.crew.create(crewData)
       .then(crew => {
@@ -408,16 +288,161 @@ describe('Postgres crewbuilder db', function() {
 
   xit('Should create a new task', function(done) {
     var taskData = {
-      "name": "Viola clauseniana Baker",
-      "description": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.",
-      "points": 89,
-      "crewId": 4,
-      "expiry": "2017-01-25T19:10:29Z",
-      "limit": 66
+      'name': 'Viola clauseniana Baker',
+      'description': 'Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.',
+      'points': 89,
+      'crewId': 4,
+      'expiry': '2017-01-25T19:10:29Z',
+      'limit': 66
     };
     db.task.create(taskData)
       .then(task => {
         expect(task.name).to.equal(taskData.name);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  /* *************** special routes *************** */
+  xit('Should return two lists of tasks for a user: tasksInProgress and tasksAvailable', function(done) {
+    let tasksInProgress = [];
+    db.user.findOne({
+      where: {id: 1},
+      include: [{
+        model: db.task,
+        where: {crewId: 4},
+        through: {
+          attributes: ['completed', 'verified']
+        }
+      }]
+    })
+      .then(user => {
+        if (!user) {
+          done('no data found');
+        } else {
+          tasksInProgress = user.tasks;
+          let excludeIds = user.tasks.map(task => task.id);
+          return db.task.findAll({
+            where: {
+              id: {
+                $notIn: excludeIds
+              },
+              crewId: 4
+            }
+          });
+        }
+      })
+      .then(tasks => {
+        let response = {
+          tasksInProgress: tasksInProgress,
+          tasksAvailable: tasks
+        };
+        expect(response.tasksAvailable.length).to.equal(7);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  xit('Should update a task as verified and add points to user_crews', function(done) {
+    let userId, taskId, crewId, points, newPoints, userCrew;
+    const verified = true;
+    db.user_task.update(
+      {
+        completed: true, // this may already be true, but doing this makes the request work for both verifiying and completing
+        verified: verified
+      },
+      {
+        where: {id: 10}
+      })
+      .then((updated) => {
+        return db.user_task.findOne({ where: {id: 10}});
+      })
+      .then(userTask => {
+        userId = userTask.user_id;
+        taskId = userTask.task_id;
+        return db.task.findOne({where: {id: taskId}});
+      })
+      .then(task => {
+        points = task.points;
+        crewId = task.crewId;
+        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+      })
+      .then(userCrew => {
+        newPoints = verified ? userCrew.points + points : userCrew.points; //will only add points when being verified
+        return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crewId}});
+      })
+      .then(updated => {
+        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+      })
+      .then(userCrew => {
+        expect(userCrew.points).to.equal(newPoints);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  xit('Should mark a task as complete in user_task without adding any points', function(done) {
+    let userId, taskId, crewId, points, newPoints, userCrew;
+    const verified = false;
+    db.user_task.update(
+      {
+        completed: true, // this may already be true, but doing this makes the request work for both verifiying and completing
+        verified: verified
+      },
+      {
+        where: {id: 4}
+      })
+      .then((updated) => {
+        return db.user_task.findOne({ where: {id: 4}});
+      })
+      .then(userTask => {
+        userId = userTask.user_id;
+        taskId = userTask.task_id;
+        return db.task.findOne({where: {id: taskId}});
+      })
+      .then(task => {
+        points = task.points;
+        crewId = task.crewId;
+        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+      })
+      .then(userCrew => {
+        newPoints = verified ? userCrew.points + points : userCrew.points; //will only add points when being verified
+        return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crewId}});
+      })
+      .then(updated => {
+        return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+      })
+      .then(userCrew => {
+        expect(userCrew.points).to.equal(0);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  xit('Should return crews that match a search term', function(done) {
+    db.crew.findAll({
+      where: {
+        $or: {
+          name: {
+            $iLike: '%Integer%'
+          },
+          description: {
+            $iLike: '%Integer%'
+          }
+        }
+      }
+    })
+      .then(crews => {
+        console.log(crews);
+        expect(crews.length).to.equal(3);
         done();
       })
       .catch(err => {

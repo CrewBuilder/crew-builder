@@ -83,8 +83,8 @@
   }
 ]
 
-###'/crews'
-###Returns all crews.
+###'/crews?qs={search string}'
+###Returns all crews, query string is optional and can also be set to null to return all crews
 ####Response
 [{
   createdAt: "2017-10-27T23:58:30.538Z",

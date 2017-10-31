@@ -33,15 +33,7 @@ exports.findAllCrewsByIds = (ids, cb) => {
 
 // Returns all crews in the database
 exports.findAllCrews = (cb) => {
-  //this query has been test OK
-  db.crew.findAll()
-    .then(crewsData => {
-      if (!crewsData.length) {
-        cb(err, null);
-      } else {
-        cb(null, crewsData);
-      }
-    });
+  return db.crew.findAll();
 };
 
 // Allows crew creation
@@ -57,14 +49,35 @@ exports.postCrew = (crewData, userId, cb) => {
         crew_id: crewId,
         user_id: user,
         points: 0,
-        achievement: "none",
-        role: "leader"
+        achievement: 'none',
+        role: 'leader'
       })
-      .then(crew => {
-        cb(null, crew);
-      });
+        .then(crew => {
+          cb(null, crew);
+        });
     })
     .catch(err => {
       return cb(err, null);
     });
+};
+
+exports.searchCrews = (qs) => {
+  if (qs) {
+    qs = `%${qs}%`;
+    qs = qs.replace(/'/g, '');
+    return db.crew.findAll({
+      where: {
+        $or: {
+          name: {
+            $iLike: qs
+          },
+          description: {
+            $iLike: qs
+          }
+        }
+      }
+    });
+  } else {
+    return db.crew.findAll();
+  }
 };
