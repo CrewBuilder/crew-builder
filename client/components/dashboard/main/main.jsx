@@ -34,6 +34,7 @@ export default class Main extends Component {
           )}/>
           <Route exact path="/dashboard/newcrew" render={(props) => (
             <CreateCrew {...props}
+            user={this.props.user}
             getCurrentCrews={this.props.getCurrentCrews}
             />
           )}/>
