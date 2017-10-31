@@ -21,7 +21,7 @@ export default class CreateCrew extends Component {
       image: this.img
     }
     console.log(obj)
-    PostCrew(obj, 1, function (err, data) {
+    PostCrew(obj, this.props.user.id, function (err, data) {
       if (err) {
         console.log('error in posting');
       }
