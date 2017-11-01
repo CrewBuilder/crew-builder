@@ -6,6 +6,7 @@ import { Image, CloudinaryContext, Transformation} from 'cloudinary-react';
 import Dropzone from 'react-dropzone';
 import cloudinary from 'cloudinary-core';
 import request from 'superagent';
+import {cloud_name, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL} from './config.js'
 
 export default class CreateCrew extends Component {
   constructor(props) {
