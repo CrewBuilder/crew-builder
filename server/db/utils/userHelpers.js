@@ -12,7 +12,7 @@ exports.upsertFbUser = (profile, cb) => {
     .then(user => {
       if (!user) {
         // No user found...let's create one
-        db.user.create(profile)
+        db.user.create({facebook_id: profile.facebookId, facebook: profile.facebook})
           .then(user => {
             console.log('Created a new user', user);
             // Callback with user data

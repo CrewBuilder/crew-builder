@@ -6,8 +6,8 @@ const upsertFbUser = require('./../db/utils/userHelpers.js').upsertFbUser;
 // Define strategy
 module.exports = () => {
   passport.use(new FacebookTokenStrategy({
-  clientID: process.env.FB_CLIENT_ID,
-  clientSecret: process.env.FB_SECRET,
+    clientID: process.env.FB_CLIENT_ID,
+    clientSecret: process.env.FB_SECRET,
   },
   function (accessToken, refreshToken, profile, done) {
   //make profile data manageable in our DB
@@ -19,7 +19,7 @@ module.exports = () => {
         IMAGE_URL: profile.photos[0].value,
         TOKEN: accessToken
       }
-    }
+    };
     upsertFbUser(userProfile, done);
   }));
 };
