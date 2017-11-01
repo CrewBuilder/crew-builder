@@ -1,7 +1,6 @@
 const db = require('../index.js'); // Queries the User_Crew table, returns all of a User's crews by Id
-exports.getCrewsByUser = (id, cb) => {
-  //this query tested OK
-  db.user.findOne({
+exports.getCrewsByUser = (id) => {
+  return db.user.findOne({
     where: {
       id: id
     },
@@ -11,17 +10,7 @@ exports.getCrewsByUser = (id, cb) => {
         attributes: ['points', 'role', 'achievement']
       }
     }]
-  })
-    .then(user => {
-      if (!user.crews.length) {
-        cb(`No crews for user: ${id}`, null);
-      } else {
-        cb(null, parseData(user));
-      }
-    })
-    .catch(err => {
-      cb(err, null);
-    });
+  });
 };
 
 exports.postUserCrew = (userId, crewId, cb) => {
@@ -101,4 +90,3 @@ const parseData = (user) => {
 
   return response;
 };
-

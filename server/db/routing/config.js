@@ -9,13 +9,13 @@ const router = express.Router();
 const getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
 router.get('/user/crews', (req, res) => { // tested with postman, returns array of user_crew data for user
   let id = req.query.id;
-  getCrewsByUser(id, (err, crews) => {
-    if (err) {
-      res.status(401).send('User has not signed up for any crews');
-    } else {
-      res.status(200).send(crews);
-    }
-  });
+  getCrewsByUser(id).
+    then(crews => {
+      res.status(200).send(parseData(crews));
+    })
+    .catch(err => {
+      res.status(401).send(err);
+    });
 });
 
 // GET: /user/tasks => retrieves a list of user's tasks in progress, and a list of all available tasks for the crew in view
@@ -191,3 +191,42 @@ router.delete('/user/crews', (req, res) => {
 });
 
 module.exports = router;
+
+const parseData = (user) => {
+  let crews = user.crews;
+  let response = {
+    leader: [],
+    member: []
+  };
+  crews.forEach(crew => {
+
+    if (crew.user_crew.role === 'leader') {
+      response.leader.push({
+        points: crew.user_crew.points,
+        achievement: crew.user_crew.achievement,
+        role: crew.user_crew.role,
+        crew: {
+          id: crew.id,
+          name: crew.name,
+          description: crew.description,
+          image: crew.image
+        }
+      });
+
+    } else {
+      response.member.push({
+        points: crew.user_crew.points,
+        achievement: crew.user_crew.achievement,
+        role: crew.user_crew.role,
+        crew: {
+          id: crew.id,
+          name: crew.name,
+          description: crew.description,
+          image: crew.image
+        }
+      });
+    }
+  });
+
+  return response;
+};
