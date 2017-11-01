@@ -11,6 +11,9 @@ import {cloud_name, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL} from './con
 export default class CreateCrew extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      uploadedFileCloudinaryUrl: ''
+    }
     // props contain name and unique details of user, so we can keep track of who created this crew  and store it in database accordingly
   }
 
@@ -22,7 +25,7 @@ export default class CreateCrew extends Component {
     var obj = {
       name: this.name.value,
       description: this.description.value,
-      image: this.img
+      image: this.state.uploadedFileCloudinaryUrl
     }
     console.log(obj)
     PostCrew(obj, this.props.user.id, function (err, data) {
@@ -43,19 +46,20 @@ export default class CreateCrew extends Component {
   render() {
     return (
       <div>
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <FormGroup>
-         <FormControl type="text" placeholder="Enter the name of Crew" name="crewname" inputRef={ref => this.name = ref} defaultValue={this.props.name}/><br/>
-         <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description = ref} defaultValue={this.props.desc}/><br/>
-         <input name="file" type="file"
-           className="file-upload" data-cloudinary-field="image_id"
-           data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"
-           onChange={this.image.bind(this)}/>
-         <Button type="submit">
-           Create/Update
-        </Button>
-      </FormGroup>
-      </form>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <FormGroup>
+            <FormControl type="text" placeholder="Enter the name of Crew" name="crewname" inputRef={ref => this.name = ref} defaultValue={this.props.name}/><br/>
+            <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description = ref} defaultValue={this.props.desc}/><br/>
+            <Dropzone
+              muliple={false}
+              accept="image/*"
+              onDrop={this.onImageDrop.bind(this)}>
+            </Dropzone>
+            <Button type="submit">
+               Create/Update
+            </Button>
+        </FormGroup>
+        </form>
       </div>
     )
   }
