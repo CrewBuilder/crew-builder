@@ -280,7 +280,7 @@ module.exports = {
   DeleteUserCrew: (userId, crewId, cb) => {
     let route = `${module.exports.host}user/crews/`;
     let body = {
-      userId: userId,
+      id: userId,
       crewId: crewId
     };
     let options = {
