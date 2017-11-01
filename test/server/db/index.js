@@ -24,14 +24,18 @@ describe('Postgres crewbuilder db', function() {
       .then(deleted => {
         return db.user_crew.findOne({
           where: {
-            user_id: userId,
-            crew_id: crewId
+            user_id: 1,
+            crew_id: 4
           }
         });
       })
-      .catch(err => {
-        expect(err).to.exist;
+      .then(userCrew => {
+        console.log(userCrew);
+        expect(!userCrew).to.be.true;
         done();
+      })
+      .catch(err => {
+        done(err);
       });
   });
   /* *************** associations *************** */

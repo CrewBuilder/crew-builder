@@ -183,10 +183,8 @@ const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
 router.delete('/user/crews', (req, res) => {
   let userId = req.body.id;
   let crewId = req.body.crewId;
-  console.log('userid', userId, "crewId", crewId)
   leaveCrew(userId, crewId)
     .then(deleted => {
-      console.log(deleted)
       res.sendStatus(202);
     })
     .catch(err => {
