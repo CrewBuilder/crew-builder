@@ -40,15 +40,13 @@ describe('Server and Client Are Active', function() {
 
   it('Responds with a list of all crews that match a search string', function(done) {
     request(server)
-      .get('/crews?qs=\'Integer\'')
+      .get('/crews?qs=Integer')
       .expect(200)
       .then(res => {
         expect(res.body.length).to.equal(3);
         done();
       })
-      .catch(err =>{
-        done(err);
-      });
+      .catch(err => done(err));
   });
 
   it('Removes the association between a user and a crew upon user request to delete', function(done) {
