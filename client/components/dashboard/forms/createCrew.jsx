@@ -43,6 +43,17 @@ export default class CreateCrew extends Component {
     console.log(this.img, 'thisimg')
   }
 
+  onImageDrop(files) {
+    this.setState({
+      uploadedFile: files[0]
+    }, function(err, done) {
+      if (done) {
+        console.log(this.state.uploadedFile)
+      }
+    })
+    this.handleImageUpload(files[0]);
+  }
+
   render() {
     return (
       <div>
