@@ -2,7 +2,10 @@
 import React, { Component } from 'react';
 import { FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap';
 import { PostCrew } from '../../utils/requests.jsx';
-import {Image} from 'cloudinary-react';
+import { Image, CloudinaryContext, Transformation} from 'cloudinary-react';
+import Dropzone from 'react-dropzone';
+import cloudinary from 'cloudinary-core';
+import request from 'superagent';
 
 export default class CreateCrew extends Component {
   constructor(props) {
