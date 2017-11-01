@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Media, Modal, ButtonGroup, Button } from 'react-bootstrap';
+import { Media, Modal, ButtonGroup, Button, Image } from 'react-bootstrap';
 // import editForm from './../../forms/createCrew.jsx'
-import { Image, Transformation } from 'cloudinary-react';
+import { Transformation } from 'cloudinary-react';
 import CreateCrew from './../../forms/createCrew.jsx'
-import { cloud_name } from '../../forms/config.js'
+import { cloud_name, Image_Url } from '../../forms/config.js'
 
 export default class crewLeaderSummary extends Component {
   constructor(props) {
@@ -43,18 +43,15 @@ export default class crewLeaderSummary extends Component {
         <div />
       )
     } else {
-      console.log(this.props.currentCrew.crew.image, 'image')
+    // console.log(this.props.currentCrew.crew.image, 'image')
     var str = this.props.currentCrew.crew.image;
     str = str.split('/')
     var publicId = str[str.length - 1]
-    console.log(publicId)
     return (
       <div>
         <Media>
           <Media.Left>
-            <Image cloudName={cloud_name} publicId={publicId} >
-              <Transformation width="300" height="100" crop="scale" />
-            </Image>
+            <Image src={Image_Url + publicId} alt="Image"/>
           </Media.Left>
           <Media.Body>
             <Media.Heading>
@@ -97,6 +94,7 @@ export default class crewLeaderSummary extends Component {
     }
   }
 }
+
 
 // when you click on list members it should pop over a model showing all the current members
 
