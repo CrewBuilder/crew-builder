@@ -27,8 +27,10 @@ export default class TasksInProgress extends Component {
       e.preventDefault();
       let taskId = this.state.focusUserTask.id;
       UpdateTask(taskId, (data) => {
-        this.closeModal();
+
+        this.props.getUserTasks(this.props.userId, this.state.focusTask.crewId);
       });
+      this.closeModal();
     };
 
   }

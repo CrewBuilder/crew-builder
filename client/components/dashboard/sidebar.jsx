@@ -53,9 +53,9 @@ export default class Sidebar extends Component {
 
               <h4>Crews I Belong To:</h4>
               <Nav bsStyle="pills" stacked>
-                {this.props.userMemberCrews.map((container) => {
+                {this.props.userMemberCrews.map((container, i) => {
                   return (
-                    <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={container.crew.id} onClick={e => this.props.setCurrentCrew(container)}>
+                    <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={e => this.props.setCurrentCrew(container, e)}>
                       <NavItem activeKey={container.crew.id}
                         value={container.crew.name}
                         key={container.crew.id}
@@ -63,7 +63,7 @@ export default class Sidebar extends Component {
                         {container.crew.name}
                       </NavItem>
                     </LinkContainer>
-                  )
+                  );
                 })}
               </Nav>
               <hr />

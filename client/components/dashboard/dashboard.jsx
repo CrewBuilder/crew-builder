@@ -41,8 +41,10 @@ export default class Dashboard extends Component {
 
     // TEMP USERID FOR TESTING
     this.setCurrentCrew = (crew) => {
+      this.setState({currentCrew: crew});
       let crewId = crew.crew.id;
       let userId = this.state.user.id;
+      console.log('crew', crewId, 'user', userId);
       GetUserTasks(userId, crewId, (err, response) => {
         if (err) {
           console.log('ERROR:', err);
@@ -59,8 +61,7 @@ export default class Dashboard extends Component {
         }
         this.setState({
           userTasks: userTasks,
-          currentCrewTasks: crewTasks,
-          currentCrew: crew
+          currentCrewTasks: crewTasks
         });
       });
     };
