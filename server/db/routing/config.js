@@ -176,4 +176,18 @@ router.put('/user/tasks', (req, res) => {
 /************************ DELETE REQUESTS ************************/
 /*****************************************************************/
 
+const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
+router.delete('/user/crews', (req, res) => {
+  let userId = req.body.id;
+  let crewId = req.body.crewId;
+  leaveCrew(userId, crewId)
+    .then(deleted => {
+      res.sendStatus(202);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(401).send(err);
+    });
+});
+
 module.exports = router;
