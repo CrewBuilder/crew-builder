@@ -29,8 +29,8 @@ exports.postUserCrew = (userId, crewId, cb) => {
     user_id: userId,
     crew_id: crewId,
     points: 0,
-    achievement: "none",
-    role: "member"
+    achievement: 'none',
+    role: 'member'
   })
     .then(userCrew => {
       cb(null, userCrew);
@@ -52,6 +52,15 @@ exports.getCrewMembers = (crewId, cb) => {
     .catch(err => {
       cb(err, null);
     });
+};
+
+exports.leaveCrew = (crewId, userId) => {
+  return db.user_crew.destroy({
+    where: {
+      crew_id: crewId,
+      user_id: userId
+    }
+  });
 };
 
 const parseData = (user) => {

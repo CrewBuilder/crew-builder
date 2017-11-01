@@ -50,4 +50,16 @@ describe('Server and Client Are Active', function() {
         done(err);
       });
   });
+
+  it('Removes the association between a user and a crew upon user request to delete', function(done) {
+    request(server)
+      .delete('/user/crews?id=1crewId=4')
+      .expect(202)
+      .then(res => {
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
 });
