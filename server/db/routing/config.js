@@ -183,7 +183,7 @@ const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
 router.delete('/user/crews', (req, res) => {
   let userId = req.body.id;
   let crewId = req.body.crewId;
-  leaveCrew(userId, crewId)
+  leaveCrew(crewId, userId)
     .then(deleted => {
       res.sendStatus(202);
     })

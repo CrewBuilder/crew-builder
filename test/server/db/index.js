@@ -24,10 +24,14 @@ describe('Postgres crewbuilder db', function() {
       .then(deleted => {
         return db.user_crew.findOne({
           where: {
-            user_id: userId,
-            crew_id: crewId
+            user_id: 1,
+            crew_id: 4
           }
         });
+      })
+      .then(userCrew => {
+        expect(!userCrew).to.be.true;
+        done('row not deleted');
       })
       .catch(err => {
         expect(err).to.exist;
