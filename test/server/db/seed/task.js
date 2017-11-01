@@ -1,142 +1,303 @@
 module.exports = [{
-  "name": "Bergstrom, Blanda and Hamill",
-  "description": "Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.",
-  "points": 86,
-  "expiry": "2017-09-14T09:32:33Z",
-  "limit": 14,
+  "name": "Sign up a friend for Earth Day cleanup",
+  "description": "Get a bunch of points for getting a friend to sign up on our website!",
+  "points": 200,
+  "expiry": "2018-04-14T09:32:33Z",
+  "limit": 100,
   "crewId": 2
 }, {
-  "name": "Zemlak, Koepp and Schoen",
-  "description": "Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
-  "points": 13,
-  "expiry": "2017-06-01T01:07:43Z",
-  "limit": 83,
-  "crewId": 13
-}, {
-  "name": "Waters and Sons",
-  "description": "Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
-  "points": 42,
-  "expiry": "2017-03-05T22:58:30Z",
-  "limit": 22,
-  "crewId": 4
-}, {
-  "name": "Jacobi-Schiller",
-  "description": "Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
-  "points": 81,
-  "expiry": "2017-07-21T08:19:26Z",
-  "limit": 32,
-  "crewId": 13
-}, {
-  "name": "Heller Inc",
-  "description": "Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis.",
-  "points": 13,
-  "expiry": "2017-06-11T15:21:19Z",
-  "limit": 36,
-  "crewId": 6
-}, {
-  "name": "Kunde Inc",
-  "description": "Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.",
+  "name": "Like/follow our page on FB",
+  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/MilwaukeeRiverKeepers/",
   "points": 20,
-  "expiry": "2017-02-14T03:01:20Z",
-  "limit": 86,
+  "expiry": "2019-05-14T21:03:51Z",
+  "limit": 10000,
+  "crewId": 2
+}, {
+  "name": "Like/follow our page on FB",
+  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/Mothlight/",
+  "points": 20,
+  "expiry": "2019-05-14T21:03:51Z",
+  "limit": 10000,
   "crewId": 3
 }, {
-  "name": "Bartoletti, Bartoletti and Jones",
-  "description": "Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti.",
-  "points": 6,
-  "expiry": "2016-10-29T18:38:31Z",
-  "limit": 66,
+  "name": "Like/follow our page on FB",
+  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/les-maurice-mke/",
+  "points": 20,
+  "expiry": "2019-05-14T21:03:51Z",
+  "limit": 10000,
+  "crewId": 4
+}, {
+  "name": "Like/follow our page on FB",
+  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/BStroop540mke/",
+  "points": 20,
+  "expiry": "2019-05-14T21:03:51Z",
+  "limit": 10000,
+  "crewId": 5
+}, {
+  "name": "Like/follow our page on FB",
+  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/austindogrescue/",
+  "points": 20,
+  "expiry": "2019-05-14T21:03:51Z",
+  "limit": 10000,
+  "crewId": 6
+}, {
+  "name": "Like/follow our page on FB",
+  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/theduis/",
+  "points": 20,
+  "expiry": "2019-05-14T21:03:51Z",
+  "limit": 10000,
+  "crewId": 7
+}, {
+  "name": "Like/follow our page on FB",
+  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/downtownmarket/",
+  "points": 20,
+  "expiry": "2019-05-14T21:03:51Z",
+  "limit": 10000,
+  "crewId": 8
+}, {
+  "name": "Like/follow our page on FB",
+  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/batlimorecodemeetup/",
+  "points": 20,
+  "expiry": "2019-05-14T21:03:51Z",
+  "limit": 10000,
+  "crewId": 9
+} {
+  "name": "Share our event on FaceBook",
+  "description": "Our next gig is at Puddlers on November 30, 2017. Please share out event to earn points! https://www.facebook.com/events/122239935115724/?acontext=%7B%22action_history%22%3A%22[%7B%5C%22surface%5C%22%3A%5C%22page%5C%22%2C%5C%22mechanism%5C%22%3A%5C%22page_upcoming_events_card%5C%22%2C%5C%22extra_data%5C%22%3A[]%7D]%22%2C%22has_source%22%3Atrue%7D",
+  "points": 50,
+  "expiry": "2017-12-04T15:29:32Z",
+  "limit": 100,
+  "crewId": 3
+}, {
+  "name": "Volunteer at the shelter",
+  "description": "Help cleanup around the shelter and keep the dogs company. Most people do a two hour shift",
+  "points": 250,
+  "expiry": "2017-06-01T01:07:43Z",
+  "limit": 200,
+  "crewId": 6
+}, {
+  "name": "Tweet a link to our SoundCloud",
+  "description": "https://soundcloud.com/moth-light",
+  "points": 150,
+  "expiry": "2020-03-05T22:58:30Z",
+  "limit": 1000,
+  "crewId": 3
+}, {
+  "name": "Tweet a link to our SoundCloud",
+  "description": "https://soundcloud.com/les-maurice",
+  "points": 150,
+  "expiry": "2020-03-05T22:58:30Z",
+  "limit": 1000,
+  "crewId": 4
+}, {
+  "name": "Tweet a link to our SoundCloud",
+  "description": "https://soundcloud.com/theduis",
+  "points": 150,
+  "expiry": "2020-03-05T22:58:30Z",
+  "limit": 1000,
+  "crewId": 13
+}, {
+  "name": "Attend our meetup",
+  "description": "We will be meeting at the community garden around 6:30pm December 1st, 2017. ",
+  "points": 150,
+  "expiry": "2017-12-21T08:19:26Z",
+  "limit": 320,
+  "crewId": 13
+}, {
+  "name": "Attend our meetup",
+  "description": "We will be meeting at the site garden around 7:30pm December 1st, 2017. ",
+  "points": 150,
+  "expiry": "2017-12-21T08:19:26Z",
+  "limit": 320,
+  "crewId": 12
+}, {
+  "name": "Attend our meetup",
+  "description": "We will be meeting at the conference center around 6:00pm December 1st, 2017. ",
+  "points": 150,
+  "expiry": "2017-12-21T08:19:26Z",
+  "limit": 320,
+  "crewId": 11
+}, {
+  "name": "Attend our meetup",
+  "description": "We will be meeting at the town hall around 6:30pm December 1st, 2017. ",
+  "points": 150,
+  "expiry": "2017-12-21T08:19:26Z",
+  "limit": 320,
   "crewId": 10
 }, {
-  "name": "Sporer-Walsh",
-  "description": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum.",
-  "points": 75,
-  "expiry": "2016-12-29T03:12:08Z",
+  "name": "Attend our meetup",
+  "description": "We will be meeting at the community square around 6:30pm December 1st, 2017. ",
+  "points": 150,
+  "expiry": "2017-12-21T08:19:26Z",
+  "limit": 30,
+  "crewId": 2
+}, {
+  "name": "Post a review on discogs.com",
+  "description": "We just released our first album! Give it a listen and post a review on discogs.",
+  "points": 350,
+  "expiry": "2017-06-11T15:21:19Z",
+  "limit": 30,
+  "crewId": 3
+}, {
+  "name": "Post a review on discogs.com",
+  "description": "We just released our first album! Give it a listen and post a review on discogs.",
+  "points": 350,
+  "expiry": "2017-06-11T15:21:19Z",
+  "limit": 30,
+  "crewId": 5
+}, {
+  "name": "Post a review on discogs.com",
+  "description": "We just released our first album! Give it a listen and post a review on discogs.",
+  "points": 350,
+  "expiry": "2017-06-11T15:21:19Z",
+  "limit": 30,
+  "crewId": 13
+}, {
+  "name": "Cleanup Humboldt Park 11/29/17",
+  "description": "We will be meeting up at 4pm til sunset to pickup litter.",
+  "points": 200,
+  "expiry": "2017-12-14T03:01:20Z",
+  "limit": 100,
+  "crewId": 2
+}, {
+  "name": "Foster care for a pet",
+  "description": "Host a pet for a month to help the shelter.",
+  "points": 600,
+  "expiry": "2018-10-29T18:38:31Z",
+  "limit": 60,
+  "crewId": 6
+}, {
+  "name": "Hand out handbills",
+  "description": "Includes free admission. Distribute handbills to audience as they exit the show.",
+  "points": 250,
+  "expiry": "2020-12-29T03:12:08Z",
   "limit": 69,
-  "crewId": 14
-}, {
-  "name": "Crist-O'Reilly",
-  "description": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue.",
-  "points": 44,
-  "expiry": "2017-07-15T15:29:32Z",
-  "limit": 11,
   "crewId": 1
 }, {
-  "name": "Flatley-Bogisich",
-  "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia.",
+  "name": "Hand out handbills",
+  "description": "Includes free admission. Distribute handbills to audience as they exit the show.",
+  "points": 250,
+  "expiry": "2020-12-29T03:12:08Z",
+  "limit": 69,
+  "crewId": 3
+}, {
+  "name": "Hand out handbills",
+  "description": "Includes free admission. Distribute handbills to audience as they exit the show.",
+  "points": 250,
+  "expiry": "2020-12-29T03:12:08Z",
+  "limit": 69,
+  "crewId": 5
+}, {
+  "name": "Hand out handbills",
+  "description": "Includes free admission. Distribute handbills to audience as they exit the show.",
+  "points": 250,
+  "expiry": "2020-12-29T03:12:08Z",
+  "limit": 69,
+  "crewId": 13
+}, {
+  "name": "Share our event on FaceBook",
+  "description": "Our next gig is on December 4, 2017. Please share out event to earn points! https://www.facebook.com/events/122239935115724/?acontext=%7B%22action_history%22%3A%22[%7B%5C%22surface%5C%22%3A%5C%22page%5C%22%2C%5C%22mechanism%5C%22%3A%5C%22page_upcoming_events_card%5C%22%2C%5C%22extra_data%5C%22%3A[]%7D]%22%2C%22has_source%22%3Atrue%7D",
+  "points": 50,
+  "expiry": "2017-12-04T15:29:32Z",
+  "limit": 100,
+  "crewId": 1
+}, {
+  "name": "Tag us in a tweet for Christmas",
+  "description": "Just wish us a Merry Christmas on Twitter.",
   "points": 75,
-  "expiry": "2016-11-12T04:55:37Z",
-  "limit": 74,
+  "expiry": "2018-01-12T04:55:37Z",
+  "limit": 100,
   "crewId": 1
 }, {
-  "name": "Kirlin, Goodwin and Kertzmann",
-  "description": "Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim.",
+  "name": "Tag us in a tweet for Christmas",
+  "description": "Just wish us a Merry Christmas on Twitter.",
+  "points": 75,
+  "expiry": "2018-01-12T04:55:37Z",
+  "limit": 100,
+  "crewId": 10
+}, {
+  "name": "Tag us in a tweet for Christmas",
+  "description": "Just wish us a Merry Christmas on Twitter.",
+  "points": 75,
+  "expiry": "2018-01-12T04:55:37Z",
+  "limit": 100,
+  "crewId": 12
+}, {
+  "name": "Tag us in a tweet for Christmas",
+  "description": "Just wish us a Merry Christmas on Twitter.",
+  "points": 75,
+  "expiry": "2018-01-12T04:55:37Z",
+  "limit": 100,
+  "crewId": 6
+}, {
+  "name": "Tag us in a tweet for Christmas",
+  "description": "Just wish us a Merry Christmas on Twitter.",
+  "points": 75,
+  "expiry": "2018-01-12T04:55:37Z",
+  "limit": 100,
+  "crewId": 8
+}, {
+  "name": "Sign up a team",
+  "description": "Sign up a team for our fall or spring leagues.",
   "points": 25,
-  "expiry": "2017-09-12T12:40:00Z",
-  "limit": 87,
+  "expiry": "2020-09-12T12:40:00Z",
+  "limit": 100,
   "crewId": 15
 }, {
-  "name": "Mann Inc",
-  "description": "Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst.",
+  "name": "Host a meetup",
+  "description": "Hosting a Crew meetup at your residence.",
+  "points": 500,
+  "expiry": "2019-02-10T01:02:37Z",
+  "limit": 63,
+  "crewId": 6
+}, {
+  "name": "Host a meetup",
+  "description": "Hosting a Crew meetup at your residence.",
+  "points": 500,
+  "expiry": "2018-02-10T01:02:37Z",
+  "limit": 63,
+  "crewId": 2
+}, {
+  "name": "Host a meetup",
+  "description": "Hosting a Crew meetup at your residence.",
+  "points": 20,
+  "expiry": "2027-02-10T01:02:37Z",
+  "limit": 63,
+  "crewId": 4
+}, {
+  "name": "Host a meetup",
+  "description": "Hosting a Crew meetup at your residence.",
   "points": 20,
   "expiry": "2017-02-10T01:02:37Z",
   "limit": 63,
-  "crewId": 6
-}, {
-  "name": "Haley LLC",
-  "description": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.",
-  "points": 39,
-  "expiry": "2016-11-08T04:26:03Z",
-  "limit": 66,
-  "crewId": 5
-}, {
-  "name": "Murray-Green",
-  "description": "In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.",
-  "points": 60,
-  "expiry": "2017-09-23T07:09:54Z",
-  "limit": 73,
   "crewId": 12
 }, {
-  "name": "Kohler, Hyatt and Jerde",
-  "description": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl.",
-  "points": 71,
-  "expiry": "2017-08-05T06:46:16Z",
-  "limit": 26,
-  "crewId": 14
-}, {
-  "name": "Shields-Mosciski",
-  "description": "Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.",
-  "points": 1,
-  "expiry": "2017-06-25T23:37:57Z",
-  "limit": 26,
-  "crewId": 12
-}, {
-  "name": "Hilpert, Rohan and Thiel",
-  "description": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.",
-  "points": 37,
-  "expiry": "2017-01-05T15:55:36Z",
-  "limit": 66,
-  "crewId": 5
-}, {
-  "name": "Cruickshank, Ebert and Yost",
-  "description": "Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
-  "points": 99,
+  "name": "Help moving equipment at a gig",
+  "description": "Just show up early to our next show and you can earn points helping us unload. Alternatively you can stay late and help us load back up!",
+  "points": 100,
   "expiry": "2017-08-14T10:36:55Z",
-  "limit": 66,
+  "limit": 10,
   "crewId": 1
 }, {
-  "name": "Morar, Dickens and Kulas",
-  "description": "Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-  "points": 17,
-  "expiry": "2017-04-16T02:43:14Z",
-  "limit": 63,
-  "crewId": 12
+  "name": "Help moving equipment at a gig",
+  "description": "Just show up early to our next show and you can earn points helping us unload. Alternatively you can stay late and help us load back up!",
+  "points": 100,
+  "expiry": "2017-08-14T10:36:55Z",
+  "limit": 10,
+  "crewId": 3
 }, {
-  "name": "Erdman, Bailey and Weber",
-  "description": "Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla.",
-  "points": 8,
-  "expiry": "2017-05-14T21:03:51Z",
-  "limit": 34,
+  "name": "Help moving equipment at a gig",
+  "description": "Just show up early to our next show and you can earn points helping us unload. Alternatively you can stay late and help us load back up!",
+  "points": 100,
+  "expiry": "2017-08-14T10:36:55Z",
+  "limit": 10,
+  "crewId": 13
+}, {
+  "name": "Like/follow our page on FB",
+  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/StringsAttached/",
+  "points": 20,
+  "expiry": "2019-05-14T21:03:51Z",
+  "limit": 10000,
   "crewId": 1
 }, {
   "name": "Kunze Inc",
@@ -587,11 +748,11 @@ module.exports = [{
   "limit": 41,
   "crewId": 6
 }, {
-  "name": "Vandervort LLC",
-  "description": "Vestibulum ac est lacinia nisi venenatis tristique.",
-  "points": 76,
-  "expiry": "2016-11-05T11:37:41Z",
-  "limit": 96,
+  "name": "Hang up flyers to promote a show",
+  "description": "Hang up at least three promotional flyers within reasonable distance from the venue.",
+  "points": 350,
+  "expiry": "2018-11-05T11:37:41Z",
+  "limit": 10,
   "crewId": 1
 }, {
   "name": "Dietrich, Monahan and Mertz",
