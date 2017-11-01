@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Media, Image, Modal, ButtonGroup, Button } from 'react-bootstrap';
+import { Media, Modal, ButtonGroup, Button } from 'react-bootstrap';
 // import editForm from './../../forms/createCrew.jsx'
+import { Image, Transformation } from 'cloudinary-react';
 import CreateCrew from './../../forms/createCrew.jsx'
 
 export default class crewLeaderSummary extends Component {
