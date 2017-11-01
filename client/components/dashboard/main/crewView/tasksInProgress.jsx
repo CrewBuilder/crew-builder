@@ -1,18 +1,21 @@
 // This component renders all the tasks a user has claimed for their crew
 import React, { Component } from 'react';
-import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { Modal, ListGroup, ListGroupItem, Button, Label } from 'react-bootstrap';
+import { UpdateTask } from '../../../utils/requests.jsx';
+
 export default class TasksInProgress extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       focusTask: props.userTasks,
+      focusUserTask: props.userTasks,
       showModal: false
     };
 
     this.openModal = (taskTarget) => {
-      console.log('TT',taskTarget)
       this.setState({ focusTask: taskTarget });
+      this.setState({ focusUserTask: taskTarget.user_task });
       this.setState({ showModal: true });
     };
 
@@ -20,8 +23,12 @@ export default class TasksInProgress extends Component {
       this.setState({ showModal: false });
     };
 
-    this.confirmTask = () => {
-      // TODO
+    this.confirmTask = (e) => {
+      e.preventDefault();
+      let taskId = this.state.focusUserTask.id;
+      UpdateTask(taskId, (data) => {
+        this.closeModal();
+      });
     };
 
   }
@@ -31,7 +38,7 @@ export default class TasksInProgress extends Component {
       <div>
         <ListGroup>
           {this.props.userTasks.map((task, i) => {
-            return (<ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.name}</ListGroupItem>)
+            return (<ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.name} {(task.user_task.completed === true && task.user_task.verified === false) ? <Label>Waiting approval...</Label> : ''}</ListGroupItem>);
           })}
         </ListGroup>
         <Modal show={this.state.showModal} onHide={this.closeModal}>
@@ -44,11 +51,10 @@ export default class TasksInProgress extends Component {
               <div>
                 <h4>Expires: {this.state.focusTask.expiry}</h4>
               </div>
-              <h4>Completed? {this.state.focusTask.completed}</h4>
-              <Button onClick={this.confirmTask} >Click to request completion</Button>
-            </div>
-            <div>
-              <h4>Verified? {this.state.focusTask.verified}</h4>
+              <h4>Completed? {(this.state.focusUserTask.completed === true) ? <span>Yes</span> :
+                <span>No <Button onClick={(e) => this.confirmTask(e)} >Click to request completion</Button></span>
+              }
+              </h4>
             </div>
             <h4>Description</h4>
             <p>{this.state.focusTask.description}</p>

@@ -33,7 +33,7 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
       model: db.task,
       where: {crewId: crewId},
       through: {
-        attributes: ['completed', 'verified']
+        attributes: ['id', 'completed', 'verified']
       }
     }]
   })
@@ -78,16 +78,11 @@ exports.postUserTask = (userId, taskId, cb) => {
 
 exports.updateTask = (userTaskId, verified, cb) => {
   let points, newPoints, userId, crewId, taskId;
-  db.user_task.update(
-    {
-      completed: true, // this may already be true, but doing this makes the request work for both verifiying and completing
-      verified: verified
-    },
-    {
-      where: {id: userTaskId}
-    })
-    .then((updated) => {
-      return db.user_task.findOne({ where: {id: userTaskId}});
+  db.user_task.findOne({ where: {id: userTaskId}})
+    .then((userTask) => {
+      userTask.completed = true;
+      userTask.verified = verified;
+      return userTask.save();
     })
     .then(userTask => {
       userId = userTask.user_id;
