@@ -1,19 +1,14 @@
+
 .outlineBox {
   border: 1px solid #555;
   min-height: 500px;
-}
-
-.background-image {
-  background-image: url('/images/crew.png');
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .cover-background {
   background-color: #fff;
 }
 
-
+/* FADE TRANSITION */
 
 .fadeIn-landing {
   -webkit-animation: fadein .8s ease-in 1 forwards;
@@ -36,5 +31,61 @@
 @keyframes fadein {
   to {
     opacity: 1;
+  }
+}
+
+/* LANDING PAGE */
+
+.landing-container {
+  background: #21A4DA;
+  background: -webkit-linear-gradient(left top, #21A4DA, #E6F4F7);
+  background: -o-linear-gradient(bottom right, #21A4DA, #E6F4F7);
+  background: -moz-linear-gradient(bottom right, #21A4DA, #E6F4F7);
+  background: linear-gradient(to bottom right, #21A4DA, #E6F4F7);
+  border: none;
+}
+
+.vertical-center {
+  text-align: center;
+}
+
+.jumbotron-heading {
+  color: #222;
+}
+
+.carousel-container {
+  max-height: 600px;
+  overflow: hidden;
+}
+
+.carousel-img {
+  margin: 0 auto;
+  background-color: #E6F4F7;
+  filter: brightness(50%);
+}
+
+.caption-landing {
+  height: 85%;
+}
+
+.caption-text {
+  color: #E6F4F7;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-align: center;
+  padding: 30px;
+  margin-left: 12%;
+  margin-right: 12%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.footer {
+  line-height: 30px;
+  height: 30px;
+}
+
+@media (max-width: 768px) {
+  .vertical-center:before {
+    display: none;
   }
 }

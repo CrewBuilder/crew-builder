@@ -5,6 +5,9 @@
 
 import React, { Component } from 'react';
 import SearchCard from './searchCard.jsx';
+
+import { Pagination } from 'react-bootstrap';
+
 import { JoinACrew } from '../../../utils/requests.jsx';
 
 export default class SearchResults extends Component {
@@ -13,7 +16,9 @@ export default class SearchResults extends Component {
     super(props);
     this.state = {
       user: props.user,
-
+      activePage: 1,
+      rangeLow: 0,
+      rangeHigh: 5
     };
     // Expect 'props' to contain 'crews'
     this.joinCrew = (crew) => {
@@ -29,6 +34,14 @@ export default class SearchResults extends Component {
       });
 
     };
+
+    this.handleSelect = (eventKey) => {
+      this.setState({
+        activePage: eventKey,
+        rangeLow: ((5 * eventKey) - 5),
+        rangeHigh: (5 * eventKey)
+      });
+    }
   }
 
   render() {
@@ -43,15 +56,34 @@ export default class SearchResults extends Component {
         `Search results for ${this.props.searchField}` :
         `Browse some of our crews to join`;
 
+      const searchResultsLength = Math.ceil(this.props.searchResults.length / 5);
+      console.log(searchResultsLength);
       return (
         <div className="fadeIn-container">
           <h4>{browseOrSearch}...</h4>
+          {searchResultsLength > 0 ?
+          <Pagination
+            prev
+            next
+            first
+            last
+            ellipsis
+            boundaryLinks
+            bsSize="large"
+            items={searchResultsLength}
+            maxButtons={searchResultsLength}
+            activePage={this.state.activePage}
+            onSelect={this.handleSelect}
+          />
+          : null }
           <hr />
           <div className="search-crew-list">
             {this.props.searchResults.map((crew, i) => {
+              if(i >= this.state.rangeLow && i < this.state.rangeHigh) {
               return (
                 <SearchCard key={i} crew={crew} joinCrew={this.joinCrew} />
               )
+              }
             })}
           </div>
           {this.props.searchField && this.props.searchResults.length === 0 ?
