@@ -273,6 +273,34 @@ module.exports = {
         cb(data);
       })
       .catch(err => console.log('Unable to update task', err));
+  },
+
+  // Delete UserCrew: removes User from Crew
+  DeleteUserCrew: (userId, crewId, cb) => {
+    let route = `${module.exports.host}user/crews/`;
+    let body = {
+      userId: userId,
+      crewId: crewId
+    };
+    let options = {
+      method: 'delete',
+      body: JSON.stringify(body),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    };
+    return fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then((data) => {
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
   }
 
 };

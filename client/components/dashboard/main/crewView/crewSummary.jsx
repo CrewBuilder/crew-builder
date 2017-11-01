@@ -1,7 +1,7 @@
 // This component renders a crewSummary card with some information and a picture
 import React, { Component } from 'react';
 import { Media, Image, Button, Alert } from 'react-bootstrap';
-import { UpdateTask } from '../../../utils/requests.jsx';
+import { DeleteUserCrew } from '../../../utils/requests.jsx';
 
 export default class CrewSummary extends Component {
 
@@ -18,19 +18,19 @@ export default class CrewSummary extends Component {
     };
 
     this.handleConfirmLeave = () => {
-      console.log('User', this.props.userId);
-      console.log('Crew', this.props.currentCrew.crew.id);
+      let userId = this.props.userId;
+      let crewId = this.props.currentCrew.crew.id;
+      DeleteUserCrew(userId, crewId, (err, data) => {
+        if (err) {
+          console.log('Error', err);
+        } else {
+          console.log('Data', data);
+        }
+      });
     };
   }
 
   render() {
-
-    if(!this.props.currentCrew) {
-      return (
-        <div />
-      )
-    } else {
-
     const achievementLevel = this.props.currentCrew.achievement !== "none" ?
       `Your achievement level with this crew is ${this.props.currentCrew.achievement}` :
       `Complete some tasks to help the cause and gain achievements!`;
