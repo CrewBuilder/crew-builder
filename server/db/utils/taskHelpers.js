@@ -61,55 +61,20 @@ exports.getTasksByCrew = (crewId, cb) => {
     });
 };
 
-exports.getUnverifiedTasks = (crewId, cb) => {
-  db.user_crew.findAll({
-    attributes: ['user_id'],
-    where: {crew_id: crewId}
-  })
-    .then(userCrews => {
-      if (!userCrews.length) {
-        cb('no users found for this crew', null);
-      } else {
-        userIds = userCrews.map(userCrew => {
-          return userCrew.user_id;
-        });
-        return db.user.findAll({
-          where: { id: userIds},
-          include: [{
-            model: db.task,
-            where: {crew_id: crewId},
-            through: {
-              where: {completed: true, verified: false},
-              attributes: ['id']
-            }
-          }]
-        });
+exports.getUnverifiedTasks = (crewId) => {
+  return db.task.findAll({
+    attributes: ['id', 'name', 'description', 'points', 'expiry'],
+    where: {crew_id: crewId},
+    include: [{
+      model: db.user_task,
+      where: {completed: true, verified: false},
+      include: {
+        model: db.user
       }
-    })
-    .then(users => {
-      var taskList = [ ];
-      users.forEach(user => {
-        let profile = JSON.parse(user.facebook);
-        user.tasks.forEach(task => {
-          taskList.push({
-            taskId: task.id,
-            taskName: task.name,
-            taskDescription: task.description,
-            points: task.points,
-            userId: user.id,
-            userName: profile.DISPLAY_NAME,
-            userEmail: profile.EMAIL,
-            userImg: profile.IMAGE_URL,
-            userTaskId: task.user_task.id
-          });
-        });
-      });
-      cb(null, taskList);
-    })
-    .catch(err => {
-      cb(err, null);
-    });
+    }]
+  });
 };
+
 // Allows task creation
 exports.postTask = (taskData, cb) => {
   db.task.create(taskData)

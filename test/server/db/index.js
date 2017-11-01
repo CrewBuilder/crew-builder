@@ -36,10 +36,14 @@ describe('Postgres crewbuilder db', function() {
   });
   /* *************** associations *************** */
   it('Should retrieve a list of a crew\'s unverified tasks for crew leader view', function(done) {
-    taskHelpers.getUnverifiedTasks(4, (err, tasks) => {
-      expect(tasks.length).to.equal(2);
-      done();
-    });
+    taskHelpers.getUnverifiedTasks(4)
+      .then(tasks => {
+        expect(tasks).to.exist;
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
   });
 
 });
