@@ -37,7 +37,7 @@ export default class Landing extends Component {
         <Jumbotron className="landing-container">
           <div className="text-center jumbotron-heading">
             <h1>Crew Builder</h1>
-            <p>Contribute to you crew...earn rewards</p>
+            <p>Contribute to your crew...earn rewards</p>
             <div className="row">
               <Button onClick={this.handleLogin} bsStyle="primary">Sign up with Facebook</Button>
             </div>
