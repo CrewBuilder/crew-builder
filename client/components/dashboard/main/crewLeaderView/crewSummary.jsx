@@ -3,6 +3,7 @@ import { Media, Modal, ButtonGroup, Button } from 'react-bootstrap';
 // import editForm from './../../forms/createCrew.jsx'
 import { Image, Transformation } from 'cloudinary-react';
 import CreateCrew from './../../forms/createCrew.jsx'
+import { cloud_name } from '../../forms/config.js'
 
 export default class crewLeaderSummary extends Component {
   constructor(props) {
@@ -42,11 +43,18 @@ export default class crewLeaderSummary extends Component {
         <div />
       )
     } else {
+      console.log(this.props.currentCrew.crew.image, 'image')
+    var str = this.props.currentCrew.crew.image;
+    str = str.split('/')
+    var publicId = str[str.length - 1]
+    console.log(publicId)
     return (
       <div>
         <Media>
           <Media.Left>
-            <Image src={this.props.currentCrew.crew.image} alt='Image'/>
+            <Image cloudName={cloud_name} publicId={publicId} >
+              <Transformation width="300" height="100" crop="scale" />
+            </Image>
           </Media.Left>
           <Media.Body>
             <Media.Heading>
@@ -86,7 +94,7 @@ export default class crewLeaderSummary extends Component {
         </Modal>
       </div>
     )
-  }
+    }
   }
 }
 
