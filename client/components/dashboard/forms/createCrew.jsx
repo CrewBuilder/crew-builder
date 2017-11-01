@@ -54,6 +54,24 @@ export default class CreateCrew extends Component {
     this.handleImageUpload(files[0]);
   }
 
+  handleImageUpload(file) {
+  let upload = request.post(CLOUDINARY_UPLOAD_URL)
+                      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+                      .field('file', file)
+
+  upload.end((err, response) => {
+    if (err) {
+      console.log(err);
+    }
+
+    if (response.body.secure_url !== '') {
+      this.setState({
+        uploadedFileCloudinaryUrl: response.body.secure_url
+      });
+    }
+  })
+  }
+
   render() {
     return (
       <div>
@@ -62,7 +80,7 @@ export default class CreateCrew extends Component {
             <FormControl type="text" placeholder="Enter the name of Crew" name="crewname" inputRef={ref => this.name = ref} defaultValue={this.props.name}/><br/>
             <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description = ref} defaultValue={this.props.desc}/><br/>
             <Dropzone
-              muliple={false}
+              muliple="false"
               accept="image/*"
               onDrop={this.onImageDrop.bind(this)}>
             </Dropzone>
