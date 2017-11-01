@@ -75,13 +75,16 @@ router.get('/leader/members', (req, res) => {
 const getUnverifiedTasks = require('./../utils/taskHelpers.js').getUnverifiedTasks;
 router.get('/leader/tasks', (req, res) => {
   let crewId = req.query.crewId;
-  getUnverifiedTasks(crewId, (err, tasks) => {
-    if (err) {
-      res.status(401).send('Could not complete request for unverified tasks.');
-    } else {
+  getUnverifiedTasks(crewId)
+    .then(tasks => {
+      return parseUnverifiedTasks(tasks);
+    })
+    .then(tasks => {
       res.status(200).send(tasks);
-    }
-  });
+    })
+    .catch(err => {
+      res.status(401).send(err);
+    });
 });
 /***************************************************************/
 /************************ POST REQUESTS ************************/
@@ -180,7 +183,7 @@ const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
 router.delete('/user/crews', (req, res) => {
   let userId = req.body.id;
   let crewId = req.body.crewId;
-  leaveCrew(userId, crewId)
+  leaveCrew(crewId, userId)
     .then(deleted => {
       res.sendStatus(202);
     })
@@ -229,4 +232,32 @@ const parseData = (user) => {
   });
 
   return response;
+};
+
+const parseUnverifiedTasks = (tasks) =>{
+  return new Promise((resolve, reject) => {
+    let parsedTasks = [ ];
+    for (let i = 0; i < tasks.length; i++) {
+      let task = tasks[i];
+      for (let j = 0; j < task.user_tasks.length; j++) {
+        let user = task.user_tasks[j].user;
+        let profile = JSON.parse(user.facebook);
+        parsedTasks.push({
+          taskId: task.id,
+          taskName: task.name,
+          taskDescription: task.description,
+          points: task.points,
+          expiry: task.expiry,
+          userId: user.id,
+          userName: profile.DISPLAY_NAME,
+          userEmail: profile.EMAIL,
+          userImg: profile.IMAGE_URL,
+          userTaskId: task.user_tasks[j].id
+        });
+      }
+      if (i === tasks.length - 1) {
+        resolve(parsedTasks);
+      }
+    }
+  });
 };

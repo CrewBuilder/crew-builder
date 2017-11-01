@@ -14,5 +14,10 @@ module.exports = function(sequelize, DataTypes) {
     role: DataTypes.STRING
   });
 
+  UserCrew.associate = models => {
+    UserCrew.belongsTo(models.user, {foreignKey: 'user_id'});
+    UserCrew.belongsTo(models.crew, {foreignKey: 'crew_id'});
+  };
+
   return UserCrew;
 };

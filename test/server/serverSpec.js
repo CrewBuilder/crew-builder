@@ -40,10 +40,11 @@ describe('Server and Client Are Active', function() {
 
   it('Responds with a list of all crews that match a search string', function(done) {
     request(server)
-      .get('/crews?qs=Integer')
+      .get('/crews?qs=community')
       .expect(200)
       .then(res => {
-        expect(res.body.length).to.equal(3);
+        console.log(res.body);
+        expect(res.body.length).to.equal(7);
         done();
       })
       .catch(err => done(err));
@@ -54,9 +55,25 @@ describe('Server and Client Are Active', function() {
       .delete('/user/crews?id=1crewId=4')
       .expect(202)
       .then(res => {
+        expect(!res.body.length).to.be.true;
         done();
       })
       .catch(err => {
+        done(err);
+      });
+  });
+
+  it('Responds to GET: \'leader/tasks\' with a list of tasks in progress', function(done) {
+    request(server)
+      .get('/leader/tasks?crewId=4')
+      .expect(200)
+      .then(res => {
+        expect(res.body[0].taskName).to.equal('Kshlerin-Herman');
+        expect(res.body[1].taskName).to.equal('Jerde, Bauch and Barrows');
+        expect(!res.body[2]).to.be.true;
+        done();
+      })
+      .catch(err =>{
         done(err);
       });
   });

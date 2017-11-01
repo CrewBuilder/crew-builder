@@ -31,9 +31,10 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
     where: {id: userId},
     include: [{
       model: db.task,
-      where: {crewId: crewId},
+      where: {crew_id: crewId},
       through: {
-        attributes: ['id', 'completed', 'verified']
+        attributes: ['id', 'completed', 'verified'],
+        where: {completed: false},
       }
     }]
   })
@@ -48,7 +49,7 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
           id: {
             $notIn: excludeIds
           },
-          crewId: crewId
+          crew_id: crewId
         }
       });
     })
