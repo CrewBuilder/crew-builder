@@ -7,67 +7,76 @@ module.exports = [{
   "crewId": 2
 }, {
   "name": "Like/follow our page on FB",
-  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/MilwaukeeRiverKeepers/",
+  "description": "Please like our page. If you already like us, task will be verified immediately.",
   "points": 20,
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
-  "crewId": 2
+  "crewId": 2,
+  "task_url": "https://www.facebook.com/MilwaukeeRiverKeepers/"
 }, {
   "name": "Like/follow our page on FB",
-  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/Mothlight/",
+  "description": "Please like our page. If you already like us, task will be verified immediately.",
   "points": 20,
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
-  "crewId": 3
+  "crewId": 3,
+  "task_url": "https://www.facebook.com/Mothlight/"
 }, {
   "name": "Like/follow our page on FB",
-  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/les-maurice-mke/",
+  "description": "Please like our page. If you already like us, task will be verified immediately.",
   "points": 20,
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
-  "crewId": 4
+  "crewId": 4,
+  "task_url": "https://www.facebook.com/les-maurice-mke/"
 }, {
   "name": "Like/follow our page on FB",
-  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/BStroop540mke/",
+  "description": "Please like our page. If you already like us, task will be verified immediately.",
   "points": 20,
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
-  "crewId": 5
+  "crewId": 5,
+  "task_url": "https://www.facebook.com/BStroop540mke/"
 }, {
   "name": "Like/follow our page on FB",
-  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/austindogrescue/",
+  "description": "Please like our page. If you already like us, task will be verified immediately.",
   "points": 20,
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
-  "crewId": 6
+  "crewId": 6,
+  "task_url": "https://www.facebook.com/austindogrescue/"
 }, {
   "name": "Like/follow our page on FB",
-  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/theduis/",
+  "description": "Please like our page. If you already like us, task will be verified immediately.",
   "points": 20,
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
-  "crewId": 7
+  "crewId": 7,
+  "task_url": "https://www.facebook.com/theduis/"
 }, {
   "name": "Like/follow our page on FB",
-  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/downtownmarket/",
+  "description": "Please like our page. If you already like us, task will be verified immediately.",
   "points": 20,
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
-  "crewId": 8
+  "crewId": 8,
+  "task_url": "https://www.facebook.com/downtownmarket/"
 }, {
   "name": "Like/follow our page on FB",
-  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/batlimorecodemeetup/",
+  "description": "Please like our page. If you already like us, task will be verified immediately.",
   "points": 20,
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
-  "crewId": 9
-} {
+  "crewId": 9,
+  "task_url": "https://www.facebook.com/batlimorecodemeetup/"
+}, {
   "name": "Share our event on FaceBook",
-  "description": "Our next gig is at Puddlers on November 30, 2017. Please share out event to earn points! https://www.facebook.com/events/122239935115724/?acontext=%7B%22action_history%22%3A%22[%7B%5C%22surface%5C%22%3A%5C%22page%5C%22%2C%5C%22mechanism%5C%22%3A%5C%22page_upcoming_events_card%5C%22%2C%5C%22extra_data%5C%22%3A[]%7D]%22%2C%22has_source%22%3Atrue%7D",
+  "description": "Our next gig is at Puddlers on November 30, 2017. Please share out event to earn points!",
   "points": 50,
   "expiry": "2017-12-04T15:29:32Z",
   "limit": 100,
-  "crewId": 3
+  "crewId": 3,
+  "task_url": "https://www.facebook.com/events/122239935115724/?acontext=%7B%22action_history%22%3A%22[%7B%5C%22surface%5C%22%3A%5C%22page%5C%22%2C%5C%22mechanism%5C%22%3A%5C%22page_upcoming_events_card%5C%22%2C%5C%22extra_data%5C%22%3A[]%7D]%22%2C%22has_source%22%3Atrue%7D"
 }, {
   "name": "Volunteer at the shelter",
   "description": "Help cleanup around the shelter and keep the dogs company. Most people do a two hour shift",
@@ -77,25 +86,28 @@ module.exports = [{
   "crewId": 6
 }, {
   "name": "Tweet a link to our SoundCloud",
-  "description": "https://soundcloud.com/moth-light",
+  "description": "Give our SoundCloud some love on Twitter",
   "points": 150,
   "expiry": "2020-03-05T22:58:30Z",
   "limit": 1000,
-  "crewId": 3
+  "crewId": 3,
+  "task_url": "https://soundcloud.com/moth-light"
 }, {
   "name": "Tweet a link to our SoundCloud",
-  "description": "https://soundcloud.com/les-maurice",
+  "description": "Give our SoundCloud some love on Twitter",
   "points": 150,
   "expiry": "2020-03-05T22:58:30Z",
   "limit": 1000,
-  "crewId": 4
+  "crewId": 4,
+  "task_url": "https://soundcloud.com/les-maurice"
 }, {
   "name": "Tweet a link to our SoundCloud",
-  "description": "https://soundcloud.com/theduis",
+  "description": "Give our SoundCloud some love on Twitter",
   "points": 150,
   "expiry": "2020-03-05T22:58:30Z",
   "limit": 1000,
-  "crewId": 13
+  "crewId": 13,
+  "task_url": "https://soundcloud.com/theduis"
 }, {
   "name": "Attend our meetup",
   "description": "We will be meeting at the community garden around 6:30pm December 1st, 2017. ",
@@ -196,11 +208,12 @@ module.exports = [{
   "crewId": 13
 }, {
   "name": "Share our event on FaceBook",
-  "description": "Our next gig is on December 4, 2017. Please share out event to earn points! https://www.facebook.com/events/122239935115724/?acontext=%7B%22action_history%22%3A%22[%7B%5C%22surface%5C%22%3A%5C%22page%5C%22%2C%5C%22mechanism%5C%22%3A%5C%22page_upcoming_events_card%5C%22%2C%5C%22extra_data%5C%22%3A[]%7D]%22%2C%22has_source%22%3Atrue%7D",
+  "description": "Our next gig is on December 4, 2017. Please share out event to earn points! ",
   "points": 50,
   "expiry": "2017-12-04T15:29:32Z",
   "limit": 100,
-  "crewId": 1
+  "crewId": 1,
+  "task_url": "https://www.facebook.com/events/122239935115724/?acontext=%7B%22action_history%22%3A%22[%7B%5C%22surface%5C%22%3A%5C%22page%5C%22%2C%5C%22mechanism%5C%22%3A%5C%22page_upcoming_events_card%5C%22%2C%5C%22extra_data%5C%22%3A[]%7D]%22%2C%22has_source%22%3Atrue%7D"
 }, {
   "name": "Tag us in a tweet for Christmas",
   "description": "Just wish us a Merry Christmas on Twitter.",
@@ -294,11 +307,12 @@ module.exports = [{
   "crewId": 13
 }, {
   "name": "Like/follow our page on FB",
-  "description": "Please like our page. If you already like us, task will be verified immediately https://www.facebook.com/StringsAttached/",
+  "description": "Please like our page. If you already like us, task will be verified immediately.",
   "points": 20,
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
-  "crewId": 1
+  "crewId": 1,
+  "task_url": "https://www.facebook.com/StringsAttached/"
 }, {
   "name": "Kunze Inc",
   "description": "Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.",
