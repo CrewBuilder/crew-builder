@@ -83,6 +83,15 @@ export default class CreateCrew extends Component {
               muliple="false"
               accept="image/*"
               onDrop={this.onImageDrop.bind(this)}>
+
+              {this.state.uploadedFileCloudinaryUrl !== '' ?
+              <div>
+                <p>{this.state.uploadedFile.name}</p>
+                <Image cloudName="sarikonda" publicId={this.state.uploadedFileCloudinaryUrl} width="200" crop="scale"/>
+              </div> : <div>
+              <p>Drop an image or click to select a file to upload.</p>
+              </div>}
+
             </Dropzone>
             <Button type="submit">
                Create/Update
