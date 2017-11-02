@@ -21,28 +21,23 @@ export default class SearchCard extends Component {
 
   }
 
-  // componentWillMount() {
-  //   this.setState({
-  //     user: this.props.user,
-  //     crew: this.props.crew,
-  //   });
-
-  // }
-
   render() {
     const tooltip = (<Tooltip id="tooltip"><strong>Click here</strong> to join this Crew!</Tooltip>);
     return (
       <Media>
         <OverlayTrigger placement="top" overlay={tooltip}>
           <Media.Left align="top">
-            <img height={120} width={120} src={this.props.crew.image} onClick={this.joinHandler} />
+            <img height={120} width={120} src={this.props.crew.image} onClick={this.joinHandler} className="image-shadow" />
           </Media.Left>
         </OverlayTrigger>
 
-        <Media.Body>
+        <Media.Body className="search-card-media-body">
           <Media.Heading>{this.props.crew.name}</Media.Heading>
           <p>{this.props.crew.description}</p>
         </Media.Body>
+        {(this.props.count + 1 ) % 3 === 0 ?
+          null
+        : <hr className="hr-break" /> }
       </Media>
     );
   }
