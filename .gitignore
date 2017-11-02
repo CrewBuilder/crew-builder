@@ -33,7 +33,7 @@ bower_components/
 .env
 
 # config
-config.js
+configfile.js
 
 # floobits
 .floo
