@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.TEXT,
     points: DataTypes.INTEGER,
     limit: DataTypes.INTEGER,
-    expiry: DataTypes.DATE
+    expiry: DataTypes.DATE,
+    task_url: DataTypes.TEXT
   });
 
   Task.associate = function(models) {

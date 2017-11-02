@@ -37,7 +37,7 @@ export default class Dashboard extends Component {
           searchField: query
         });
       });
-    }
+    };
 
     // TEMP USERID FOR TESTING
     this.setCurrentCrew = (crew) => {
@@ -50,8 +50,7 @@ export default class Dashboard extends Component {
           console.log('ERROR:', err);
         }
 
-        let userTasks;
-        let crewTasks;
+        let userTasks, crewTasks;
         if (!response) {
           userTasks = [];
           crewTasks = [];
@@ -85,8 +84,7 @@ export default class Dashboard extends Component {
           console.log('ERROR:', err);
         }
 
-        let userTasks;
-        let currentCrewTasks;
+        let userTasks, currentCrewTasks;
         if (!res) {
           userTasks = [];
           currentCrewTasks = [];

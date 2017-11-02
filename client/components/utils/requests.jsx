@@ -273,7 +273,8 @@ module.exports = {
       .then(data => {
         cb(data);
       })
-      .catch(err => console.log('Unable to update task', err));
+      .catch(err =>
+        cb(err));
   },
 
   // Delete UserCrew: removes User from Crew

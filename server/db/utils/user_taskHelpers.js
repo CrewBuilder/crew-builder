@@ -33,8 +33,7 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
       model: db.task,
       where: {crew_id: crewId},
       through: {
-        attributes: ['id', 'completed', 'verified'],
-        where: {completed: false},
+        attributes: ['id', 'completed', 'verified']
       }
     }]
   })
@@ -92,10 +91,11 @@ exports.updateTask = (userTaskId, verified, cb) => {
     })
     .then(task => {
       points = task.points;
-      crewId = task.crewId;
+      crewId = task.crew_id;
       return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
     })
     .then(userCrew => {
+
       newPoints = verified ? userCrew.points + points : userCrew.points; //will only add points when being verified
       return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crewId}});
     })
