@@ -22,8 +22,8 @@ router.get('/user/crews', (req, res) => { // tested with postman, returns array 
 const getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByUserCrew;
 router.get('/user/tasks', (req, res) => {
   let id = req.query.id;
-  let crewId = req.query.crewId;
-  getTasksByUserCrew(id, crewId, (err, user) => {
+  let crew_id = req.query.crew_id;
+  getTasksByUserCrew(id, crew_id, (err, user) => {
     if (err) {
       res.status(401).send(err);
     } else {
@@ -35,7 +35,7 @@ router.get('/user/tasks', (req, res) => {
 // GET: /crew/tasks => retrieves all tasks for a given crew
 const getTasksByCrew = require('./../utils/taskHelpers.js').getTasksByCrew;
 router.get('/crew/tasks', (req, res) => {
-  let id = req.query.crewId;
+  let id = req.query.crew_id;
   getTasksByCrew(id, (err, tasks) => {
     if (err) {
       res.status(401).send('No tasks available. Tell your Crew Leader to add some!');
@@ -61,8 +61,8 @@ router.get('/crews', (req, res) => {
 // GET: leader/members => leader requests members, retrieves list of user data for the crew
 const getCrewMembers = require('./../utils/user_crewHelpers.js').getCrewMembers;
 router.get('/leader/members', (req, res) => {
-  let crewId = req.query.crewId;
-  getCrewMembers(crewId, (err, members) => {
+  let crew_id = req.query.crew_id;
+  getCrewMembers(crew_id, (err, members) => {
     if (err) {
       res.status(401).send('Could not claim task');
     } else {
@@ -71,11 +71,11 @@ router.get('/leader/members', (req, res) => {
   });
 });
 
-// GET: /leader/tasks?crewId={CREW_ID} => retrieves unverified tasks for a crew
+// GET: /leader/tasks?crew_id={CREW_ID} => retrieves unverified tasks for a crew
 const getUnverifiedTasks = require('./../utils/taskHelpers.js').getUnverifiedTasks;
 router.get('/leader/tasks', (req, res) => {
-  let crewId = req.query.crewId;
-  getUnverifiedTasks(crewId)
+  let crew_id = req.query.crew_id;
+  getUnverifiedTasks(crew_id)
     .then(tasks => {
       return parseUnverifiedTasks(tasks);
     })
@@ -99,7 +99,7 @@ router.post('/task', (req, res) => {
     points: req.body.points,
     limit: req.body.limit,
     expiry: req.body.expiry,
-    crew_id: req.body.crewId
+    crew_id: req.body.crew_id
   };
   postTask(task, (err, task) => {
     if (err) {
@@ -132,8 +132,8 @@ router.post('/crew', (req, res) => {
 const postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
 router.post('/user/crews', (req, res) => {
   let userId = req.body.userId;
-  let crewId = req.body.crewId;
-  postUserCrew(userId, crewId, (err, userCrew) => {
+  let crew_id = req.body.crew_id;
+  postUserCrew(userId, crew_id, (err, userCrew) => {
     if (err) {
       res.status(401).send('Could not join crew');
     } else {
@@ -185,8 +185,8 @@ router.put('/user/tasks', (req, res) => {
 const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
 router.delete('/user/crews', (req, res) => {
   let userId = req.body.id;
-  let crewId = req.body.crewId;
-  leaveCrew(userId, crewId)
+  let crew_id = req.body.crew_id;
+  leaveCrew(userId, crew_id)
     .then(deleted => {
       res.sendStatus(202);
     })

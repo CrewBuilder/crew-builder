@@ -51,7 +51,7 @@ describe('Server and Client Are Active', function() {
 
   it('Removes the association between a user and a crew upon user request to delete', function(done) {
     request(server)
-      .delete('/user/crews?id=1crewId=4')
+      .delete('/user/crews?id=1crew_id=4')
       .expect(202)
       .then(res => {
         expect(!res.body.length).to.be.true;
@@ -64,7 +64,7 @@ describe('Server and Client Are Active', function() {
 
   it('Responds to GET: \'leader/tasks\' with a list of tasks in progress', function(done) {
     request(server)
-      .get('/leader/tasks?crewId=13')
+      .get('/leader/tasks?crew_id=13')
       .expect(200)
       .then(res => {
         expect(res.body[0].taskName).to.equal('Tweet a link to our SoundCloud');

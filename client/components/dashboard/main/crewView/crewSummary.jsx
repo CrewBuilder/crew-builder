@@ -19,8 +19,8 @@ export default class CrewSummary extends Component {
 
     this.handleConfirmLeave = () => {
       let userId = this.props.userId;
-      let crewId = this.props.currentCrew.crew.id;
-      DeleteUserCrew(userId, crewId, (err, data) => {
+      let crew_id = this.props.currentCrew.crew.id;
+      DeleteUserCrew(userId, crew_id, (err, data) => {
         if (err) {
           console.log('Error', err);
         } else {

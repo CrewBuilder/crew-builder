@@ -42,10 +42,10 @@ export default class Dashboard extends Component {
     // TEMP USERID FOR TESTING
     this.setCurrentCrew = (crew) => {
       this.setState({currentCrew: crew});
-      let crewId = crew.crew.id;
+      let crew_id = crew.crew.id;
       let userId = this.state.user.id;
-      console.log('crew', crewId, 'user', userId);
-      GetUserTasks(userId, crewId, (err, response) => {
+      console.log('crew', crew_id, 'user', userId);
+      GetUserTasks(userId, crew_id, (err, response) => {
         if (err) {
           console.log('ERROR:', err);
         }
@@ -78,8 +78,8 @@ export default class Dashboard extends Component {
       });
     };
 
-    this.getUserTasks = (userId, crewId) => {
-      GetUserTasks(userId, crewId, (err, res) => {
+    this.getUserTasks = (userId, crew_id) => {
+      GetUserTasks(userId, crew_id, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         }

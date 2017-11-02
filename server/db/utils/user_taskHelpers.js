@@ -25,13 +25,13 @@ exports.getTasksByUser = (userId, cb) => {
     });
 };
 
-exports.getTasksByUserCrew = (userId, crewId, cb) => {
+exports.getTasksByUserCrew = (userId, crew_id, cb) => {
   let tasksInProgress = [];
   db.user.findOne({
     where: {id: userId},
     include: [{
       model: db.task,
-      where: {crew_id: crewId},
+      where: {crew_id: crew_id},
       through: {
         attributes: ['id', 'completed', 'verified']
       }
@@ -48,7 +48,7 @@ exports.getTasksByUserCrew = (userId, crewId, cb) => {
           id: {
             $notIn: excludeIds
           },
-          crew_id: crewId
+          crew_id: crew_id
         }
       });
     })
@@ -77,7 +77,7 @@ exports.postUserTask = (userId, taskId, cb) => {
 };
 
 exports.updateTask = (userTaskId, verified, cb) => {
-  let points, newPoints, userId, crewId, taskId;
+  let points, newPoints, userId, crew_id, taskId;
   db.user_task.findOne({ where: {id: userTaskId}})
     .then((userTask) => {
       userTask.completed = true;
@@ -91,16 +91,16 @@ exports.updateTask = (userTaskId, verified, cb) => {
     })
     .then(task => {
       points = task.points;
-      crewId = task.crew_id;
-      return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+      crew_id = task.crew_id;
+      return db.user_crew.findOne({where: {user_id: userId, crew_id: crew_id}});
     })
     .then(userCrew => {
 
       newPoints = verified ? userCrew.points + points : userCrew.points; //will only add points when being verified
-      return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crewId}});
+      return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crew_id}});
     })
     .then(updated => {
-      return db.user_crew.findOne({where: {user_id: userId, crew_id: crewId}});
+      return db.user_crew.findOne({where: {user_id: userId, crew_id: crew_id}});
     })
     .then(userCrew => {
       cb(null, userCrew);
