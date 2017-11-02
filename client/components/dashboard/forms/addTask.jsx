@@ -42,41 +42,44 @@ export default class addTask extends Component {
       this.task = e.target.value;
     }
 
+    this.handleSubmit = (e) => {
+      e.preventDefault();
+      // var date = moment();
+      // console.log(date.format())
+      // note: never set state in handleSubmit...
+        let points = Number(this.state.Points)
+        let limit = Number(this.state.Limit)
+        var obj = {
+          name: this.state.name,
+          description: this.state.description,
+          points: points,
+          limit: limit,
+          expiry: this.state.expiry
+        }
+        console.log('whole object', obj)
+        console.log(typeof obj.Points, 'pointstype')
+        PostTask(obj, this.props.data.currentCrew.crew.id, function(err, data) {
+          if (err) {
+            console.log('error in posting task');
+          }
+
+          if (data) {
+            console.log('posted!!!!!!!!!!!')
+            console.log(data, 'data')
+            console.log(props.data.currentCrewTasks, 'TASK')
+            props.data.currentCrewTasks.push(data)
+          }
+        })
+    }
+
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    // var date = moment();
-    // console.log(date.format())
-    // note: never set state in handleSubmit...
-      let points = Number(this.state.Points)
-      let limit = Number(this.state.Limit)
-      var obj = {
-        name: this.state.name,
-        description: this.state.description,
-        points: points,
-        limit: limit,
-        expiry: this.state.expiry
-      }
-      console.log('whole object', obj)
-      console.log(typeof obj.Points, 'pointstype')
-      PostTask(obj, 16, function(err, data) {
-        if (err) {
-          console.log('error in posting task');
-        }
-
-        if (data) {
-          console.log('posted!!!!!!!!!!!')
-          console.log(data, 'data')
-        }
-      })
-  }
 
   render() {
-    console.log('this.props', this.props)
+    console.log('this.props', this.props.data.currentCrewTasks)
     return (
       <div>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form onSubmit={this.handleSubmit}>
           <FormGroup>
             <ControlLabel>Name of the task</ControlLabel>
             <FormControl type="text" placeholder="Add a new Task" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
@@ -95,7 +98,7 @@ export default class addTask extends Component {
             <ControlLabel>Expiry Date</ControlLabel>
             <DateTime utc={true} onChange={(e) => this.show(e)}/>
           </FormGroup>
-            <Button type="submit" onClick={this.setCurrDate}>
+            <Button type="submit">
                Add a task
             </Button>
         </form>
