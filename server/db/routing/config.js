@@ -196,6 +196,17 @@ router.delete('/user/crews', (req, res) => {
     });
 });
 
+const deleteTask = require('./../utils/taskHelpers').deleteTask;
+router.delete('/tasks', (req, res) => {
+  deleteTask(req.body.taskId)
+    .then(deleted => {
+      res.sendStatus(202);
+    })
+    .catch(err => {
+      res.status(404).send(err);
+    });
+});
+
 module.exports = router;
 
 const parseData = (user) => {
