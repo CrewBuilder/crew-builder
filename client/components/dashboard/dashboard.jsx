@@ -141,7 +141,7 @@ export default class Dashboard extends Component {
     } else {
 
       return (
-        <div className='fadeIn-container'>
+        <div className='fadeIn-container component-container'>
           <Navbar
             user={this.state.user}
             crewSearch={this.crewSearch}
@@ -149,7 +149,7 @@ export default class Dashboard extends Component {
           />
           <Grid>
             <Row className="show-grid">
-              <Col md={2} lg={3} className="outlineBox">
+              <Col md={2} lg={3} className="outlineBox sidebar-container">
                 <Sidebar
                   user={this.state.user}
                   userLeaderCrews={this.state.userLeaderCrews}
@@ -157,7 +157,7 @@ export default class Dashboard extends Component {
                   setCurrentCrew={this.setCurrentCrew}
                 />
               </Col>
-              <Col md={10} lg={9} className="outlineBox">
+              <Col md={10} lg={9} className="outlineBox dashboard-container">
                 <Main
                   user={this.state.user}
                   getCurrentCrews={this.getCurrentCrews}
@@ -173,6 +173,7 @@ export default class Dashboard extends Component {
               <Clearfix visibleSmBlock></Clearfix>
             </Row>
           </Grid>
+          <div className="footer">&copy; 2017 CrewBuilder</div>
         </div>
       );
     }

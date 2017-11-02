@@ -8,6 +8,8 @@
 // status "connected" OR IT WILL BE "unknown" IF NOT LOGGED IN
 
 module.exports = {
+
+  host: process.env.HOST || 'http://localhost:3000/',
   // initialize Facebook SDK
   Init: () => {
     return new Promise((resolve, reject) => {
@@ -61,7 +63,7 @@ module.exports = {
             })
           };
 
-          fetch('http://localhost:3000/auth/facebook', options)
+          fetch(`${module.exports.host}auth/facebook`, options)
           .then((data) => {
             var token = data.headers.get('x-auth-token');
             if(token) {
@@ -105,7 +107,7 @@ module.exports = {
         'x-auth-token': localStorage.getItem('id_token')
       })
     };
-    return fetch('http://localhost:3000/auth/me', options)
+    return fetch(`${module.exports.host}auth/me`, options)
     .then((response) => {
       if(!response.ok){
         return false
