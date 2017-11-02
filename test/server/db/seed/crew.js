@@ -14,7 +14,7 @@ module.exports = [
     "name": "Concerts for a Cause",
     "description": "Since 2014 Concerts For A Cause has promoted charities and non-profits who serve our community through a monthly concert series. In 2016 CFAC became an official Non-Profit. The 4th Season will run from March - November 2017.",
     "crew_url": "https://www.facebook.com/kyleconcerts/",
-    "image": "hhttps://scontent-dft4-1.xx.fbcdn.net/v/t1.0-0/c4.0.200.200/p200x200/21433030_1972750022972646_9130241013051842356_n.jpg?oh=b90bcf09de8cbdba5265ed366fcc264f&oe=5AA589E9"
+    "image": "https://scontent-dft4-1.xx.fbcdn.net/v/t1.0-1/c5.5.190.190/p200x200/10696316_1512739535640366_7525164064575739860_n.jpg?oh=39d8557cc1cf38d495d34bb38ced4f34&oe=5AAA9A7D"
   }, {
     "name": "Hays Band Boosters",
     "description": "The Hays Band Boosters organization is dedicated to support the students, directors, and the mission of the band program as they strive towards the highest level of curricular and artistic goals in music education and performance",
