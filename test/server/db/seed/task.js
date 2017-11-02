@@ -12,7 +12,7 @@ module.exports = [{
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
   "crewId": 2,
-  "task_url": "https://www.facebook.com/MilwaukeeRiverKeepers/"
+  "task_url": "http://www.facebook.com/PAWS"
 }, {
   "name": "Like/follow our page on FB",
   "description": "Please like our page. If you already like us, task will be verified immediately.",
@@ -20,7 +20,7 @@ module.exports = [{
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
   "crewId": 3,
-  "task_url": "https://www.facebook.com/Mothlight/"
+  "task_url": "https://www.facebook.com/kyleconcerts/"
 }, {
   "name": "Like/follow our page on FB",
   "description": "Please like our page. If you already like us, task will be verified immediately.",
@@ -36,7 +36,7 @@ module.exports = [{
   "expiry": "2019-05-14T21:03:51Z",
   "limit": 10000,
   "crewId": 5,
-  "task_url": "https://www.facebook.com/BStroop540mke/"
+  "task_url": "https://www.facebook.com/Waterloo-Disc-Golf-Club-Austin-Texas-169803583049807/"
 }, {
   "name": "Like/follow our page on FB",
   "description": "Please like our page. If you already like us, task will be verified immediately.",
@@ -71,11 +71,11 @@ module.exports = [{
   "task_url": "https://www.facebook.com/batlimorecodemeetup/"
 }, {
   "name": "Share our event on FaceBook",
-  "description": "Our next gig is at Puddlers on November 30, 2017. Please share out event to earn points!",
+  "description": "Our next concert is at Puddlers on November 30, 2017. Please share out event to earn points!",
   "points": 50,
   "expiry": "2017-12-04T15:29:32Z",
   "limit": 100,
-  "crewId": 3,
+  "crewId": 4,
   "task_url": "https://www.facebook.com/events/122239935115724/?acontext=%7B%22action_history%22%3A%22[%7B%5C%22surface%5C%22%3A%5C%22page%5C%22%2C%5C%22mechanism%5C%22%3A%5C%22page_upcoming_events_card%5C%22%2C%5C%22extra_data%5C%22%3A[]%7D]%22%2C%22has_source%22%3Atrue%7D"
 }, {
   "name": "Volunteer at the shelter",
@@ -83,15 +83,7 @@ module.exports = [{
   "points": 250,
   "expiry": "2017-06-01T01:07:43Z",
   "limit": 200,
-  "crewId": 6
-}, {
-  "name": "Tweet a link to our SoundCloud",
-  "description": "Give our SoundCloud some love on Twitter",
-  "points": 150,
-  "expiry": "2020-03-05T22:58:30Z",
-  "limit": 1000,
-  "crewId": 3,
-  "task_url": "https://soundcloud.com/moth-light"
+  "crewId": 2
 }, {
   "name": "Tweet a link to our SoundCloud",
   "description": "Give our SoundCloud some love on Twitter",
@@ -99,7 +91,15 @@ module.exports = [{
   "expiry": "2020-03-05T22:58:30Z",
   "limit": 1000,
   "crewId": 4,
-  "task_url": "https://soundcloud.com/les-maurice"
+  "task_url": "https://soundcloud.com/hays-band"
+}, {
+  "name": "Tweet a link to our SoundCloud",
+  "description": "Give our SoundCloud some love on Twitter",
+  "points": 150,
+  "expiry": "2020-03-05T22:58:30Z",
+  "limit": 1000,
+  "crewId": 3,
+  "task_url": "https://soundcloud.com/c4ac"
 }, {
   "name": "Tweet a link to our SoundCloud",
   "description": "Give our SoundCloud some love on Twitter",
@@ -130,31 +130,17 @@ module.exports = [{
   "limit": 320,
   "crewId": 11
 }, {
-  "name": "Attend our meetup",
+  "name": "Attend our volunteer training",
   "description": "We will be meeting at the town hall around 6:30pm December 1st, 2017. ",
   "points": 150,
   "expiry": "2017-12-21T08:19:26Z",
   "limit": 320,
   "crewId": 10
 }, {
-  "name": "Attend our meetup",
-  "description": "We will be meeting at the community square around 6:30pm December 1st, 2017. ",
+  "name": "Attend our meetup at Club HQ",
+  "description": "We will be meeting at 6:30pm December 1st, 2017. ",
   "points": 150,
   "expiry": "2017-12-21T08:19:26Z",
-  "limit": 30,
-  "crewId": 2
-}, {
-  "name": "Post a review on discogs.com",
-  "description": "We just released our first album! Give it a listen and post a review on discogs.",
-  "points": 350,
-  "expiry": "2017-06-11T15:21:19Z",
-  "limit": 30,
-  "crewId": 3
-}, {
-  "name": "Post a review on discogs.com",
-  "description": "We just released our first album! Give it a listen and post a review on discogs.",
-  "points": 350,
-  "expiry": "2017-06-11T15:21:19Z",
   "limit": 30,
   "crewId": 5
 }, {
@@ -163,28 +149,38 @@ module.exports = [{
   "points": 350,
   "expiry": "2017-06-11T15:21:19Z",
   "limit": 30,
-  "crewId": 13
+  "crewId": 1,
+  "task_url": "http://www.discogs.com/"
+}, {
+  "name": "Post a review on discogs.com",
+  "description": "We just released our first album! Give it a listen and post a review on discogs.",
+  "points": 350,
+  "expiry": "2017-06-11T15:21:19Z",
+  "limit": 30,
+  "crewId": 8,
+  "task_url": "http://www.discogs.com/"
+}, {
+  "name": "Post a review on discogs.com",
+  "description": "We just released our first album! Give it a listen and post a review on discogs.",
+  "points": 350,
+  "expiry": "2017-06-11T15:21:19Z",
+  "limit": 30,
+  "crewId": 13,
+  "task_url": "http://www.discogs.com/"
 }, {
   "name": "Cleanup Humboldt Park 11/29/17",
   "description": "We will be meeting up at 4pm til sunset to pickup litter.",
   "points": 200,
   "expiry": "2017-12-14T03:01:20Z",
   "limit": 100,
-  "crewId": 2
+  "crewId": 6
 }, {
   "name": "Foster care for a pet",
   "description": "Host a pet for a month to help the shelter.",
   "points": 600,
   "expiry": "2018-10-29T18:38:31Z",
   "limit": 60,
-  "crewId": 6
-}, {
-  "name": "Hand out handbills",
-  "description": "Includes free admission. Distribute handbills to audience as they exit the show.",
-  "points": 250,
-  "expiry": "2020-12-29T03:12:08Z",
-  "limit": 69,
-  "crewId": 1
+  "crewId": 2
 }, {
   "name": "Hand out handbills",
   "description": "Includes free admission. Distribute handbills to audience as they exit the show.",
@@ -198,10 +194,17 @@ module.exports = [{
   "points": 250,
   "expiry": "2020-12-29T03:12:08Z",
   "limit": 69,
-  "crewId": 5
+  "crewId": 11
 }, {
   "name": "Hand out handbills",
   "description": "Includes free admission. Distribute handbills to audience as they exit the show.",
+  "points": 250,
+  "expiry": "2020-12-29T03:12:08Z",
+  "limit": 69,
+  "crewId": 4
+}, {
+  "name": "Hand out handbills at conference",
+  "description": "Includes free admission. Distribute handbills to visitors as they leave.",
   "points": 250,
   "expiry": "2020-12-29T03:12:08Z",
   "limit": 69,
@@ -227,7 +230,7 @@ module.exports = [{
   "points": 75,
   "expiry": "2018-01-12T04:55:37Z",
   "limit": 100,
-  "crewId": 10
+  "crewId": 15
 }, {
   "name": "Tag us in a tweet for Christmas",
   "description": "Just wish us a Merry Christmas on Twitter.",
@@ -241,49 +244,49 @@ module.exports = [{
   "points": 75,
   "expiry": "2018-01-12T04:55:37Z",
   "limit": 100,
-  "crewId": 6
+  "crewId": 15
 }, {
   "name": "Tag us in a tweet for Christmas",
   "description": "Just wish us a Merry Christmas on Twitter.",
   "points": 75,
   "expiry": "2018-01-12T04:55:37Z",
   "limit": 100,
-  "crewId": 8
+  "crewId": 14
 }, {
   "name": "Sign up a team",
   "description": "Sign up a team for our fall or spring leagues.",
   "points": 25,
   "expiry": "2020-09-12T12:40:00Z",
   "limit": 100,
-  "crewId": 15
+  "crewId": 5
 }, {
   "name": "Host a meetup",
   "description": "Hosting a Crew meetup at your residence.",
   "points": 500,
   "expiry": "2019-02-10T01:02:37Z",
   "limit": 63,
-  "crewId": 6
+  "crewId": 5
 }, {
   "name": "Host a meetup",
   "description": "Hosting a Crew meetup at your residence.",
   "points": 500,
   "expiry": "2018-02-10T01:02:37Z",
   "limit": 63,
-  "crewId": 2
+  "crewId": 12
 }, {
   "name": "Host a meetup",
   "description": "Hosting a Crew meetup at your residence.",
   "points": 20,
   "expiry": "2027-02-10T01:02:37Z",
   "limit": 63,
-  "crewId": 4
+  "crewId": 14
 }, {
   "name": "Host a meetup",
   "description": "Hosting a Crew meetup at your residence.",
   "points": 20,
   "expiry": "2017-02-10T01:02:37Z",
   "limit": 63,
-  "crewId": 12
+  "crewId": 11
 }, {
   "name": "Help moving equipment at a gig",
   "description": "Just show up early to our next show and you can earn points helping us unload. Alternatively you can stay late and help us load back up!",
@@ -292,19 +295,19 @@ module.exports = [{
   "limit": 10,
   "crewId": 1
 }, {
-  "name": "Help moving equipment at a gig",
-  "description": "Just show up early to our next show and you can earn points helping us unload. Alternatively you can stay late and help us load back up!",
+  "name": "Help setting up equipment",
+  "description": "Just show up early to our next show and you can earn points helping us setup. Alternatively you can stay late and help us load back up!",
   "points": 100,
   "expiry": "2017-08-14T10:36:55Z",
   "limit": 10,
   "crewId": 3
 }, {
-  "name": "Help moving equipment at a gig",
-  "description": "Just show up early to our next show and you can earn points helping us unload. Alternatively you can stay late and help us load back up!",
+  "name": "Help setting up stage",
+  "description": "Just show up early to our next show and you can earn points helping us setup. Alternatively you can stay late and help us load back up!",
   "points": 100,
   "expiry": "2017-08-14T10:36:55Z",
   "limit": 10,
-  "crewId": 13
+  "crewId": 4
 }, {
   "name": "Like/follow our page on FB",
   "description": "Please like our page. If you already like us, task will be verified immediately.",
@@ -314,47 +317,49 @@ module.exports = [{
   "crewId": 1,
   "task_url": "https://www.facebook.com/StringsAttached/"
 }, {
-  "name": "Kunze Inc",
-  "description": "Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.",
-  "points": 7,
+  "name": "Become a tutor/Host a workshop",
+  "description": "You can sign up to be a volunteer tutor on our website. Think of a fun topic/experience you would like to share with the youth in our community!",
+  "points": 500,
   "expiry": "2017-02-07T16:55:21Z",
-  "limit": 23,
-  "crewId": 8
+  "limit": 200,
+  "crewId": 10,
+  "task_url": "https://austinbatcave.org/"
 }, {
-  "name": "Keebler LLC",
-  "description": "Praesent blandit lacinia erat.",
-  "points": 18,
+  "name": "Help coordinate a Bat Cave at your school",
+  "description": "We need teachers/parents to coordinate a learning environment where we can set up our tutors for success. Get ",
+  "points": 250,
   "expiry": "2017-01-28T19:39:34Z",
-  "limit": 6,
-  "crewId": 6
+  "limit": 60,
+  "crewId": 10
 }, {
-  "name": "Hyatt-Mitchell",
-  "description": "Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam.",
+  "name": "Tweet about ABC",
+  "description": "Give us some love by tagging @austinbatcave in a tweet.",
   "points": 82,
   "expiry": "2016-11-11T17:48:00Z",
   "limit": 84,
-  "crewId": 4
+  "crewId": 10,
+  "task_url": "https://twitter.com/austinbatcave"
 }, {
-  "name": "Shanahan, Schuster and Keeling",
-  "description": "Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula.",
+  "name": "Donate a bike",
+  "description": "The easiest way to support our non-profit is by donating your old bike!",
   "points": 23,
   "expiry": "2017-09-08T10:24:32Z",
-  "limit": 66,
-  "crewId": 8
+  "limit": 150,
+  "crewId": 7
 }, {
-  "name": "Jaskolski-Powlowski",
-  "description": "Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo.",
-  "points": 28,
+  "name": "Teach a bicycle maintenance class",
+  "description": "Repairing a bike can be costly. Help out the biking community by teaching proper bike maintenance in one of our seminars.",
+  "points": 280,
   "expiry": "2017-05-08T20:28:30Z",
   "limit": 12,
-  "crewId": 14
+  "crewId": 17
 }, {
-  "name": "Dietrich, Hand and Schimmel",
-  "description": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
-  "points": 69,
+  "name": "Host a cycling event",
+  "description": "Could be a pub crawl, or mountain biking in the bluffs. You organize it and we'll promote it.",
+  "points": 220,
   "expiry": "2017-07-04T13:49:11Z",
   "limit": 21,
-  "crewId": 15
+  "crewId": 7
 }, {
   "name": "Runte, Brown and Pagac",
   "description": "Pellentesque at nulla. Suspendisse potenti.",
