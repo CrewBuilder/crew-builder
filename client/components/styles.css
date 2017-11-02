@@ -1,11 +1,33 @@
+/* APPLICATION */
+
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: #f6f8f8;
+}
+body {
+  margin-bottom: 30px;
+}
 
 .outlineBox {
-  border: 1px solid #555;
-  min-height: 500px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color: #fff;
 }
 
 .cover-background {
   background-color: #fff;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  border-top: 1px solid #d8d8d8;
+  background-color: #f8f8f8;
+  text-align: center;
 }
 
 /* FADE TRANSITION */
@@ -20,6 +42,10 @@
   -webkit-animation: fadein .4s ease-in 1 forwards;
   animation: fadein .4s ease-in 1 forwards;
   opacity: 0;
+}
+
+.component-container {
+  background-color: #f6f8f8;
 }
 
 @-webkit-keyframes fadein {
@@ -40,7 +66,9 @@
   background: #21A4DA;
   background: -webkit-linear-gradient(left top, #21A4DA, #E6F4F7);
   background: -o-linear-gradient(bottom right, #21A4DA, #E6F4F7);
-  background: -moz-linear-gradient(bottom right, #21A4DA, #E6F4F7);
+  background: -webkit-gradient(linear, left top, right bottom, from(#21A4DA), to(#E6F4F7));
+  background: -webkit-linear-gradient(top left, #21A4DA, #E6F4F7);
+  background: -o-linear-gradient(top left, #21A4DA, #E6F4F7);
   background: linear-gradient(to bottom right, #21A4DA, #E6F4F7);
   border: none;
 }
@@ -49,19 +77,33 @@
   text-align: center;
 }
 
+.jumbotron {
+  margin-bottom: 0;
+  border-bottom: 1px solid #d8d8d8;
+}
+
 .jumbotron-heading {
   color: #222;
 }
 
 .carousel-container {
-  max-height: 600px;
   overflow: hidden;
+}
+
+.carousel-container>div{
+  background-color: #f6f8f8;
 }
 
 .carousel-img {
   margin: 0 auto;
-  background-color: #E6F4F7;
+  height: 400px;
+  background-color: #f6f8f8;
+  -webkit-filter: brightness(50%);
   filter: brightness(50%);
+}
+
+.carousel-inner>.item>img {
+  height: 400px;
 }
 
 .caption-landing {
@@ -79,13 +121,121 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.footer {
-  line-height: 30px;
-  height: 30px;
-}
-
 @media (max-width: 768px) {
   .vertical-center:before {
     display: none;
   }
+  .carousel-inner>.item>img {
+    height: 360px;
+  }
 }
+
+/* NAVBAR */
+
+.navbar-logo {
+  width: 120px;
+}
+
+#dropdown {
+  padding: 10px 0 0 15px;
+}
+
+.dropdown-menu {
+  border-right: 5px solid #f9f9f9;
+}
+
+.dropdown-menu>li>a {
+  color: #222;
+  padding-right: 25px;
+  text-align: right;
+}
+
+.dropdown-menu>li>a:hover {
+  background-color: #f9f9f9;
+}
+
+.navbar-browse-button {
+  margin-left: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .navbar-search-form {
+    padding-bottom: 10px;
+  }
+}
+
+/* DASHBOARD */
+
+.dashboard-container {
+  min-height: 500px;
+}
+
+/* SIDEBAR */
+
+.sidebar-heading {
+  padding: 15px 15px 15px 10px;
+  margin: 0;
+  background-color: #eeeeee;
+  font-weight: 700;
+  color: #595959;
+  border-bottom: 5px solid #e7e7e7;
+}
+
+.nav>li>a:hover {
+  background: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+  .sidebar-container {
+    min-height: 0;
+  }
+  .dashboard-container {
+    min-height: 200px;
+  }
+}
+
+/* SEARCH RESULTS */
+
+.image-shadow {
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  -webkit-transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  -o-transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.image-shadow:hover {
+  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.media, .media-body {
+  overflow: visible;
+}
+
+.search-crew-list {
+  margin-bottom: 15px;
+}
+
+.hr-break {
+  margin-left: 25%;
+  margin-right: 25%;
+  border-width: 3px;
+}
+
+.pagination {
+  margin: 5px 0;
+}
+
+.search-results-heading {
+  color: #8e8e8e;
+}
+
+@media (max-width: 768px) {
+  .search-results-heading {
+    text-align: center;
+  }
+}
+

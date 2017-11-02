@@ -18,7 +18,7 @@ export default class SearchResults extends Component {
       user: props.user,
       activePage: 1,
       rangeLow: 0,
-      rangeHigh: 5
+      rangeHigh: 3,
     };
     // Expect 'props' to contain 'crews'
     this.joinCrew = (crew) => {
@@ -35,13 +35,24 @@ export default class SearchResults extends Component {
 
     };
 
+    // handle range of paginated items
     this.handleSelect = (eventKey) => {
       this.setState({
         activePage: eventKey,
-        rangeLow: ((5 * eventKey) - 5),
-        rangeHigh: (5 * eventKey)
+        rangeLow: ((3 * eventKey) - 3),
+        rangeHigh: (3 * eventKey)
       });
     }
+
+  }
+
+  // reset pagination on search
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      activePage: 1,
+      rangeLow: 0,
+      rangeHigh: 3
+    });
   }
 
   render() {
@@ -56,11 +67,10 @@ export default class SearchResults extends Component {
         `Search results for ${this.props.searchField}` :
         `Browse some of our crews to join`;
 
-      const searchResultsLength = Math.ceil(this.props.searchResults.length / 5);
-      console.log(searchResultsLength);
+      const searchResultsLength = Math.ceil(this.props.searchResults.length / 3);
       return (
         <div className="fadeIn-container">
-          <h4>{browseOrSearch}...</h4>
+          <h4 className="search-results-heading">{browseOrSearch}...</h4>
           {searchResultsLength > 0 ?
           <Pagination
             prev
@@ -69,7 +79,7 @@ export default class SearchResults extends Component {
             last
             ellipsis
             boundaryLinks
-            bsSize="large"
+            bsSize="medium"
             items={searchResultsLength}
             maxButtons={searchResultsLength}
             activePage={this.state.activePage}
@@ -81,7 +91,7 @@ export default class SearchResults extends Component {
             {this.props.searchResults.map((crew, i) => {
               if(i >= this.state.rangeLow && i < this.state.rangeHigh) {
               return (
-                <SearchCard key={i} crew={crew} joinCrew={this.joinCrew} />
+                <SearchCard key={i} crew={crew} count={i} joinCrew={this.joinCrew} />
               )
               }
             })}
