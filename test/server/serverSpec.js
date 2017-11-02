@@ -64,12 +64,11 @@ describe('Server and Client Are Active', function() {
 
   it('Responds to GET: \'leader/tasks\' with a list of tasks in progress', function(done) {
     request(server)
-      .get('/leader/tasks?crewId=4')
+      .get('/leader/tasks?crewId=13')
       .expect(200)
       .then(res => {
-        expect(res.body[0].taskName).to.equal('Kshlerin-Herman');
-        expect(res.body[1].taskName).to.equal('Jerde, Bauch and Barrows');
-        expect(!res.body[2]).to.be.true;
+        expect(res.body[0].taskName).to.equal('Tweet a link to our SoundCloud');
+        expect(!res.body[1]).to.be.true;
         done();
       })
       .catch(err =>{
