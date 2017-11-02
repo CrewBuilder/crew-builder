@@ -48,7 +48,7 @@ export default class ManageTasks extends Component {
   }
 
   render() {
-
+    console.log('line 51 in ManageTasks', this.props)
     return (
       <div>
         <ListGroup>
@@ -62,7 +62,7 @@ export default class ManageTasks extends Component {
             Add/Update a Task
           </Modal.Header>
           <Modal.Body>
-            <AddTask taskData={this.addTaskData} updateData={this.handleSelect}/>
+            <AddTask taskData={this.addTaskData} updateData={this.handleSelect} data={this.props}/>
           </Modal.Body>
         </Modal>
       </div>
