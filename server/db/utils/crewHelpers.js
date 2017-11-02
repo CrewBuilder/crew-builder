@@ -64,7 +64,6 @@ exports.postCrew = (crewData, userId, cb) => {
 exports.searchCrews = (qs) => {
   if (qs) {
     qs = `%${qs}%`;
-    qs = qs.replace(/'/g, '');
     return db.crew.findAll({
       where: {
         $or: {

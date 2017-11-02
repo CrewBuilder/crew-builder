@@ -3,7 +3,11 @@ require('dotenv').config();
 const expect = require('chai').expect;
 const seed = require('../../../server/db/seed.js');
 const db = require('../../../server/db/index.js');
-const userCrewHelpers = require('../../../server/db/utils/user_crewHelpers');
+const crewHelpers = require('../../../server/db/utils/crewHelpers.js');
+const taskHelpers = require('../../../server/db/utils/taskHelpers.js');
+const user_crewHelpers = require('../../../server/db/utils/user_crewHelpers.js');
+const user_taskHelpers = require('../../../server/db/utils/user_taskHelpers.js');
+const userHelpers = require('../../../server/db/utils/userHelpers.js');
 
 describe('Postgres crewbuilder db', function() {
 
@@ -15,21 +19,34 @@ describe('Postgres crewbuilder db', function() {
     return db.sequelize.authenticate();
   });
 
-
-
   it('Should remove a row from the user-crew table when a user requests to leave', function(done) {
-    userCrewHelpers.leaveCrew(1, 4)
+    user_crewHelpers.leaveCrew(1, 4)
       .then(deleted => {
         return db.user_crew.findOne({
           where: {
-            user_id: userId,
-            crew_id: crewId
+            user_id: 1,
+            crew_id: 4
           }
         });
       })
-      .catch(err => {
-        expect(err).to.exist;
+      .then(userCrew => {
+        console.log(userCrew);
+        expect(!userCrew).to.be.true;
         done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+  /* *************** associations *************** */
+  it('Should retrieve a list of a crew\'s unverified tasks for crew leader view', function(done) {
+    taskHelpers.getUnverifiedTasks(4)
+      .then(tasks => {
+        expect(tasks).to.exist;
+        done();
+      })
+      .catch(err => {
+        done(err);
       });
   });
 
