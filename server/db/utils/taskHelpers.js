@@ -87,5 +87,12 @@ exports.postTask = (taskData, cb) => {
     });
 };
 
+exports.deleteTask = (taskId) => {
+  return db.task.destroy({
+    where: {
+      id: taskId
+    }
+  });
+};
 
 
