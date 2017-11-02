@@ -9,7 +9,7 @@ module.exports = [
     "name": "PAWS Shelter of Central Texas",
     "description": "PAWS Shelter of Central Texas (PAWS) was founded in Kyle, Texas in 1986 as a 501 (c) 3 non-profit organization providing care and love to homeless, abandoned, and abused animals in Central Texas. We are a no-kill shelter that believes in second chances! At PAWS, companion animals are given medical attention, care, and love for however long it takes for us to find them a loving home",
     "crew_url": "http://pawsshelter.org/",
-    "image": "http://pawsshelter.org/wp-content/uploads/2012/04/484189_10151292033869429_356538469_n.jpg"
+    "image": "https://scontent-dft4-1.xx.fbcdn.net/v/t1.0-1/p200x200/580178_10152742640309429_8556238796584150749_n.jpg?oh=8262a57566a05a2517e4e728651d6f1f&oe=5A743E91"
   }, {
     "name": "Concerts for a Cause",
     "description": "Since 2014 Concerts For A Cause has promoted charities and non-profits who serve our community through a monthly concert series. In 2016 CFAC became an official Non-Profit. The 4th Season will run from March - November 2017.",
