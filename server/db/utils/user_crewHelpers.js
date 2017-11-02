@@ -43,12 +43,14 @@ exports.getCrewMembers = (crewId, cb) => {
     });
 };
 
-exports.leaveCrew = (crewId, userId) => {
-  return db.user_crew.destroy({
+exports.leaveCrew = (userId, crewId) => {
+  return db.user_crew.findOne({
     where: {
       crew_id: crewId,
       user_id: userId
     }
+  }).then(userCrew => {
+    userCrew.destroy();
   });
 };
 
