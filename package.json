@@ -52,6 +52,7 @@
     "react-passport-auth": "^1.2.1",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
+    "react-share": "^1.16.0",
     "sequelize": "^4.15.0",
     "style-loader": "^0.19.0",
     "superagent": "^3.8.0",

@@ -57,7 +57,7 @@ export default class Sidebar extends Component {
                 })}
               </Nav>
 
-              <p><em>{this.props.userMemberCrews && this.props.userMemberCrews.length === 0 ? 'Just getting started or looking to find that next crew for you? Try our browse or search features to find some crews to join today!' : null}</em></p>
+              {this.props.userMemberCrews && this.props.userMemberCrews.length === 0 ? <p className="sidebar-empty-crews-msg"><Glyphicon glyph="info-sign" /> <em>Just getting started or looking to find that next crew for you? Try our browse or search features to find some crews to join today!</em></p> : null}
             </Col>
           </Row>
         </Tab.Container>

@@ -51,7 +51,7 @@ export default class crewLeaderSummary extends Component {
       <div>
         <Media>
           <Media.Left>
-            <Image src={Image_Url + publicId} alt="Image"/>
+            <Image src={Image_Url + publicId} alt="Image" className="crew-image"/>
           </Media.Left>
           <Media.Body>
             <Media.Heading>
