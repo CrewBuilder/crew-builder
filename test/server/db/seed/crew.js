@@ -63,7 +63,7 @@ module.exports = [
     "name": "The Science Mill",
     "description": "We are a family destination offering a fun, interactive learning environment for all ages through cutting-edge technology-based exhibits, games, and programs. The Science Mill experience expands students' understanding and appreciation of science in their everyday lives. Our mission is to inspire them to continue their education and pursue careers in science, technology, engineering and math.",
     "crew_url": "http://www.sciencemill.org/volunteer/",
-    "image": "http://dummyimage.com/172x118.png/5fa2dd/ffffff"
+    "image": "http://static1.squarespace.com/static/580fd28d20099ec7189b72cf/t/5867f06be4fcb5e168864aee/1509458544994/?format=1500w"
   }, {
     "name": "girlstart",
     "description": "Girlstart’s mission is to increase girls’ interest and engagement in STEM through innovative, nationally-recognized informal STEM education programs.",
