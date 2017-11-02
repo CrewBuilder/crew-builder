@@ -16,8 +16,8 @@ export default class CrewLeaderView extends Component {
       crewMembers: []
     }
 
-    this.getCrewMembers = (crewId) => {
-      GetCrewMembers(crewId, (err, res) => {
+    this.getCrewMembers = (crew_id) => {
+      GetCrewMembers(crew_id, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         } else {

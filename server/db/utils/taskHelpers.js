@@ -11,10 +11,10 @@ exports.findTaskById = (id, cb) => {
 };
 
 // Returns all tasks for array of id(s). Used by '/user/tasks' endpoint in config.js.
-exports.findAllTasksByIds = (ids, crewId, cb) => {
+exports.findAllTasksByIds = (ids, crew_id, cb) => {
   db.task.findAll({
     where: {
-      crew_id: crewId,
+      crew_id: crew_id,
       id: {
         $in: ids
       }
@@ -30,10 +30,10 @@ exports.findAllTasksByIds = (ids, crewId, cb) => {
 };
 
 // Returns all tasks not in array of id(s). User by '/user/tasks' endpoint in config.js.
-exports.findAllTasksByNotIds = (ids, crewId, cb) => {
+exports.findAllTasksByNotIds = (ids, crew_id, cb) => {
   db.task.findAll({
     where: {
-      crew_id: crewId,
+      crew_id: crew_id,
       id: {
         $notIn: ids
       }
@@ -48,9 +48,9 @@ exports.findAllTasksByNotIds = (ids, crewId, cb) => {
     });
 };
 
-exports.getTasksByCrew = (crewId, cb) => {
+exports.getTasksByCrew = (crew_id, cb) => {
   db.task.findAll({
-    where: {crew_id: crewId}
+    where: {crew_id: crew_id}
   })
     .then(tasks => {
       if (!tasks.length) {
@@ -61,10 +61,10 @@ exports.getTasksByCrew = (crewId, cb) => {
     });
 };
 
-exports.getUnverifiedTasks = (crewId) => {
+exports.getUnverifiedTasks = (crew_id) => {
   return db.task.findAll({
     attributes: ['id', 'name', 'description', 'points', 'expiry'],
-    where: {crew_id: crewId},
+    where: {crew_id: crew_id},
     include: [{
       model: db.user_task,
       where: {completed: true, verified: false},

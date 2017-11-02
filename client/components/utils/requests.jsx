@@ -25,8 +25,8 @@ module.exports = {
   },
 
   // Returns all of current user's tasks for selected crew.
-  GetUserTasks: (userId, crewId, cb) => {
-    let route = `${module.exports.host}user/tasks?id=${userId}&crewId=${crewId}`;
+  GetUserTasks: (userId, crew_id, cb) => {
+    let route = `${module.exports.host}user/tasks?id=${userId}&crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -47,9 +47,9 @@ module.exports = {
   },
 
   // Returns all of selected crew's tasks.
-  GetCrewTasks: (crewId, cb) => {
-    let id = crewId;
-    let route = `${module.exports.host}crew/tasks?crewId=${crewId}`;
+  GetCrewTasks: (crew_id, cb) => {
+    let id = crew_id;
+    let route = `${module.exports.host}crew/tasks?crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -70,9 +70,9 @@ module.exports = {
   },
 
   // Returns all of a Crew's users
-  GetCrewMembers: (crewId, cb) => {
-    let id = crewId;
-    let route = `${module.exports.host}leader/members?crewId=${crewId}`;
+  GetCrewMembers: (crew_id, cb) => {
+    let id = crew_id;
+    let route = `${module.exports.host}leader/members?crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -92,8 +92,8 @@ module.exports = {
       });
   },
 
-  GetLeaderTasks: (crewId, cb) => {
-    let route = `${module.exports.host}leader/tasks?crewId=${crewId}`;
+  GetLeaderTasks: (crew_id, cb) => {
+    let route = `${module.exports.host}leader/tasks?crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -141,14 +141,14 @@ module.exports = {
   },
 
   // Let's user post task to crew. Should only be available to the Leader of that crew.
-  PostTask: (task, crewId, cb) => {
+  PostTask: (task, crew_id, cb) => {
     let route = `${module.exports.host}task/`;
     let body = {
       name: task.name,
       description: task.description,
       limit: task.limit,
       expiry: task.expiry,
-      crewId: crewId,
+      crew_id: crew_id,
       points: task.points
     };
     let options = {
@@ -197,11 +197,11 @@ module.exports = {
   },
 
   // POSTs a new relation of User to Crew. User joins selected Crew.
-  JoinACrew: (userId, crewId, cb) => {
+  JoinACrew: (userId, crew_id, cb) => {
     let route = `${module.exports.host}user/crews/`;
     let body = {
       userId: userId,
-      crewId: crewId
+      crew_id: crew_id
     };
     let options = {
       method: 'post',
@@ -278,11 +278,11 @@ module.exports = {
   },
 
   // Delete UserCrew: removes User from Crew
-  DeleteUserCrew: (userId, crewId, cb) => {
+  DeleteUserCrew: (userId, crew_id, cb) => {
     let route = `${module.exports.host}user/crews/`;
     let body = {
       id: userId,
-      crewId: crewId
+      crew_id: crew_id
     };
     let options = {
       method: 'delete',

@@ -44,9 +44,9 @@ exports.postCrew = (crewData, userId, cb) => {
     .then(crew => {
       return crew.id;
     })
-    .then(crewId => {
+    .then(crew_id => {
       db.user_crew.create({
-        crew_id: crewId,
+        crew_id: crew_id,
         user_id: user,
         points: 0,
         achievement: 'none',
