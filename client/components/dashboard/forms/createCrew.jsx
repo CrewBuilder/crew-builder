@@ -60,8 +60,8 @@ export default class CreateCrew extends Component {
   }
 
   handleImageUpload(file) {
-  let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+  let upload = request.post(process.env.CLOUDINARY_UPLOAD_URL || CLOUDINARY_UPLOAD_URL)
+                      .field('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET || CLOUDINARY_UPLOAD_PRESET)
                       .field('file', file)
 
   upload.end((err, response) => {
@@ -92,7 +92,7 @@ export default class CreateCrew extends Component {
               {this.state.uploadedFileCloudinaryUrl !== '' ?
               <div>
                 <p>{this.state.uploadedFile.name}</p>
-                <Image cloudName="sarikonda" publicId={this.state.uploadedFileCloudinaryUrl} width="200" crop="scale"/>
+                <Image cloudName={process.env.CLOUD_NAME || cloud_name} publicId={this.state.uploadedFileCloudinaryUrl} width="200" crop="scale"/>
               </div> : <div>
               <p>Drop an image or click to select a file to upload.</p>
               </div>}
