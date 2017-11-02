@@ -75,4 +75,16 @@ describe('Server and Client Are Active', function() {
         done(err);
       });
   });
+
+  it('Responds to DELETE: /tasks with a 202', function(done) {
+    request(server)
+      .delete('/tasks?taskId=4')
+      .expect(202)
+      .then(res => {
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
 });
