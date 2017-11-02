@@ -174,6 +174,10 @@ body {
 
 /* SIDEBAR */
 
+.sidebar-container {
+  min-height: 500px;
+}
+
 .sidebar-heading {
   padding: 15px 15px 15px 10px;
   margin: 0;
@@ -181,6 +185,10 @@ body {
   font-weight: 700;
   color: #595959;
   border-bottom: 5px solid #e7e7e7;
+}
+
+.sidebar-empty-crews-msg {
+  padding: 15px 15px 15px 10px;
 }
 
 .nav>li>a:hover {
@@ -239,3 +247,38 @@ body {
   }
 }
 
+/* SOCIAL MEDIA */
+
+.social-button-container {
+  display:flex;
+  flex-direction:row;
+}
+
+.social-button {
+  padding-left: 5px;
+}
+
+.social-share-button:hover:not(:active) {
+  opacity: 0.75;
+}
+
+/* CREW */
+
+.crew-image {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+@media (max-width: 918px) {
+  .crew-image {
+    max-width: 100px;
+    max-height: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .crew-image {
+    max-width: 50px;
+    max-height: 50px;
+  }
+}

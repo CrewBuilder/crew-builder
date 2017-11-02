@@ -6,6 +6,8 @@ import TasksAvailable from './tasksAvailable.jsx';
 import {Panel, PanelGroup} from 'react-bootstrap';
 // Compares userTasks to crewTasks => sends to tasksInProgress and tasksAvailable respectively
 
+import Social from './social.jsx';
+
 export default class CrewView extends Component {
 
   constructor(props) {
@@ -19,6 +21,9 @@ export default class CrewView extends Component {
           <Panel collapsible defaultExpanded={true} header="Crew Summary" eventKey="1">
             <CrewSummary
               userId={this.props.user.id}
+              currentCrew={this.props.currentCrew}
+            />
+            <Social
               currentCrew={this.props.currentCrew}
             />
           </Panel>
