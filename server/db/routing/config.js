@@ -99,7 +99,7 @@ router.post('/task', (req, res) => {
     points: req.body.points,
     limit: req.body.limit,
     expiry: req.body.expiry,
-    crewId: req.body.crewId
+    crew_id: req.body.crewId
   };
   postTask(task, (err, task) => {
     if (err) {

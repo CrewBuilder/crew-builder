@@ -15,28 +15,33 @@ export default class CreateCrew extends Component {
       uploadedFileCloudinaryUrl: ''
     }
     // props contain name and unique details of user, so we can keep track of who created this crew  and store it in database accordingly
+
+    this.handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(this.name)
+      console.log(this.desc);
+      console.log(this.img)
+      var obj = {
+        name: this.name.value,
+        description: this.description.value,
+        image: this.state.uploadedFileCloudinaryUrl
+      }
+      this.refs.form.reset()
+      console.log(obj)
+      PostCrew(obj, this.props.user.id, function (err, data) {
+        if (err) {
+          console.log('error in posting');
+        }
+        if (data) {
+          props.getCurrentCrews(props.user.id);
+          console.log(data, 'data from posting');
+          //document.getElementById("course-form").reset();
+        }
+      })
+    }
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    console.log(this.name)
-    console.log(this.desc);
-    console.log(this.img)
-    var obj = {
-      name: this.name.value,
-      description: this.description.value,
-      image: this.state.uploadedFileCloudinaryUrl
-    }
-    console.log(obj)
-    PostCrew(obj, this.props.user.id, function (err, data) {
-      if (err) {
-        console.log('error in posting');
-      }
-      if (data) {
-        console.log(data, 'data from posting')
-      }
-    })
-  }
+
 
   image(e) {
     this.img = e.target.value
@@ -75,7 +80,7 @@ export default class CreateCrew extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form onSubmit={this.handleSubmit} id="course-form" ref="form">
           <FormGroup>
             <FormControl type="text" placeholder="Enter the name of Crew" name="crewname" inputRef={ref => this.name = ref} defaultValue={this.props.name}/><br/>
             <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description = ref} defaultValue={this.props.desc}/><br/>

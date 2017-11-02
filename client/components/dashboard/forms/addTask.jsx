@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap'
+import { PostTask } from '../../utils/requests.jsx';
 var moment = require('moment');
 require('moment/locale/en-ca');
 
@@ -11,11 +12,9 @@ export default class addTask extends Component {
     this.state = {
       name : this.props.name || '',
       description: this.props.description || '',
-      Points: this.props.Points || '',
-      Limit: this.props.Limit || '',
+      Points: this.props.Points || 0,
+      Limit: this.props.Limit || 0,
       expiry: '',
-      createdAt: this.props.createdAt || '',
-      updatedAt: ''
     }
 
     this.show = (e) => {
@@ -38,12 +37,6 @@ export default class addTask extends Component {
       return null;
     }
 
-    this.setCurrDate = () => {
-      this.setState({updatedAt: moment().format()});
-      if (this.state.createdAt.length === 0) {
-        this.setState({createdAt: moment().format()})
-      }
-    }
 
     this.task = (e) => {
       this.task = e.target.value;
@@ -56,19 +49,31 @@ export default class addTask extends Component {
     // var date = moment();
     // console.log(date.format())
     // note: never set state in handleSubmit...
-      var objState = {
+      let points = Number(this.state.Points)
+      let limit = Number(this.state.Limit)
+      var obj = {
         name: this.state.name,
         description: this.state.description,
-        Points: this.state.Points,
-        Limit: this.state.Points,
-        expiry: this.state.expiry,
-        createdAt: this.state.createdAt,
-        updatedAt: this.state.updatedAt
+        points: points,
+        limit: limit,
+        expiry: this.state.expiry
       }
-      console.log('whole object', objState)
+      console.log('whole object', obj)
+      console.log(typeof obj.Points, 'pointstype')
+      PostTask(obj, 16, function(err, data) {
+        if (err) {
+          console.log('error in posting task');
+        }
+
+        if (data) {
+          console.log('posted!!!!!!!!!!!')
+          console.log(data, 'data')
+        }
+      })
   }
 
   render() {
+    console.log('this.props', this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>
@@ -82,9 +87,9 @@ export default class addTask extends Component {
           </FormGroup>
           <FormGroup validationState={this.getValidationState()}>
             <ControlLabel>Points</ControlLabel>
-            <FormControl type="text" value={this.state.Points} value={this.state.Points} onChange={(event) => this.setState({Points: event.target.value})}/>
+            <FormControl type="number" value={this.state.Points} value={this.state.Points} onChange={(event) => this.setState({Points: event.target.value})}/>
             <ControlLabel>Limit</ControlLabel>
-            <FormControl type="text" value={this.state.Limit} value={this.state.Limit} onChange={(event) => this.setState({Limit: event.target.value})} />
+            <FormControl type="number" value={this.state.Limit} value={this.state.Limit} onChange={(event) => this.setState({Limit: event.target.value})} />
           </FormGroup>
           <FormGroup>
             <ControlLabel>Expiry Date</ControlLabel>
