@@ -3,7 +3,15 @@ import { Media, Modal, ButtonGroup, Button, Image } from 'react-bootstrap';
 // import editForm from './../../forms/createCrew.jsx'
 import { Transformation } from 'cloudinary-react';
 import CreateCrew from './../../forms/createCrew.jsx'
-import { cloud_name, Image_Url } from '../../forms/configfile.js'
+
+let cloudKeys;
+
+if (process.env.DEV_MODE === 'production') {
+  cloudKeys = require('../../forms/configfile.js');
+} else {
+  cloudKeys.cloud_name = process.env.CLOUD_NAME;
+  cloudKeys.Image_Url = process.env.IMAGE_URL;
+}
 
 export default class crewLeaderSummary extends Component {
   constructor(props) {
@@ -51,7 +59,7 @@ export default class crewLeaderSummary extends Component {
       <div>
         <Media>
           <Media.Left>
-            <Image src={Image_Url + publicId} alt="Image" className="crew-image"/>
+            <Image src={cloudKeys.Image_Url + publicId} alt="Image" className="crew-image"/>
           </Media.Left>
           <Media.Body>
             <Media.Heading>

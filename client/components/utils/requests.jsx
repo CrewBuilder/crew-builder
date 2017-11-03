@@ -1,6 +1,6 @@
 module.exports = {
   // Sets the path for 'fetches'
-  host: process.env.HOST || 'http://localhost:3000/',
+  host: process.env.HOST || '/',
 
   // Returns all of current user's crews. Will be rendered in sidebar view.
   GetUserCrews: (userId, cb) => {

@@ -1,5 +1,6 @@
 const
   path = require('path'),
+  UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
   webpack = require('webpack');
 
 module.exports = {
@@ -33,9 +34,26 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        CLOUD_NAME: JSON.stringify(process.env.CLOUD_NAME),
+        DB_PORT: JSON.stringify(process.env.DB_PORT),
+        CLOUDINARY_UPLOAD_PRESET: JSON.stringify(process.env.CLOUDINARY_UPLOAD_PRESET),
+        CLOUDINARY_UPLOAD_URL: JSON.stringify(process.env.CLOUDINARY_UPLOAD_URL),
+        IMAGE_URL: JSON.stringify(process.env.IMAGE_URL),
+        DEV_MODE: JSON.stringify(process.env.DEV_MODE),
+        HOST: JSON.stringify(process.env.HOST)
+      }
+    }),
     new webpack.ProvidePlugin({
       React: 'react',
       ReactDOM: 'react-dom'
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      parallel: true,
+      compress: {
+        warnings: false
+      }
     })
   ]
 };

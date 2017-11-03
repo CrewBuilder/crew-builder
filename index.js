@@ -18,7 +18,7 @@ const app = express();
 //CORS config
 let corsOption = {
   origin: true,
-  methods: 'GET,HEAD,PUT,POST,DELETE',
+  methods: 'OPTIONS,GET,HEAD,PUT,POST,DELETE',
   credentials: true,
   exposedHeaders: ['x-auth-token']
 };
