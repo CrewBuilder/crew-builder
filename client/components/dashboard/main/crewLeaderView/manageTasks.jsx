@@ -7,6 +7,7 @@ export default class ManageTasks extends Component {
     super(props);
     this.state = {
       showModal: false,
+      displayModal: false,
       newTask: ''
     };
 
@@ -16,12 +17,18 @@ export default class ManageTasks extends Component {
       })
     }
 
-    this.close = () => {
+    this.show = () => {
       this.setState({
-        showModal: false
+        displayModal: true
       })
     }
 
+    this.close = () => {
+      this.setState({
+        showModal: false,
+        displayModal: false
+      })
+    }
 
     this.func = () => {
       if (this.state.newTask.length !== 0)
@@ -32,7 +39,7 @@ export default class ManageTasks extends Component {
 
     this.handleSelect = (task) => {
       console.log(task, 'task')
-      this.open()
+      this.show()
     }
   }
 
@@ -54,6 +61,12 @@ export default class ManageTasks extends Component {
             <AddTask {...this.props}/>
           </Modal.Body>
         </Modal>
+        <Modal show={this.state.displayModal} onHide={this.close}>
+          <Modal.Header closeButton>
+            Hello!
+          </Modal.Header>
+        </Modal>
+
       </div>
     )
   }
