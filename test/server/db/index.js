@@ -51,14 +51,14 @@ describe('Postgres crewbuilder db', function() {
   });
 
   it('Should delete a task and all associated user_tasks', function(done) {
-    taskHelpers.deleteTask(4)
+    taskHelpers.deleteTask(5)
       .then(deleted => {
         expect(deleted).to.equal(1);
       })
       .then(() => {
         return db.user_task.findAll({
           where: {
-            task_id: 4
+            task_id: 5
           }
         });
       })
