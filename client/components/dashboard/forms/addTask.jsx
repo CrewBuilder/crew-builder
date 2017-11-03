@@ -47,36 +47,34 @@ export default class addTask extends Component {
       // var date = moment();
       // console.log(date.format())
       // note: never set state in handleSubmit...
-        let points = Number(this.state.Points)
-        let limit = Number(this.state.Limit)
-        var obj = {
-          name: this.state.name,
-          description: this.state.description,
-          points: points,
-          limit: limit,
-          expiry: this.state.expiry
+      let points = Number(this.state.Points)
+      let limit = Number(this.state.Limit)
+      var obj = {
+        name: this.state.name,
+        description: this.state.description,
+        points: points,
+        limit: limit,
+        expiry: this.state.expiry
+      }
+      console.log('whole object', obj)
+      console.log(typeof obj.Points, 'pointstype')
+      PostTask(obj, this.props.currentCrew.crew.id, function(err, data) {
+        if (err) {
+          console.log('error in posting task');
         }
-        console.log('whole object', obj)
-        console.log(typeof obj.Points, 'pointstype')
-        PostTask(obj, this.props.data.currentCrew.crew.id, function(err, data) {
-          if (err) {
-            console.log('error in posting task');
-          }
 
-          if (data) {
-            console.log('posted!!!!!!!!!!!')
-            console.log(data, 'data')
-            console.log(props.data.currentCrewTasks, 'TASK')
-            props.data.currentCrewTasks.push(data)
-          }
-        })
+        if (data) {
+          // console.log('posted!!!!!!!!!!!')
+          // console.log(props.currentCrewTasks, 'TASK')
+          props.getUserTasks(props.userId, props.currentCrew.crew.id)
+        }
+      })
     }
-
   }
 
 
   render() {
-    console.log('this.props', this.props.data.currentCrewTasks)
+    console.log('this.props', this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
