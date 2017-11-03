@@ -41,7 +41,8 @@ module.exports = {
         CLOUDINARY_UPLOAD_PRESET: JSON.stringify(process.env.CLOUDINARY_UPLOAD_PRESET),
         CLOUDINARY_UPLOAD_URL: JSON.stringify(process.env.CLOUDINARY_UPLOAD_URL),
         IMAGE_URL: JSON.stringify(process.env.IMAGE_URL),
-        DEV_MODE: JSON.stringify(process.env.DEV_MODE)
+        DEV_MODE: JSON.stringify(process.env.DEV_MODE),
+        HOST: JSON.stringify(process.env.HOST)
       }
     }),
     new webpack.ProvidePlugin({

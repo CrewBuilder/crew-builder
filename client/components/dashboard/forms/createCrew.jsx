@@ -17,7 +17,6 @@ if (process.env.DEV_MODE === 'production') {
   cloudKeys.CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
 }
 
-
 // import {cloud_name, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL} from './configfile.js'
 
 export default class CreateCrew extends Component {
