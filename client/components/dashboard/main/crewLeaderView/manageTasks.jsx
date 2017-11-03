@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem, Modal } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Modal, Button } from 'react-bootstrap';
 import AddTask from './../../forms/addTask.jsx';
 
 export default class ManageTasks extends Component {
@@ -8,7 +8,8 @@ export default class ManageTasks extends Component {
     this.state = {
       showModal: false,
       displayModal: false,
-      newTask: ''
+      newTask: '',
+      task: {}
     };
 
     this.open = () => {
@@ -39,13 +40,14 @@ export default class ManageTasks extends Component {
 
     this.handleSelect = (task) => {
       console.log(task, 'task')
-      this.data = task.name
+
+      this.setState({task: task})
       this.show()
     }
   }
 
   render() {
-    console.log('line 51 in ManageTasks', this.props)
+    console.log('line 51 in ManageTasks', this.state.task)
     return (
       <div>
         <ListGroup>
@@ -64,8 +66,18 @@ export default class ManageTasks extends Component {
         </Modal>
         <Modal show={this.state.displayModal} onHide={this.close}>
           <Modal.Header closeButton>
-            Hello! + {this.data}
+            <Modal.Title>{this.state.task.name}</Modal.Title>
           </Modal.Header>
+          <Modal.Body>
+            <h4>Points: {this.state.task.points}</h4>
+            <h4>Limit: {this.state.task.limit}</h4>
+            <h4>Expires: {this.state.task.expiry}</h4>
+            <h4>Description</h4>
+            <p>{this.state.task.description}</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.delete}>Delete</Button>
+          </Modal.Footer>
         </Modal>
 
       </div>
