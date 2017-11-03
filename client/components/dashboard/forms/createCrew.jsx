@@ -6,7 +6,19 @@ import { Image, CloudinaryContext, Transformation} from 'cloudinary-react';
 import Dropzone from 'react-dropzone';
 import cloudinary from 'cloudinary-core';
 import request from 'superagent';
-import {cloud_name, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL} from './configfile.js'
+
+let cloudKeys;
+
+if (process.env.DEV_MODE === 'production') {
+  cloudKeys = require('./configfile.js');
+} else {
+  cloudKeys.cloud_name = process.env.CLOUD_NAME;
+  cloudKeys.CLOUDINARY_UPLOAD_URL = process.env.CLOUDINARY_UPLOAD_URL;
+  cloudKeys.CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
+}
+
+
+// import {cloud_name, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL} from './configfile.js'
 
 export default class CreateCrew extends Component {
   constructor(props) {
@@ -60,8 +72,8 @@ export default class CreateCrew extends Component {
   }
 
   handleImageUpload(file) {
-  let upload = request.post(process.env.CLOUDINARY_UPLOAD_URL || CLOUDINARY_UPLOAD_URL)
-                      .field('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET || CLOUDINARY_UPLOAD_PRESET)
+  let upload = request.post(cloudKeys.CLOUDINARY_UPLOAD_URL)
+                      .field('upload_preset', cloudKeys.CLOUDINARY_UPLOAD_PRESET)
                       .field('file', file)
 
   upload.end((err, response) => {
@@ -92,7 +104,7 @@ export default class CreateCrew extends Component {
               {this.state.uploadedFileCloudinaryUrl !== '' ?
               <div>
                 <p>{this.state.uploadedFile.name}</p>
-                <Image cloudName={process.env.CLOUD_NAME || cloud_name} publicId={this.state.uploadedFileCloudinaryUrl} width="200" crop="scale"/>
+                <Image cloudName={cloudKeys.cloud_name} publicId={this.state.uploadedFileCloudinaryUrl} width="200" crop="scale"/>
               </div> : <div>
               <p>Drop an image or click to select a file to upload.</p>
               </div>}
