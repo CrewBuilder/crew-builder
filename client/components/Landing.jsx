@@ -32,6 +32,8 @@ export default class Landing extends Component {
 
   render() {
 
+    console.log(process.env);
+
     return(
       <div className="vertical-center">
         <Jumbotron className="landing-container">
