@@ -15,6 +15,7 @@ body {
   background-color: #fff;
 }
 
+
 .cover-background {
   background-color: #fff;
 }
@@ -197,7 +198,7 @@ body {
 
 @media (max-width: 768px) {
   .sidebar-container {
-    min-height: 0;
+    min-height: 50px;
   }
   .dashboard-container {
     min-height: 200px;
@@ -271,12 +272,20 @@ body {
 
 @media (max-width: 918px) {
   .crew-image {
+    clearfix()
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .crew-image {
     max-width: 100px;
     max-height: 100px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 440px) {
   .crew-image {
     max-width: 50px;
     max-height: 50px;

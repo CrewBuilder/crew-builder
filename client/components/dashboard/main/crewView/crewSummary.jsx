@@ -37,10 +37,10 @@ export default class CrewSummary extends Component {
       `Complete some tasks to help the cause and gain achievements!`;
 
     return (
-      <div>
+      <div className="clearfix">
         <Media>
           <Media.Left>
-            <Image src={this.props.currentCrew.crew.image} alt='Image' className="crew-image"/>
+            <Image src={this.props.currentCrew.crew.image} alt='Image' className="crew-image" responsive={true} />
           </Media.Left>
 
           <Media.Body>
