@@ -187,7 +187,6 @@
 }
 
 ##PUT Endpoints
-//TODO: Leader verify task endpoint, Member claim complete
 ###'user/tasks'
 ####req.body (request will know which action to do based on fields included)
 {
@@ -196,6 +195,14 @@
 }
 
 ##DELETE Endpoints
-//TODO: Leader delete task endpoint
+### 'user/crews'
+TODO: for cleanup this should probably be changed to only accept a query string
+####req.body
+{
+  userId: INT, user id
+  crewId: INT, crew id
+}
+sends back 202 with no data
 
-
+###'leader/tasks?taskId={TASK ID}'
+sends back 202 with no data
