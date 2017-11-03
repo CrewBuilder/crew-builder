@@ -5,16 +5,8 @@ import { Transformation } from 'cloudinary-react';
 import CreateCrew from './../../forms/createCrew.jsx'
 
 
-let cloudKeys;
 
-if (process.env.DEV_MODE === 'production') {
-  cloudKeys = require('../../forms/configfile.js');
-} else {
-//   cloudKeys.cloud_name = process.env.CLOUD_NAME;
-//   cloudKeys.Image_Url = process.env.IMAGE_URL;
-}
-
-// import { cloud_name, Image_Url } from '../../forms/configfile.js'
+import { cloud_name, Image_Url } from '../../forms/configfile.js'
 
 
 export default class crewLeaderSummary extends Component {

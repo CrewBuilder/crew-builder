@@ -9,6 +9,7 @@ import request from 'superagent';
 
 let cloudKeys;
 
+<<<<<<< HEAD
 if (process.env.DEV_MODE === 'production') {
   cloudKeys = require('./configfile.js');
 } else {
@@ -16,6 +17,20 @@ if (process.env.DEV_MODE === 'production') {
   // cloudKeys.CLOUDINARY_UPLOAD_URL = process.env.CLOUDINARY_UPLOAD_URL;
   // cloudKeys.CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
 }
+=======
+// if (process.env.DEV_MODE === 'production') {
+//   cloudKeys = require('./configfile.js');
+// } else {
+//   cloudKeys.cloud_name = process.env.CLOUD_NAME;
+//   cloudKeys.CLOUDINARY_UPLOAD_URL = process.env.CLOUDINARY_UPLOAD_URL;
+//   cloudKeys.CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
+// }
+
+cloudKeys.cloud_name: 'sarikonda',
+cloudKeys.CLOUDINARY_UPLOAD_PRESET: 'rqsqai1h',
+cloudKeys.CLOUDINARY_UPLOAD_URL: 'https://api.cloudinary.com/v1_1/sarikonda/upload',
+cloudKeys.Image_Url: "https://res.cloudinary.com/sarikonda/w_300,h_200,c_crop/"
+>>>>>>> test deploy cloudinary keys
 
 // import {cloud_name, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL} from './configfile.js'
 
