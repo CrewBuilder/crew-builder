@@ -147,7 +147,7 @@ export default class Dashboard extends Component {
           />
           <Grid>
             <Row className="show-grid clearfix">
-              <Col xs={2} sm={2} md={2} lg={3} className="outlineBox sidebar-container">
+              <Col xs={10} sm={2} md={2} lg={3} className="outlineBox sidebar-container">
                 <Sidebar
                   user={this.state.user}
                   userLeaderCrews={this.state.userLeaderCrews}
@@ -155,7 +155,7 @@ export default class Dashboard extends Component {
                   setCurrentCrew={this.setCurrentCrew}
                 />
               </Col>
-              <Col xs={10} sm={10} md={10} lg={9} className="clearfix outlineBox dashboard-container">
+              <Col xs={12} sm={10} md={10} lg={9} className="clearfix outlineBox dashboard-container">
                 <Main
                   user={this.state.user}
                   getCurrentCrews={this.getCurrentCrews}

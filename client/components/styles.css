@@ -265,6 +265,7 @@ body {
 }
 
 .social-button {
+  @include clearfix;
   padding-left: 5px;
 }
 
