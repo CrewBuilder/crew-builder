@@ -22,17 +22,6 @@ export default class ManageTasks extends Component {
       })
     }
 
-    this.addTaskData = (data) => {
-      console.log(data)
-      this.setState({
-        newTask: data
-      }, function(err, data) {
-        if (err)
-          console.log(err);
-        else
-          this.func();
-      })
-    }
 
     this.func = () => {
       if (this.state.newTask.length !== 0)
@@ -62,7 +51,7 @@ export default class ManageTasks extends Component {
             Add/Update a Task
           </Modal.Header>
           <Modal.Body>
-            <AddTask taskData={this.addTaskData} updateData={this.handleSelect} data={this.props}/>
+            <AddTask {...this.props}/>
           </Modal.Body>
         </Modal>
       </div>
