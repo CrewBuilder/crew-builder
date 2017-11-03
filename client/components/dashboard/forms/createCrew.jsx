@@ -8,6 +8,7 @@ import cloudinary from 'cloudinary-core';
 import request from 'superagent';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 let cloudKeys;
 
 <<<<<<< HEAD
@@ -47,8 +48,20 @@ let cloudKeys = {
   CLOUDINARY_UPLOAD_PRESET: 'rqsqai1h',
   CLOUDINARY_UPLOAD_URL: 'https://api.cloudinary.com/v1_1/sarikonda/upload',
   Image_Url: 'https://res.cloudinary.com/sarikonda/w_300,h_200,c_crop/'
+=======
+let cloudKeys;
+
+if (process.env.DEV_MODE === 'production') {
+  cloudKeys = require('./configfile.js');
+} else {
+  cloudKeys.cloud_name = process.env.CLOUD_NAME;
+  cloudKeys.CLOUDINARY_UPLOAD_URL = process.env.CLOUDINARY_UPLOAD_URL;
+  cloudKeys.CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
+>>>>>>> revert back to configfile temp
 }
 >>>>>>> test deploy heroku
+
+// import {cloud_name, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL} from './configfile.js'
 
 export default class CreateCrew extends Component {
   constructor(props) {
