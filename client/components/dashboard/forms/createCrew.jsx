@@ -7,6 +7,7 @@ import Dropzone from 'react-dropzone';
 import cloudinary from 'cloudinary-core';
 import request from 'superagent';
 
+<<<<<<< HEAD
 let cloudKeys;
 
 <<<<<<< HEAD
@@ -40,6 +41,14 @@ cloudKeys.Image_Url = "https://res.cloudinary.com/sarikonda/w_300,h_200,c_crop/"
 >>>>>>> test deploy cloudinary keys 2
 
 // import {cloud_name, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL} from './configfile.js'
+=======
+let cloudKeys = {
+  cloud_name: 'sarikonda',
+  CLOUDINARY_UPLOAD_PRESET: 'rqsqai1h',
+  CLOUDINARY_UPLOAD_URL: 'https://api.cloudinary.com/v1_1/sarikonda/upload',
+  Image_Url: 'https://res.cloudinary.com/sarikonda/w_300,h_200,c_crop/'
+}
+>>>>>>> test deploy heroku
 
 export default class CreateCrew extends Component {
   constructor(props) {
