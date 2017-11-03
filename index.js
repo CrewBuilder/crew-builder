@@ -8,6 +8,7 @@ const fbRouting = require('./server/auth/utils/facebookTokens.js');
 const modelRouting = require('./server/db/routing/config.js');
 const cors = require('cors');
 const passportConfig = require('./server/auth/passport.js');
+const db = require('./server/db/index.js');
 require('dotenv').config();
 
 passportConfig();
@@ -40,8 +41,10 @@ app.get('*', (req, res) => {
 // CHECK PORT AND START SERVER
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log('SERVER STARTED: Listening on port:' + port);
+db.sequelize.sync().then(() => {
+  app.listen(port, () => {
+    console.log('SERVER STARTED: Listening on port:' + port);
+  });
 });
 
 module.exports = app;
