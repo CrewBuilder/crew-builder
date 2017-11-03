@@ -54,6 +54,7 @@ export default class CrewLeaderView extends Component {
               userId={this.props.user.id}
               currentCrewTasks={this.props.currentCrewTasks}
               currentCrew={this.props.currentCrew}
+              getUserTasks={this.props.getUserTasks}
             />
           </Panel>
         </PanelGroup>
