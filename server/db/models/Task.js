@@ -6,7 +6,23 @@ module.exports = function(sequelize, DataTypes) {
     limit: DataTypes.INTEGER,
     expiry: DataTypes.DATE,
     task_url: DataTypes.TEXT
+  }, {
+    hooks: {
+      afterCreate: () => {
+        Task.expire();
+      }
+    }
   });
+
+  Task.expire = function() {
+    return this.destroy({
+      where: {
+        expiry: {
+          $lt: new Date()
+        }
+      }
+    });
+  },
 
   Task.associate = function(models) {
     Task.belongsTo(models.crew, {foreignKey: 'crew_id'});
