@@ -10,7 +10,11 @@ import request from 'superagent';
 let cloudKeys;
 
 if (process.env.DEV_MODE === 'production') {
-  cloudKeys = require('./configfile.js');
+  console.log('Comment out 13-16, and uncomment Line 17 of createCrew.jsx in forms')
+  cloudKeys.cloud_name = '';
+  cloudKeys.CLOUDINARY_UPLOAD_URL = '';
+  cloudKeys.CLOUDINARY_UPLOAD_PRESET = '';
+  // cloudKeys = require('./configfile.js');
 } else {
   cloudKeys.cloud_name = process.env.CLOUD_NAME;
   cloudKeys.CLOUDINARY_UPLOAD_URL = process.env.CLOUDINARY_UPLOAD_URL;
