@@ -39,6 +39,7 @@ export default class ManageTasks extends Component {
 
     this.handleSelect = (task) => {
       console.log(task, 'task')
+      this.data = task.name
       this.show()
     }
   }
@@ -49,7 +50,7 @@ export default class ManageTasks extends Component {
       <div>
         <ListGroup>
           {this.props.currentCrewTasks.map((task, i) => (
-            <ListGroupItem key={i} onClick={() => this.handleSelect(task.name)}>{task.name}</ListGroupItem>
+            <ListGroupItem key={i} onClick={() => this.handleSelect(task)}>{task.name}</ListGroupItem>
           )) }
           <ListGroupItem onClick={this.open}>+ addTask</ListGroupItem>
         </ListGroup>
@@ -63,7 +64,7 @@ export default class ManageTasks extends Component {
         </Modal>
         <Modal show={this.state.displayModal} onHide={this.close}>
           <Modal.Header closeButton>
-            Hello!
+            Hello! + {this.data}
           </Modal.Header>
         </Modal>
 
