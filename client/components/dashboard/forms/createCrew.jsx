@@ -12,9 +12,9 @@ let cloudKeys;
 if (process.env.DEV_MODE === 'production') {
   cloudKeys = require('./configfile.js');
 } else {
-  cloudKeys.cloud_name = process.env.CLOUD_NAME;
-  cloudKeys.CLOUDINARY_UPLOAD_URL = process.env.CLOUDINARY_UPLOAD_URL;
-  cloudKeys.CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
+  // cloudKeys.cloud_name = process.env.CLOUD_NAME;
+  // cloudKeys.CLOUDINARY_UPLOAD_URL = process.env.CLOUDINARY_UPLOAD_URL;
+  // cloudKeys.CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
 }
 
 // import {cloud_name, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL} from './configfile.js'

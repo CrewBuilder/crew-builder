@@ -16,7 +16,7 @@ export default class CrewView extends Component {
 
   render() {
     return (
-      <div className="cover-background clearfix">
+      <div className="cover-background clearfix container-fluid">
         <PanelGroup>
           <Panel collapsible defaultExpanded={true} header="Crew Summary" eventKey="1">
             <CrewSummary

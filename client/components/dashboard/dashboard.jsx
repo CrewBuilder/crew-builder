@@ -155,7 +155,7 @@ export default class Dashboard extends Component {
                   setCurrentCrew={this.setCurrentCrew}
                 />
               </Col>
-              <Col xs={2} sm={10} md={10} lg={9} className="outlineBox dashboard-container">
+              <Col xs={10} sm={10} md={10} lg={9} className="clearfix outlineBox dashboard-container">
                 <Main
                   user={this.state.user}
                   getCurrentCrews={this.getCurrentCrews}

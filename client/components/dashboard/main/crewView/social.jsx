@@ -47,9 +47,9 @@ export default class Social extends Component {
   render() {
 
     return (
-      <div className="social-button-container">
+      <div className="social-button-container container-fluid">
 
-        <div className="social-button">
+        <div className="img-responsive social-button">
           <FacebookShareButton
             url={this.state.shareUrl}
             quote={this.state.message}
@@ -61,7 +61,7 @@ export default class Social extends Component {
           </FacebookShareButton>
         </div>
 
-        <div className="social-button">
+        <div className="img-responsive social-button">
           <TwitterShareButton
             url={this.state.shareUrl}
             title={this.state.message}

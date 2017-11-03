@@ -1,4 +1,11 @@
 /* APPLICATION */
+@mixin clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
 
 html {
   position: relative;
@@ -170,12 +177,14 @@ body {
 /* DASHBOARD */
 
 .dashboard-container {
+  @include clearfix;
   min-height: 500px;
 }
 
 /* SIDEBAR */
 
 .sidebar-container {
+  @include clearfix;
   min-height: 500px;
 }
 
@@ -267,27 +276,23 @@ body {
 
 .crew-image {
   max-width: 200px;
-  max-height: 200px;
 }
 
 @media (max-width: 918px) {
   .crew-image {
-    clearfix()
+
     max-width: 150px;
-    max-height: 150px;
   }
 }
 
 @media (max-width: 768px) {
   .crew-image {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 150px;
   }
 }
 
 @media (max-width: 440px) {
   .crew-image {
-    max-width: 50px;
-    max-height: 50px;
+    max-width: 100px;
   }
 }

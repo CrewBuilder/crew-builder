@@ -9,8 +9,8 @@ let cloudKeys;
 if (process.env.DEV_MODE === 'production') {
   cloudKeys = require('../../forms/configfile.js');
 } else {
-  cloudKeys.cloud_name = process.env.CLOUD_NAME;
-  cloudKeys.Image_Url = process.env.IMAGE_URL;
+//   cloudKeys.cloud_name = process.env.CLOUD_NAME;
+//   cloudKeys.Image_Url = process.env.IMAGE_URL;
 }
 
 export default class crewLeaderSummary extends Component {
