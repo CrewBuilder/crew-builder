@@ -107,7 +107,7 @@ module.exports = {
         'x-auth-token': localStorage.getItem('id_token')
       })
     };
-    return fetch(`${module.exports.host}auth/facebook`, options)
+    return fetch(`${module.exports.host}auth/me`, options)
     .then((response) => {
       if(!response.ok){
         return false
