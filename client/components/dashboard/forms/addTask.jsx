@@ -42,13 +42,11 @@ export default class addTask extends Component {
       this.task = e.target.value;
     }
 
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    // var date = moment();
-    // console.log(date.format())
-    // note: never set state in handleSubmit...
+    this.handleSubmit = (e) => {
+      e.preventDefault();
+      // var date = moment();
+      // console.log(date.format())
+      // note: never set state in handleSubmit...
       let points = Number(this.state.Points)
       let limit = Number(this.state.Limit)
       var obj = {
@@ -60,23 +58,26 @@ export default class addTask extends Component {
       }
       console.log('whole object', obj)
       console.log(typeof obj.Points, 'pointstype')
-      PostTask(obj, 16, function(err, data) {
+      PostTask(obj, this.props.currentCrew.crew.id, function(err, data) {
         if (err) {
           console.log('error in posting task');
         }
 
         if (data) {
-          console.log('posted!!!!!!!!!!!')
-          console.log(data, 'data')
+          // console.log('posted!!!!!!!!!!!')
+          // console.log(props.currentCrewTasks, 'TASK')
+          props.getUserTasks(props.userId, props.currentCrew.crew.id)
         }
       })
+    }
   }
+
 
   render() {
     console.log('this.props', this.props)
     return (
       <div>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form onSubmit={this.handleSubmit}>
           <FormGroup>
             <ControlLabel>Name of the task</ControlLabel>
             <FormControl type="text" placeholder="Add a new Task" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
@@ -95,7 +96,7 @@ export default class addTask extends Component {
             <ControlLabel>Expiry Date</ControlLabel>
             <DateTime utc={true} onChange={(e) => this.show(e)}/>
           </FormGroup>
-            <Button type="submit" onClick={this.setCurrDate}>
+            <Button type="submit">
                Add a task
             </Button>
         </form>

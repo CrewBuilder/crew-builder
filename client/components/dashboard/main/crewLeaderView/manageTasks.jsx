@@ -7,6 +7,7 @@ export default class ManageTasks extends Component {
     super(props);
     this.state = {
       showModal: false,
+      displayModal: false,
       newTask: ''
     };
 
@@ -16,21 +17,16 @@ export default class ManageTasks extends Component {
       })
     }
 
-    this.close = () => {
+    this.show = () => {
       this.setState({
-        showModal: false
+        displayModal: true
       })
     }
 
-    this.addTaskData = (data) => {
-      console.log(data)
+    this.close = () => {
       this.setState({
-        newTask: data
-      }, function(err, data) {
-        if (err)
-          console.log(err);
-        else
-          this.func();
+        showModal: false,
+        displayModal: false
       })
     }
 
@@ -43,7 +39,8 @@ export default class ManageTasks extends Component {
 
     this.handleSelect = (task) => {
       console.log(task, 'task')
-      this.open()
+      this.data = task.name
+      this.show()
     }
   }
 
@@ -53,7 +50,7 @@ export default class ManageTasks extends Component {
       <div>
         <ListGroup>
           {this.props.currentCrewTasks.map((task, i) => (
-            <ListGroupItem key={i} onClick={() => this.handleSelect(task.name)}>{task.name}</ListGroupItem>
+            <ListGroupItem key={i} onClick={() => this.handleSelect(task)}>{task.name}</ListGroupItem>
           )) }
           <ListGroupItem onClick={this.open}>+ addTask</ListGroupItem>
         </ListGroup>
@@ -62,9 +59,15 @@ export default class ManageTasks extends Component {
             Add/Update a Task
           </Modal.Header>
           <Modal.Body>
-            <AddTask taskData={this.addTaskData} updateData={this.handleSelect} data={this.props}/>
+            <AddTask {...this.props}/>
           </Modal.Body>
         </Modal>
+        <Modal show={this.state.displayModal} onHide={this.close}>
+          <Modal.Header closeButton>
+            Hello! + {this.data}
+          </Modal.Header>
+        </Modal>
+
       </div>
     )
   }
