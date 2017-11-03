@@ -7,7 +7,10 @@ import CreateCrew from './../../forms/createCrew.jsx'
 let cloudKeys;
 
 if (process.env.DEV_MODE === 'production') {
-  cloudKeys = require('../../forms/configfile.js');
+  console.log('Comment out 10-12, and uncomment Line 13 of crewSummary.jsx in crewLeaderView')
+  cloudKeys.cloud_name = '';
+  cloudKeys.Image_Url = '';
+  // cloudKeys = require('../../forms/configfile.js');
 } else {
   cloudKeys.cloud_name = process.env.CLOUD_NAME;
   cloudKeys.Image_Url = process.env.IMAGE_URL;
