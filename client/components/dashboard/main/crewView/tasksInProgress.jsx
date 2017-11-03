@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Modal, ListGroup, ListGroupItem, Button, Label } from 'react-bootstrap';
 import { UpdateTask } from '../../../utils/requests.jsx';
+const moment = require('moment');
 
 export default class TasksInProgress extends Component {
 
@@ -10,11 +11,15 @@ export default class TasksInProgress extends Component {
     this.state = {
       focusTask: props.userTasks,
       focusUserTask: props.userTasks,
-      showModal: false
+      showModal: false,
+      focusTaskExpiry: props.userTasks
     };
 
     this.openModal = (taskTarget) => {
+      let expiry = moment(this.state.focusTask.expiry).format("MM/DD/YYYY");
+      console.log('eexxx', expiry)
       this.setState({ focusTask: taskTarget });
+      this.setState({ focusTaskExpiry: expiry });
       this.setState({ focusUserTask: taskTarget.user_task });
       this.setState({ showModal: true });
     };
@@ -32,6 +37,8 @@ export default class TasksInProgress extends Component {
       });
       this.closeModal();
     };
+
+
 
   }
 
@@ -51,7 +58,7 @@ export default class TasksInProgress extends Component {
             <h4>Points: {this.state.focusTask.points}</h4>
             <div>
               <div>
-                <h4>Expires: {this.state.focusTask.expiry}</h4>
+                <h4>Expires: {this.state.focusTaskExpiry}</h4>
               </div>
               <h4>Completed? {(this.state.focusUserTask.completed === true) ? <span>Yes</span> :
                 <span>No <Button onClick={(e) => this.confirmTask(e)} >Click to request completion</Button></span>
