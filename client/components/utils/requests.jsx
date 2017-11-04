@@ -305,32 +305,27 @@ module.exports = {
       });
   },
 
-  // DeleteCrewTask: (taskId, crew_id, cb) => {
-  //   let route = `${module.exports.host}tasks/`;
-  //   let body = {
-  //     id: taskId,
-  //     crew_id: crew_id
-  //   };
-  //   let options = {
-  //     method: 'delete',
-  //     body: JSON.stringify(body),
-  //     headers: {
-  //       'Accept': 'application/json, text/plain, */*',
-  //       'Content-Type': 'application/json'
-  //     }
-  //   };
-  //   return fetch(route, options)
-  //     .then(response => {
-  //       console.log('======')
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log('--------')
-  //       cb(null, data);
-  //     })
-  //     .catch((error) => {
-  //       console.log('err', error)
-  //       cb(error, null);
-  //     })
-  // }
+  DeleteTask: (taskId, cb) => {
+    let route = `${module.exports.host}tasks?taskId=${taskId}`;
+    let options = {
+      method: 'delete',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    };
+    return fetch(route, options)
+      .then(response => {
+        console.log('======')
+        return response.json();
+      })
+      .then((data) => {
+        console.log('--------')
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('err', error)
+        cb(error, null);
+      })
+  }
 };
