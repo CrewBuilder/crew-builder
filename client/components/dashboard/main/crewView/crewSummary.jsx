@@ -1,6 +1,6 @@
 // This component renders a crewSummary card with some information and a picture
 import React, { Component } from 'react';
-import { Media, Image, Button, Alert, Badge } from 'react-bootstrap';
+import { Grid, Row, Col, Image, Button, Alert, Badge } from 'react-bootstrap';
 import { DeleteUserCrew } from '../../../utils/requests.jsx';
 
 export default class CrewSummary extends Component {
@@ -37,19 +37,19 @@ export default class CrewSummary extends Component {
       `Complete some tasks to help the cause and gain achievements!`;
 
     return (
-      <div>
-        <Media>
-          <Media.Left>
-            <Image src={this.props.currentCrew.crew.image} alt='Image' className="crew-image"/>
-          </Media.Left>
-
-          <Media.Body>
-            <Media.Heading>{this.props.currentCrew.crew.name}</Media.Heading>
+      <div className="clearfix container-fluid">
+        <Grid>
+          <Row className="show-grid clearfix ">
+            <Col xs={12} sm={12} md={2} lg={3} className="container-fluid">
+            <Image className="clearfix img-responsive" src={this.props.currentCrew.crew.image} alt='Image' />
+            </Col>
+          <Col xs={12} sm={12} md={8} lg={4} className="container-fluid">
+            <h2>{this.props.currentCrew.crew.name}</h2>
             <p><Badge>{this.props.currentCrew.role}</Badge><em> You have {this.props.currentCrew.points} points with this crew!</em></p>
             <p>{this.props.currentCrew.crew.description}</p>
             <p><strong>{achievementLevel}</strong></p>
-          </Media.Body>
-          <Media.Right>
+          </Col>
+          <Col xs={12} sm={12} md={1} lg={1} className="container-fluid">
 
             <div>
               {(this.state.showLeave === true) ? <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>
@@ -62,8 +62,9 @@ export default class CrewSummary extends Component {
                 </p>
               </Alert> : <Button onClick={this.leaveCrewHandler} > Leave </Button> }
             </div>
-          </Media.Right>
-        </Media>
+          </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import CrewSummary from './crewSummary.jsx';
 import TasksInProgress from './tasksInProgress.jsx';
 import TasksAvailable from './tasksAvailable.jsx';
-import {Panel, PanelGroup} from 'react-bootstrap';
+import { Panel, PanelGroup, ResponsiveEmbed } from 'react-bootstrap';
 // Compares userTasks to crewTasks => sends to tasksInProgress and tasksAvailable respectively
 
 import Social from './social.jsx';
@@ -16,7 +16,7 @@ export default class CrewView extends Component {
 
   render() {
     return (
-      <div className="cover-background">
+      <div className="cover-background clearfix container-fluid">
         <PanelGroup>
           <Panel collapsible defaultExpanded={true} header="Crew Summary" eventKey="1">
             <CrewSummary
