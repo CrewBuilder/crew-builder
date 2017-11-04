@@ -48,6 +48,7 @@ export default class ManageTasks extends Component {
 
     this.delete = (e) => {
       e.preventDefault();
+      //this.close()
       console.log(this.state.task, 'task in line 51')
       DeleteTask(this.state.task.id, function(err, done) {
         if (err) {
@@ -59,6 +60,7 @@ export default class ManageTasks extends Component {
           props.getUserTasks(props.userId, props.currentCrew.crew.id)
         }
       })
+      this.close()
     }
   }
 

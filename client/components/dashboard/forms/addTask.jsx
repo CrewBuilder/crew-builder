@@ -65,7 +65,7 @@ export default class addTask extends Component {
         if (data) {
           // console.log('posted!!!!!!!!!!!')
           // console.log(props.currentCrewTasks, 'TASK')
-          props.getUserTasks(props.userId, props.currentCrew.crew.id)
+          props.getUserTasks(props.userId, props.currentCrew.crew.id);
         }
       })
     }
