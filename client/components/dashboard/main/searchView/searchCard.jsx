@@ -8,17 +8,11 @@ export default class SearchCard extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      crew: props.crew
-    };
     this.joinHandler = (e) => {
       e.preventDefault();
-      this.props.joinCrew(this.state.crew);
-    }
-
-
+      this.props.joinCrew(this.props.crew);
+    };
     // Expect 'props' to contain 'crew' and 'handleCrewClick' function which sets current crew in main view
-
   }
 
   render() {
@@ -37,7 +31,7 @@ export default class SearchCard extends Component {
         </Media.Body>
         {(this.props.count + 1 ) % 3 === 0 ?
           null
-        : <hr className="hr-break" /> }
+          : <hr className="hr-break" /> }
       </Media>
     );
   }

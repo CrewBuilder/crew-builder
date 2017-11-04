@@ -61,7 +61,6 @@ export default class App extends Component {
               changeLoginStatus={this.changeLoginStatus}
               />
             )}/>
-            <Redirect to="/" />
           </Switch>
         </div>
       )
