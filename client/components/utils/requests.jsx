@@ -317,6 +317,8 @@ module.exports = {
     return fetch(route, options)
       .then(response => {
         console.log('delete successful')
+        console.log(response, 'response')
+        cb(null, response)
       })
       .catch((error) => {
         console.log('err', error)
