@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Modal, Button } from 'react-bootstrap';
 import AddTask from './../../forms/addTask.jsx';
+// import { DeleteCrewTask } from '../../../utils/requests.jsx'
 
 export default class ManageTasks extends Component {
   constructor(props) {
@@ -43,6 +44,19 @@ export default class ManageTasks extends Component {
 
       this.setState({task: task})
       this.show()
+    }
+
+    this.delete = (e) => {
+      e.preventDefault();
+      console.log(this.state.task, '===========')
+      DeleteCrewTask(this.state.task.id, this.state.crew_id, function(err, done) {
+        if (err) {
+          console.log('problem in deleting')
+        }
+        if (done) {
+          console.log('done', done)
+        }
+      })
     }
   }
 
