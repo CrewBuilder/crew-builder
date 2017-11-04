@@ -40,16 +40,16 @@ export default class CrewSummary extends Component {
       <div className="clearfix container-fluid">
         <Grid>
           <Row className="show-grid clearfix ">
-            <Col xs={8} sm={8} md={2} lg={2} className="container-fluid">
+            <Col xs={12} sm={12} md={2} lg={3} className="container-fluid">
             <Image className="clearfix img-responsive" src={this.props.currentCrew.crew.image} alt='Image' />
             </Col>
-          <Col xs={8} sm={8} md={6} lg={4} className="container-fluid">
+          <Col xs={12} sm={12} md={8} lg={4} className="container-fluid">
             <h2>{this.props.currentCrew.crew.name}</h2>
             <p><Badge>{this.props.currentCrew.role}</Badge><em> You have {this.props.currentCrew.points} points with this crew!</em></p>
             <p>{this.props.currentCrew.crew.description}</p>
             <p><strong>{achievementLevel}</strong></p>
           </Col>
-          <Col xs={5} sm={5} md={1} lg={1} className="container-fluid">
+          <Col xs={12} sm={12} md={1} lg={1} className="container-fluid">
 
             <div>
               {(this.state.showLeave === true) ? <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>
