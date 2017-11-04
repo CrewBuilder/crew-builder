@@ -26,7 +26,6 @@ export default class addTask extends Component {
           return data
         }
       })
-      console.log(this.state.expiry, 'expirtttt')
     }
 
     this.getValidationState = () => {
@@ -56,8 +55,8 @@ export default class addTask extends Component {
         limit: limit,
         expiry: this.state.expiry
       }
-      console.log('whole object', obj)
-      console.log(typeof obj.Points, 'pointstype')
+      //console.log('whole object', obj)
+      //console.log(typeof obj.points, 'pointstype')
       PostTask(obj, this.props.currentCrew.crew.id, function(err, data) {
         if (err) {
           console.log('error in posting task');
@@ -74,7 +73,7 @@ export default class addTask extends Component {
 
 
   render() {
-    console.log('this.props', this.props)
+    // console.log('this.props', this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
