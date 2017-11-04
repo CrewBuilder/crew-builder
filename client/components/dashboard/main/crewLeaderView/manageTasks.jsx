@@ -48,13 +48,14 @@ export default class ManageTasks extends Component {
 
     this.delete = (e) => {
       e.preventDefault();
+      console.log(this.state.task, 'task in line 51')
       DeleteTask(this.state.task.id, function(err, done) {
         if (err) {
           console.log('problem in deleting')
         }
         if (done) {
-          console.log('done', done)
-          console.log(typeof GetLeaderTasks, GetLeaderTasks, '----------')
+          console.log('done', done);
+          // console.log(typeof GetLeaderTasks, GetLeaderTasks, '----------')
           props.getUserTasks(props.userId, props.currentCrew.crew.id)
         }
       })
