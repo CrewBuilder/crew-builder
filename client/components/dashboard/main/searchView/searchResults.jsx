@@ -15,7 +15,6 @@ export default class SearchResults extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.user,
       activePage: 1,
       rangeLow: 0,
       rangeHigh: 3,
@@ -25,10 +24,10 @@ export default class SearchResults extends Component {
       let crew_id = crew.id;
       let userId = this.props.user.id;
       JoinACrew(userId, crew_id, (err, data) => {
-        if(err) {
+        if (err) {
           console.log('Error', err);
         } else {
-          console.log('Data', data);
+          // console.log('Data', data);
           props.getCurrentCrews(userId);
         }
       });
@@ -42,7 +41,7 @@ export default class SearchResults extends Component {
         rangeLow: ((3 * eventKey) - 3),
         rangeHigh: (3 * eventKey)
       });
-    }
+    };
 
   }
 
@@ -57,42 +56,42 @@ export default class SearchResults extends Component {
 
   render() {
 
-    if(!this.props.searchResults){
+    if (!this.props.searchResults) {
       return (
         <div />
-      )
+      );
     } else {
 
       const browseOrSearch = this.props.searchField ?
         `Search results for ${this.props.searchField}` :
-        `Browse some of our crews to join`;
+        'Browse some of our crews to join';
 
       const searchResultsLength = Math.ceil(this.props.searchResults.length / 3);
       return (
         <div className="fadeIn-container">
           <h4 className="search-results-heading">{browseOrSearch}...</h4>
           {searchResultsLength > 0 ?
-          <Pagination
-            prev
-            next
-            first
-            last
-            ellipsis
-            boundaryLinks
-            bsSize="medium"
-            items={searchResultsLength}
-            maxButtons={searchResultsLength}
-            activePage={this.state.activePage}
-            onSelect={this.handleSelect}
-          />
-          : null }
+            <Pagination
+              prev
+              next
+              first
+              last
+              ellipsis
+              boundaryLinks
+              bsSize="medium"
+              items={searchResultsLength}
+              maxButtons={searchResultsLength}
+              activePage={this.state.activePage}
+              onSelect={this.handleSelect}
+            />
+            : null }
           <hr />
           <div className="search-crew-list">
             {this.props.searchResults.map((crew, i) => {
-              if(i >= this.state.rangeLow && i < this.state.rangeHigh) {
-              return (
-                <SearchCard key={i} crew={crew} count={i} joinCrew={this.joinCrew} />
-              )
+              if (i >= this.state.rangeLow && i < this.state.rangeHigh) {
+                return (
+                  <SearchCard key={i} crew={crew} count={i} joinCrew={this.joinCrew} />
+                );
               }
             })}
           </div>
@@ -103,7 +102,7 @@ export default class SearchResults extends Component {
               </em></h2>
             </div> : ''}
         </div>
-      )
+      );
     }
   }
 }

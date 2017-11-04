@@ -22,6 +22,7 @@ export default class CrewView extends Component {
             <CrewSummary
               userId={this.props.user.id}
               currentCrew={this.props.currentCrew}
+              getCurrentCrews={this.props.getCurrentCrews}
             />
             <Social
               currentCrew={this.props.currentCrew}

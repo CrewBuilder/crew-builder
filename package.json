@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha test --recursive --exit",
     "start": "nodemon index.js",
-    "dev": "SET DEV_MODE=production&& npm run build",
+    "dev": "DEV_MODE=production&& npm run build",
+    "windev": "SET DEV_MODE=production&& npm run build",
     "build": "webpack --watch"
   },
   "repository": {
