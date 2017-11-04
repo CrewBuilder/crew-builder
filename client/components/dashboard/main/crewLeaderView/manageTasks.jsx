@@ -49,7 +49,6 @@ export default class ManageTasks extends Component {
     this.delete = (e) => {
       e.preventDefault();
       this.close()
-      console.log(this.state.task, '===========')
       DeleteTask(this.state.task.id, function(err, done) {
         if (err) {
           console.log('problem in deleting')
@@ -63,7 +62,7 @@ export default class ManageTasks extends Component {
   }
 
   render() {
-    console.log('line 51 in ManageTasks', this.props)
+    // console.log('line 51 in ManageTasks', this.props)
     return (
       <div>
         <ListGroup>
