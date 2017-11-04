@@ -71,4 +71,39 @@ describe('Postgres crewbuilder db', function() {
       });
   });
 
+  it('Should delete tasks according to expiry date', function(done) {
+    db.task.destroy({
+      where: {
+        expiry: {
+          $lt: new Date()
+        }
+      }
+    })
+      .then(destroyed => {
+        expect(destroyed).to.equal(60);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  it('Should delete expired tests after any new task is created', function(done) {
+    let id;
+    db.task.create({
+      name: 'Task that should get deleted',
+      expiry: new Date() - 1000,
+    })
+      .then((created) => {
+        return db.task.count();
+      })
+      .then(count => {
+        expect(count).to.equal(116);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
 });
