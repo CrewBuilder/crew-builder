@@ -316,12 +316,7 @@ module.exports = {
     };
     return fetch(route, options)
       .then(response => {
-        console.log('======')
-        return response.json();
-      })
-      .then((data) => {
-        console.log('--------')
-        cb(null, data);
+        console.log('delete successful')
       })
       .catch((error) => {
         console.log('err', error)
