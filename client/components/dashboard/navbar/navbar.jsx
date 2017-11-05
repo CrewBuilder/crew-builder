@@ -17,17 +17,22 @@ export default class NavBar extends Component {
     this.handleClickLogout = (e) => {
       e.preventDefault();
       this.props.changeLoginStatus();
+      this.props.history.push('/');
     };
 
     // set state based on navbar search FormControl input
     this.handleSearchQuery = (e) => {
-      this.setState({searchQuery: e.target.value});
+      this.setState({
+        searchQuery: e.target.value
+      });
     };
 
     // submit STRING search to dashboard function using state query, reset state query
     this.submitSearchField = () => {
       this.props.crewSearch(this.state.searchQuery);
-      this.setState({searchQuery: ''});
+      this.setState({
+        searchQuery: ''
+      });
     };
 
     // submit EMPTY search to dashboard function

@@ -14,7 +14,7 @@ export default class CrewLeaderView extends Component {
     // Needed props: currentCrewMembers, crewTasks, currentCrew, memberReq
     this.state = {
       crewMembers: []
-    }
+    };
 
     this.getCrewMembers = (crew_id) => {
       GetCrewMembers(crew_id, (err, res) => {
@@ -31,7 +31,10 @@ export default class CrewLeaderView extends Component {
 
   }
 
+
   render() {
+
+    console.log(this.props);
 
     return (
       <div className="cover-background">
@@ -46,7 +49,8 @@ export default class CrewLeaderView extends Component {
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Member Requests" eventKey="2">
             <MemberRequests
-
+              currentTasksToConfirm={this.props.currentTasksToConfirm}
+              handleMemberRequestVerification={this.props.handleMemberRequestVerification}
             />
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Manage Tasks" eventKey="3">
