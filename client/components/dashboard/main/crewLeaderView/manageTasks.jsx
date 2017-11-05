@@ -16,51 +16,45 @@ export default class ManageTasks extends Component {
     this.open = () => {
       this.setState({
         showModal: true
-      })
-    }
+      });
+    };
 
     this.show = () => {
       this.setState({
         displayModal: true
-      })
-    }
+      });
+    };
 
     this.close = () => {
       this.setState({
         showModal: false,
         displayModal: false
-      })
-    }
+      });
+    };
 
     this.func = () => {
       if (this.state.newTask.length !== 0)
-        this.props.userTasks.push({name: this.state.newTask})
+        this.props.userTasks.push({name: this.state.newTask});
       // TODO:
       // should update the newly added in database
-    }
+    };
 
     this.handleSelect = (task) => {
-      console.log(task, 'task')
-
-      this.setState({task: task})
-      this.show()
-    }
+      this.setState({task: task});
+      this.show();
+    };
 
     this.delete = (e) => {
       e.preventDefault();
-      //this.close()
-      console.log(this.state.task, 'task in line 51')
       DeleteTask(this.state.task.id, function(err, done) {
         if (err) {
-          console.log('problem in deleting')
+          console.log('problem in deleting');
         }
         if (done) {
-          console.log('done', done);
-          // console.log(typeof GetLeaderTasks, GetLeaderTasks, '----------')
-          props.getUserTasks(props.userId, props.currentCrew.crew.id)
+          props.getUserTasks(props.userId, props.currentCrew.crew.id);
         }
-      })
-      this.close()
+      });
+      this.close();
     }
   }
 
