@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Modal, Button } from 'react-bootstrap';
 import AddTask from './../../forms/addTask.jsx';
-import { DeleteTask, GetLeaderTasks } from '../../../utils/requests.jsx'
+import { DeleteTask, GetLeaderTasks } from '../../../utils/requests.jsx';
 
 export default class ManageTasks extends Component {
   constructor(props) {
