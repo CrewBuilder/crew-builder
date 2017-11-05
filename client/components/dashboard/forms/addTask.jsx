@@ -15,7 +15,7 @@ export default class addTask extends Component {
       Points: this.props.Points || 0,
       Limit: this.props.Limit || 0,
       expiry: '',
-    }
+    };
 
     this.show = (e) => {
       var date = moment(e)
@@ -23,11 +23,10 @@ export default class addTask extends Component {
       console.log(date.format(), 'format')
       this.setState({expiry: date.format()}, function(err, data) {
         if (data) {
-          return data
+          return data;
         }
-      })
-      console.log(this.state.expiry, 'expirtttt')
-    }
+      });
+    };
 
     this.getValidationState = () => {
       const limitVal = this.state.Limit;
@@ -35,17 +34,15 @@ export default class addTask extends Component {
       if (!isNaN(Number(limitVal)) && !isNaN(Number(pointsVal))) return 'success';
       else if (isNaN(Number(limitVal)) || isNaN(Number(pointsVal))) return 'error';
       return null;
-    }
+    };
 
 
     this.task = (e) => {
       this.task = e.target.value;
-    }
+    };
 
     this.handleSubmit = (e) => {
       e.preventDefault();
-      // var date = moment();
-      // console.log(date.format())
       // note: never set state in handleSubmit...
       let points = Number(this.state.Points)
       let limit = Number(this.state.Limit)
@@ -56,25 +53,21 @@ export default class addTask extends Component {
         limit: limit,
         expiry: this.state.expiry
       }
-      console.log('whole object', obj)
-      console.log(typeof obj.Points, 'pointstype')
       PostTask(obj, this.props.currentCrew.crew.id, function(err, data) {
         if (err) {
           console.log('error in posting task');
         }
 
         if (data) {
-          // console.log('posted!!!!!!!!!!!')
-          // console.log(props.currentCrewTasks, 'TASK')
-          props.getUserTasks(props.userId, props.currentCrew.crew.id)
+          props.getUserTasks(props.userId, props.currentCrew.crew.id);
         }
-      })
-    }
+      });
+    };
   }
 
 
   render() {
-    console.log('this.props', this.props)
+    // console.log('this.props', this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

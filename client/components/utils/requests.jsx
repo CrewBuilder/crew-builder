@@ -303,6 +303,26 @@ module.exports = {
         console.log('ERROR', error);
         cb(error, null);
       });
-  }
+  },
 
+  DeleteTask: (taskId, cb) => {
+    let route = `${module.exports.host}tasks?taskId=${taskId}`;
+    let options = {
+      method: 'delete',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    };
+    return fetch(route, options)
+      .then(response => {
+        console.log('delete successful')
+        console.log(response, 'response')
+        cb(null, response)
+      })
+      .catch((error) => {
+        console.log('err', error)
+        cb(error, null);
+      })
+  }
 };
