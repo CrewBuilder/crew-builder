@@ -22,45 +22,47 @@ export default class Main extends Component {
       <div>
         <Switch>
           <Route path="/dashboard/crews" render={(props) => (
-          <CrewView {...props}
-            user={this.props.user}
-            getCurrentCrews={this.props.getCurrentCrews}
-            getUserTasks={this.props.getUserTasks}
-            currentCrew={this.props.currentCrew}
-            currentCrewTasks={this.props.currentCrewTasks}
-            userTasks={this.props.userTasks}
-            setCurrentCrew={this.props.setCurrentCrew}
+            <CrewView {...props}
+              user={this.props.user}
+              getCurrentCrews={this.props.getCurrentCrews}
+              getUserTasks={this.props.getUserTasks}
+              currentCrew={this.props.currentCrew}
+              currentCrewTasks={this.props.currentCrewTasks}
+              userTasks={this.props.userTasks}
+              setCurrentCrew={this.props.setCurrentCrew}
             />
           )}/>
           <Route path="/dashboard/manage" render={(props) => (
-          <CrewLeaderView {...props}
-            user={this.props.user}
-            getCurrentCrews={this.props.getCurrentCrews}
-            getUserTasks={this.props.getUserTasks}
-            currentCrew={this.props.currentCrew}
-            currentCrewTasks={this.props.currentCrewTasks}
-            userTasks={this.props.userTasks}
-            setCurrentCrew={this.props.setCurrentCrew}
+            <CrewLeaderView {...props}
+              user={this.props.user}
+              getCurrentCrews={this.props.getCurrentCrews}
+              getUserTasks={this.props.getUserTasks}
+              currentCrew={this.props.currentCrew}
+              currentCrewTasks={this.props.currentCrewTasks}
+              currentTasksToConfirm={this.props.currentTasksToConfirm}
+              handleMemberRequestVerification={this.props.handleMemberRequestVerification}
+              userTasks={this.props.userTasks}
+              setCurrentCrew={this.props.setCurrentCrew}
             />
           )}/>
           <Route exact path="/dashboard/newcrew" render={(props) => (
             <CreateCrew {...props}
-            user={this.props.user}
-            getCurrentCrews={this.props.getCurrentCrews}
+              user={this.props.user}
+              getCurrentCrews={this.props.getCurrentCrews}
             />
           )}/>
           <Route path="/dashboard/results" render={(props) => (
             <SearchResults {...props}
-            user={this.props.user}
-            getCurrentCrews={this.props.getCurrentCrews}
-            currentCrewTasks={this.props.currentCrewTasks}
-            searchResults={this.props.searchResults}
-            searchField={this.props.searchField}
+              user={this.props.user}
+              getCurrentCrews={this.props.getCurrentCrews}
+              currentCrewTasks={this.props.currentCrewTasks}
+              searchResults={this.props.searchResults}
+              searchField={this.props.searchField}
             />
           )}/>
         </Switch>
       </div>
-    )
+    );
   }
 }
 

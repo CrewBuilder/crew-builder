@@ -47,7 +47,10 @@ export default class TasksInProgress extends Component {
       <div>
         <ListGroup>
           {this.props.userTasks.map((task, i) => {
-            return (<ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.name} {(task.user_task.completed === true && task.user_task.verified === false) ? <Label>Waiting approval...</Label> : ''}</ListGroupItem>);
+            return (<ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.name}
+              {(task.user_task.completed === true && task.user_task.verified === false) ? <Label bsStyle="warning" className="task-status-labels">Waiting approval...</Label> : ''}
+              {(task.user_task.completed === true && task.user_task.verified === true) ? <Label bsStyle="success" className="task-status-labels">Task Completed</Label> : ''}
+              </ListGroupItem>);
           })}
         </ListGroup>
         <Modal show={this.state.showModal} onHide={this.closeModal}>

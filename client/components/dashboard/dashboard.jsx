@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
 
-import { GetUserCrews, GetUserTasks, GetCrewTasks, GetAllCrews } from '../utils/requests.jsx';
+import { GetUserCrews, GetUserTasks, GetCrewTasks, GetAllCrews, GetLeaderTasks, UpdateTask } from '../utils/requests.jsx';
 
 import { GetCurrentUser } from '../utils/auth.jsx';
 
@@ -22,6 +22,7 @@ export default class Dashboard extends Component {
       userTasks: [],
       currentCrew: null,
       currentCrewTasks: [],
+      currentTasksToConfirm: [],
       searchResults: [],
       searchField: ''
     };
@@ -40,8 +41,22 @@ export default class Dashboard extends Component {
     };
 
     // TEMP USERID FOR TESTING
-    this.setCurrentCrew = (crew) => {
-      this.setState({currentCrew: crew});
+    this.setCurrentCrew = (crew, lead) => {
+      this.setState({
+        currentCrew: crew
+      });
+      if (lead) {
+        GetLeaderTasks(crew.crew.id, (err, res) => {
+          if (err) {
+            console.log('ERROR:', err);
+          } else {
+            console.log(res);
+            this.setState({
+              currentTasksToConfirm: res
+            });
+          }
+        });
+      }
       let crew_id = crew.crew.id;
       let userId = this.state.user.id;
       console.log('crew', crew_id, 'user', userId);
@@ -50,7 +65,8 @@ export default class Dashboard extends Component {
           console.log('ERROR:', err);
         }
 
-        let userTasks, crewTasks;
+        let userTasks;
+        let crewTasks;
         if (!response) {
           userTasks = [];
           crewTasks = [];
@@ -84,7 +100,8 @@ export default class Dashboard extends Component {
           console.log('ERROR:', err);
         }
 
-        let userTasks, currentCrewTasks;
+        let userTasks;
+        let currentCrewTasks;
         if (!res) {
           userTasks = [];
           currentCrewTasks = [];
@@ -96,6 +113,19 @@ export default class Dashboard extends Component {
           userTasks: userTasks,
           currentCrewTasks: currentCrewTasks,
         });
+      });
+    };
+
+    // (userTaskId, verified = false, cb)
+    this.handleMemberRequestVerification = (userTaskId, verified) => {
+      let verifyTask = verified ? true : null;
+      UpdateTask(userTaskId, verifyTask, (err, res) => {
+        if (err) {
+          console.log('ERROR:', err);
+        } else {
+          console.log('OK HANDLED handleMemberRequestVerification');
+          this.props.setCurrentCrew(this.state.currentCrew, 'lead');
+        }
       });
     };
 
@@ -111,7 +141,9 @@ export default class Dashboard extends Component {
           this.props.changeLoginStatus();
           console.log('NOT LOGGED IN');
         } else {
-          this.setState({user: user});
+          this.setState({
+            user: user
+          });
           return user;
         }
       }).then((userId) => {
@@ -141,6 +173,7 @@ export default class Dashboard extends Component {
       return (
         <div className='fadeIn-container component-container clearfix'>
           <Navbar
+            history={this.props.history}
             user={this.state.user}
             crewSearch={this.crewSearch}
             changeLoginStatus={this.props.changeLoginStatus}
@@ -162,6 +195,8 @@ export default class Dashboard extends Component {
                   getUserTasks={this.getUserTasks}
                   currentCrew={this.state.currentCrew}
                   currentCrewTasks={this.state.currentCrewTasks}
+                  currentTasksToConfirm={this.state.currentTasksToConfirm}
+                  handleMemberRequestVerification={this.handleMemberRequestVerification}
                   userTasks={this.state.userTasks}
                   searchResults={this.state.searchResults}
                   searchField={this.state.searchField}
