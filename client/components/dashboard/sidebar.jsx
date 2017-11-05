@@ -3,10 +3,14 @@ import React, { Component } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { MenuItem, NavDropdown, Navbar, Row, Col, Nav, NavItem, Tab, TagContainer, TabContent, TabPane, Label, Button, Glyphicon } from 'react-bootstrap';
 =======
 import { MenuItem, NavDropdown, NavBar, Row, Col, Nav, NavItem, Tab, TagContainer, TabContent, TabPane, Label, Button, Glyphicon } from 'react-bootstrap';
 >>>>>>> Styled sidebar a little
+=======
+import { MenuItem, NavDropdown, Navbar, Row, Col, Nav, NavItem, Tab, TagContainer, TabContent, TabPane, Label, Button, Glyphicon } from 'react-bootstrap';
+>>>>>>> Improved sidebar menu for mobile
 
 export default class Sidebar extends Component {
 
@@ -36,31 +40,8 @@ export default class Sidebar extends Component {
                       </LinkContainer>
                     );
                   })}
+                </Nav>
 
-                  <LinkContainer to={`/dashboard/newcrew`} key='createCrew' >
-                    <NavItem activeKey='createCrew'
-                      value='createCrew'
-                      key='createCrew'
-                      className="sidebar-crew-name">
-                      <Glyphicon glyph="plus" /> create new crew
-                    </NavItem>
-                  </LinkContainer>
-                </Nav>
-                <h4 className="sidebar-heading">Crews I Follow:</h4>
-                <Nav bsStyle="pills" stacked>
-                  {this.props.userMemberCrews.map((container, i) => {
-                    return (
-                      <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={() => this.props.setCurrentCrewMember(container)}>
-                        <NavItem activeKey={container.crew.id}
-                          value={container.crew.name}
-                          key={container.crew.id}
-                          className="sidebar-crew-name">
-                          {container.crew.name}
-                        </NavItem>
-                      </LinkContainer>
-                    );
-                  })}
-                </Nav>
                 {this.props.userMemberCrews && this.props.userMemberCrews.length === 0 ? <p className="sidebar-empty-crews-msg"><Glyphicon glyph="info-sign" /> <em>Just getting started or looking to find that next crew for you? Try our browse or search features to find some crews to join today!</em></p> : null}
               </span>
             </Col>
