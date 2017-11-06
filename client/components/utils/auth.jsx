@@ -16,10 +16,10 @@ module.exports = {
       } else {
         window.fbAsyncInit = function() {
           FB.init({
-            appId            : '356644548109752',
-            autoLogAppEvents : true,
-            xfbml            : true,
-            version          : 'v2.10'
+            appId: '356644548109752',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v2.10'
           });
           // for accurate user counts and session time metrics in FB analytics
           FB.AppEvents.logPageView();
@@ -28,14 +28,15 @@ module.exports = {
           // FB.getLoginStatus((response) => {
           //   console.log('INIT getLoginStatus:', response);
           // })
-      };
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "https://connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
+        };
+        (function(d, s, id) {
+          var js;
+          var fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) { return; }
+          js = d.createElement(s); js.id = id;
+          js.src = "https://connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
       }
     });
   },
@@ -61,7 +62,7 @@ module.exports = {
             })
           };
 
-          fetch('/auth/facebook/', options)
+          fetch('/api/auth/facebook/', options)
             .then((data) => {
               var token = data.headers.get('x-auth-token');
               if (token) {
@@ -105,7 +106,7 @@ module.exports = {
         'x-auth-token': localStorage.getItem('id_token')
       })
     };
-    return fetch('/auth/me', options)
+    return fetch('/api/auth/me', options)
       .then((response) => {
         if (!response.ok) {
           return false;
