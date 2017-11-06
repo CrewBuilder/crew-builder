@@ -83,6 +83,22 @@ module.exports = {
       });
   },
 
+  // Returns all available rewards for a Crew
+  GetCrewRewards: (crew_id, cb) => {
+    let route = `/crew/rewards?crew_id=${crew_id}`;
+    return fetch(route, getOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
+  },
+
   // Returns all of a Crew's users
   GetCrewMembers: (crew_id, cb) => {
     let route = `/leader/members?crew_id=${crew_id}`;
@@ -98,6 +114,7 @@ module.exports = {
         cb(error, null);
       });
   },
+
 
   GetLeaderTasks: (crew_id, cb) => {
     let route = `/leader/tasks?crew_id=${crew_id}`;
@@ -135,7 +152,7 @@ module.exports = {
       });
   },
 
-  // Let's user post task to crew. Should only be available to the Leader of that crew.
+  // Lets leader post task to crew. Should only be available to the Leader of that crew.
   PostTask: (task, crew_id, cb) => {
     let route = '/task/';
     let body = {
@@ -145,6 +162,32 @@ module.exports = {
       expiry: task.expiry,
       crew_id: crew_id,
       points: task.points
+    };
+    let options = postOptions;
+    options.body = JSON.stringify(body);
+    fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then((data) => {
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
+  },
+
+  // Lets leader post a new reward to their crew.
+  PostReward: (reward, crew_id, cb) => {
+    let route = '/reward/';
+    let body = {
+      name: reward.name,
+      description: reward.description,
+      limit: reward.limit,
+      expiry: reward.expiry,
+      crew_id: crew_id,
+      points: reward.points
     };
     let options = postOptions;
     options.body = JSON.stringify(body);
