@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha test --recursive --exit",
     "start": "nodemon index.js",
-    "dev": "SET DEV_MODE=production&& npm run build",
+    "dev": "DEV_MODE=production&& npm run build",
+    "windev": "SET DEV_MODE=production&& npm run build",
     "build": "webpack --watch"
   },
   "repository": {
@@ -62,8 +63,10 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "compression-webpack-plugin": "^1.0.1",
     "mocha": "^4.0.1",
     "supertest": "^3.0.0",
+    "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.3"
   }
 }

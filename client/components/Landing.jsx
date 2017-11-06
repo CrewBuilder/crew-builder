@@ -32,8 +32,6 @@ export default class Landing extends Component {
 
   render() {
 
-    console.log(process.env);
-
     return(
       <div className="vertical-center">
         <Jumbotron className="landing-container">
@@ -48,19 +46,19 @@ export default class Landing extends Component {
 
         <Carousel controls={false} indicators={false} className="carousel-container">
           <Carousel.Item>
-            <img className="carousel-img" width={1170} height={400} alt="900x500" src="https://farm4.staticflickr.com/3208/2682021398_1bbf189bf6.jpg" />
+            <img className="carousel-img" width={800} height={400} alt="900x500" src="https://farm4.staticflickr.com/3208/2682021398_1bbf189bf6.jpg" />
             <Carousel.Caption className="caption-landing">
               <h2 className="caption-text">Bring out new fans</h2>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carousel-img" width={1170} height={400} alt="900x500" src="https://farm8.staticflickr.com/7445/9072298392_6607f7eb50.jpg" />
+            <img className="carousel-img" width={800} height={400} alt="900x500" src="https://farm8.staticflickr.com/7445/9072298392_6607f7eb50.jpg" />
             <Carousel.Caption className="caption-landing">
               <h2 className="caption-text">Help grow your cause</h2>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carousel-img" width={1170} height={400} alt="900x500" src="https://farm4.staticflickr.com/3432/3911533511_85381ccc2a.jpg" />
+            <img className="carousel-img" width={800} height={400} alt="900x500" src="https://farm4.staticflickr.com/3432/3911533511_85381ccc2a.jpg" />
             <Carousel.Caption className="caption-landing">
               <h2 className="caption-text">Reward your supporters </h2>
             </Carousel.Caption>

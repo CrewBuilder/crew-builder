@@ -38,6 +38,7 @@ app.use(modelRouting);
 app.get('*', (req, res) => {
   res.sendFile(__dirname + '/client/public/index.html');
 });
+
 // CHECK PORT AND START SERVER
 const port = process.env.PORT || 3000;
 

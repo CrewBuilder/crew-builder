@@ -10,39 +10,43 @@ import { Init, CheckLogin, GetCurrentUser, Login, Logout } from './utils/auth.js
 export default class App extends Component {
   constructor(props) {
     super(props);
-      this.state = {
-        isLoggedIn: false
-      }
-      // check auth with local token
-      this.authLogin = (callback) => {
-        let userCheck = window.localStorage.getItem('id_token');
-        if(userCheck) {
-          GetCurrentUser((res) => {
-            return res;
-          })
+    this.state = {
+      isLoggedIn: false
+    };
+    // check auth with local token
+    this.authLogin = (callback) => {
+      let userCheck = window.localStorage.getItem('id_token');
+      if (userCheck) {
+        GetCurrentUser((res) => {
+          return res;
+        })
           .then((user) => {
             if (user === false) {
               window.reload.location();
             } else {
-              this.setState({isLoggedIn: true});
+              this.setState({
+                isLoggedIn: true
+              });
             }
           });
-        }
-        return this.state.isLoggedIn;
       }
+      return this.state.isLoggedIn;
+    };
 
-      // will log out/remove token or change state for log in
-      this.changeLoginStatus = () => {
-        if(this.state.isLoggedIn) {
-          let userCheck = window.localStorage.getItem('id_token');
-          if(userCheck) {
-            window.localStorage.removeItem('id_token');
-          }
+    // will log out/remove token or change state for log in
+    this.changeLoginStatus = () => {
+      if (this.state.isLoggedIn) {
+        let userCheck = window.localStorage.getItem('id_token');
+        if (userCheck) {
+          window.localStorage.removeItem('id_token');
         }
-        this.setState({isLoggedIn: !this.state.isLoggedIn});
       }
+      this.setState({
+        isLoggedIn: !this.state.isLoggedIn
+      });
+    };
 
-    }
+  }
 
   componentDidMount() {
     // Initializes facebook sdk
@@ -52,19 +56,18 @@ export default class App extends Component {
 
   render() {
 
-    if(!window.localStorage.getItem('id_token') || !this.state.isLoggedIn) {
+    if (!window.localStorage.getItem('id_token') || !this.state.isLoggedIn) {
       return (
         <div className="fadeIn-landing">
           <Switch>
             <Route exact path="/" render={(props) => (
               <Landing {...props}
-              changeLoginStatus={this.changeLoginStatus}
+                changeLoginStatus={this.changeLoginStatus}
               />
             )}/>
-            <Redirect to="/" />
           </Switch>
         </div>
-      )
+      );
 
     } else {
 
@@ -73,14 +76,14 @@ export default class App extends Component {
           <Switch>
             <Route path="/dashboard" render={(props) => (
               <Dashboard {...props}
-              isLoggedIn={this.state.isLoggedIn}
-              changeLoginStatus={this.changeLoginStatus}
+                isLoggedIn={this.state.isLoggedIn}
+                changeLoginStatus={this.changeLoginStatus}
               />
             )}/>
             <Redirect to="/dashboard" />
           </Switch>
         </div>
-      )
+      );
     }
   }
 }

@@ -1,10 +1,8 @@
 module.exports = {
-  // Sets the path for 'fetches'
-  host: process.env.HOST || '/',
 
   // Returns all of current user's crews. Will be rendered in sidebar view.
   GetUserCrews: (userId, cb) => {
-    let route = `${module.exports.host}user/crews?id=${userId}`;
+    let route = `/user/crews?id=${userId}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -26,7 +24,7 @@ module.exports = {
 
   // Returns all of current user's tasks for selected crew.
   GetUserTasks: (userId, crew_id, cb) => {
-    let route = `${module.exports.host}user/tasks?id=${userId}&crew_id=${crew_id}`;
+    let route = `/user/tasks?id=${userId}&crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -49,7 +47,7 @@ module.exports = {
   // Returns all of selected crew's tasks.
   GetCrewTasks: (crew_id, cb) => {
     let id = crew_id;
-    let route = `${module.exports.host}crew/tasks?crew_id=${crew_id}`;
+    let route = `/crew/tasks?crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -72,7 +70,7 @@ module.exports = {
   // Returns all of a Crew's users
   GetCrewMembers: (crew_id, cb) => {
     let id = crew_id;
-    let route = `${module.exports.host}leader/members?crew_id=${crew_id}`;
+    let route = `/leader/members?crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -93,7 +91,7 @@ module.exports = {
   },
 
   GetLeaderTasks: (crew_id, cb) => {
-    let route = `${module.exports.host}leader/tasks?crew_id=${crew_id}`;
+    let route = `/leader/tasks?crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -112,7 +110,7 @@ module.exports = {
 
   // Lets user create a Crew for which they will serve as leader
   PostCrew: (crew, userId, cb) => {
-    let route = `${module.exports.host}crew/`;
+    let route = '/crew/';
     let body = {
       name: crew.name,
       description: crew.description,
@@ -142,7 +140,7 @@ module.exports = {
 
   // Let's user post task to crew. Should only be available to the Leader of that crew.
   PostTask: (task, crew_id, cb) => {
-    let route = `${module.exports.host}task/`;
+    let route = '/task/';
     let body = {
       name: task.name,
       description: task.description,
@@ -174,7 +172,7 @@ module.exports = {
 
   // Returns all crews. Meant for Browse functionality
   GetAllCrews: (qs, cb) => {
-    let route = qs === '' ? `${module.exports.host}crews` : `${module.exports.host}crews?qs=${qs}`;
+    let route = qs === '' ? '/crews' : `/crews?qs=${qs}`;
 
     let options = {
       method: 'GET',
@@ -198,7 +196,7 @@ module.exports = {
 
   // POSTs a new relation of User to Crew. User joins selected Crew.
   JoinACrew: (userId, crew_id, cb) => {
-    let route = `${module.exports.host}user/crews/`;
+    let route = '/user/crews/';
     let body = {
       userId: userId,
       crew_id: crew_id
@@ -226,7 +224,7 @@ module.exports = {
 
   // POSTs a new relation of User to Task. User claims selected Task
   ClaimATask: (userId, taskId, cb) => {
-    let route = `${module.exports.host}user/tasks/`;
+    let route = '/user/tasks/';
     let body = {
       userId: userId,
       taskId: taskId
@@ -252,8 +250,8 @@ module.exports = {
       });
   },
 
-  UpdateTask: (userTaskId, cb, verified = false) => {
-    let route = `${module.exports.host}user/tasks/`;
+  UpdateTask: (userTaskId, verified = false, cb) => {
+    let route = '/user/tasks/';
     let body = {
       userTaskId: userTaskId,
       verified: verified
@@ -270,16 +268,18 @@ module.exports = {
       .then(response => {
         return response.json();
       })
-      .then(data => {
-        cb(data);
+      .then((data) => {
+        cb(null, data);
       })
-      .catch(err =>
-        cb(err));
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
   },
 
   // Delete UserCrew: removes User from Crew
   DeleteUserCrew: (userId, crew_id, cb) => {
-    let route = `${module.exports.host}user/crews/`;
+    let route = '/user/crews/';
     let body = {
       id: userId,
       crew_id: crew_id
@@ -303,6 +303,26 @@ module.exports = {
         console.log('ERROR', error);
         cb(error, null);
       });
-  }
+  },
 
+  DeleteTask: (taskId, cb) => {
+    let route = `${module.exports.host}tasks?taskId=${taskId}`;
+    let options = {
+      method: 'delete',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    };
+    return fetch(route, options)
+      .then(response => {
+        console.log('delete successful')
+        console.log(response, 'response')
+        cb(null, response)
+      })
+      .catch((error) => {
+        console.log('err', error)
+        cb(error, null);
+      })
+  }
 };
