@@ -9,7 +9,7 @@
 
 module.exports = {
 
-  host: process.env.HOST || '/',
+  host: process.env.HOST || '/api/',
   // initialize Facebook SDK
   Init: () => {
     return new Promise((resolve, reject) => {

@@ -25,11 +25,7 @@ module.exports = {
               facebook: profile
             });
         }
-      })
-      .then(res => {
-        console.log('Query completed result: ', res);
-      })
-      .catch(err => console.log(err));
+      });
   },
 
   findUserById(id) {

@@ -1,26 +1,12 @@
 let jwt = require('jsonwebtoken');
-let expressJwt = require('express-jwt');
-let User = require('../../models').User;
+let User = require('../models').User;
 
 module.exports.lookup = (req, res) => {
-  return expressJwt({
-    secret: 'crew-bldr-secret',
-    requestProperty: 'auth',
-    getToken: (req) => {
-      if (req.headers['x-auth-token']) {
-        return req.headers['x-auth-token'];
-      } else {
-        return null;
+  return User
+    .findOne({
+      where: {
+        facebook_id: req.auth.id
       }
-    }
-  })
-    .then(() => {
-      return User
-        .findOne({
-          where: {
-            facebook_id: req.auth.id
-          }
-        });
     })
     .then(user => {
       delete user.facebook.TOKEN;
@@ -30,7 +16,7 @@ module.exports.lookup = (req, res) => {
 
 module.exports.facebook = (req, res) => {
   if (!req.user) {
-    res.status(401).send('User not authenticated');
+    return res.status(401).send('User not authenticated');
   } else {
     req.auth = {
       id: req.user.id
@@ -51,6 +37,10 @@ module.exports.facebook = (req, res) => {
       .then(token => {
         res.setHeader('x-auth-token', token);
         res.status(200).send(req.auth);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).send('Error in facebook auth route: ', err);
       });
   }
 };
