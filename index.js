@@ -5,13 +5,12 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const fbRouting = require('./server/auth/utils/facebookTokens.js');
-const modelRouting = require('./server/db/routing/config.js');
 const cors = require('cors');
 const passportConfig = require('./server/auth/passport.js');
-const db = require('./server/db/index.js');
 const cloudinary = require('cloudinary');
 const multer = require('multer');
 const upload = multer({dest: './uploads/'});
+const db = require('./server/models/index.js');
 require('dotenv').config();
 
 
@@ -42,7 +41,7 @@ app.use(bodyParser.json());
 
 //Add ROUTES
 app.use(fbRouting);
-app.use(modelRouting);
+require('./server/routes')(app);
 
 // ROUTES
 app.get('*', (req, res) => {
@@ -51,11 +50,8 @@ app.get('*', (req, res) => {
 
 // CHECK PORT AND START SERVER
 const port = process.env.PORT || 3000;
-
-db.sequelize.sync().then(() => {
-  app.listen(port, () => {
-    console.log('SERVER STARTED: Listening on port:' + port);
-  });
+app.listen(port, () => {
+  console.log('SERVER STARTED: Listening on port:' + port);
 });
 
 app.post('/image', upload.single('picture'), function(req, res, next) {
