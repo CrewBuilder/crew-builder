@@ -5,10 +5,10 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const fbRouting = require('./server/auth/utils/facebookTokens.js');
-const modelRouting = require('./server/db/routing/config.js');
 const cors = require('cors');
 const passportConfig = require('./server/auth/passport.js');
-const db = require('./server/db/index.js');
+const db = require('./server/models/index.js');
+const seed = require('./server/seeders');
 require('dotenv').config();
 
 passportConfig();
@@ -31,8 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //Add ROUTES
-app.use(fbRouting);
-app.use(modelRouting);
+require('./server/routes')(app);
 
 // ROUTES
 app.get('*', (req, res) => {
@@ -42,10 +41,17 @@ app.get('*', (req, res) => {
 // CHECK PORT AND START SERVER
 const port = process.env.PORT || 3000;
 
-db.sequelize.sync().then(() => {
+if (process.env.NODE_ENV && process.env.NODE_ENV === 'test') {
   app.listen(port, () => {
     console.log('SERVER STARTED: Listening on port:' + port);
   });
-});
+} else {
+  seed(db)
+    .then(() => {
+      app.listen(port, () => {
+        console.log('SERVER STARTED: Listening on port:' + port);
+      });
+    });
+}
 
 module.exports = app;

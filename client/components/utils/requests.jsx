@@ -1,8 +1,8 @@
 module.exports = {
 
   // Returns all of current user's crews. Will be rendered in sidebar view.
-  GetUserCrews: (userId, cb) => {
-    let route = `/user/crews?id=${userId}`;
+  GetUserCrews: (user_id, cb) => {
+    let route = `/user/crews?id=${user_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -23,8 +23,8 @@ module.exports = {
   },
 
   // Returns all of current user's tasks for selected crew.
-  GetUserTasks: (userId, crew_id, cb) => {
-    let route = `/user/tasks?id=${userId}&crew_id=${crew_id}`;
+  GetUserTasks: (user_id, crew_id, cb) => {
+    let route = `/user/tasks?id=${user_id}&crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -109,13 +109,13 @@ module.exports = {
   },
 
   // Lets user create a Crew for which they will serve as leader
-  PostCrew: (crew, userId, cb) => {
+  PostCrew: (crew, user_id, cb) => {
     let route = '/crew/';
     let body = {
       name: crew.name,
       description: crew.description,
       image: crew.image,
-      userId: userId
+      user_id: user_id
     };
     let options = {
       method: 'post',
@@ -195,10 +195,10 @@ module.exports = {
   },
 
   // POSTs a new relation of User to Crew. User joins selected Crew.
-  JoinACrew: (userId, crew_id, cb) => {
+  JoinACrew: (user_id, crew_id, cb) => {
     let route = '/user/crews/';
     let body = {
-      userId: userId,
+      user_id: user_id,
       crew_id: crew_id
     };
     let options = {
@@ -223,11 +223,11 @@ module.exports = {
   },
 
   // POSTs a new relation of User to Task. User claims selected Task
-  ClaimATask: (userId, taskId, cb) => {
+  ClaimATask: (user_id, task_id, cb) => {
     let route = '/user/tasks/';
     let body = {
-      userId: userId,
-      taskId: taskId
+      user_id: user_id,
+      task_id: task_id
     };
     let options = {
       method: 'post',
@@ -250,10 +250,11 @@ module.exports = {
       });
   },
 
-  UpdateTask: (userTaskId, verified = false, cb) => {
+  UpdateTask: (user_id, task_id, verified = false, cb) => {
     let route = '/user/tasks/';
     let body = {
-      userTaskId: userTaskId,
+      user_id: user_id,
+      task_id: task_id,
       verified: verified
     };
     let options = {
@@ -278,10 +279,10 @@ module.exports = {
   },
 
   // Delete UserCrew: removes User from Crew
-  DeleteUserCrew: (userId, crew_id, cb) => {
+  DeleteUserCrew: (user_id, crew_id, cb) => {
     let route = '/user/crews/';
     let body = {
-      id: userId,
+      id: user_id,
       crew_id: crew_id
     };
     let options = {
@@ -305,8 +306,8 @@ module.exports = {
       });
   },
 
-  DeleteTask: (taskId, cb) => {
-    let route = `${module.exports.host}tasks?taskId=${taskId}`;
+  DeleteTask: (task_id, cb) => {
+    let route = `${module.exports.host}tasks?task_id=${task_id}`;
     let options = {
       method: 'delete',
       headers: {

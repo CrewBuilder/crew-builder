@@ -174,23 +174,24 @@
 ###Member joins a crew, creates corresponding user_crew row
 ####req.body
 {
-  crewId: 2,
-  userId: 4
+  crew_id: 2,
+  user_id: 4
 }
 
 ###'/user/tasks'
 ###User adds a task to the user_task join table. Task must be connected to the appropriate Crew.
 ####req.body
 {
-  taskId: 87,
-  userID: 2
+  task_id: 87,
+  user_id: 2
 }
 
 ##PUT Endpoints
 ###'user/tasks'
 ####req.body (request will know which action to do based on fields included)
 {
-  userTaskId: INT, unique identifier for the user_task selected
+  user_id: INT, unique identifier for the user selected
+  task_id: INT, task id
   verified: BOOL, optional, only include for leader verification
 }
 
@@ -204,5 +205,9 @@ TODO: for cleanup this should probably be changed to only accept a query string
 }
 sends back 202 with no data
 
-###'leader/tasks?taskId={TASK ID}'
+###'leader/tasks
+####req.body
+{
+  task_id: task id
+}
 sends back 202 with no data
