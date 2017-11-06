@@ -50,9 +50,18 @@ app.get('*', (req, res) => {
 
 // CHECK PORT AND START SERVER
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log('SERVER STARTED: Listening on port:' + port);
-});
+
+if (process.env.NODE_ENV && process.env.NODE_ENV === 'test') {
+  app.listen(port, () => {
+    console.log('SERVER STARTED: Listening on port:' + port);
+  });
+} else {
+  db.sequelize.sync().then(() => {
+    app.listen(port, () => {
+      console.log('SERVER STARTED: Listening on port:' + port);
+    });
+  });
+}
 
 app.post('/image', upload.single('picture'), function(req, res, next) {
   // console.log(req.file)
