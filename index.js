@@ -8,6 +8,7 @@ const fbRouting = require('./server/auth/utils/facebookTokens.js');
 const cors = require('cors');
 const passportConfig = require('./server/auth/passport.js');
 const db = require('./server/models/index.js');
+const seed = require('./server/seeders');
 require('dotenv').config();
 
 passportConfig();
@@ -46,11 +47,12 @@ if (process.env.NODE_ENV && process.env.NODE_ENV === 'test') {
     console.log('SERVER STARTED: Listening on port:' + port);
   });
 } else {
-  db.sequelize.sync().then(() => {
-    app.listen(port, () => {
-      console.log('SERVER STARTED: Listening on port:' + port);
+  seed(db)
+    .then(() => {
+      app.listen(port, () => {
+        console.log('SERVER STARTED: Listening on port:' + port);
+      });
     });
-  });
 }
 
 module.exports = app;
