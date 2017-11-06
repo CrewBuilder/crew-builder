@@ -3,10 +3,33 @@ const db = require('../models');
 module.exports = {
   newUser(profile) {
     return db.User
-      .upsert({
-        facebook_id: profile.facebook_id,
-        facebook: profile
-      });
+      .findOne({
+        where: {
+          facebook_id: profile.facebook_id
+        }
+      })
+      .then((found) => {
+        if (found) {
+          return db.User
+            .update({
+              facebook: profile.facebook
+            }, {
+              where: {
+                facebook_id: profile.facebook_id
+              }
+            });
+        } else {
+          return db.User
+            .create({
+              facebook_id: profile.facebook_id,
+              facebook: profile
+            });
+        }
+      })
+      .then(res => {
+        console.log('Query completed result: ', res);
+      })
+      .catch(err => console.log(err));
   },
 
   findUserById(id) {
