@@ -30,9 +30,9 @@ export default class TasksInProgress extends Component {
 
     this.confirmTask = (e) => {
       e.preventDefault();
-      console.log('FOXUS', this.state.focusTask)
-      let taskId = this.state.focusUserTask.id;
-      UpdateTask(taskId, (data) => {
+      let task_id = this.state.focusUserTask.task_id;
+      let user_id = this.state.focusUserTask.user_id;
+      UpdateTask(user_id, task_id, (data) => {
         this.props.getUserTasks(this.props.userId, this.state.focusTask.crew_id);
       });
       this.closeModal();

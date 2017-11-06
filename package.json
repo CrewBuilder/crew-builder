@@ -4,11 +4,13 @@
   "description": "Build and cultivate grass roots support",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test --recursive --exit",
     "start": "nodemon index.js",
     "dev": "DEV_MODE=production&& npm run build",
     "windev": "SET DEV_MODE=production&& npm run build",
-    "build": "webpack --watch"
+    "build": "webpack --watch",
+    "test": "npm run test-unit && npm run test-integration",
+    "test-unit": "cross-env NODE_ENV=test mocha test/unit --recursive --exit",
+    "test-integration": "cross-env NODE_ENV=test mocha test/integration --recursive --exit"
   },
   "repository": {
     "type": "git",
@@ -63,7 +65,9 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-moment": "^0.1.0",
     "compression-webpack-plugin": "^1.0.1",
+    "cross-env": "^5.1.1",
     "mocha": "^4.0.1",
     "supertest": "^3.0.0",
     "webpack-bundle-analyzer": "^2.9.0",
