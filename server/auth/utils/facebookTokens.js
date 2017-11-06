@@ -2,10 +2,10 @@ let jwt = require('jsonwebtoken');
 let expressJwt = require('express-jwt');
 let express = require('express');
 let router = express.Router();
-let passport = require('passport')
-let User = require('./../../db/models/User.js');
-let upsertFbUser = require('./../../db/utils/userHelpers.js').upsertFbUser;
-let findUserById = require('./../../db/utils/userHelpers.js').findUserById;
+let passport = require('passport');
+let User = require('./../../models').User;
+let upsertFbUser = require('./../../controllers/users.js').newUser;
+let findUserById = require('./../../controllers/users.js').findUserById;
 
 // Hashes a unique JWT for our user
 let createToken = (auth) => {
