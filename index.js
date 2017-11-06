@@ -11,6 +11,7 @@ const cloudinary = require('cloudinary');
 const multer = require('multer');
 const upload = multer({dest: './uploads/'});
 const db = require('./server/models/index.js');
+const seed = require('./server/seeders');
 require('dotenv').config();
 
 
@@ -56,11 +57,12 @@ if (process.env.NODE_ENV && process.env.NODE_ENV === 'test') {
     console.log('SERVER STARTED: Listening on port:' + port);
   });
 } else {
-  db.sequelize.sync().then(() => {
-    app.listen(port, () => {
-      console.log('SERVER STARTED: Listening on port:' + port);
+  seed(db)
+    .then(() => {
+      app.listen(port, () => {
+        console.log('SERVER STARTED: Listening on port:' + port);
+      });
     });
-  });
 }
 
 app.post('/image', upload.single('picture'), function(req, res, next) {
