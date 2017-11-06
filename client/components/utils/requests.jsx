@@ -1,15 +1,44 @@
+const getOptions = {
+  method: 'GET',
+  headers: new Headers({
+    'Content-Type': 'application/json',
+    'x-auth-token': localStorage.getItem('id_token')
+  })
+};
+
+let postOptions = {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+    'x-auth-token': localStorage.getItem('id_token')
+  }
+};
+
+const putOptions = {
+  method: 'put',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+    'x-auth-token': localStorage.getItem('id_token')
+  }
+};
+
+const deleteOptions = {
+  method: 'delete',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+    'x-auth-token': localStorage.getItem('id_token')
+  }
+};
 module.exports = {
+
 
   // Returns all of current user's crews. Will be rendered in sidebar view.
   GetUserCrews: (userId, cb) => {
     let route = `/user/crews?id=${userId}`;
-    let options = {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    };
-    return fetch(route, options)
+    return fetch(route, getOptions)
       .then((response) => {
         return response.json();
       })
@@ -25,13 +54,7 @@ module.exports = {
   // Returns all of current user's tasks for selected crew.
   GetUserTasks: (userId, crew_id, cb) => {
     let route = `/user/tasks?id=${userId}&crew_id=${crew_id}`;
-    let options = {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    };
-    return fetch(route, options)
+    return fetch(route, getOptions)
     // TODO: test the data format of these API requests
       .then((response) => {
         return response.json();
@@ -46,15 +69,8 @@ module.exports = {
 
   // Returns all of selected crew's tasks.
   GetCrewTasks: (crew_id, cb) => {
-    let id = crew_id;
     let route = `/crew/tasks?crew_id=${crew_id}`;
-    let options = {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    };
-    return fetch(route, options)
+    return fetch(route, getOptions)
       .then((response) => {
         return response.json();
       })
@@ -62,22 +78,15 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error)
+        console.log('ERROR', error);
         cb(error, null);
       });
   },
 
   // Returns all of a Crew's users
   GetCrewMembers: (crew_id, cb) => {
-    let id = crew_id;
     let route = `/leader/members?crew_id=${crew_id}`;
-    let options = {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    };
-    return fetch(route, options)
+    return fetch(route, getOptions)
       .then((response) => {
         return response.json();
       })
@@ -92,13 +101,7 @@ module.exports = {
 
   GetLeaderTasks: (crew_id, cb) => {
     let route = `/leader/tasks?crew_id=${crew_id}`;
-    let options = {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    };
-    return fetch(route, options)
+    return fetch(route, getOptions)
       .then((response) => {
         return response.json();
       })
@@ -117,14 +120,8 @@ module.exports = {
       image: crew.image,
       userId: userId
     };
-    let options = {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    };
+    let options = postOptions;
+    options.body = JSON.stringify(body);
     fetch(route, options)
       .then(response => {
         return response.json();
@@ -149,14 +146,8 @@ module.exports = {
       crew_id: crew_id,
       points: task.points
     };
-    let options = {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    };
+    let options = postOptions;
+    options.body = JSON.stringify(body);
     fetch(route, options)
       .then(response => {
         return response.json();
@@ -173,14 +164,7 @@ module.exports = {
   // Returns all crews. Meant for Browse functionality
   GetAllCrews: (qs, cb) => {
     let route = qs === '' ? '/crews' : `/crews?qs=${qs}`;
-
-    let options = {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    };
-    fetch(route, options)
+    fetch(route, getOptions)
     // TODO: test the data format of these API requests
       .then((response) => {
         return response.json();
@@ -201,14 +185,8 @@ module.exports = {
       userId: userId,
       crew_id: crew_id
     };
-    let options = {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    };
+    let options = postOptions;
+    options.body = JSON.stringify(body);
     return fetch(route, options)
       .then(response => {
         return response.json();
@@ -229,14 +207,8 @@ module.exports = {
       userId: userId,
       taskId: taskId
     };
-    let options = {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    };
+    let options = postOptions;
+    options.body = JSON.stringify(body);
     fetch(route, options)
       .then(response => {
         return response.json();
@@ -256,14 +228,8 @@ module.exports = {
       userTaskId: userTaskId,
       verified: verified
     };
-    let options = {
-      method: 'put',
-      body: JSON.stringify(body),
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    };
+    let options = putOptions;
+    options.body = JSON.stringify(body);
     fetch(route, options)
       .then(response => {
         return response.json();
@@ -284,14 +250,8 @@ module.exports = {
       id: userId,
       crew_id: crew_id
     };
-    let options = {
-      method: 'delete',
-      body: JSON.stringify(body),
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    };
+    let options = deleteOptions;
+    options.body = JSON.stringify(body);
     return fetch(route, options)
       .then(response => {
         return response.json();
@@ -307,22 +267,15 @@ module.exports = {
 
   DeleteTask: (taskId, cb) => {
     let route = `${module.exports.host}tasks?taskId=${taskId}`;
-    let options = {
-      method: 'delete',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    };
+    let options = deleteOptions;
+    options.body = JSON.stringify(body);
     return fetch(route, options)
       .then(response => {
-        console.log('delete successful')
-        console.log(response, 'response')
-        cb(null, response)
+        cb(null, response);
       })
       .catch((error) => {
-        console.log('err', error)
+        console.log('err', error);
         cb(error, null);
-      })
+      });
   }
 };
