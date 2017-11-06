@@ -1,6 +1,6 @@
 const FacebookTokenStrategy = require('passport-facebook-token');
 const passport = require('passport');
-const upsertFbUser = require('./../controllers/users.js').upsertFbUser;
+const upsertFbUser = require('./../controllers/users.js').newUser;
 
 
 // Define strategy
@@ -12,7 +12,7 @@ module.exports = () => {
   function (accessToken, refreshToken, profile, done) {
   //make profile data manageable in our DB
     let userProfile = {
-      facebookId: profile.id,
+      facebook_id: profile.id,
       facebook: {
         DISPLAY_NAME: profile.displayName,
         EMAIL: profile.emails[0].value,
