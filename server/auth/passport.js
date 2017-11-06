@@ -20,7 +20,8 @@ module.exports = () => {
         TOKEN: accessToken
       }
     };
-    upsertFbUser(userProfile, done);
+    return upsertFbUser(userProfile)
+      .then((user) => done(user));
   }));
 };
 
