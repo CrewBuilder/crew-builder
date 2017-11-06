@@ -57,6 +57,9 @@ export default class Sidebar extends Component {
                     );
                   })}
                 </Nav>
+              </span>
+            </Col>
+          </Row>
         </Tab.Container>
         <Row>
           <Col smHidden={true} mdHidden={true} lgHidden={true} className="phone-only" >
