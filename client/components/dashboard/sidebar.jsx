@@ -32,6 +32,30 @@ export default class Sidebar extends Component {
                       </LinkContainer>
                     );
                   })}
+
+                  <LinkContainer to={`/dashboard/newcrew`} key='createCrew' >
+                    <NavItem activeKey='createCrew'
+                      value='createCrew'
+                      key='createCrew'
+                      className="sidebar-crew-name">
+                      <Glyphicon glyph="plus" /> create new crew
+                    </NavItem>
+                  </LinkContainer>
+                </Nav>
+                <h4 className="sidebar-heading">Crews I Follow:</h4>
+                <Nav bsStyle="pills" stacked>
+                  {this.props.userMemberCrews.map((container, i) => {
+                    return (
+                      <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={() => this.props.setCurrentCrewMember(container)}>
+                        <NavItem activeKey={container.crew.id}
+                          value={container.crew.name}
+                          key={container.crew.id}
+                          className="sidebar-crew-name">
+                          {container.crew.name}
+                        </NavItem>
+                      </LinkContainer>
+                    );
+                  })}
                 </Nav>
               </span>
             </Col>
