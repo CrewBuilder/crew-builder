@@ -28,14 +28,14 @@ export default class TasksAvailable extends Component {
 
     this.claimTask = () => {
       this.setState({showModal: false});
-      let userId = props.userId;
+      let user_id = props.user_id;
       let task = this.state.selectedTask.id;
-      ClaimATask(userId, task, (err, data) => {
+      ClaimATask(user_id, task, (err, data) => {
         if (err) {
           console.log('Error', err);
         } else {
           console.log('Data', data);
-          this.props.getUserTasks(userId, this.state.selectedTask.crew_id);
+          this.props.getUserTasks(user_id, this.state.selectedTask.crew_id);
         }
       });
     };
@@ -47,17 +47,17 @@ export default class TasksAvailable extends Component {
       <div>
         <div>
           <ListGroup>
-            {this.props.currentCrewTasks.map((task, i) => <ListGroupItem onClick={() => this.handleSelectTask(task)} key={i}>{task.name}</ListGroupItem>)}
+            {this.props.currentCrewTasks.map((task, i) => <ListGroupItem onClick={() => this.handleSelectTask(task)} key={i}>{task.task_name}</ListGroupItem>)}
           </ListGroup>
         </div>
         <div>
           <Modal show={this.state.showModal} onHide={this.closeModal}>
             <Modal.Header closeButton>
-              <Modal.Title>{this.state.selectedTask.name}</Modal.Title>
+              <Modal.Title>{this.state.selectedTask.task_name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <h4>Points: {this.state.selectedTask.points}</h4>
-              <p>{this.state.selectedTask.description}</p>
+              <p>{this.state.selectedTask.task_description}</p>
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.claimTask}>Claim this task</Button>

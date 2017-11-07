@@ -58,9 +58,9 @@ export default class Dashboard extends Component {
         });
       }
       let crew_id = crew.crew.id;
-      let userId = this.state.user.id;
-      console.log('crew', crew_id, 'user', userId);
-      GetUserTasks(userId, crew_id, (err, response) => {
+      let user_id = this.state.user.id;
+      console.log('crew', crew_id, 'user', user_id);
+      GetUserTasks(user_id, crew_id, (err, response) => {
         if (err) {
           console.log('ERROR:', err);
         }
@@ -81,8 +81,8 @@ export default class Dashboard extends Component {
       });
     };
 
-    this.getCurrentCrews = (userId) => {
-      GetUserCrews(userId, (err, res) => {
+    this.getCurrentCrews = (user_id) => {
+      GetUserCrews(user_id, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         } else {
@@ -94,8 +94,8 @@ export default class Dashboard extends Component {
       });
     };
 
-    this.getUserTasks = (userId, crew_id) => {
-      GetUserTasks(userId, crew_id, (err, res) => {
+    this.getUserTasks = (user_id, crew_id) => {
+      GetUserTasks(user_id, crew_id, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         }
@@ -117,9 +117,9 @@ export default class Dashboard extends Component {
     };
 
     // (userTaskId, verified = false, cb)
-    this.handleMemberRequestVerification = (userTaskId, verified) => {
+    this.handleMemberRequestVerification = (user_id, task_id, verified) => {
       let verifyTask = verified ? true : null;
-      UpdateTask(userTaskId, verifyTask, (err, res) => {
+      UpdateTask(user_id, task_id, verifyTask, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         } else {
@@ -146,9 +146,9 @@ export default class Dashboard extends Component {
           });
           return user;
         }
-      }).then((userId) => {
-        // get user crews using userId.id
-        let id = userId.id;
+      }).then((user_id) => {
+        // get user crews using user_id.id
+        let id = user_id.id;
         GetUserCrews(id, (err, res) => {
           if (err) {
             console.log('ERROR:', err);

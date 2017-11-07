@@ -41,6 +41,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //Add ROUTES
+app.use(fbRouting);
 require('./server/routes')(app);
 
 // ROUTES

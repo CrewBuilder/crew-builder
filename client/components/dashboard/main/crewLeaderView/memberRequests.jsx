@@ -29,7 +29,7 @@ export default class MemberRequests extends Component {
                   <Button bsStyle="danger" onClick={() => this.selectTaskCompleted(task)}><Glyphicon glyph="remove" /> Reject</Button>
                 </ButtonGroup>
               </div>
-              <div className="member-request-text">{task.name}</div>
+              <div className="member-request-text">{task.task_name}</div>
             </ListGroupItem>
           )) }
           <ListGroupItem>

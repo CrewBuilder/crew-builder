@@ -20,7 +20,7 @@ export default class CrewView extends Component {
         <PanelGroup>
           <Panel collapsible defaultExpanded={true} header="Crew Summary" eventKey="1">
             <CrewSummary
-              userId={this.props.user.id}
+              user_id={this.props.user.id}
               currentCrew={this.props.currentCrew}
               getCurrentCrews={this.props.getCurrentCrews}
             />
@@ -30,7 +30,7 @@ export default class CrewView extends Component {
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Tasks in Progress" eventKey="2">
             <TasksInProgress
-              userId={this.props.user.id}
+              user_id={this.props.user.id}
               userTasks={this.props.userTasks}
               getCurrentCrews={this.props.getCurrentCrews}
               getUserTasks={this.props.getUserTasks}
@@ -38,7 +38,7 @@ export default class CrewView extends Component {
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Tasks Available" eventKey="3">
             <TasksAvailable
-              userId={this.props.user.id}
+              user_id={this.props.user.id}
               getUserTasks={this.props.getUserTasks}
               currentCrewTasks={this.props.currentCrewTasks}
               currentCrew={this.props.currentCrew}

@@ -1,7 +1,7 @@
 const FacebookTokenStrategy = require('passport-facebook-token');
 const passport = require('passport');
 const User = require('../models').User;
-const config = require('../config/config.js')[facebook];
+const config = require('../config/config.js').facebook;
 
 
 // Define strategy
