@@ -29,7 +29,8 @@ export default class Main extends Component {
               currentCrew={this.props.currentCrew}
               currentCrewTasks={this.props.currentCrewTasks}
               userTasks={this.props.userTasks}
-              setCurrentCrew={this.props.setCurrentCrew}
+              getCurrentRewards={this.props.getCurrentRewards}
+              currentCrewRewards={this.props.currentCrewRewards}
             />
           )}/>
           <Route path="/dashboard/manage" render={(props) => (
@@ -43,7 +44,7 @@ export default class Main extends Component {
               currentTasksToConfirm={this.props.currentTasksToConfirm}
               handleMemberRequestVerification={this.props.handleMemberRequestVerification}
               userTasks={this.props.userTasks}
-              setCurrentCrew={this.props.setCurrentCrew}
+              getCurrentRewards={this.props.getCurrentRewards}
             />
           )}/>
           <Route exact path="/dashboard/newcrew" render={(props) => (

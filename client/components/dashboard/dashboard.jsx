@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
 
-import { GetUserCrews, GetUserTasks, GetCrewTasks, GetAllCrews, GetLeaderTasks, UpdateTask } from '../utils/requests.jsx';
+import { GetCrewRewards, GetUserCrews, GetUserTasks, GetCrewTasks, GetAllCrews, GetLeaderTasks, UpdateTask } from '../utils/requests.jsx';
 
 import { GetCurrentUser } from '../utils/auth.jsx';
 
@@ -41,43 +41,82 @@ export default class Dashboard extends Component {
       });
     };
 
-    // TEMP USERID FOR TESTING
     // need to fix if/else logic and add get crew tasks for leader
-    this.setCurrentCrew = (crew, lead) => {
+    this.setCurrentCrewLeader = (crew) => {
       this.setState({
         currentCrew: crew
       });
-      if (lead) {
-        GetLeaderTasks(crew.crew.id, (err, res) => {
+      let crewTasks = [];
+      let rewards = [];
+      let leaderTasks = [];
+      GetCrewRewards(crew.crew.id, (err, resCrewRewards) => {
+        if (err) {
+          console.log('Error', err);
+        } else {
+          rewards = resCrewRewards;
+        }
+        GetCrewTasks(crew.crew.id, (err, resCrewTasks) => {
           if (err) {
             console.log('ERROR:', err);
           } else {
-            console.log(res);
-            this.setState({
-              currentTasksToConfirm: res
-            });
+            console.log('RESCREWTASKS', resCrewTasks);
+            crewTasks = resCrewTasks;
           }
+          // GetLeaderTasks(crew.crew.id, (err, resLeadTasks) => {
+          //   if (err) {
+          //     console.log('ERROR:', err);
+          //   } else {
+          //     console.log('RESLEADTASKS', resLeadTasks);
+          //     leaderTasks = resLeadTasks;
+          //   }
+          this.setState({
+            currentCrewRewards: rewards,
+            currentTasksToConfirm: [],
+            currentCrewTasks: crewTasks
+          });
+          // console.log('STATE', this.state);
+          // });
         });
-      }
-      let crew_id = crew.crew.id;
-      let userId = this.state.user.id;
-      GetUserTasks(userId, crew_id, (err, response) => {
-        if (err) {
-          console.log('ERROR:', err);
-        }
+      });
+    };
 
-        let userTasks;
-        let crewTasks;
-        if (!response) {
-          userTasks = [];
-          crewTasks = [];
+    this.setCurrentCrewMember = (crew) => {
+      this.setState({
+        currentCrew: crew
+      });
+      let crewRewards = [];
+      let userTasks = [];
+      let crewTasks = [];
+      GetCrewRewards(crew.crew.id, (err, rewards) => {
+        if (err) {
+          console.log('Error', err);
         } else {
-          userTasks = response.tasksInProgress;
-          crewTasks = response.tasksAvailable;
+          crewRewards = rewards;
+          console.log('rewards',crewRewards);
         }
+        GetUserTasks(this.state.user.id, crew.crew.id, (err, tasks) => {
+          if (err) {
+            console.log('ERROR:', err);
+          } else {
+            console.log('Tasks', tasks);
+            userTasks = tasks.tasksInProgress;
+            crewTasks = tasks.tasksAvailable;
+          }
+          this.setState({
+            userTasks: userTasks,
+            currentCrewTasks: crewTasks,
+            currentCrewRewards: rewards
+          });
+          console.log('State', this.state);
+        });
+      });
+    };
+
+
+    this.getCurrentRewards = (crew) => {
+      GetCrewRewards(crew.crew.id, (err, res) => {
         this.setState({
-          userTasks: userTasks,
-          currentCrewTasks: crewTasks
+          currentCrewRewards: res
         });
       });
     };
@@ -101,8 +140,7 @@ export default class Dashboard extends Component {
           console.log('ERROR:', err);
         }
 
-        let userTasks;
-        let currentCrewTasks;
+        let userTasks, currentCrewTasks;
         if (!res) {
           userTasks = [];
           currentCrewTasks = [];
@@ -129,7 +167,6 @@ export default class Dashboard extends Component {
         }
       });
     };
-
   }
 
   componentDidMount() {
@@ -186,7 +223,8 @@ export default class Dashboard extends Component {
                   user={this.state.user}
                   userLeaderCrews={this.state.userLeaderCrews}
                   userMemberCrews={this.state.userMemberCrews}
-                  setCurrentCrew={this.setCurrentCrew}
+                  setCurrentCrewMember={this.setCurrentCrewMember}
+                  setCurrentCrewLeader={this.setCurrentCrewLeader}
                 />
               </Col>
               <Col xs={12} sm={10} md={10} lg={9} className="clearfix outlineBox dashboard-container">
@@ -202,7 +240,9 @@ export default class Dashboard extends Component {
                   userTasks={this.state.userTasks}
                   searchResults={this.state.searchResults}
                   searchField={this.state.searchField}
-                  setCurrentCrew={this.setCurrentCrew}
+                  setCurrentCrewMember={this.setCurrentCrewMember}
+                  setCurrentCrewLeader={this.setCurrentCrewLeader}
+                  getCurrentRewards={this.getCurrentRewards}
                 />
               </Col>
 

@@ -67,7 +67,7 @@
   ]
 }
 
-###'/crew/tasks?crewId={CREW_ID}'
+###'/crew/rewards?crewId={CREW_ID}'
 ###Returns all rewards for a crew. Used in CrewView and LeaderCrewView.
 ####Response
 [

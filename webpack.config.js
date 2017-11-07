@@ -3,30 +3,30 @@ const
   UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
   webpack = require('webpack');
 
-let pluginsEnv;
+// let pluginsEnv;
 
-if (process.env.DEV_MODE === 'production') {
-  pluginsEnv = [
-    new webpack.ProvidePlugin({
-      React: 'react',
-      ReactDOM: 'react-dom'
-    })
-  ];
-} else {
-  pluginsEnv = [
-    new webpack.ProvidePlugin({
-      React: 'react',
-      ReactDOM: 'react-dom'
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      parallel: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.optimize.AggressiveMergingPlugin()
-  ];
-}
+// if (process.env.DEV_MODE === 'production') {
+//   pluginsEnv = [
+//     new webpack.ProvidePlugin({
+//       React: 'react',
+//       ReactDOM: 'react-dom'
+//     })
+//   ];
+// } else {
+//   pluginsEnv = [
+//     new webpack.ProvidePlugin({
+//       React: 'react',
+//       ReactDOM: 'react-dom'
+//     }),
+//     new webpack.optimize.UglifyJsPlugin({
+//       parallel: true,
+//       compress: {
+//         warnings: false
+//       }
+//     }),
+//     new webpack.optimize.AggressiveMergingPlugin()
+//   ];
+// }
 
 module.exports = {
   entry: './client/components/index.jsx',
@@ -58,5 +58,5 @@ module.exports = {
       }
     ],
   },
-  plugins: pluginsEnv
+  // plugins: pluginsEnv
 };
