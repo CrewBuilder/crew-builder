@@ -11,7 +11,7 @@ const passportConfig = require('./server/auth/passport.js');
 const db = require('./server/db/index.js');
 const cloudinary = require('cloudinary');
 const multer = require('multer');
-const upload = multer({dest: './uploads/'})
+const upload = multer({dest: './uploads/'});
 require('dotenv').config();
 
 
