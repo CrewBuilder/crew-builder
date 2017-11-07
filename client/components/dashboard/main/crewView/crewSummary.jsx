@@ -24,7 +24,6 @@ export default class CrewSummary extends Component {
         if (err) {
           console.log('Error', err);
         } else {
-          console.log('Data', data);
           this.setState({showLeave: false});
           this.props.getCurrentCrews();
         }
