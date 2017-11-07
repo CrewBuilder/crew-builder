@@ -4,12 +4,9 @@ import { FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap';
 
 import moment from 'moment';
 import 'moment/locale/en-ca';
-// var moment = require('moment');
-// require('moment/locale/en-ca');
 import DateTime from 'react-datetime';
 
 // expect props from manageTasks, related to updation of current rewards
-// var DateTime = require('react-datetime');
 export default class addReward extends Component {
   constructor(props) {
     super(props);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Modal, Button, Glyphicon } from 'react-bootstrap';
-// import AddTask from './../../forms/addTask.jsx';
 import AddReward from './../../forms/addReward.jsx';
 // import { DeleteTask, GetLeaderTasks } from '../../../utils/requests.jsx';
 
