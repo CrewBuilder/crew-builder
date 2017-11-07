@@ -33,7 +33,7 @@
 Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
 
 ```
-git remote add upstream https://github.com/reactorcore/<NAME_OF_REPO>.git
+git remote add upstream https://github.com/CrewBuilder/crew-builder
 ```
 
 ### Cut a namespaced feature branch from master
@@ -53,7 +53,7 @@ These commands will help you do this:
 git checkout -b `your-branch-name`
 ```
 
-### Make commits to your feature branch. 
+### Make commits to your feature branch.
 
 Prefix each commit like so
   - (feat) Added a new feature
@@ -169,12 +169,8 @@ no problem getting your changes merged in.
 
 <!-- Links -->
 [style guide]: https://github.com/reactorcore/style-guide
-[n-queens]: https://github.com/reactorcore/n-queens
-[Underbar]: https://github.com/reactorcore/underbar
 [curriculum workflow diagram]: http://i.imgur.com/p0e4tQK.png
 [cons of merge]: https://f.cloud.github.com/assets/1577682/1458274/1391ac28-435e-11e3-88b6-69c85029c978.png
-[Bookstrap]: https://github.com/hackreactor/bookstrap
-[Taser]: https://github.com/hackreactor/bookstrap
 [tools workflow diagram]: http://i.imgur.com/kzlrDj7.png
 [Git Flow]: http://nvie.com/posts/a-successful-git-branching-model/
 [GitHub Flow]: http://scottchacon.com/2011/08/31/github-flow.html
