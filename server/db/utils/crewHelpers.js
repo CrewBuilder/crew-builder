@@ -82,12 +82,12 @@ exports.searchCrews = (qs) => {
 };
 
 exports.editCrew = (req, res) => {
-  db.crew
+  return db.crew
     .update(req.body, {
       where: {
         id: req.query.crew_id
       }
     })
-    .then(updated => res.status(201).send(updated))
+    .then(updated => res.status(200).send(updated))
     .catch(err => res.status(500).send(err));
 };
