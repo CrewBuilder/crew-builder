@@ -31,7 +31,7 @@ export default class CrewRewards extends Component {
   }
 
   render() {
-    if (this.props.currentCrewRewards !== undefined) {
+    // if (this.props.currentCrewRewards !== undefined) {
       return (
 
         <div>
@@ -57,9 +57,9 @@ export default class CrewRewards extends Component {
           </div>
         </div>
       );
-    } else {
-      return (<div></div>);
-    }
+    // } else {
+    //   return (<div></div>);
+    // }
   }
 
 }
