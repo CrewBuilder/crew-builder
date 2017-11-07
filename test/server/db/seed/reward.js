@@ -4,7 +4,7 @@ module.exports = [{
     "points": 200,
     "expiry": "2018-04-14T09:32:33Z",
     "limit": 1,
-    "crew_id": 2
+    "crew_id": 3
   }, {
     "name": "Concert ticket",
     "description": "Claim a free concert ticket.",

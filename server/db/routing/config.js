@@ -7,6 +7,7 @@ const getTasksByCrew = require('./../utils/taskHelpers.js').getTasksByCrew;
 const searchCrews = require('./../utils/crewHelpers.js').searchCrews;
 const getCrewMembers = require('./../utils/user_crewHelpers.js').getCrewMembers;
 const getUnverifiedTasks = require('./../utils/taskHelpers.js').getUnverifiedTasks;
+const getRewardsByCrew = require('./../utils/rewardHelpers.js').getRewardsByCrew;
 
 const postTask = require('./../utils/taskHelpers.js').postTask;
 const postCrew = require('./../utils/crewHelpers.js').postCrew;
@@ -96,6 +97,8 @@ router.get('/leader/tasks', (req, res) => {
       res.status(401).send(err);
     });
 });
+
+router.get('/crew/rewards', getRewardsByCrew);
 /***************************************************************/
 /************************ POST REQUESTS ************************/
 /***************************************************************/
@@ -209,7 +212,7 @@ router.delete('/tasks', (req, res) => {
     });
 });
 
-router.delete('crew/rewards', deleteReward);
+router.delete('/crew/rewards', deleteReward);
 
 module.exports = router;
 

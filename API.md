@@ -137,6 +137,7 @@
 ###'/leader/tasks?crewId={CREW_ID}'
 ###Leader gets a list of tasks that are completed but still need verification.
 #### Example Response from seed data user crewId=4
+[
     {
         "taskId": 65,
         "taskName": "Jerde, Bauch and Barrows",
@@ -158,6 +159,33 @@
         "userEmail": "johndoe@johndoe.com",
         "userImg": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
         "userTaskId": 24
+    }
+]
+
+###'/crew/rewards?crewId={CREW_ID}'
+#### Example Response
+[
+    {
+        "id": 1,
+        "name": "T-shirt",
+        "description": "Get a t-shirt!",
+        "points": 200,
+        "limit": 1,
+        "expiry": "2018-04-14T09:32:33.000Z",
+        "createdAt": "2017-11-07T20:03:43.931Z",
+        "updatedAt": "2017-11-07T20:03:43.931Z",
+        "crew_id": 3
+    },
+    {
+        "id": 3,
+        "name": "Private party.",
+        "description": "Attend a private party for the crew.",
+        "points": 1000,
+        "limit": 10,
+        "expiry": "2019-05-14T21:03:51.000Z",
+        "createdAt": "2017-11-07T20:03:43.931Z",
+        "updatedAt": "2017-11-07T20:03:43.931Z",
+        "crew_id": 3
     }
 ]
 
@@ -216,6 +244,17 @@
   userID: 2
 }
 
+###'/user/rewards'
+####req.body
+{
+  name: 'T-shirt',
+  description: 'get a crew T-shirt',
+  points: 300,
+  limit: 1,
+  expiry: new Date() + 1000,
+  crew_id: 4
+}
+
 ##PUT Endpoints
 ###'user/tasks'
 ####req.body (request will know which action to do based on fields included)
@@ -235,4 +274,7 @@ TODO: for cleanup this should probably be changed to only accept a query string
 sends back 202 with no data
 
 ###'leader/tasks?taskId={TASK ID}'
+sends back 202 with no data
+
+###'crew/rewards?reward_id={reward ID}'
 sends back 202 with no data

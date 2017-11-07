@@ -16,6 +16,24 @@ module.exports = {
       });
   },
 
+  getRewardsByCrew(req, res) {
+    db.reward
+      .findAll({
+        where: {
+          crew_id: req.query.crew_id
+        }
+      })
+      .then(rewards => res.status(200).send(rewards))
+      .catch(err => {
+        if (err.SequelizeDatabaseError) {
+          console.log('Get rewards by crew error in Sequelize: ', err.SequelizeDatabaseError);
+          res.sendStatus(500);
+        } else {
+          console.log('Get rewards by crew error in request: ', err);
+        }
+      });
+  },
+
   destroyReward(req, res) {
     db.reward
       .destroy({
