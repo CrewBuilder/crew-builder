@@ -19,9 +19,9 @@ export default class CreateCrew extends Component {
     // props contain name and unique details of user, so we can keep track of who created this crew  and store it in database accordingly
 
     this.handleSubmit = (e) => {
-      e.preventDefault()
-      var formData = new FormData()
-      formData.append("picture", this.state.image)
+      e.preventDefault();
+      var formData = new FormData();
+      formData.append("picture", this.state.image);
 
       var options = {
         method: 'POST',
