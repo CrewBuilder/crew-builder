@@ -3,14 +3,19 @@ const expect = chai.expect;
 const request = require('supertest');
 const path = require('path');
 const server = require('../../index.js');
+const db = require('../../server/db/index.js');
+const seed = require('../../server/db/seed.js');
 
 // ##################################
 // Test Server and Client Are Active
 // ##################################
 
 describe('Server and Client Are Active', function() {
+  beforeEach(function(done) {
+    seed().then(function() { done(); });
+  });
 
-  it('Respond with 200 at localhost', function(done) {
+  it('Responds with 200 at localhost', function(done) {
     request(server)
       .get('/')
       .expect(200, done);
@@ -86,5 +91,54 @@ describe('Server and Client Are Active', function() {
       .catch(err => {
         done(err);
       });
+  });
+
+  it('Responds with a new reward created', function(done) {
+    let newReward = {
+      name: 'T-shirt',
+      description: 'get a crew T-shirt',
+      points: 300,
+      limit: 1,
+      expiry: new Date() + 1000,
+      crew_id: 4
+    };
+    request(server)
+      .post('/crew/rewards')
+      .send(newReward)
+      .expect(201)
+      .then(res => {
+        expect(res.body.name).to.equal(newReward.name);
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Deletes a specified reward', function(done) {
+    request(server)
+      .delete('/crew/rewards?reward_id=1')
+      .expect(202)
+      .then(res => {
+        return db.reward.findOne({
+          where: {
+            id: 1
+          }
+        });
+      })
+      .then(found => {
+        expect(!found).to.be.true;
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Responds with all of the rewards for a given crew', function(done) {
+    request(server)
+      .get('/crew/rewards?crew_id=3')
+      .expect(200)
+      .then(res => {
+        expect(res.body.length).to.equal(2);
+        done();
+      })
+      .catch(err => done(err));
   });
 });
