@@ -1,7 +1,6 @@
 // This component renders a list of rewards to be claimed
 import React, { Component } from 'react';
 import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
-import { ClaimATask } from '../../../utils/requests.jsx';
 
 
 export default class CrewRewards extends Component {

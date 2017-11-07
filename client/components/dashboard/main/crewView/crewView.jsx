@@ -52,6 +52,7 @@ export default class CrewView extends Component {
               getUserTasks={this.props.getUserTasks}
               currentCrewRewards={this.props.currentCrewRewards}
               currentCrew={this.props.currentCrew}
+              getCurrentRewards={this.props.getCurrentRewards}
             />
           </Panel>
         </PanelGroup>
