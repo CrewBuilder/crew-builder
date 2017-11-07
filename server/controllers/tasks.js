@@ -40,7 +40,10 @@ module.exports = {
     return db.Task
       .create(req.body)
       .then(task => res.status(201).send(task))
-      .catch(err => res.status(400).send(err));
+      .catch(err => {
+        console.log(err);
+        res.status(400).send(err);
+      });
   },
 
   deleteTask(req, res) {

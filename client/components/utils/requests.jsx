@@ -36,8 +36,8 @@ module.exports = {
 
 
   // Returns all of current user's crews. Will be rendered in sidebar view.
-  GetUserCrews: (userId, cb) => {
-    let route = `/api/user/crews?user_id=${userId}`;
+  GetUserCrews: (user_id, cb) => {
+    let route = `/api/user/crews?user_id=${user_id}`;
     return fetch(route, getOptions)
       .then((response) => {
         return response.json();
@@ -52,8 +52,8 @@ module.exports = {
   },
 
   // Returns all of current user's tasks for selected crew.
-  GetUserTasks: (userId, crew_id, cb) => {
-    let route = `/api/user/tasks?user_id=${userId}&crew_id=${crew_id}`;
+  GetUserTasks: (user_id, crew_id, cb) => {
+    let route = `/api/user/tasks?user_id=${user_id}&crew_id=${crew_id}`;
     return fetch(route, getOptions)
     // TODO: test the data format of these API requests
       .then((response) => {
@@ -304,8 +304,8 @@ module.exports = {
       });
   },
 
-  DeleteTask: (taskId, cb) => {
-    let route = `${module.exports.host}api/tasks?taskId=${taskId}`;
+  DeleteTask: (task_id, cb) => {
+    let route = `${module.exports.host}api/tasks?task_id=${task_id}`;
     let options = deleteOptions;
     options.body = JSON.stringify(body);
     return fetch(route, options)

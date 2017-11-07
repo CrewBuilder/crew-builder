@@ -41,7 +41,7 @@ export default class CrewLeaderView extends Component {
         <PanelGroup>
           <Panel collapsible defaultExpanded={true} header="Crew Summary" eventKey="1">
             <CrewSummary
-              userId={this.props.user.id}
+              user_id={this.props.user.id}
               currentCrew={this.props.currentCrew}
               getCrewMember={this.getCrewMembers}
               crewMembers={this.state.crewMembers}
@@ -55,7 +55,7 @@ export default class CrewLeaderView extends Component {
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Manage Tasks" eventKey="3">
             <ManageTasks
-              userId={this.props.user.id}
+              user_id={this.props.user.id}
               currentCrewTasks={this.props.currentCrewTasks}
               currentCrew={this.props.currentCrew}
               getUserTasks={this.props.getUserTasks}
