@@ -42,6 +42,7 @@ export default class Dashboard extends Component {
     };
 
     // TEMP USERID FOR TESTING
+    // need to fix if/else logic and add get crew tasks for leader
     this.setCurrentCrew = (crew, lead) => {
       this.setState({
         currentCrew: crew

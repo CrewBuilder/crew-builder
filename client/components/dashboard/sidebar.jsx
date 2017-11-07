@@ -22,7 +22,7 @@ export default class Sidebar extends Component {
                 <Nav bsStyle="pills" stacked>
                   {this.props.userLeaderCrews.map((container) => {
                     return (
-                      <LinkContainer to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={e => this.props.setCurrentCrew(container)}>
+                      <LinkContainer to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={() => this.props.setCurrentCrew(container, 'lead')}>
                         <NavItem activeKey={container.crew.id}
                           value={container.crew.name}
                           key={container.crew.id}
@@ -46,7 +46,7 @@ export default class Sidebar extends Component {
                 <Nav bsStyle="pills" stacked>
                   {this.props.userMemberCrews.map((container, i) => {
                     return (
-                      <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={e => this.props.setCurrentCrew(container, e)}>
+                      <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={() => this.props.setCurrentCrew(container)}>
                         <NavItem activeKey={container.crew.id}
                           value={container.crew.name}
                           key={container.crew.id}
@@ -70,7 +70,7 @@ export default class Sidebar extends Component {
                   {this.props.userLeaderCrews.map((container, i) => {
                     return (
                       <MenuItem componentClass="span" eventKey={i} key={i}>
-                        <LinkContainer componentClass="span" to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={e => this.props.setCurrentCrew(container)}>
+                        <LinkContainer componentClass="span" to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={() => this.props.setCurrentCrew(container)}>
                           <NavItem componentClass="span" activeKey={container.crew.id}
                             value={container.crew.name}
                             key={container.crew.id}
@@ -95,7 +95,7 @@ export default class Sidebar extends Component {
                   {this.props.userMemberCrews.map((container, i) => {
                     return (
                       <MenuItem componentClass="span" eventKey={i} key={i}>
-                        <LinkContainer componentClass="span" to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={e => this.props.setCurrentCrew(container, e)}>
+                        <LinkContainer componentClass="span" to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={() => this.props.setCurrentCrew(container)}>
                           <NavItem componentClass="span" activeKey={container.crew.id}
                             value={container.crew.name}
                             key={container.crew.id}
