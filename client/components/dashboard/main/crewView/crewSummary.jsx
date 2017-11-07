@@ -18,9 +18,9 @@ export default class CrewSummary extends Component {
     };
 
     this.handleConfirmLeave = () => {
-      let userId = this.props.userId;
+      let user_id = this.props.user_id;
       let crew_id = this.props.currentCrew.crew.id;
-      DeleteUserCrew(userId, crew_id, (err, data) => {
+      DeleteUserCrew(user_id, crew_id, (err, data) => {
         if (err) {
           console.log('Error', err);
         } else {
@@ -43,12 +43,12 @@ export default class CrewSummary extends Component {
         <Grid>
           <Row className="show-grid clearfix ">
             <Col xs={12} sm={12} md={2} lg={3} className="container-fluid">
-              <Image className="clearfix img-responsive" src={this.props.currentCrew.crew.image} alt='Image' />
+              <Image className="clearfix img-responsive" src={this.props.currentCrew.crew.crew_image} alt='Image' />
             </Col>
             <Col xs={12} sm={12} md={8} lg={4} className="container-fluid">
-              <h2>{this.props.currentCrew.crew.name}</h2>
+              <h2>{this.props.currentCrew.crew.crew_name}</h2>
               <p><Badge>{this.props.currentCrew.role}</Badge><em> You have {this.props.currentCrew.points} points with this crew!</em></p>
-              <p>{this.props.currentCrew.crew.description}</p>
+              <p>{this.props.currentCrew.crew.crew_description}</p>
               <p><strong>{achievementLevel}</strong></p>
             </Col>
             <Col xs={12} sm={12} md={1} lg={1} className="container-fluid">

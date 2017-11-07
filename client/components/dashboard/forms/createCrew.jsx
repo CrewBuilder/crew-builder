@@ -22,7 +22,6 @@ export default class CreateCrew extends Component {
       e.preventDefault();
       var formData = new FormData();
       formData.append("picture", this.state.image);
-
       var options = {
         method: 'POST',
         body: formData
@@ -34,9 +33,9 @@ export default class CreateCrew extends Component {
           // console.log(data, 'data in line 83')
           this.setState({url: data.message})
           var obj = {
-            name: this.state.name,
-            description: this.state.description,
-            image: this.state.url
+            crew_name: this.state.name,
+            crew_description: this.state.description,
+            crew_image: this.state.url
           }
 
           PostCrew(obj, this.props.user.id, function (err, data) {

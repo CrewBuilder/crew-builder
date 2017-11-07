@@ -9,9 +9,9 @@ export default class MemberRequests extends Component {
     this.selectTaskCompleted = (task, confirm) => {
       console.log('confirmTaskCompleted');
       if (confirm) {
-        this.props.handleMemberRequestVerification(task.id, confirm);
+        this.props.handleMemberRequestVerification(task.user_id, task.task_id, confirm);
       } else {
-        this.props.handleMemberRequestVerification(task.id);
+        this.props.handleMemberRequestVerification(task.user_id, task.task_id);
       }
     };
   }
@@ -29,7 +29,7 @@ export default class MemberRequests extends Component {
                   <Button bsStyle="danger" onClick={() => this.selectTaskCompleted(task)}><Glyphicon glyph="remove" /> Reject</Button>
                 </ButtonGroup>
               </div>
-              <div className="member-request-text">{task.name}</div>
+              <div className="member-request-text">{task.task_name}</div>
             </ListGroupItem>
           )) }
           <ListGroupItem>

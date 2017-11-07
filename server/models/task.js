@@ -1,7 +1,8 @@
-module.exports = function(sequelize, DataTypes) {
-  var Task = sequelize.define('task', {
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT,
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var Task = sequelize.define('Task', {
+    task_name: DataTypes.TEXT,
+    task_description: DataTypes.TEXT,
     points: DataTypes.INTEGER,
     limit: DataTypes.INTEGER,
     expiry: DataTypes.DATE,
@@ -25,9 +26,9 @@ module.exports = function(sequelize, DataTypes) {
   },
 
   Task.associate = function(models) {
-    Task.belongsTo(models.crew, {foreignKey: 'crew_id'});
-    Task.belongsToMany(models.user, {through: models.user_task, foreignKey: 'task_id'});
-    Task.hasMany(models.user_task, {foreignKey: 'task_id'});
+    Task.belongsTo(models.Crew, {foreignKey: 'crew_id'});
+    Task.belongsToMany(models.User, {through: models.User_Task, foreignKey: 'task_id'});
+    Task.hasMany(models.User_Task, {foreignKey: 'task_id'});
   };
 
   return Task;

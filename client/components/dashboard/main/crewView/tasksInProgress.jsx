@@ -21,7 +21,7 @@ export default class TasksInProgress extends Component {
       let expiry = moment(this.state.focusTask.expiry).format("MM/DD/YYYY");
       this.setState({ focusTask: taskTarget });
       this.setState({ focusTaskExpiry: expiry });
-      this.setState({ focusUserTask: taskTarget.user_task });
+      this.setState({ focusUserTask: taskTarget.User_Tasks });
       this.setState({ showModal: true });
     };
 
@@ -31,9 +31,11 @@ export default class TasksInProgress extends Component {
 
     this.confirmTask = (e) => {
       e.preventDefault();
-      let taskId = this.state.focusUserTask.id;
-      UpdateTask(taskId, null, (err, data) => {
-        this.props.getUserTasks(this.props.userId, this.state.focusTask.crew_id);
+      console.log(this.focusUserTask);
+      let task_id = this.state.focusUserTask.task_id;
+      let user_id = this.state.focusUserTask.user_id;
+      UpdateTask(user_id, task_id, false, (data) => {
+        this.props.getUserTasks(this.props.user_id, this.state.focusTask.crew_id);
       });
       this.closeModal();
     };
@@ -47,15 +49,16 @@ export default class TasksInProgress extends Component {
       <div>
         <ListGroup>
           {this.props.userTasks.map((task, i) => {
-            return (<ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.name}
-              {(task.user_task.completed === true && task.user_task.verified === false) ? <Label bsStyle="warning" className="task-status-labels">Waiting approval...</Label> : ''}
-              {(task.user_task.completed === true && task.user_task.verified === true) ? <Label bsStyle="success" className="task-status-labels">Task Completed</Label> : ''}
+            return (
+              <ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.task_name}
+                {(task.User_Tasks.completed === true && task.User_Tasks.verified === false) ? <Label bsStyle="warning" className="task-status-labels">Waiting approval...</Label> : ''}
+                {(task.User_Tasks.completed === true && task.User_Tasks.verified === true) ? <Label bsStyle="success" className="task-status-labels">Task Completed</Label> : ''}
               </ListGroupItem>);
           })}
         </ListGroup>
         <Modal show={this.state.showModal} onHide={this.closeModal}>
           <Modal.Header closeButton>
-            <Modal.Title>{this.state.focusTask.name}</Modal.Title>
+            <Modal.Title>{this.state.focusTask.task_name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <h4>Points: {this.state.focusTask.points}</h4>
@@ -69,7 +72,7 @@ export default class TasksInProgress extends Component {
               </h4>
             </div>
             <h4>Description</h4>
-            <p>{this.state.focusTask.description}</p>
+            <p>{this.state.focusTask.task_description}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.closeModal}>Close</Button>

@@ -1,12 +1,14 @@
 const FacebookTokenStrategy = require('passport-facebook-token');
 const passport = require('passport');
-const upsertFbUser = require('./../controllers/users.js').newUser;
+const User = require('../models').User;
+const config = require('../config/config.js').facebook;
+
 
 // Define strategy
 module.exports = () => {
   passport.use(new FacebookTokenStrategy({
-    clientID: process.env.FB_CLIENT_ID,
-    clientSecret: process.env.FB_SECRET,
+    clientID: config.FB_CLIENT_ID,
+    clientSecret: config.FB_SECRET
   },
   function (accessToken, refreshToken, profile, done) {
   //make profile data manageable in our DB
@@ -19,8 +21,11 @@ module.exports = () => {
         TOKEN: accessToken
       }
     };
-    upsertFbUser(userProfile, done)
+    User
+      .upsert({
+        facebook_id: userProfile.facebook_id,
+        facebook: userProfile.facebook
+      })
+      .then(() => done());
   }));
 };
-
-

@@ -32,9 +32,9 @@ bower_components/
 # dotenv file
 .env
 
-# config
-configfile.js
-
 # floobits
 .floo
 .flooignore
+
+#images
+uploads/*
