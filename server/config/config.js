@@ -11,7 +11,7 @@ module.exports = {
   },
   test: {
     username: process.env.DATABASE_USER,
-    password: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
     database: 'crewbuilder_test',
     host: '127.0.0.1',
     dialect: 'postgres',
@@ -20,8 +20,4 @@ module.exports = {
   production: {
     'use-env-variable': 'DATABASE_URL'
   },
-  facebook: {
-    FB_CLIENT_ID: '356644548109752',
-    FB_SECRET: '52ad76caab8dd22fbece177eb65aa942'
-  }
 };
