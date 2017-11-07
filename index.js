@@ -9,7 +9,17 @@ const modelRouting = require('./server/db/routing/config.js');
 const cors = require('cors');
 const passportConfig = require('./server/auth/passport.js');
 const db = require('./server/db/index.js');
+const cloudinary = require('cloudinary');
+const multer = require('multer');
+const upload = multer({dest: './uploads/'})
 require('dotenv').config();
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+});
 
 passportConfig();
 // INIT APP
@@ -47,5 +57,22 @@ db.sequelize.sync().then(() => {
     console.log('SERVER STARTED: Listening on port:' + port);
   });
 });
+
+app.post('/image', upload.single('picture'), function(req, res, next) {
+  // console.log(req.file)
+  if (req.file) {
+    cloudinary.v2.uploader.upload(req.file.path, {public_id: req.file.originalname},
+      function(error, result) {
+        // console.log(result)
+        res.json({success: true, message: result.secure_url})
+      })
+  } else {
+    res.status(500);
+    res.send("Image was not uploaded to cloudinary")
+  }
+})
+
+cloudinary.v2.uploader.upload('my_image.jpg', {public_id: "sample_id"},
+    function(error, result){console.log(result)});
 
 module.exports = app;
