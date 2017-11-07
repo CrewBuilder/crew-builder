@@ -1,6 +1,7 @@
 // This component renders a list of rewards to be claimed
 import React, { Component } from 'react';
 import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ClaimATask } from '../../../utils/requests.jsx';
 
 
 export default class CrewRewards extends Component {
@@ -31,58 +32,32 @@ export default class CrewRewards extends Component {
   }
 
   render() {
-    // if (this.props.currentCrewRewards !== undefined) {
-      return (
+    return (
 
+      <div>
         <div>
-          <div>
-            <ListGroup>
-              {this.props.currentCrewRewards.map((reward, i) => <ListGroupItem onClick={() => this.handleSelectReward(reward)} key={i}>{reward.name}</ListGroupItem>)}
-            </ListGroup>
-          </div>
-          <div>
-            <Modal show={this.state.showModal} onHide={this.closeModal}>
-              <Modal.Header closeButton>
-                <Modal.Title>{this.state.selectedReward.name}</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <h4>Points: {this.state.selectedReward.points}</h4>
-                <p>{this.state.selectedReward.description}</p>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button onClick={this.claimReward}>Claim this reward</Button>
-                <Button onClick={this.closeModal}>Close</Button>
-              </Modal.Footer>
-            </Modal>
-          </div>
+          <ListGroup>
+            {this.props.currentCrewRewards.map((reward, i) => <ListGroupItem onClick={() => this.handleSelectReward(reward)} key={i}>{reward.name}</ListGroupItem>)}
+          </ListGroup>
         </div>
-      );
-    // } else {
-    //   return (<div></div>);
-    // }
+        <div>
+          <Modal show={this.state.showModal} onHide={this.closeModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>{this.state.selectedReward.name}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <h4>Points: {this.state.selectedReward.points}</h4>
+              <p>{this.state.selectedReward.description}</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.claimReward}>Claim this reward</Button>
+              <Button onClick={this.closeModal}>Close</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+      </div>
+    );
   }
 
 }
 
-
-// this.getUserTasks = (userId, crew_id) => {
-//   GetUserTasks(userId, crew_id, (err, res) => {
-//     if (err) {
-//       console.log('ERROR:', err);
-//     }
-
-//     let userTasks;
-//     let currentCrewTasks;
-//     if (!res) {
-//       userTasks = [];
-//       currentCrewTasks = [];
-//     } else {
-//       userTasks = res.tasksInProgress;
-//       currentCrewTasks = res.tasksAvailable;
-//     }
-//     this.setState({
-//       userTasks: userTasks,
-//       currentCrewTasks: currentCrewTasks,
-//     });
-//   });
-// };

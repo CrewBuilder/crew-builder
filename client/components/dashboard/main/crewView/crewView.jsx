@@ -49,6 +49,7 @@ export default class CrewView extends Component {
           <Panel collapsible defaultExpanded={true} header="Rewards Available" eventKey="4">
             <CrewRewards
               userId={this.props.user.id}
+              getUserTasks={this.props.getUserTasks}
               currentCrewRewards={this.props.currentCrewRewards}
               currentCrew={this.props.currentCrew}
             />
