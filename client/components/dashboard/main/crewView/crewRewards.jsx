@@ -55,6 +55,7 @@ export default class CrewRewards extends Component {
         </div>
       </div>
     );
+
   }
 
 }
