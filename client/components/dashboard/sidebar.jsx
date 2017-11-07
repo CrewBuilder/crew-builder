@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
+<<<<<<< HEAD
 import { MenuItem, NavDropdown, Navbar, Row, Col, Nav, NavItem, Tab, TagContainer, TabContent, TabPane, Label, Button, Glyphicon } from 'react-bootstrap';
+=======
+import { MenuItem, NavDropdown, NavBar, Row, Col, Nav, NavItem, Tab, TagContainer, TabContent, TabPane, Label, Button, Glyphicon } from 'react-bootstrap';
+>>>>>>> Styled sidebar a little
 
 export default class Sidebar extends Component {
 
@@ -57,6 +61,7 @@ export default class Sidebar extends Component {
                     );
                   })}
                 </Nav>
+                {this.props.userMemberCrews && this.props.userMemberCrews.length === 0 ? <p className="sidebar-empty-crews-msg"><Glyphicon glyph="info-sign" /> <em>Just getting started or looking to find that next crew for you? Try our browse or search features to find some crews to join today!</em></p> : null}
               </span>
             </Col>
           </Row>
