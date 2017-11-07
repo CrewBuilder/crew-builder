@@ -1,12 +1,32 @@
 const express = require('express');
 const router = express.Router();
 
+const getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
+const getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByUserCrew;
+const getTasksByCrew = require('./../utils/taskHelpers.js').getTasksByCrew;
+const searchCrews = require('./../utils/crewHelpers.js').searchCrews;
+const getCrewMembers = require('./../utils/user_crewHelpers.js').getCrewMembers;
+const getUnverifiedTasks = require('./../utils/taskHelpers.js').getUnverifiedTasks;
+
+const postTask = require('./../utils/taskHelpers.js').postTask;
+const postCrew = require('./../utils/crewHelpers.js').postCrew;
+const postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
+const postUserTask = require('./../utils/user_taskHelpers.js').postUserTask;
+const postReward = require('./../utils/rewardHelpers.js').createReward;
+
+const updateTask = require('./../utils/user_taskHelpers.js').updateTask;
+
+const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
+const deleteTask = require('./../utils/taskHelpers').deleteTask;
+const deleteReward = require('./../utils/rewardHelpers.js').destroyReward;
+
+
+
+
 /**************************************************************/
 /************************ GET REQUESTS ************************/
 /**************************************************************/
 
-// GET: /user/crews => returns user's crew(s) data
-const getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
 router.get('/user/crews', (req, res) => { // tested with postman, returns array of user_crew data for user
   let id = req.query.id;
   getCrewsByUser(id).
@@ -18,8 +38,6 @@ router.get('/user/crews', (req, res) => { // tested with postman, returns array 
     });
 });
 
-// GET: /user/tasks => retrieves a list of user's tasks in progress, and a list of all available tasks for the crew in view
-const getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByUserCrew;
 router.get('/user/tasks', (req, res) => {
   let id = req.query.id;
   let crew_id = req.query.crew_id;
@@ -32,8 +50,6 @@ router.get('/user/tasks', (req, res) => {
   });
 });
 
-// GET: /crew/tasks => retrieves all tasks for a given crew
-const getTasksByCrew = require('./../utils/taskHelpers.js').getTasksByCrew;
 router.get('/crew/tasks', (req, res) => {
   let id = req.query.crew_id;
   getTasksByCrew(id, (err, tasks) => {
@@ -45,8 +61,6 @@ router.get('/crew/tasks', (req, res) => {
   });
 });
 
-// GET: /crews => retrieves all crews in current db
-const searchCrews = require('./../utils/crewHelpers.js').searchCrews;
 router.get('/crews', (req, res) => {
   qs = req.query.qs || null;
   searchCrews(qs)
@@ -58,8 +72,6 @@ router.get('/crews', (req, res) => {
     });
 });
 
-// GET: leader/members => leader requests members, retrieves list of user data for the crew
-const getCrewMembers = require('./../utils/user_crewHelpers.js').getCrewMembers;
 router.get('/leader/members', (req, res) => {
   let crew_id = req.query.crew_id;
   getCrewMembers(crew_id, (err, members) => {
@@ -71,8 +83,6 @@ router.get('/leader/members', (req, res) => {
   });
 });
 
-// GET: /leader/tasks?crew_id={CREW_ID} => retrieves unverified tasks for a crew
-const getUnverifiedTasks = require('./../utils/taskHelpers.js').getUnverifiedTasks;
 router.get('/leader/tasks', (req, res) => {
   let crew_id = req.query.crew_id;
   getUnverifiedTasks(crew_id)
@@ -90,8 +100,6 @@ router.get('/leader/tasks', (req, res) => {
 /************************ POST REQUESTS ************************/
 /***************************************************************/
 
-// POST: /task => crew leader creates a task, creates a new row in task table.
-let postTask = require('./../utils/taskHelpers.js').postTask;
 router.post('/task', (req, res) => {
   let task = {
     name: req.body.name,
@@ -110,8 +118,6 @@ router.post('/task', (req, res) => {
   });
 });
 
-// POST: /crew => user creates a new crew, creates a new row in crew table
-const postCrew = require('./../utils/crewHelpers.js').postCrew;
 router.post('/crew', (req, res) => {
   let crew = {
     name: req.body.name,
@@ -128,8 +134,6 @@ router.post('/crew', (req, res) => {
   });
 });
 
-// POST: user/crews => user joins a crew, creates a new row in user_crew table
-const postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
 router.post('/user/crews', (req, res) => {
   let userId = req.body.userId;
   let crew_id = req.body.crew_id;
@@ -142,8 +146,6 @@ router.post('/user/crews', (req, res) => {
   });
 });
 
-// POST: user/tasks => user claims a task, creates a new row in user_task table
-const postUserTask = require('./../utils/user_taskHelpers.js').postUserTask;
 router.post('/user/tasks', (req, res) => {
   let userId = req.body.userId;
   let taskId = req.body.taskId;
@@ -156,20 +158,18 @@ router.post('/user/tasks', (req, res) => {
   });
 });
 
+router.post('/crew/rewards', postReward);
+
 /**************************************************************/
 /************************ PUT REQUESTS ************************/
 /**************************************************************/
 
-// PUT: user/tasks => changes user_task completed status from false to true
-const updateTask = require('./../utils/user_taskHelpers.js').updateTask;
 router.put('/user/tasks', (req, res) => {
 
   let userTaskId = req.body.userTaskId;
-  let verified = req.body.verified || false; // verified should remain false if it is not in the request
-  console.log('USER TASK', userTaskId, 'VEr', verified)
+  let verified = req.body.verified || false;
   updateTask(userTaskId, verified, (err, userCrew) => {
     if (err) {
-      console.log('err',err)
       res.status(401).send(err);
     } else {
       res.status(200).send(userCrew);
@@ -182,7 +182,6 @@ router.put('/user/tasks', (req, res) => {
 /************************ DELETE REQUESTS ************************/
 /*****************************************************************/
 
-const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
 router.delete('/user/crews', (req, res) => {
   let userId = req.body.id;
   let crew_id = req.body.crew_id;
@@ -196,7 +195,6 @@ router.delete('/user/crews', (req, res) => {
     });
 });
 
-const deleteTask = require('./../utils/taskHelpers').deleteTask;
 router.delete('/tasks', (req, res) => {
   deleteTask(req.query.taskId)
     .then(deleted => {
@@ -211,8 +209,11 @@ router.delete('/tasks', (req, res) => {
     });
 });
 
+router.delete('crew/rewards', deleteReward);
+
 module.exports = router;
 
+// Database response parsing functions
 const parseData = (user) => {
   let crews = user.crews;
   let response = {

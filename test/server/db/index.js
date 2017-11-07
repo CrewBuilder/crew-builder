@@ -9,7 +9,7 @@ const user_crewHelpers = require('../../../server/db/utils/user_crewHelpers.js')
 const user_taskHelpers = require('../../../server/db/utils/user_taskHelpers.js');
 const userHelpers = require('../../../server/db/utils/userHelpers.js');
 
-describe('Postgres crewbuilder db', function() {
+xdescribe('Postgres crewbuilder db', function() {
 
   beforeEach(function(done) {
     seed().then(function() { done(); });
