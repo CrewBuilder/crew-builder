@@ -23,9 +23,9 @@ export default class CreateCrew extends Component {
       console.log(this.desc);
       console.log(this.img);
       var obj = {
-        name: this.name.value,
-        description: this.description.value,
-        image: this.state.uploadedFileCloudinaryUrl
+        crew_name: this.name.value,
+        crew_description: this.description.value,
+        crew_image: this.state.uploadedFileCloudinaryUrl
       };
       this.refs.form.reset();
       console.log(obj);

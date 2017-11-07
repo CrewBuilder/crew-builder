@@ -21,13 +21,13 @@ export default class SearchCard extends Component {
       <Media>
         <OverlayTrigger placement="top" overlay={tooltip}>
           <Media.Left align="top">
-            <img height={120} width={120} src={this.props.crew.image} onClick={this.joinHandler} className="image-shadow" />
+            <img height={120} width={120} src={this.props.crew.crew_image} onClick={this.joinHandler} className="image-shadow" />
           </Media.Left>
         </OverlayTrigger>
 
         <Media.Body className="search-card-media-body">
-          <Media.Heading>{this.props.crew.name}</Media.Heading>
-          <p>{this.props.crew.description}</p>
+          <Media.Heading>{this.props.crew.crew_name}</Media.Heading>
+          <p>{this.props.crew.crew_description}</p>
         </Media.Body>
         {(this.props.count + 1 ) % 3 === 0 ?
           null

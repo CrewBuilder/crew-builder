@@ -42,7 +42,7 @@ let authenticate = expressJwt({
 });
 
 // Handles /auth route for facebook
-router.route('/auth/facebook')
+router.route('/api/auth/facebook')
   .post(passport.authenticate('facebook-token', {session: false}), (req, res, next) => {
     if (!req.user) {
       return res.status(401, 'User not authenticated');
@@ -57,14 +57,16 @@ router.route('/auth/facebook')
 
 // Returns User data by id
 let getCurrentUser = (req, res, next) => {
-  findUserById(req.auth.id, (err, user) => {
-    if (err) {
-      next(err);
-    } else {
+  User.findOne({
+    where: {
+      id: req.auth.id
+    }
+  })
+    .then(user => {
       req.user = user;
       next();
-    }
-  });
+    })
+    .catch(err => next(err));
 };
 
 let getOne = (req, res) => {
@@ -78,7 +80,7 @@ let getOne = (req, res) => {
 };
 
 // Expects req.user.id to be defined. Queries DB and returns the User's data
-router.route('/auth/me')
+router.route('/api/auth/me')
   .get(authenticate, getCurrentUser, getOne);
 
 module.exports = router;

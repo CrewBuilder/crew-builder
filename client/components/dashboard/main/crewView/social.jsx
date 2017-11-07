@@ -34,14 +34,14 @@ export default class Social extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       shareUrl: 'https://www.reddit.com/',
       message: 'Here is a test message for our social media!'
-    }
+    };
 
     this.test = () => {
       console.log('test');
-    }
+    };
   }
 
   render() {
@@ -89,7 +89,7 @@ export default class Social extends Component {
           </Col>
           <Col xs={2} sm={2} md={2} lg={2}>
             <div className="social-button">
-             <WhatsappShareButton
+              <WhatsappShareButton
                 url={this.state.shareUrl}
                 title={this.state.message}
                 separator=" "
@@ -122,7 +122,6 @@ export default class Social extends Component {
           </Col>
         </Row>
       </div>
-
-    )
+    );
   }
 }

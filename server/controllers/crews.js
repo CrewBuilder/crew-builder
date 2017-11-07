@@ -1,43 +1,6 @@
 const db = require('../models');
 
 module.exports = {
-  getCrewsByUser(req, res) {
-    let user_id = req.query.user_id;
-    let leader,
-      member;
-    return db.Crew
-      .findAll({
-        include: [{
-          model: db.User_Crew,
-          where: {
-            user_id: user_id,
-            role: 'leader'
-          }
-        }]
-      })
-      .then(crews => {
-        leader = crews;
-        return db.Crew
-          .findAll({
-            include: [{
-              model: db.User_Crew,
-              where: {
-                user_id: user_id,
-                role: 'member'
-              }
-            }]
-          });
-      })
-      .then(crews => {
-        member = crews;
-        res.status(200).send({
-          leader: leader,
-          member: member
-        });
-      })
-      .catch(err => res.status(401).send(err));
-  },
-
   searchCrews(req, res) {
     if (req.query.qs) {
       let qs = `%${req.query.qs}%`;

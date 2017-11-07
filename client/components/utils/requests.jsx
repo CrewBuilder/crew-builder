@@ -2,7 +2,7 @@ module.exports = {
 
   // Returns all of current user's crews. Will be rendered in sidebar view.
   GetUserCrews: (user_id, cb) => {
-    let route = `/user/crews?id=${user_id}`;
+    let route = `/api/user/crews?user_id=${user_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -24,7 +24,7 @@ module.exports = {
 
   // Returns all of current user's tasks for selected crew.
   GetUserTasks: (user_id, crew_id, cb) => {
-    let route = `/user/tasks?id=${user_id}&crew_id=${crew_id}`;
+    let route = `/api/user/tasks?user_id=${user_id}&crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -39,7 +39,6 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error);
         cb(error, null);
       });
   },
@@ -47,7 +46,7 @@ module.exports = {
   // Returns all of selected crew's tasks.
   GetCrewTasks: (crew_id, cb) => {
     let id = crew_id;
-    let route = `/crew/tasks?crew_id=${crew_id}`;
+    let route = `/api/crew/tasks?crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -62,7 +61,6 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error)
         cb(error, null);
       });
   },
@@ -70,7 +68,7 @@ module.exports = {
   // Returns all of a Crew's users
   GetCrewMembers: (crew_id, cb) => {
     let id = crew_id;
-    let route = `/leader/members?crew_id=${crew_id}`;
+    let route = `/api/leader/members?crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -85,13 +83,12 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error);
         cb(error, null);
       });
   },
 
   GetLeaderTasks: (crew_id, cb) => {
-    let route = `/leader/tasks?crew_id=${crew_id}`;
+    let route = `/api/leader/tasks?crew_id=${crew_id}`;
     let options = {
       method: 'GET',
       headers: new Headers({
@@ -110,11 +107,11 @@ module.exports = {
 
   // Lets user create a Crew for which they will serve as leader
   PostCrew: (crew, user_id, cb) => {
-    let route = '/crew/';
+    let route = '/api/crew/';
     let body = {
-      name: crew.name,
-      description: crew.description,
-      image: crew.image,
+      crew_name: crew.crew_name,
+      crew_description: crew.crew_description,
+      crew_image: crew.crew_image,
       user_id: user_id
     };
     let options = {
@@ -140,10 +137,10 @@ module.exports = {
 
   // Let's user post task to crew. Should only be available to the Leader of that crew.
   PostTask: (task, crew_id, cb) => {
-    let route = '/task/';
+    let route = '/api/task/';
     let body = {
-      name: task.name,
-      description: task.description,
+      task_name: task.task_name,
+      task_description: task.task_description,
       limit: task.limit,
       expiry: task.expiry,
       crew_id: crew_id,
@@ -172,7 +169,7 @@ module.exports = {
 
   // Returns all crews. Meant for Browse functionality
   GetAllCrews: (qs, cb) => {
-    let route = qs === '' ? '/crews' : `/crews?qs=${qs}`;
+    let route = qs === '' ? '/api/crews' : `/api/crews?qs=${qs}`;
 
     let options = {
       method: 'GET',
@@ -189,14 +186,13 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error);
         cb(error, null);
       });
   },
 
   // POSTs a new relation of User to Crew. User joins selected Crew.
   JoinACrew: (user_id, crew_id, cb) => {
-    let route = '/user/crews/';
+    let route = '/api/user/crews/';
     let body = {
       user_id: user_id,
       crew_id: crew_id
@@ -217,14 +213,13 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error);
         cb(error, null);
       });
   },
 
   // POSTs a new relation of User to Task. User claims selected Task
   ClaimATask: (user_id, task_id, cb) => {
-    let route = '/user/tasks/';
+    let route = '/api/user/tasks/';
     let body = {
       user_id: user_id,
       task_id: task_id
@@ -251,7 +246,7 @@ module.exports = {
   },
 
   UpdateTask: (user_id, task_id, verified = false, cb) => {
-    let route = '/user/tasks/';
+    let route = '/api/user/tasks/';
     let body = {
       user_id: user_id,
       task_id: task_id,
@@ -280,7 +275,7 @@ module.exports = {
 
   // Delete UserCrew: removes User from Crew
   DeleteUserCrew: (user_id, crew_id, cb) => {
-    let route = '/user/crews/';
+    let route = '/api/user/crews/';
     let body = {
       id: user_id,
       crew_id: crew_id
@@ -307,7 +302,7 @@ module.exports = {
   },
 
   DeleteTask: (task_id, cb) => {
-    let route = `${module.exports.host}tasks?task_id=${task_id}`;
+    let route = `/api/tasks?task_id=${task_id}`;
     let options = {
       method: 'delete',
       headers: {
@@ -317,13 +312,13 @@ module.exports = {
     };
     return fetch(route, options)
       .then(response => {
-        console.log('delete successful')
-        console.log(response, 'response')
-        cb(null, response)
+        console.log('delete successful');
+        console.log(response, 'response');
+        cb(null, response);
       })
       .catch((error) => {
-        console.log('err', error)
+        console.log('err', error);
         cb(error, null);
-      })
+      });
   }
 };
