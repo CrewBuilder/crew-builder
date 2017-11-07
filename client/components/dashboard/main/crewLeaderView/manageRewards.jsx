@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Modal, Button, Glyphicon } from 'react-bootstrap';
 import AddReward from './../../forms/addReward.jsx';
-// import { DeleteTask, GetLeaderTasks } from '../../../utils/requests.jsx';
+import { DeleteReward } from '../../../utils/requests.jsx';
 
 export default class ManageRewards extends Component {
   constructor(props) {
@@ -39,13 +39,13 @@ export default class ManageRewards extends Component {
 
     this.delete = (e) => {
       e.preventDefault();
-      // DeleteReward(this.state.reward.id, (err, done) => {
-      //   if (err) {
-      //     console.log(err);
-      //   } else {
-      //     this.props.getCrewRewards(this.props.currentCrew.crew.id);
-      //   }
-      // });
+      DeleteReward(this.state.reward.id, (err, done) => {
+        if (err) {
+          console.log(err);
+        } else {
+          this.props.getCrewRewards(this.props.currentCrew.crew.id);
+        }
+      });
       this.close();
     };
   }
@@ -86,7 +86,6 @@ export default class ManageRewards extends Component {
             <Button onClick={this.delete}>Delete</Button>
           </Modal.Footer>
         </Modal>
-
       </div>
     );
   }

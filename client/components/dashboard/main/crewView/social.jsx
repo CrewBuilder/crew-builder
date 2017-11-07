@@ -1,50 +1,39 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { ShareButtons, ShareCounts, generateShareIcon } from 'react-share';
+import { ShareButtons, generateShareIcon } from 'react-share';
 
 const {
   FacebookShareButton,
   GooglePlusShareButton,
-  LinkedinShareButton,
   TwitterShareButton,
-  PinterestShareButton,
   TelegramShareButton,
   WhatsappShareButton,
-  RedditShareButton,
 } = ShareButtons;
-
-const {
-  FacebookShareCount,
-  GooglePlusShareCount,
-  LinkedinShareCount,
-  PinterestShareCount,
-  RedditShareCount,
-} = ShareCounts;
 
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 const GooglePlusIcon = generateShareIcon('google');
-const LinkedinIcon = generateShareIcon('linkedin');
-const PinterestIcon = generateShareIcon('pinterest');
 const TelegramIcon = generateShareIcon('telegram');
 const WhatsappIcon = generateShareIcon('whatsapp');
-const RedditIcon = generateShareIcon('reddit');
 
 export default class Social extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
-      shareUrl: 'https://www.reddit.com/',
-      message: 'Here is a test message for our social media!'
-    }
+    this.state = {
+      shareUrl: 'https://crew-builder.herokuapp.com/'
+    };
 
     this.test = () => {
       console.log('test');
-    }
+    };
   }
 
   render() {
+    let fbLongQuote = 'Join Crew Builder and help support ' + this.props.currentCrew.crew.name + '! ' + this.props.currentCrew.crew.description;
+
+    let shortQuote = 'Join Crew Builder and help support ' + this.props.currentCrew.crew.name + '! ';
+    let twitterHash = [this.props.currentCrew.crew.name.split(' ')[0]];
 
     return (
       <div className="social-button-container container-fluid">
@@ -53,7 +42,7 @@ export default class Social extends Component {
             <div className="img-responsive social-button">
               <FacebookShareButton
                 url={this.state.shareUrl}
-                quote={this.state.message}
+                quote={fbLongQuote}
                 onClick={this.test}
                 className="social-share-button">
                 <FacebookIcon
@@ -66,9 +55,8 @@ export default class Social extends Component {
             <div className="img-responsive social-button">
               <TwitterShareButton
                 url={this.state.shareUrl}
-                title={this.state.message}
-                via="noob"
-                hashtags={['hey']}
+                title={shortQuote}
+                hashtags={twitterHash}
                 className="social-share-button">
                 <TwitterIcon
                   size={48}
@@ -89,9 +77,9 @@ export default class Social extends Component {
           </Col>
           <Col xs={2} sm={2} md={2} lg={2}>
             <div className="social-button">
-             <WhatsappShareButton
+              <WhatsappShareButton
                 url={this.state.shareUrl}
-                title={this.state.message}
+                title={shortQuote}
                 separator=" "
                 className="social-share-button">
                 <WhatsappIcon size={48} round />
@@ -102,27 +90,14 @@ export default class Social extends Component {
             <div className="social-button">
               <TelegramShareButton
                 url={this.state.shareUrl}
-                title={this.state.message}
+                title={shortQuote}
                 className="social-share-button">
                 <TelegramIcon size={48} round />
               </TelegramShareButton>
             </div>
           </Col>
-          <Col xs={2} sm={2} md={2} lg={2}>
-            <div className="social-button">
-              <PinterestShareButton
-                url={this.state.shareUrl}
-                media="http://www.celebratewithstringsattached.com/uploads/3/5/4/6/3546135/1090860.jpg"
-                windowWidth={800}
-                windowHeight={630}
-                className="social-share-button">
-                <PinterestIcon size={48} round />
-              </PinterestShareButton>
-            </div>
-          </Col>
         </Row>
       </div>
-
-    )
+    );
   }
 }

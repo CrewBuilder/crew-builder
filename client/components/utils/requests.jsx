@@ -327,5 +327,22 @@ module.exports = {
         console.log('err', error);
         cb(error, null);
       });
+  },
+
+  DeleteReward: (rewardId, cb) => {
+    let route = `/crew/rewards?rewardId=${rewardId}`;
+    let body = {
+      rewardId: rewardId
+    };
+    let options = deleteOptions;
+    options.body = JSON.stringify(body);
+    return fetch(route, options)
+      .then(response => {
+        cb(null, response);
+      })
+      .catch((error) => {
+        console.log('err', error);
+        cb(error, null);
+      });
   }
 };
