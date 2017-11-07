@@ -51,11 +51,8 @@ app.get('*', (req, res) => {
 
 // CHECK PORT AND START SERVER
 const port = process.env.PORT || 3000;
-
-db.sequelize.sync().then(() => {
-  app.listen(port, () => {
-    console.log('SERVER STARTED: Listening on port:' + port);
-  });
+app.listen(port, () => {
+  console.log('SERVER STARTED: Listening on port:' + port);
 });
 
 app.post('/image', upload.single('picture'), function(req, res, next) {
@@ -64,15 +61,15 @@ app.post('/image', upload.single('picture'), function(req, res, next) {
     cloudinary.v2.uploader.upload(req.file.path, {public_id: req.file.originalname},
       function(error, result) {
         // console.log(result)
-        res.json({success: true, message: result.secure_url})
-      })
+        res.json({success: true, message: result.secure_url});
+      });
   } else {
     res.status(500);
-    res.send("Image was not uploaded to cloudinary")
+    res.send("Image was not uploaded to cloudinary");
   }
-})
+});
 
-cloudinary.v2.uploader.upload('my_image.jpg', {public_id: "sample_id"},
-    function(error, result){console.log(result)});
+cloudinary.v2.uploader.upload('my_image.jpg', {public_id: 'sample_id'},
+  function(error, result) { console.log('Cloudinary message: ', result); });
 
 module.exports = app;
