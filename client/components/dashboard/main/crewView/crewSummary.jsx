@@ -51,7 +51,7 @@ export default class CrewSummary extends Component {
             <p>{this.props.currentCrew.crew.description}</p>
             <p><strong>{achievementLevel}</strong></p>
           </Col>
-          <Col xs={12} sm={12} md={1} lg={1} className="container-fluid">
+          <Col xs={12} sm={12} md={2} lg={2} className="container-fluid">
 
             <div>
               {(this.state.showLeave === true) ? <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>

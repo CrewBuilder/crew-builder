@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import CrewSummary from './crewSummary.jsx';
 import TasksInProgress from './tasksInProgress.jsx';
 import TasksAvailable from './tasksAvailable.jsx';
+import CrewRewards from './crewRewards.jsx';
+
 import { Panel, PanelGroup, ResponsiveEmbed } from 'react-bootstrap';
 // Compares userTasks to crewTasks => sends to tasksInProgress and tasksAvailable respectively
 
@@ -41,6 +43,14 @@ export default class CrewView extends Component {
               userId={this.props.user.id}
               getUserTasks={this.props.getUserTasks}
               currentCrewTasks={this.props.currentCrewTasks}
+              currentCrew={this.props.currentCrew}
+            />
+          </Panel>
+          <Panel collapsible defaultExpanded={true} header="Rewards Available" eventKey="4">
+            <CrewRewards
+              userId={this.props.user.id}
+              getUserTasks={this.props.getUserTasks}
+              currentCrewRewards={this.props.currentCrewRewards}
               currentCrew={this.props.currentCrew}
             />
           </Panel>
