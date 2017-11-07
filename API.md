@@ -187,8 +187,6 @@
   limit: INT,
   expiry: DATE,
   crew_id: INT
-=======
->>>>>>> integrating new BE with FE
 }
 
 ###'/user/crews'
