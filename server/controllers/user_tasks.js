@@ -5,7 +5,7 @@ module.exports = {
     let addPoints, oldPoints;
     let user_id = req.body.user_id;
     let task_id = req.body.task_id;
-    if (req.body.verified) {
+    if (req.body.verified && req.body.verified === true) {
       return db.User_Task
         .update({
           verified: true

@@ -54,7 +54,7 @@ export default class addTask extends Component {
         task_description: this.state.description,
         points: points,
         limit: limit,
-        expiry: this.state.expiry
+        expiry: this.state.expiry,
       };
       PostTask(obj, this.props.currentCrew.crew.id, function(err, data) {
         if (err) {
