@@ -22,7 +22,7 @@ export default class Sidebar extends Component {
                 <Nav bsStyle="pills" stacked>
                   {this.props.userLeaderCrews.map((container) => {
                     return (
-                      <LinkContainer to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={() => this.props.setCurrentCrew(container, 'lead')}>
+                      <LinkContainer to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={() => this.props.setCurrentCrew(container, true)}>
                         <NavItem activeKey={container.crew.id}
                           value={container.crew.name}
                           key={container.crew.id}

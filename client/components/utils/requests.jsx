@@ -91,6 +91,7 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
+        console.log('Data', data);
         cb(null, data);
       })
       .catch((error) => {

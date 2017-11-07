@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
 
-import { GetUserCrews, GetUserTasks, GetCrewTasks, GetAllCrews, GetLeaderTasks, UpdateTask } from '../utils/requests.jsx';
+import { GetCrewRewards, GetUserCrews, GetUserTasks, GetCrewTasks, GetAllCrews, GetLeaderTasks, UpdateTask } from '../utils/requests.jsx';
 
 import { GetCurrentUser } from '../utils/auth.jsx';
 
@@ -41,7 +41,6 @@ export default class Dashboard extends Component {
       });
     };
 
-    // TEMP USERID FOR TESTING
     // need to fix if/else logic and add get crew tasks for leader
     this.setCurrentCrew = (crew, lead) => {
       this.setState({
@@ -52,32 +51,65 @@ export default class Dashboard extends Component {
           if (err) {
             console.log('ERROR:', err);
           } else {
-            console.log(res);
             this.setState({
               currentTasksToConfirm: res
             });
           }
-        });
-      }
-      let crew_id = crew.crew.id;
-      let userId = this.state.user.id;
-      GetUserTasks(userId, crew_id, (err, response) => {
-        if (err) {
-          console.log('ERROR:', err);
-        }
+          GetCrewTasks(crew.crew.id, (err, res) => {
+            this.setState({
+              currentCrewTasks: res
+            });
+            GetCrewRewards(crew.crew.id, (err, res) => {
+              if (err) {
+                console.log('Error', err);
+              } else {
+                this.setState({
+                  currentCrewRewards: res
+                });
+                console.log('current', this.state.currentCrewRewards);
+              }
 
-        let userTasks;
-        let crewTasks;
-        if (!response) {
-          userTasks = [];
-          crewTasks = [];
-        } else {
-          userTasks = response.tasksInProgress;
-          crewTasks = response.tasksAvailable;
-        }
+            });
+          });
+        });
+      } else {
+        GetCrewRewards(crew.crew.id, (err, res) => {
+          if (err) {
+            console.log('Error', err);
+          }
+          this.setState({
+            currentCrewRewards: res
+          });
+
+
+          console.log('Res', res);
+          console.log('RESPONSE', this.state.currentCrewRewards);
+          GetUserTasks(this.state.user.id, crew.crew.id, (err, response) => {
+            if (err) {
+              console.log('ERROR:', err);
+            }
+            let userTasks, crewTasks;
+            if (!response) {
+              userTasks = [];
+              crewTasks = [];
+            } else {
+              userTasks = response.tasksInProgress;
+              crewTasks = response.tasksAvailable;
+            }
+            this.setState({
+              userTasks: userTasks,
+              currentCrewTasks: crewTasks
+            });
+          });
+        });
+
+      }
+    };
+
+    this.getCurrentRewards = (crew) => {
+      GetCrewRewards(crew.crew.id, (err, res) => {
         this.setState({
-          userTasks: userTasks,
-          currentCrewTasks: crewTasks
+          currentCrewRewards: res
         });
       });
     };
@@ -101,8 +133,7 @@ export default class Dashboard extends Component {
           console.log('ERROR:', err);
         }
 
-        let userTasks;
-        let currentCrewTasks;
+        let userTasks, currentCrewTasks;
         if (!res) {
           userTasks = [];
           currentCrewTasks = [];
@@ -203,6 +234,7 @@ export default class Dashboard extends Component {
                   searchResults={this.state.searchResults}
                   searchField={this.state.searchField}
                   setCurrentCrew={this.setCurrentCrew}
+                  getCurrentRewards={this.getCurrentRewards}
                 />
               </Col>
 
