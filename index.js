@@ -57,7 +57,7 @@ if (process.env.NODE_ENV && process.env.NODE_ENV === 'test') {
     console.log('SERVER STARTED: Listening on port:' + port);
   });
 } else {
-  seed(db)
+  db.sequelize.sync()
     .then(() => {
       app.listen(port, () => {
         console.log('SERVER STARTED: Listening on port:' + port);

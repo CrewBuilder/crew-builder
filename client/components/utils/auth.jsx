@@ -81,7 +81,7 @@ module.exports = {
           cb('failure');
           reject(result);
         }
-      }, {scope: 'public_profile,email'})
+      }, {scope: 'public_profile, email'});
     });
   },
   // logout via FB method and removing localStorage 'id_token'

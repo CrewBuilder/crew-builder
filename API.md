@@ -73,12 +73,12 @@
 [
   {
     id: 9,
-    name: 'T-shirt',
-    description: 'Get a "CrewSupporter" t-shirt size S-XL',
+    task_name: 'T-shirt',
+    task_description: 'Get a "CrewSupporter" t-shirt size S-XL',
     points: 500,
     limit: 10,
     expiry: 2017-12-27T23:58:30.556Z,
-    crewId: 3,
+    crew_id: 3,
     createdAt: '2017-10-27T23:58:30.556Z',
     updatedAt: '2017-10-27T23:58:30.556Z'
   }
@@ -90,8 +90,8 @@
 [
   {
     id: 9,
-    task_name: 'Share our status on FB',
-    task_description: 'Like us on FB and share a post to earn 44 points',
+    reward_name: 'Share our status on FB',
+    reward_description: 'Like us on FB and share a post to earn 44 points',
     points: 44,
     limit: 100,
     expiry: 2017-12-27T23:58:30.556Z,
@@ -107,15 +107,15 @@
 [{
   createdAt: "2017-10-27T23:58:30.538Z",
   id: 1,
-  name: "Strings Attached",
-  description: "I started Strings Attached as a genre-blurring collaboration with folk
+  crew_name: "Strings Attached",
+  crew_description: "I started Strings Attached as a genre-blurring collaboration with folk
     artists. Our vision was to fuse jazz and classical flavors with the contemporary singer/songwriter
     genre; to dress it up with a little different jewelry. From the classical tradition we borrowed
     the architectural precision of composition and arranging. From jazz we brought the performance
     ethic. The ability to abandon the score and make choices spontaneously, in response to each other
     and the present musical moment. And then there's that irresistable sense of"swing" - the thing
     that gets people dancing.",
-  image: "http://www.celebratewithstringsattached.com/uploads/3/5/4/6/3546135/1090860.jpg"
+  crew_image: "http://www.celebratewithstringsattached.com/uploads/3/5/4/6/3546135/1090860.jpg"
 }]
 
 ###'/leader/members?crewId={CREW_ID}'
