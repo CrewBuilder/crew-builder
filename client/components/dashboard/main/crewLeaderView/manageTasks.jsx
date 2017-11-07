@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Modal, Button, Glyphicon } from 'react-bootstrap';
 import AddTask from './../../forms/addTask.jsx';
-import { DeleteTask, GetLeaderTasks } from '../../../utils/requests.jsx';
+import { DeleteTask } from '../../../utils/requests.jsx';
 
 import moment from 'moment';
 import 'moment/locale/en-ca';
@@ -92,7 +92,6 @@ export default class ManageTasks extends Component {
             <Button onClick={this.delete}>Delete</Button>
           </Modal.Footer>
         </Modal>
-
       </div>
     );
   }
