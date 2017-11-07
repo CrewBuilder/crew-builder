@@ -39,6 +39,7 @@ export default class Main extends Component {
               getUserTasks={this.props.getUserTasks}
               currentCrew={this.props.currentCrew}
               currentCrewTasks={this.props.currentCrewTasks}
+              currentCrewRewards={this.props.currentCrewRewards}
               currentTasksToConfirm={this.props.currentTasksToConfirm}
               handleMemberRequestVerification={this.props.handleMemberRequestVerification}
               userTasks={this.props.userTasks}

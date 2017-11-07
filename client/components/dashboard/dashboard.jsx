@@ -22,6 +22,7 @@ export default class Dashboard extends Component {
       userTasks: [],
       currentCrew: null,
       currentCrewTasks: [],
+      currentCrewRewards: [],
       currentTasksToConfirm: [],
       searchResults: [],
       searchField: ''
@@ -41,6 +42,7 @@ export default class Dashboard extends Component {
     };
 
     // TEMP USERID FOR TESTING
+    // need to fix if/else logic and add get crew tasks for leader
     this.setCurrentCrew = (crew, lead) => {
       this.setState({
         currentCrew: crew
@@ -59,7 +61,6 @@ export default class Dashboard extends Component {
       }
       let crew_id = crew.crew.id;
       let userId = this.state.user.id;
-      console.log('crew', crew_id, 'user', userId);
       GetUserTasks(userId, crew_id, (err, response) => {
         if (err) {
           console.log('ERROR:', err);
@@ -195,6 +196,7 @@ export default class Dashboard extends Component {
                   getUserTasks={this.getUserTasks}
                   currentCrew={this.state.currentCrew}
                   currentCrewTasks={this.state.currentCrewTasks}
+                  currentCrewRewards={this.state.currentCrewRewards}
                   currentTasksToConfirm={this.state.currentTasksToConfirm}
                   handleMemberRequestVerification={this.handleMemberRequestVerification}
                   userTasks={this.state.userTasks}

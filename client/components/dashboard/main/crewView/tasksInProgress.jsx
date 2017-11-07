@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import { Modal, ListGroup, ListGroupItem, Button, Label } from 'react-bootstrap';
 import { UpdateTask } from '../../../utils/requests.jsx';
-const moment = require('moment');
+
+import moment from 'moment';
+import 'moment/locale/en-ca';
 
 export default class TasksInProgress extends Component {
 

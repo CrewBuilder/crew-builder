@@ -8,28 +8,26 @@
 // status "connected" OR IT WILL BE "unknown" IF NOT LOGGED IN
 
 module.exports = {
-
-  host: process.env.HOST || '/',
   // initialize Facebook SDK
   Init: () => {
     return new Promise((resolve, reject) => {
-      if(typeof FB !== 'undefined') {
+      if (typeof FB !== 'undefined') {
         resolve();
       } else {
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId            : '356644548109752',
-          autoLogAppEvents : true,
-          xfbml            : true,
-          version          : 'v2.10'
-        });
-        // for accurate user counts and session time metrics in FB analytics
-        FB.AppEvents.logPageView();
-        resolve();
-        // maybe do initial getLoginStatus
-        // FB.getLoginStatus((response) => {
-        //   console.log('INIT getLoginStatus:', response);
-        // })
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId            : '356644548109752',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v2.10'
+          });
+          // for accurate user counts and session time metrics in FB analytics
+          FB.AppEvents.logPageView();
+          resolve();
+          // maybe do initial getLoginStatus
+          // FB.getLoginStatus((response) => {
+          //   console.log('INIT getLoginStatus:', response);
+          // })
       };
       (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
@@ -39,7 +37,7 @@ module.exports = {
          fjs.parentNode.insertBefore(js, fjs);
        }(document, 'script', 'facebook-jssdk'));
       }
-    })
+    });
   },
   // check login status either 'connected' OR 'unknown'
   CheckLogin: () => {
@@ -54,7 +52,7 @@ module.exports = {
   Login: (cb) => {
     return new Promise((resolve, reject) => {
       FB.login(result => {
-        if(result.authResponse) {
+        if (result.authResponse) {
           var options = {
             method: 'POST',
             body: JSON.stringify({access_token: result.authResponse.accessToken}),
@@ -63,27 +61,27 @@ module.exports = {
             })
           };
 
-          fetch(`${module.exports.host}auth/facebook`, options)
-          .then((data) => {
-            var token = data.headers.get('x-auth-token');
-            if(token) {
-              localStorage.setItem('id_token', token);
-            }
-          })
-          .then((loggedIn) => {
-            cb('success');
-            resolve();
-          })
-          .catch((e) => {
-            cb(e);
-            reject(e);
-          });
+          fetch('/auth/facebook/', options)
+            .then((data) => {
+              var token = data.headers.get('x-auth-token');
+              if (token) {
+                localStorage.setItem('id_token', token);
+              }
+            })
+            .then((loggedIn) => {
+              cb('success');
+              resolve();
+            })
+            .catch((e) => {
+              cb(e);
+              reject(e);
+            });
         } else {
           cb('failure');
           reject(result);
         }
       }, {scope: 'public_profile,email'})
-    })
+    });
   },
   // logout via FB method and removing localStorage 'id_token'
   Logout: () => {
@@ -107,15 +105,15 @@ module.exports = {
         'x-auth-token': localStorage.getItem('id_token')
       })
     };
-    return fetch(`${module.exports.host}auth/me`, options)
-    .then((response) => {
-      if(!response.ok){
-        return false
-      }
-      return response.json();
-    }).catch((error) => {
-      return null;
-    });
+    return fetch('/auth/me', options)
+      .then((response) => {
+        if (!response.ok) {
+          return false;
+        }
+        return response.json();
+      }).catch((error) => {
+        return null;
+      });
   }
-}
+};
 
