@@ -33,7 +33,7 @@ export default class Sidebar extends Component {
                     );
                   })}
 
-                  <LinkContainer to={`/dashboard/newcrew`} key='createCrew' >
+                  <LinkContainer to={'/dashboard/newcrew'} key='createCrew' >
                     <NavItem activeKey='createCrew'
                       value='createCrew'
                       key='createCrew'
