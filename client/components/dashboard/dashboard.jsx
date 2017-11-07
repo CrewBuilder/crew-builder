@@ -155,6 +155,21 @@ export default class Dashboard extends Component {
       });
     };
 
+    this.getCrewTasks = (crew_id) => {
+      GetCrewTasks(crew_id, (err, res) => {
+        if (err) {
+          console.log('ERROR:', err);
+          this.setState({
+            currentCrewTasks: []
+          });
+        } else {
+          this.setState({
+            currentCrewTasks: res
+          });
+        }
+      });
+    };
+
     // (userTaskId, verified = false, cb)
     this.handleMemberRequestVerification = (userTaskId, verified) => {
       let verifyTask = verified ? true : null;
@@ -232,6 +247,7 @@ export default class Dashboard extends Component {
                   user={this.state.user}
                   getCurrentCrews={this.getCurrentCrews}
                   getUserTasks={this.getUserTasks}
+                  getCrewTasks={this.getCrewTasks}
                   currentCrew={this.state.currentCrew}
                   currentCrewTasks={this.state.currentCrewTasks}
                   currentCrewRewards={this.state.currentCrewRewards}
