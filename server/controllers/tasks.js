@@ -117,6 +117,9 @@ module.exports = {
 const parseTasks = (tasks) =>{
   return new Promise((resolve, reject) => {
     let parsedTasks = [ ];
+    if (tasks.length === 0) {
+      resolve(parsedTasks);
+    }
     for (let i = 0; i < tasks.length; i++) {
       let task = tasks[i];
       for (let j = 0; j < task.User_Tasks.length; j++) {
