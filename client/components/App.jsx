@@ -22,7 +22,7 @@ export default class App extends Component {
         })
           .then((user) => {
             if (user === false) {
-              window.reload.location();
+              window.location.reload();
             } else {
               this.setState({
                 isLoggedIn: true

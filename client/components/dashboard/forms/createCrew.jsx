@@ -29,7 +29,7 @@ export default class CreateCrew extends Component {
       };
       console.log('options', options);
       fetch('/image', options)
-        // .then((res) => {res.json())
+        .then((res) => res.json())
         .then((data) => {
           console.log(data, 'data in line 34');
           this.setState({

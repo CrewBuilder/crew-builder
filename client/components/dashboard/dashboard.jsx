@@ -53,6 +53,7 @@ export default class Dashboard extends Component {
         if (err) {
           console.log('Error', err);
         } else {
+          console.log('RESCREWTASKS', resCrewTasks);
           rewards = resCrewRewards;
         }
         GetCrewTasks(crew.crew.id, (err, resCrewTasks) => {
@@ -74,7 +75,7 @@ export default class Dashboard extends Component {
             currentTasksToConfirm: [],
             currentCrewTasks: crewTasks
           });
-          // console.log('STATE', this.state);
+          console.log('STATE', this.state);
           // });
         });
       });
@@ -178,7 +179,7 @@ export default class Dashboard extends Component {
           console.log('ERROR:', err);
         } else {
           console.log('OK HANDLED handleMemberRequestVerification');
-          this.props.setCurrentCrew(this.state.currentCrew, 'lead');
+          this.setCurrentCrewLeader(this.state.currentCrew);
         }
       });
     };
