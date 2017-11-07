@@ -7,7 +7,6 @@ import 'moment/locale/en-ca';
 import DateTime from 'react-datetime';
 
 // expect props from manageTasks, related to updation of current rewards
-
 export default class addReward extends Component {
   constructor(props) {
     super(props);
