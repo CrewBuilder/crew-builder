@@ -123,9 +123,12 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        cb(data);
+        cb(null, data);
       })
-      .catch((error) => console.log('Unable to fetch leader/tasks', error));
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
   },
 
   // Lets user create a Crew for which they will serve as leader

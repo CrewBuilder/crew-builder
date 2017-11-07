@@ -4,6 +4,7 @@ import CrewSummary from './crewSummary.jsx';
 import {Panel, PanelGroup} from 'react-bootstrap';
 import MemberRequests from './memberRequests.jsx';
 import ManageTasks from './manageTasks.jsx';
+import ManageRewards from './manageRewards.jsx';
 
 import { GetCrewMembers } from '../../../utils/requests.jsx';
 
@@ -34,8 +35,6 @@ export default class CrewLeaderView extends Component {
 
   render() {
 
-    console.log(this.props);
-
     return (
       <div className="cover-background">
         <PanelGroup>
@@ -53,12 +52,19 @@ export default class CrewLeaderView extends Component {
               handleMemberRequestVerification={this.props.handleMemberRequestVerification}
             />
           </Panel>
-          <Panel collapsible defaultExpanded={true} header="Manage Tasks" eventKey="3">
+          <Panel collapsible defaultExpanded={true} header="Tasks" eventKey="3">
             <ManageTasks
               userId={this.props.user.id}
               currentCrewTasks={this.props.currentCrewTasks}
               currentCrew={this.props.currentCrew}
               getUserTasks={this.props.getUserTasks}
+            />
+          </Panel>
+          <Panel collapsible defaultExpanded={true} header="Rewards" eventKey="4">
+            <ManageRewards
+              userId={this.props.user.id}
+              currentCrewRewards={this.props.currentCrewRewards}
+              currentCrew={this.props.currentCrew}
             />
           </Panel>
         </PanelGroup>

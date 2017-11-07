@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem, Modal, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Modal, Button, Glyphicon } from 'react-bootstrap';
 import AddTask from './../../forms/addTask.jsx';
 import { DeleteTask, GetLeaderTasks } from '../../../utils/requests.jsx';
+
+import moment from 'moment';
+import 'moment/locale/en-ca';
 
 export default class ManageTasks extends Component {
   constructor(props) {
@@ -33,8 +36,9 @@ export default class ManageTasks extends Component {
     };
 
     this.func = () => {
-      if (this.state.newTask.length !== 0)
+      if (this.state.newTask.length !== 0) {
         this.props.userTasks.push({name: this.state.newTask});
+      }
       // TODO:
       // should update the newly added in database
     };
@@ -55,25 +59,30 @@ export default class ManageTasks extends Component {
         }
       });
       this.close();
-    }
+    };
   }
 
   render() {
-    // console.log('line 51 in ManageTasks', this.props)
     return (
       <div>
         <ListGroup>
           {this.props.currentCrewTasks.map((task, i) => (
-            <ListGroupItem key={i} onClick={() => this.handleSelect(task)}>{task.name}</ListGroupItem>
+            <ListGroupItem key={i} onClick={() => this.handleSelect(task)}>
+              {task.name}
+              <small className="small-list-item-text"> - points: {task.points}</small>
+            </ListGroupItem>
           )) }
-          <ListGroupItem onClick={this.open}>+ addTask</ListGroupItem>
+          <ListGroupItem onClick={this.open}><Glyphicon glyph="plus" /> Add Task</ListGroupItem>
         </ListGroup>
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            Add/Update a Task
+            Add Task
           </Modal.Header>
           <Modal.Body>
-            <AddTask {...this.props}/>
+            <AddTask
+              {...this.props}
+              closeModal={this.close}
+            />
           </Modal.Body>
         </Modal>
         <Modal show={this.state.displayModal} onHide={this.close}>
@@ -83,7 +92,7 @@ export default class ManageTasks extends Component {
           <Modal.Body>
             <h4>Points: {this.state.task.points}</h4>
             <h4>Limit: {this.state.task.limit}</h4>
-            <h4>Expires: {this.state.task.expiry}</h4>
+            <h4>Expires: { moment(this.state.task.expiry).format("MM/DD/YYYY") }</h4>
             <h4>Description</h4>
             <p>{this.state.task.description}</p>
           </Modal.Body>
@@ -93,6 +102,6 @@ export default class ManageTasks extends Component {
         </Modal>
 
       </div>
-    )
+    );
   }
 }

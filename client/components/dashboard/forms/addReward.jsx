@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap';
-import { PostTask } from '../../utils/requests.jsx';
+// import { PostTask } from '../../utils/requests.jsx';
 
 import moment from 'moment';
 import 'moment/locale/en-ca';
+// var moment = require('moment');
+// require('moment/locale/en-ca');
 import DateTime from 'react-datetime';
-// expect props from manageTasks, related to updation of current tasks
+
+// expect props from manageTasks, related to updation of current rewards
 // var DateTime = require('react-datetime');
-export default class addTask extends Component {
+export default class addReward extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,13 +39,12 @@ export default class addTask extends Component {
     };
 
 
-    this.task = (e) => {
-      this.task = e.target.value;
+    this.reward = (e) => {
+      this.reward = e.target.value;
     };
 
     this.handleSubmit = (e) => {
       e.preventDefault();
-      this.props.closeModal();
       // note: never set state in handleSubmit...
       let points = Number(this.state.points);
       let limit = Number(this.state.limit);
@@ -55,7 +57,7 @@ export default class addTask extends Component {
       };
       PostTask(obj, this.props.currentCrew.crew.id, function(err, data) {
         if (err) {
-          console.log('error in posting task');
+          console.log('error in posting reward');
         }
 
         if (data) {
@@ -72,11 +74,11 @@ export default class addTask extends Component {
         <form onSubmit={this.handleSubmit}>
           <FormGroup>
             <ControlLabel>Title</ControlLabel>
-            <FormControl type="text" placeholder="name of task" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
+            <FormControl type="text" placeholder="name of reward" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
           </FormGroup>
           <FormGroup>
             <ControlLabel>Description</ControlLabel>
-            <FormControl componentClass="textarea" placeholder="tell your members what this task requires" value={this.state.description} onChange={(event) => this.setState({description: event.target.value})}/>
+            <FormControl componentClass="textarea" placeholder="tell your members what the reward will be" value={this.state.description} onChange={(event) => this.setState({description: event.target.value})}/>
           </FormGroup>
           <FormGroup validationState={this.getValidationState()}>
             <ControlLabel>Points</ControlLabel>
@@ -89,7 +91,7 @@ export default class addTask extends Component {
             <DateTime utc={true} onChange={(e) => this.show(e)}/>
           </FormGroup>
           <Button type="submit">
-             Add a task
+             Add a reward
           </Button>
         </form>
       </div>
