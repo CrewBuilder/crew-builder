@@ -17,7 +17,6 @@ export default class TasksInProgress extends Component {
 
     this.openModal = (taskTarget) => {
       let expiry = moment(this.state.focusTask.expiry).format("MM/DD/YYYY");
-      console.log('eexxx', expiry)
       this.setState({ focusTask: taskTarget });
       this.setState({ focusTaskExpiry: expiry });
       this.setState({ focusUserTask: taskTarget.user_task });
@@ -30,9 +29,8 @@ export default class TasksInProgress extends Component {
 
     this.confirmTask = (e) => {
       e.preventDefault();
-      console.log('FOXUS', this.state.focusTask)
       let taskId = this.state.focusUserTask.id;
-      UpdateTask(taskId, (data) => {
+      UpdateTask(taskId, null, (err, data) => {
         this.props.getUserTasks(this.props.userId, this.state.focusTask.crew_id);
       });
       this.closeModal();
