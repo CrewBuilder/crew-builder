@@ -2,7 +2,6 @@ const FacebookTokenStrategy = require('passport-facebook-token');
 const passport = require('passport');
 const upsertFbUser = require('./../controllers/users.js').newUser;
 
-
 // Define strategy
 module.exports = () => {
   passport.use(new FacebookTokenStrategy({
@@ -20,8 +19,7 @@ module.exports = () => {
         TOKEN: accessToken
       }
     };
-    return upsertFbUser(userProfile)
-      .then((user) => done(user));
+    upsertFbUser(userProfile, done)
   }));
 };
 

@@ -24,10 +24,10 @@ export default class Sidebar extends Component {
                     return (
                       <LinkContainer to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={() => this.props.setCurrentCrew(container, 'lead')}>
                         <NavItem activeKey={container.crew.id}
-                          value={container.crew.name}
+                          value={container.crew.crew_name}
                           key={container.crew.id}
                           className="sidebar-crew-name">
-                          {container.crew.name}
+                          {container.crew.crew_name}
                         </NavItem>
                       </LinkContainer>
                     );
@@ -48,10 +48,10 @@ export default class Sidebar extends Component {
                     return (
                       <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={() => this.props.setCurrentCrew(container)}>
                         <NavItem activeKey={container.crew.id}
-                          value={container.crew.name}
+                          value={container.crew.crew_name}
                           key={container.crew.id}
                           className="sidebar-crew-name">
-                          {container.crew.name}
+                          {container.crew.crew_name}
                         </NavItem>
                       </LinkContainer>
                     );
@@ -72,10 +72,10 @@ export default class Sidebar extends Component {
                       <MenuItem componentClass="span" eventKey={i} key={i}>
                         <LinkContainer componentClass="span" to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={() => this.props.setCurrentCrew(container)}>
                           <NavItem componentClass="span" activeKey={container.crew.id}
-                            value={container.crew.name}
+                            value={container.crew.crew_name}
                             key={container.crew.id}
                             className="sidebar-crew-name">
-                            {container.crew.name}
+                            {container.crew.crew_name}
                           </NavItem>
                         </LinkContainer>
                       </MenuItem>
@@ -97,10 +97,10 @@ export default class Sidebar extends Component {
                       <MenuItem componentClass="span" eventKey={i} key={i}>
                         <LinkContainer componentClass="span" to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={() => this.props.setCurrentCrew(container)}>
                           <NavItem componentClass="span" activeKey={container.crew.id}
-                            value={container.crew.name}
+                            value={container.crew.crew_name}
                             key={container.crew.id}
                             className="sidebar-crew-name">
-                            {container.crew.name}
+                            {container.crew.crew_name}
                           </NavItem>
                         </LinkContainer>
                       </MenuItem>

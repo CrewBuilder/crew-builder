@@ -57,7 +57,7 @@ export default class crewLeaderSummary extends Component {
             </Media.Left>
             <Media.Body>
               <Media.Heading>
-                {this.props.currentCrew.crew.name}
+                {this.props.currentCrew.crew.crew_name}
               </Media.Heading>
               <ButtonGroup>
                 <Button onClick={this.checkMembers}>Show Members</Button>
@@ -66,7 +66,7 @@ export default class crewLeaderSummary extends Component {
               <Media.Heading>
                 <small>Description</small>
               </Media.Heading>
-              {this.props.currentCrew.crew.description}
+              {this.props.currentCrew.crew.crew_description}
             </Media.Body>
           </Media>
 
@@ -88,7 +88,7 @@ export default class crewLeaderSummary extends Component {
               Update
             </Modal.Header>
             <Modal.Body>
-              <CreateCrew name={this.props.currentCrew.crew.name} desc={this.props.currentCrew.crew.description}/>
+              <CreateCrew name={this.props.currentCrew.crew.crew_name} desc={this.props.currentCrew.crew.crew_description}/>
             </Modal.Body>
           </Modal>
         </div>

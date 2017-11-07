@@ -5,7 +5,7 @@ import {Jumbotron, Button, Carousel} from 'react-bootstrap';
 
 const responseFacebook = (response) => {
   //TODO: re-direct, query users endpoint
-}
+};
 
 export default class Landing extends Component {
 
@@ -15,24 +15,24 @@ export default class Landing extends Component {
     // triggers login and app state change to redirect to dashboard
     this.handleLogin = () => {
       let userCheck = window.localStorage.getItem('id_token');
-      if(userCheck) {
+      if (userCheck) {
         window.localStorage.removeItem('id_token');
       }
       Login((res) => {
         return res;
       })
-      .then((loggedIn) => {
-        this.props.changeLoginStatus();
-      })
-      .catch((error) => {
-        console.log('Login Error: ', error);
-      })
-    }
+        .then((loggedIn) => {
+          this.props.changeLoginStatus();
+        })
+        .catch((error) => {
+          console.log('Login Error: ', error);
+        });
+    };
   }
 
   render() {
 
-    return(
+    return (
       <div className="vertical-center">
         <Jumbotron className="landing-container">
           <div className="text-center jumbotron-heading">

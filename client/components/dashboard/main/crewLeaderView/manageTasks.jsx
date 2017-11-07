@@ -55,7 +55,7 @@ export default class ManageTasks extends Component {
           console.log('problem in deleting');
         }
         if (done) {
-          props.getUserTasks(props.userId, props.currentCrew.crew.id);
+          props.getUserTasks(props.user_id, props.currentCrew.crew.id);
         }
       });
       this.close();
@@ -67,10 +67,7 @@ export default class ManageTasks extends Component {
       <div>
         <ListGroup>
           {this.props.currentCrewTasks.map((task, i) => (
-            <ListGroupItem key={i} onClick={() => this.handleSelect(task)}>
-              {task.name}
-              <small className="small-list-item-text"> - points: {task.points}</small>
-            </ListGroupItem>
+            <ListGroupItem key={i} onClick={() => this.handleSelect(task)}>{task.task_name}</ListGroupItem>
           )) }
           <ListGroupItem onClick={this.open}><Glyphicon glyph="plus" /> Add Task</ListGroupItem>
         </ListGroup>
@@ -87,14 +84,14 @@ export default class ManageTasks extends Component {
         </Modal>
         <Modal show={this.state.displayModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>{this.state.task.name}</Modal.Title>
+            <Modal.Title>{this.state.task.task_name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <h4>Points: {this.state.task.points}</h4>
             <h4>Limit: {this.state.task.limit}</h4>
             <h4>Expires: { moment(this.state.task.expiry).format("MM/DD/YYYY") }</h4>
             <h4>Description</h4>
-            <p>{this.state.task.description}</p>
+            <p>{this.state.task.task_description}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.delete}>Delete</Button>

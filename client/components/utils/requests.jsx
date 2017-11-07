@@ -37,7 +37,7 @@ module.exports = {
 
   // Returns all of current user's crews. Will be rendered in sidebar view.
   GetUserCrews: (userId, cb) => {
-    let route = `/user/crews?id=${userId}`;
+    let route = `/api/user/crews?user_id=${userId}`;
     return fetch(route, getOptions)
       .then((response) => {
         return response.json();
@@ -53,7 +53,7 @@ module.exports = {
 
   // Returns all of current user's tasks for selected crew.
   GetUserTasks: (userId, crew_id, cb) => {
-    let route = `/user/tasks?id=${userId}&crew_id=${crew_id}`;
+    let route = `/api/user/tasks?user_id=${userId}&crew_id=${crew_id}`;
     return fetch(route, getOptions)
     // TODO: test the data format of these API requests
       .then((response) => {
@@ -62,14 +62,13 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error);
         cb(error, null);
       });
   },
 
   // Returns all of selected crew's tasks.
   GetCrewTasks: (crew_id, cb) => {
-    let route = `/crew/tasks?crew_id=${crew_id}`;
+    let route = `/api/crew/tasks?crew_id=${crew_id}`;
     return fetch(route, getOptions)
       .then((response) => {
         return response.json();
@@ -94,14 +93,13 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error);
         cb(error, null);
       });
   },
 
   // Returns all of a Crew's users
   GetCrewMembers: (crew_id, cb) => {
-    let route = `/leader/members?crew_id=${crew_id}`;
+    let route = `/api/leader/members?crew_id=${crew_id}`;
     return fetch(route, getOptions)
       .then((response) => {
         return response.json();
@@ -110,14 +108,13 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error);
         cb(error, null);
       });
   },
 
 
   GetLeaderTasks: (crew_id, cb) => {
-    let route = `/leader/tasks?crew_id=${crew_id}`;
+    let route = `/api/leader/tasks?crew_id=${crew_id}`;
     return fetch(route, getOptions)
       .then((response) => {
         return response.json();
@@ -133,11 +130,11 @@ module.exports = {
 
   // Lets user create a Crew for which they will serve as leader
   PostCrew: (crew, user_id, cb) => {
-    let route = '/crew/';
+    let route = '/api/crew/';
     let body = {
-      name: crew.name,
-      description: crew.description,
-      image: crew.image,
+      crew_name: crew.crew_name,
+      crew_description: crew.crew_description,
+      crew_image: crew.crew_image,
       user_id: user_id
     };
     let options = postOptions;
@@ -157,10 +154,10 @@ module.exports = {
 
   // Lets leader post task to crew. Should only be available to the Leader of that crew.
   PostTask: (task, crew_id, cb) => {
-    let route = '/task/';
+    let route = '/api/task/';
     let body = {
-      name: task.name,
-      description: task.description,
+      task_name: task.task_name,
+      task_description: task.task_description,
       limit: task.limit,
       expiry: task.expiry,
       crew_id: crew_id,
@@ -183,7 +180,7 @@ module.exports = {
 
   // Lets leader post a new reward to their crew.
   PostReward: (reward, crew_id, cb) => {
-    let route = '/reward/';
+    let route = '/api/reward/';
     let body = {
       name: reward.name,
       description: reward.description,
@@ -209,7 +206,7 @@ module.exports = {
 
   // Returns all crews. Meant for Browse functionality
   GetAllCrews: (qs, cb) => {
-    let route = qs === '' ? '/crews' : `/crews?qs=${qs}`;
+    let route = qs === '' ? '/api/crews' : `/api/crews?qs=${qs}`;
     fetch(route, getOptions)
     // TODO: test the data format of these API requests
       .then((response) => {
@@ -219,14 +216,13 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error);
         cb(error, null);
       });
   },
 
   // POSTs a new relation of User to Crew. User joins selected Crew.
   JoinACrew: (user_id, crew_id, cb) => {
-    let route = '/user/crews/';
+    let route = '/api/user/crews/';
     let body = {
       user_id: user_id,
       crew_id: crew_id
@@ -241,14 +237,13 @@ module.exports = {
         cb(null, data);
       })
       .catch((error) => {
-        console.log('ERROR', error);
         cb(error, null);
       });
   },
 
   // POSTs a new relation of User to Task. User claims selected Task
   ClaimATask: (user_id, task_id, cb) => {
-    let route = '/user/tasks/';
+    let route = '/api/user/tasks/';
     let body = {
       user_id: user_id,
       task_id: task_id
@@ -269,7 +264,7 @@ module.exports = {
   },
 
   UpdateTask: (user_id, task_id, verified = false, cb) => {
-    let route = '/user/tasks/';
+    let route = '/api/user/tasks/';
     let body = {
       user_id: user_id,
       task_id: task_id,
@@ -292,7 +287,7 @@ module.exports = {
 
   // Delete UserCrew: removes User from Crew
   DeleteUserCrew: (user_id, crew_id, cb) => {
-    let route = '/user/crews/';
+    let route = '/api/user/crews/';
     let body = {
       id: user_id,
       crew_id: crew_id
@@ -313,7 +308,7 @@ module.exports = {
   },
 
   DeleteTask: (taskId, cb) => {
-    let route = `${module.exports.host}tasks?taskId=${taskId}`;
+    let route = `${module.exports.host}api/tasks?taskId=${taskId}`;
     let options = deleteOptions;
     options.body = JSON.stringify(body);
     return fetch(route, options)

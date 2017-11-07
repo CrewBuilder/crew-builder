@@ -11,9 +11,9 @@ export default class addTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name : this.props.name || '',
-      description: this.props.description || '',
-      points: this.props.points || 0,
+      name: this.props.task_name || '',
+      description: this.props.task_description || '',
+      Points: this.props.Points || 0,
       limit: this.props.limit || 0,
       expiry: '',
     };
@@ -30,8 +30,11 @@ export default class addTask extends Component {
     this.getValidationState = () => {
       const limitVal = this.state.limit;
       const pointsVal = this.state.points;
-      if (!isNaN(Number(limitVal)) && !isNaN(Number(pointsVal))) return 'success';
-      else if (isNaN(Number(limitVal)) || isNaN(Number(pointsVal))) return 'error';
+      if (!isNaN(Number(limitVal)) && !isNaN(Number(pointsVal))) {
+        return 'success';
+      } else if (isNaN(Number(limitVal)) || isNaN(Number(pointsVal))) {
+        return 'error';
+      }
       return null;
     };
 
@@ -47,8 +50,8 @@ export default class addTask extends Component {
       let points = Number(this.state.points);
       let limit = Number(this.state.limit);
       var obj = {
-        name: this.state.name,
-        description: this.state.description,
+        task_name: this.state.name,
+        task_description: this.state.description,
         points: points,
         limit: limit,
         expiry: this.state.expiry
@@ -59,7 +62,7 @@ export default class addTask extends Component {
         }
 
         if (data) {
-          props.getUserTasks(props.userId, props.currentCrew.crew.id);
+          props.getUserTasks(props.user_id, props.currentCrew.crew.id);
         }
       });
     };

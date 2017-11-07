@@ -31,6 +31,7 @@ module.exports = {
           }]
         }]
       })
+      .then(tasks => parseTasks(tasks))
       .then(tasks => res.status(200).send(tasks))
       .catch(err => res.status(400).send(err));
   },
@@ -72,7 +73,7 @@ module.exports = {
           where: {
             user_id: user_id,
             verified: false
-          }
+          },
         }]
       })
       .then(tasks => {
@@ -96,7 +97,6 @@ module.exports = {
             },
 
           });
-
       })
       .then(tasks => {
         tasksAvailable = tasks;
@@ -109,4 +109,31 @@ module.exports = {
         res.status(400).send(err);
       });
   },
+};
+
+const parseTasks = (tasks) =>{
+  return new Promise((resolve, reject) => {
+    let parsedTasks = [ ];
+    for (let i = 0; i < tasks.length; i++) {
+      let task = tasks[i];
+      for (let j = 0; j < task.User_Tasks.length; j++) {
+        let user = task.User_Tasks[j].User;
+        let profile = JSON.parse(user.facebook);
+        parsedTasks.push({
+          task_id: task.id,
+          task_name: task.task_name,
+          task_description: task.task_description,
+          points: task.points,
+          expiry: task.expiry,
+          user_id: user.id,
+          user_name: profile.DISPLAY_NAME,
+          user_email: profile.EMAIL,
+          user_image: profile.IMAGE_URL,
+        });
+      }
+      if (i === tasks.length - 1) {
+        resolve(parsedTasks);
+      }
+    }
+  });
 };
