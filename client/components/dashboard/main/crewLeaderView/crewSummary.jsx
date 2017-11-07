@@ -5,7 +5,6 @@ import { Transformation } from 'cloudinary-react';
 
 import CreateCrew from './../../forms/createCrew.jsx';
 
-import { cloud_name, Image_Url } from '../../forms/configfile.js'
 
 
 export default class crewLeaderSummary extends Component {
@@ -47,14 +46,14 @@ export default class crewLeaderSummary extends Component {
       );
     } else {
     // console.log(this.props.currentCrew.crew.image, 'image')
-      var str = this.props.currentCrew.crew.image;
-      str = str.split('/');
-      var publicId = str[str.length - 1];
+      // var str = this.props.currentCrew.crew.image;
+      // str = str.split('/');
+      // var publicId = str[str.length - 1];
       return (
         <div>
           <Media>
             <Media.Left>
-              <Image src={Image_Url + publicId} alt="Image" className="crew-image"/>
+              <Image src={this.props.currentCrew.crew.image} alt="Image" className="crew-image"/>
             </Media.Left>
             <Media.Body>
               <Media.Heading>
