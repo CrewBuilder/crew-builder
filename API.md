@@ -68,6 +68,24 @@
 }
 
 ###'/crew/tasks?crewId={CREW_ID}'
+###Returns all rewards for a crew. Used in CrewView and LeaderCrewView.
+####Response
+[
+  {
+    id: 9,
+    name: 'T-shirt',
+    description: 'Get a "CrewSupporter" t-shirt size S-XL',
+    points: 500,
+    limit: 10,
+    expiry: 2017-12-27T23:58:30.556Z,
+    crewId: 3,
+    createdAt: '2017-10-27T23:58:30.556Z',
+    updatedAt: '2017-10-27T23:58:30.556Z'
+  }
+]
+
+###'/crew/rewards?crewId={CREW_ID}'
+###Returns all tasks for a crew. Used in LeaderCrewView.
 ####Response
 [
   {
@@ -167,7 +185,19 @@
   points: INT,
   limit: INT,
   expiry: DATE,
-  crewId: INT
+  crew_id: INT
+}
+
+###'/reward'
+###Leader adds reward to Crew. Only Leader of Crew should be able to do this.
+####req.body
+{
+  name: STRING,
+  description: STRING,
+  points: INT,
+  limit: INT,
+  expiry: DATE,
+  crew_id: INT
 }
 
 ###'/user/crews'
