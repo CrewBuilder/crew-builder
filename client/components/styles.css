@@ -295,6 +295,10 @@ body {
   background-color: #dcdcdc;
 }
 
+.small-list-item-text {
+  color: #9a9a9a;
+}
+
 @media (max-width: 918px) {
   .crew-image {
 
