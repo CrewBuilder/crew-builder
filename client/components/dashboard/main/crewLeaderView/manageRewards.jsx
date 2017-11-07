@@ -32,14 +32,6 @@ export default class ManageRewards extends Component {
       });
     };
 
-    this.func = () => {
-      if (this.state.newReward.length !== 0) {
-        this.props.userTasks.push({name: this.state.newReward});
-      }
-      // TODO:
-      // should update the newly added in database
-    };
-
     this.handleSelect = (reward) => {
       this.setState({reward: reward});
       this.show();
@@ -47,15 +39,14 @@ export default class ManageRewards extends Component {
 
     this.delete = (e) => {
       e.preventDefault();
-      // DeleteTask(this.state.task.id, function(err, done) {
+      // DeleteReward(this.state.reward.id, (err, done) => {
       //   if (err) {
-      //     console.log('problem in deleting');
-      //   }
-      //   if (done) {
-      //     props.getUserTasks(props.userId, props.currentCrew.crew.id);
+      //     console.log(err);
+      //   } else {
+      //     this.props.getCrewRewards(this.props.currentCrew.crew.id);
       //   }
       // });
-      // this.close();
+      this.close();
     };
   }
 
@@ -73,7 +64,11 @@ export default class ManageRewards extends Component {
             Add Reward
           </Modal.Header>
           <Modal.Body>
-            <AddReward {...this.props}/>
+            <AddReward
+              {...this.props}
+              closeModal={this.close}
+              getCrewRewards={this.props.getCrewRewards}
+            />
           </Modal.Body>
         </Modal>
         <Modal show={this.state.displayModal} onHide={this.close}>

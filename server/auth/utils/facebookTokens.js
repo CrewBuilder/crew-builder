@@ -12,7 +12,7 @@ let createToken = (auth) => {
   return jwt.sign({
     id: auth.id
   }, 'crew-bldr-secret', {
-    expiresIn: 60 * 120
+    expiresIn: 60 * 1440
   });
 };
 

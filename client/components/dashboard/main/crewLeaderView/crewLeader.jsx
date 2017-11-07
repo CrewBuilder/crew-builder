@@ -22,7 +22,6 @@ export default class CrewLeaderView extends Component {
         if (err) {
           console.log('ERROR:', err);
         } else {
-          console.log(res);
           this.setState({
             crewMembers: res
           });
@@ -42,7 +41,7 @@ export default class CrewLeaderView extends Component {
             <CrewSummary
               userId={this.props.user.id}
               currentCrew={this.props.currentCrew}
-              getCrewMember={this.getCrewMembers}
+              getCrewMembers={this.getCrewMembers}
               crewMembers={this.state.crewMembers}
             />
           </Panel>
@@ -57,7 +56,7 @@ export default class CrewLeaderView extends Component {
               userId={this.props.user.id}
               currentCrewTasks={this.props.currentCrewTasks}
               currentCrew={this.props.currentCrew}
-              getUserTasks={this.props.getUserTasks}
+              getCrewTasks={this.props.getCrewTasks}
             />
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Rewards" eventKey="4">

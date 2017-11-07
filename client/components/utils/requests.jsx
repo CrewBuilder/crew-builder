@@ -313,7 +313,10 @@ module.exports = {
   },
 
   DeleteTask: (taskId, cb) => {
-    let route = `${module.exports.host}tasks?taskId=${taskId}`;
+    let route = `/tasks?taskId=${taskId}`;
+    let body = {
+      taskId: taskId
+    };
     let options = deleteOptions;
     options.body = JSON.stringify(body);
     return fetch(route, options)
