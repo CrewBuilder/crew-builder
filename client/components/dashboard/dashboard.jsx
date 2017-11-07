@@ -112,6 +112,7 @@ export default class Dashboard extends Component {
       });
     };
 
+
     this.getCurrentRewards = (crew) => {
       GetCrewRewards(crew.crew.id, (err, res) => {
         this.setState({
