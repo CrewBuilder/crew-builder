@@ -15,6 +15,10 @@ describe('Server and Client Are Active', function() {
     seed().then(function() { done(); });
   });
 
+  after(function(done) {
+    seed().then(function() { done(); });
+  });
+
   it('Responds with 200 at localhost', function(done) {
     request(server)
       .get('/')

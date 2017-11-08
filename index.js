@@ -12,6 +12,8 @@ const db = require('./server/db/index.js');
 const cloudinary = require('cloudinary');
 const multer = require('multer');
 const upload = multer({dest: './uploads/'});
+const checkAuth = require('./server/db/utils/authHelpers').verifyToken;
+
 require('dotenv').config();
 
 
@@ -42,6 +44,7 @@ app.use(bodyParser.json());
 
 //Add ROUTES
 app.use(fbRouting);
+app.use(checkAuth);
 app.use(modelRouting);
 
 // ROUTES
