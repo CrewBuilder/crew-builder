@@ -50,16 +50,7 @@ router.get('/user/tasks', (req, res) => {
   });
 });
 
-router.get('/crew/tasks', (req, res) => {
-  let id = req.query.crew_id;
-  getTasksByCrew(id, (err, tasks) => {
-    if (err) {
-      res.status(401).send('No tasks available. Tell your Crew Leader to add some!');
-    } else {
-      res.status(200).send(tasks);
-    }
-  });
-});
+router.get('/crew/tasks', getTasksByCrew);
 
 router.get('/crews', (req, res) => {
   qs = req.query.qs || null;
