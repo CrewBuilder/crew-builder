@@ -263,6 +263,14 @@
   verified: BOOL, optional, only include for leader verification
 }
 
+###'/crew?crew_id={crew id}'
+####req.body
+{
+  name: 'new name'
+  description: 'new description'
+}
+etc, include any/all fields that need to be updated. CHeck to make sure you aren't sending null for any fields
+
 ##DELETE Endpoints
 ### 'user/crews'
 TODO: for cleanup this should probably be changed to only accept a query string
