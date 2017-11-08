@@ -17,6 +17,7 @@ const postReward = require('./../utils/rewardHelpers.js').createReward;
 
 const updateTask = require('./../utils/user_taskHelpers.js').updateTask;
 const editCrew = require('./../utils/crewHelpers.js').editCrew;
+const claimReward = require('./../utils/user_crewHelpers.js').claimReward;
 
 const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
 const deleteTask = require('./../utils/taskHelpers').deleteTask;
@@ -161,6 +162,8 @@ router.put('/user/tasks', (req, res) => {
 });
 
 router.put('/crew', editCrew);
+
+router.put('/reward/claim', claimReward);
 
 /*****************************************************************/
 /************************ DELETE REQUESTS ************************/

@@ -52,3 +52,29 @@ exports.leaveCrew = (userId, crew_id) => {
     }
   });
 };
+
+exports.claimReward = (req, res, next) => {
+  db.user_crew
+    .findOne({
+      where: {
+        user_id: req.body.user_id,
+        crew_id: req.body.crew_id
+      }
+    })
+    .then(found => {
+      let oldPoints = found.points;
+      if (oldPoints - req.body.reward.points < 0) {
+        res.status(401).send('Not enough points for this reward');
+      }
+      return found.update({
+        points: oldPoints - req.body.reward.points
+      });
+    })
+    .then(updated => {
+      next();
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+};
