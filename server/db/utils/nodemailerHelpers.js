@@ -19,13 +19,15 @@ exports.sendReward = (req, res) => {
     html: `<b><h2><strong>Congratulations!</strong></h2><div>You spent ${reward.points} to claim ${reward.name}</div><div>Thanks for being a great Crew Member!</div><div><strong>Love,</strong></div>\nThe CrewBuilder Team</b>`
   };
 
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log('Error', err);
-    }
-    console.log('Message sent: %s', info.messageId);
-    console.log('Preview on ethereal: %s', nodemailer.getTestMessageUrl(info));
-  });
-
-  res.sendStatus(200);
+  return new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(info);
+      }
+    });
+  })
+    .then(info => res.status(200).send('OK'))
+    .catch(err => res.status(500).send('Email not sent'));
 };

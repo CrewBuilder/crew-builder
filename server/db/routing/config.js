@@ -17,6 +17,8 @@ const postReward = require('./../utils/rewardHelpers.js').createReward;
 
 const updateTask = require('./../utils/user_taskHelpers.js').updateTask;
 const editCrew = require('./../utils/crewHelpers.js').editCrew;
+const claimReward = require('./../utils/user_crewHelpers.js').claimReward;
+const sendReward = require('../utils/nodemailerHelpers.js').sendReward;
 
 const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
 const deleteTask = require('./../utils/taskHelpers').deleteTask;
@@ -141,7 +143,7 @@ router.post('/user/tasks', (req, res) => {
   });
 });
 
-router.post('/crew/rewards', postReward);
+router.post('/crew/rewards', postReward, sendReward);
 
 /**************************************************************/
 /************************ PUT REQUESTS ************************/
@@ -161,6 +163,8 @@ router.put('/user/tasks', (req, res) => {
 });
 
 router.put('/crew', editCrew);
+
+router.put('/reward/claim', claimReward, sendReward);
 
 /*****************************************************************/
 /************************ DELETE REQUESTS ************************/

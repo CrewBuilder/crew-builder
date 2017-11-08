@@ -201,4 +201,45 @@ describe('Server and Client Are Active', function() {
       })
       .catch(err => done(err));
   });
+
+  it('Sends email and Deletes points for a claimed reward', function(done) {
+    db.user_crew
+      .update({
+        points: 500
+      }, {
+        where: {
+          user_id: 1,
+          crew_id: 2
+        }
+      })
+      .then(updated => {
+        return request(server)
+          .put('/reward/claim')
+          .send({
+            reward: {
+              points: 100
+            },
+            email: 'ipjwilli@gmail.com',
+            user_id: 1,
+            crew_id: 2
+          });
+      })
+      .then(res => {
+        expect(res.status).to.equal(200);
+      })
+      .then(() => {
+        return db.user_crew
+          .findOne({
+            where: {
+              user_id: 1,
+              crew_id: 2
+            }
+          });
+      })
+      .then(found => {
+        expect(found.points).to.equal(400);
+        done();
+      })
+      .catch(err => done(err));
+  });
 });
