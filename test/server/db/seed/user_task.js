@@ -5,82 +5,12 @@ module.exports = [{
   "verified": false
 }, {
   "user_id": 4,
-  "task_id": 96,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 5,
-  "task_id": 95,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 4,
-  "task_id": 82,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 3,
-  "task_id": 79,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 1,
-  "task_id": 35,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 3,
-  "task_id": 41,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 4,
   "task_id": 5,
   "completed": false,
   "verified": false
 }, {
-  "user_id": 2,
-  "task_id": 98,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 3,
-  "task_id": 98,
-  "completed": true,
-  "verified": false
-}, {
-  "user_id": 2,
-  "task_id": 88,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 2,
-  "task_id": 94,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 2,
-  "task_id": 56,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 1,
-  "task_id": 43,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 2,
-  "task_id": 65,
-  "completed": true,
-  "verified": false
-}, {
-  "user_id": 3,
-  "task_id": 72,
-  "completed": true,
-  "verified": true
-}, {
   "user_id": 5,
-  "task_id": 34,
+  "task_id": 14,
   "completed": true,
   "verified": false
 }, {
@@ -89,30 +19,10 @@ module.exports = [{
   "completed": true,
   "verified": false
 }, {
-  "user_id": 2,
-  "task_id": 71,
-  "completed": true,
-  "verified": false
-}, {
-  "user_id": 1,
-  "task_id": 33,
-  "completed": true,
-  "verified": true
-}, {
   "user_id": 1,
   "task_id": 17,
   "completed": false,
   "verified": false
-}, {
-  "user_id": 2,
-  "task_id": 58,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 2,
-  "task_id": 54,
-  "completed": true,
-  "verified": true
 }, {
   "user_id": 2,
   "task_id": 35,
@@ -125,16 +35,6 @@ module.exports = [{
   "verified": true
 }, {
   "user_id": 3,
-  "task_id": 77,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 3,
-  "task_id": 37,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 3,
   "task_id": 28,
   "completed": false,
   "verified": false
@@ -144,70 +44,15 @@ module.exports = [{
   "completed": false,
   "verified": false
 }, {
-  "user_id": 1,
-  "task_id": 69,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 5,
-  "task_id": 38,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 2,
-  "task_id": 99,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 5,
-  "task_id": 50,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 1,
-  "task_id": 62,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 4,
-  "task_id": 42,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 5,
-  "task_id": 43,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 2,
-  "task_id": 48,
-  "completed": false,
-  "verified": false
-}, {
   "user_id": 2,
   "task_id": 20,
   "completed": false,
-  "verified": false
-}, {
-  "user_id": 2,
-  "task_id": 47,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 3,
-  "task_id": 81,
-  "completed": true,
   "verified": false
 }, {
   "user_id": 5,
   "task_id": 25,
   "completed": true,
   "verified": true
-}, {
-  "user_id": 1,
-  "task_id": 86,
-  "completed": false,
-  "verified": false
 }, {
   "user_id": 4,
   "task_id": 37,
@@ -218,34 +63,4 @@ module.exports = [{
   "task_id": 2,
   "completed": true,
   "verified": false
-}, {
-  "user_id": 3,
-  "task_id": 100,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 5,
-  "task_id": 68,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 5,
-  "task_id": 78,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 4,
-  "task_id": 61,
-  "completed": true,
-  "verified": true
-}, {
-  "user_id": 2,
-  "task_id": 37,
-  "completed": false,
-  "verified": false
-}, {
-  "user_id": 3,
-  "task_id": 61,
-  "completed": true,
-  "verified": true
 }];
