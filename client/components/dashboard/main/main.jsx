@@ -51,7 +51,9 @@ export default class Main extends Component {
           <Route exact path="/dashboard/newcrew" render={(props) => (
             <CreateCrew {...props}
               user={this.props.user}
+              currentCrew={this.props.currentCrew}
               getCurrentCrews={this.props.getCurrentCrews}
+              newCrew={true}
             />
           )}/>
           <Route path="/dashboard/results" render={(props) => (
