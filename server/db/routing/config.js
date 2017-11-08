@@ -74,19 +74,7 @@ router.get('/leader/members', (req, res) => {
   });
 });
 
-router.get('/leader/tasks', (req, res) => {
-  let crew_id = req.query.crew_id;
-  getUnverifiedTasks(crew_id)
-    .then(tasks => {
-      return parseUnverifiedTasks(tasks);
-    })
-    .then(tasks => {
-      res.status(200).send(tasks);
-    })
-    .catch(err => {
-      res.status(401).send(err);
-    });
-});
+router.get('/leader/tasks', getUnverifiedTasks);
 
 router.get('/crew/rewards', getRewardsByCrew);
 /***************************************************************/

@@ -71,12 +71,12 @@ describe('Server and Client Are Active', function() {
       });
   });
 
-  it('Responds to GET: \'leader/tasks\' with a list of tasks in progress', function(done) {
+  it('Responds to GET: /leader/tasks with a list of tasks in progress', function(done) {
     request(server)
       .get('/leader/tasks?crew_id=13')
       .expect(200)
       .then(res => {
-        expect(res.body[0].taskName).to.equal('Tweet a link to our SoundCloud');
+        expect(res.body[0].name).to.equal('Tweet a link to our SoundCloud');
         expect(!res.body[1]).to.be.true;
         done();
       })
