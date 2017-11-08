@@ -28,6 +28,6 @@ exports.sendReward = (req, res) => {
       }
     });
   })
-    .then(info => res.status(200).send('OK'))
+    .then(info => res.status(200).send(info))
     .catch(err => res.status(500).send('Email not sent'));
 };
