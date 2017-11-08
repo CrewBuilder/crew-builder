@@ -37,7 +37,7 @@ module.exports = [
     "image": "https://scontent-dft4-1.xx.fbcdn.net/v/t1.0-0/c0.0.200.200/p200x200/538726_427708323906723_1136316092_n.jpg?oh=ebf40cd4f1386580538474724d0332e4&oe=5A710DF0"
   }, {
     "name": "Sol Group Ocean Cleanup",
-    "description": "Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh.",
+    "description": "SGOC is a volunteer group which seeks to organize volunteers for monthly cleanup events. Please sign up for our mailing list and check for Cleanup Events to be registered to Crew Tasks.",
     "crew_url": "http://www.volunteercleanup.org/livecleanlovebrickell/sol_group_ocean_clean_up",
     "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Ffarm5.staticflickr.com%2F4354%2F36930327120_aeaac52ddc.jpg"
   }, {
