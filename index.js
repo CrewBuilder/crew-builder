@@ -67,12 +67,8 @@ app.post('/image', upload.single('picture'), function(req, res, next) {
         res.json({success: true, message: result.secure_url});
       });
   } else {
-    res.status(500);
-    res.send("Image was not uploaded to cloudinary");
+    res.json({success: true, message: `http://res.cloudinary.com/${process.env.CLOUD_NAME}/image/upload/group-of-people-in-a-formation_318-44341.jpg.jpg`});
   }
 });
-
-cloudinary.v2.uploader.upload('my_image.jpg', {public_id: 'sample_id'},
-  function(error, result) { console.log('Cloudinary message: ', result); });
 
 module.exports = app;
