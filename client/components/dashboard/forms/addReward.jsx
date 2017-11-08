@@ -6,6 +6,12 @@ import moment from 'moment';
 import 'moment/locale/en-ca';
 import DateTime from 'react-datetime';
 
+
+var yesterday = moment().subtract(1, 'day');
+
+var valid = (current) => {
+  return current.isAfter(yesterday);
+};
 // expect props from manageTasks, related to updation of current rewards
 export default class addReward extends Component {
   constructor(props) {
@@ -64,21 +70,21 @@ export default class addReward extends Component {
         <form onSubmit={this.handleSubmit}>
           <FormGroup>
             <ControlLabel>Title</ControlLabel>
-            <FormControl type="text" placeholder="name of reward" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
+            <FormControl type="text" placeholder="name of reward" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} required/>
           </FormGroup>
           <FormGroup>
             <ControlLabel>Description</ControlLabel>
-            <FormControl componentClass="textarea" placeholder="tell your members what the reward will be" value={this.state.description} onChange={(event) => this.setState({description: event.target.value})}/>
+            <FormControl componentClass="textarea" placeholder="tell your members what the reward will be" value={this.state.description} onChange={(event) => this.setState({description: event.target.value})} required/>
           </FormGroup>
           <FormGroup validationState={this.getValidationState()}>
             <ControlLabel>Points</ControlLabel>
-            <FormControl type="number" value={this.state.points} value={this.state.points} onChange={(event) => this.setState({points: event.target.value})}/>
+            <FormControl type="number" value={this.state.points} value={this.state.points} onChange={(event) => this.setState({points: event.target.value})} required/>
             <ControlLabel>Limit</ControlLabel>
             <FormControl type="number" value={this.state.limit} value={this.state.limit} onChange={(event) => this.setState({limit: event.target.value})} />
           </FormGroup>
           <FormGroup>
             <ControlLabel>Expiry Date</ControlLabel>
-            <DateTime utc={true} onChange={(e) => this.show(e)}/>
+            <DateTime utc={true} onChange={(e) => this.show(e)} isValidDate={ valid }/>
           </FormGroup>
           <Button type="submit">
              Add a reward
