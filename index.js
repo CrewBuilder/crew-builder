@@ -44,7 +44,6 @@ app.use(bodyParser.json());
 
 //Add ROUTES
 app.use(fbRouting);
-app.use(checkAuth);
 app.use(modelRouting);
 
 // ROUTES
