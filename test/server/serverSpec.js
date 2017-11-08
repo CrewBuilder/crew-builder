@@ -141,4 +141,26 @@ describe('Server and Client Are Active', function() {
       })
       .catch(err => done(err));
   });
+
+  it('Updates crew information', function(done) {
+    request(server)
+      .put('/crew?crew_id=4')
+      .send({
+        name: 'Changed name'
+      })
+      .expect(201)
+      .then(res => {
+        return db.crew
+          .findOne({
+            where: {
+              id: 4
+            }
+          });
+      })
+      .then(found => {
+        expect(found.name).to.equal('Changed name');
+        done();
+      })
+      .catch(err => done(err));
+  });
 });

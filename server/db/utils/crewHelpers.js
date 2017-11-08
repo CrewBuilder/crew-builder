@@ -80,3 +80,14 @@ exports.searchCrews = (qs) => {
     return db.crew.findAll();
   }
 };
+
+exports.editCrew = (req, res) => {
+  return db.crew
+    .update(req.body, {
+      where: {
+        id: req.query.crew_id
+      }
+    })
+    .then(updated => res.status(200).send(updated))
+    .catch(err => res.status(500).send(err));
+};
