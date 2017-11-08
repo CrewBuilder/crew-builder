@@ -69,7 +69,4 @@ app.post('/image', upload.single('picture'), function(req, res, next) {
   }
 });
 
-cloudinary.v2.uploader.upload('my_image.jpg', {public_id: 'sample_id'},
-  function(error, result) { console.log('Cloudinary message: ', result); });
-
 module.exports = app;
