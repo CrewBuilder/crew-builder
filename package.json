@@ -4,7 +4,7 @@
   "description": "Build and cultivate grass roots support",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env DEV_MODE=test && mocha test --recursive --exit",
+    "test": "cross-env DEV_MODE=test mocha test --recursive --exit",
     "start": "nodemon index.js",
     "dev": "DEV_MODE=production&& npm run build",
     "windev": "SET DEV_MODE=production&& npm run build",
