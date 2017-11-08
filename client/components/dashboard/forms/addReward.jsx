@@ -46,16 +46,13 @@ export default class addReward extends Component {
         limit: limit,
         expiry: this.state.expiry
       };
+      // (reward, crew_id, cb)
       PostReward(obj, this.props.currentCrew.crew.id, (err, data) => {
         if (err) {
           console.log(err);
         } else {
-          // WAITING FOR DASHBOARD FUNCTION AND PASSED DOWN PROPS
-          this.props.getCrewRewards(this.props.currentCrew.crew.id);
+          this.props.getCurrentRewards(this.props.currentCrew.crew.id);
         }
-        // if (data) {
-        //   props.getUserTasks(props.userId, props.currentCrew.crew.id);
-        // }
       });
     };
   }

@@ -3,6 +3,9 @@ import { ListGroup, ListGroupItem, Modal, Button, Glyphicon } from 'react-bootst
 import AddReward from './../../forms/addReward.jsx';
 import { DeleteReward } from '../../../utils/requests.jsx';
 
+import moment from 'moment';
+import 'moment/locale/en-ca';
+
 export default class ManageRewards extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +46,7 @@ export default class ManageRewards extends Component {
         if (err) {
           console.log(err);
         } else {
-          this.props.getCrewRewards(this.props.currentCrew.crew.id);
+          this.props.getCurrentRewards(this.props.currentCrew.crew.id);
         }
       });
       this.close();
@@ -78,7 +81,7 @@ export default class ManageRewards extends Component {
           <Modal.Body>
             <h4>Points: {this.state.reward.points}</h4>
             <h4>Limit: {this.state.reward.limit}</h4>
-            <h4>Expires: {this.state.reward.expiry}</h4>
+            <h4>Expires: { moment(this.state.reward.expiry).format("MM/DD/YYYY") }</h4>
             <h4>Description</h4>
             <p>{this.state.reward.description}</p>
           </Modal.Body>

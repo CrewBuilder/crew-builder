@@ -56,7 +56,7 @@ export default class App extends Component {
 
   render() {
 
-    if (!window.localStorage.getItem('id_token') || !this.state.isLoggedIn) {
+    if (!this.state.isLoggedIn || !window.localStorage.getItem('id_token')) {
       return (
         <div className="fadeIn-landing">
           <Switch>

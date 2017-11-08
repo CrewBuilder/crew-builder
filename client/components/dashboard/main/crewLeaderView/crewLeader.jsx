@@ -63,6 +63,7 @@ export default class CrewLeaderView extends Component {
             <ManageRewards
               userId={this.props.user.id}
               currentCrewRewards={this.props.currentCrewRewards}
+              getCurrentRewards={this.props.getCurrentRewards}
               currentCrew={this.props.currentCrew}
             />
           </Panel>
