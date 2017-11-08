@@ -6,6 +6,13 @@ import moment from 'moment';
 import 'moment/locale/en-ca';
 import DateTime from 'react-datetime';
 // expect props from manageTasks, related to updation of current tasks
+
+var yesterday = moment().subtract(1, 'day');
+
+var valid = (current) => {
+  return current.isAfter(yesterday);
+};
+
 export default class addTask extends Component {
   constructor(props) {
     super(props);
@@ -76,7 +83,7 @@ export default class addTask extends Component {
           </FormGroup>
           <FormGroup>
             <ControlLabel>Expiry Date</ControlLabel>
-            <DateTime utc={true} onChange={(e) => this.show(e)}/>
+            <DateTime utc={true} onChange={(e) => this.show(e)} isValidDate={valid}/>
           </FormGroup>
           <Button type="submit">
              Add a task

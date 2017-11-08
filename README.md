@@ -27,9 +27,9 @@
 ### Create a Cloudinary cloud to host image uploads.
 #### Create environment variables for Cloudinary:
 > CLOUD_NAME=mycloud
-> CLOUDINARY_UPLOAD_PRESET=mypreset
+> API_KEY=cloudinaryapikey
 > CLOUDINARY_UPLOAD_URL=https://api.cloudinary.com/v1_1/myaccount/upload
-> IMAGE_URL=https://res.cloudinary.com/myaccount/w_300,h_200,c_crop/>
+> API_SECRET=cloudinaryapipassword
 ### Create Facebook app using Facebook Developer. Get app id and FB secret to allow FB authentication.
 #### Create environment variables for Facebook:
 > FB_CLIENT_ID=123456789012345
@@ -43,6 +43,7 @@
 - Sequelize
 - Cloudinary
 - Facebook Dev
+- Moment
 
 ## Development
 
