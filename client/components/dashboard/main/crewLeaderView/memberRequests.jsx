@@ -32,22 +32,6 @@ export default class MemberRequests extends Component {
               <div className="member-request-text">{task.name}</div>
             </ListGroupItem>
           )) }
-          <ListGroupItem>
-            <div className="member-request-confirm-buttons">
-              <ButtonGroup>
-                <Button bsStyle="success" onClick={this.confirmTaskCompleted}><Glyphicon glyph="ok" /> Confirm</Button>
-                <Button bsStyle="danger" onClick={this.rejectTaskCompleted}><Glyphicon glyph="remove" /> Reject</Button>
-              </ButtonGroup>
-            </div>
-            <div className="member-request-text">Fake task to be confirmed for testing</div>
-          </ListGroupItem>
-          <ListGroupItem>
-            <ButtonGroup>
-              <Button bsStyle="success" onClick={this.confirmTaskCompleted} className="btn-circle.btn-lg"><Glyphicon glyph="ok" /> Confirm</Button>
-              <Button bsStyle="danger" onClick={this.rejectTaskCompleted} className="btn-circle.btn-lg"><Glyphicon glyph="remove" /> Reject</Button>
-            </ButtonGroup>
-            <div className="member-request-text">Fake task to be confirmed for testing</div>
-          </ListGroupItem>
         </ListGroup>
       </div>
     );

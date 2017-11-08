@@ -22,6 +22,7 @@ export default class CrewView extends Component {
         <PanelGroup>
           <Panel collapsible defaultExpanded={true} header="Crew Summary" eventKey="1">
             <CrewSummary
+              history={this.props.history}
               userId={this.props.user.id}
               currentCrew={this.props.currentCrew}
               getCurrentCrews={this.props.getCurrentCrews}

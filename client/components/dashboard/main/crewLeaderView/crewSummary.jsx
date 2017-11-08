@@ -55,8 +55,10 @@ export default class crewLeaderSummary extends Component {
         if (err) {
           console.log('Error', err);
         } else {
-          this.props.getCurrentCrews(this.props.userId);
-          window.location.reload();
+          // this.props.getCurrentCrews(this.props.userId);
+          // window.location.reload();
+          this.props.history.push('/dashboard');
+          this.props.getCurrentCrews(this.props.user.id);
         }
       });
 
