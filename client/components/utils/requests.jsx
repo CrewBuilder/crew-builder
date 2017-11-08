@@ -155,6 +155,30 @@ module.exports = {
       });
   },
 
+  // Lets leader edit crew from leader view
+  EditCrew: (crew_id, crew, userId, cb) => {
+    let route = `/crew?crew_id=${crew_id}`;
+    let body = {
+      name: crew.name,
+      description: crew.description,
+      image: crew.image,
+      userId: userId
+    };
+    let options = putOptions;
+    options.body = JSON.stringify(body);
+    fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then((data) => {
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
+  },
+
   // Lets leader post task to crew. Should only be available to the Leader of that crew.
   PostTask: (task, crew_id, cb) => {
     let route = '/task/';
