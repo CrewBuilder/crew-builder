@@ -136,7 +136,7 @@ describe('Server and Client Are Active', function() {
       .get('/crew/rewards?crew_id=3')
       .expect(200)
       .then(res => {
-        expect(res.body.length).to.equal(2);
+        expect(res.body.length).to.equal(3);
         done();
       })
       .catch(err => done(err));
