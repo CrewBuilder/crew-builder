@@ -23,10 +23,15 @@ export default class CreateCrew extends Component {
       var formData = new FormData();
       formData.append("picture", this.state.image);
 
-      var options = {
-        method: 'POST',
-        body: formData
+      let options = {
+       method: 'POST',
+       headers: {
+         'Accept': 'application/json, text/plain, */*',
+         'Content-Type': 'application/json',
+         'x-auth-token': localStorage.getItem('id_token')
+       }
       };
+
       console.log('options', options);
       fetch('/image', options)
         .then((res) => res.json())
@@ -46,6 +51,7 @@ export default class CreateCrew extends Component {
               console.log('error in posting');
             } else {
               this.props.getCurrentCrews(props.user.id);
+              window.location = '/';
             }
           });
         })
@@ -70,34 +76,3 @@ export default class CreateCrew extends Component {
   }
 }
 
-
-// <form onSubmit={this.handleSubmitt} id="course-form" ref="form">
-          // <input type="text" name="name" value={this.state.name} placeholder="enter name" onChange={(e) => this.setState({name: e.target.value})}/>
-          // <input type="text" name="description" value={this.state.description} placeholder="description" onChange={(e) => this.setState({description: e.target.value})}/>
-          // <input type="file" name="image" onChange={(e) => this.setState({image: e.target.files[0]})} />
-          // <button>Submit</button>
-//        </form>
-
-//<FormControl type="text" placeholder="Enter the name of Crew" name="crewname" inputRef={ref => this.name = ref} defaultValue={this.props.name}/><br/>
-//           <FormControl componentClass="textarea" placeholder="enter description" inputRef={ref => this.description = ref} defaultValue={this.props.desc}/><br/>
-//            <Dropzone
-              // muliple="false"
-              // accept="image/*"
-              // onDrop={this.onImageDrop.bind(this)}>
-
-            //   {this.state.uploadedFileCloudinaryUrl !== '' ?
-            //     <div>
-            //       <p>{this.state.uploadedFile.name}</p>
-            //       <Image cloudName={cloud_name} publicId={this.state.uploadedFileCloudinaryUrl} width="200" crop="scale"/>
-            //     </div> : <div>
-            //       <p>Drop an image or click to select a file to upload.</p>
-            //     </div>}
-
-            // </Dropzone>
-            // <input type="file" onChange={this.handleFormData}/>
-//            <Button type="submit">
-//               Create/Update
-//            </Button>
-
-
-// <Image cloudName="sarikonda" publicId="flower" width="300" crop="scale"/>
