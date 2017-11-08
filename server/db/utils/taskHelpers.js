@@ -1,9 +1,11 @@
 const db = require('../index.js');
 
-exports.getTasksByCrew = (crew_id, cb) => {
+exports.getTasksByCrew = (req, res) => {
   return db.task
     .findAll({
-      where: {crew_id: req.query.crew_id}
+      where: {
+        crew_id: req.query.crew_id
+      }
     })
     .then(tasks => res.status(200).send(tasks))
     .catch(err => res.status(500).send(err));
