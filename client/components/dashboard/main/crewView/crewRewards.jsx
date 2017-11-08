@@ -29,7 +29,7 @@ export default class CrewRewards extends Component {
 
     this.claimReward = () => {
       this.setState({showModal: false});
-      let reward_id = this.state.selectedReward.id;
+      let reward = this.state.selectedReward;
       let email = this.state.email;
       let availablePoints = this.state.crew.points;
       let points = this.state.selectedReward.points;
@@ -37,7 +37,7 @@ export default class CrewRewards extends Component {
       let crew_id = this.state.crew.crew.id;
       let limit = this.state.selectedReward.limit;
       if (availablePoints >= points && limit > 0) {
-        ClaimReward(reward_id, email, user_id, crew_id, points, (err, res) => {
+        ClaimReward(reward, email, user_id, crew_id, points, (err, res) => {
           if (res) {
             this.setState({
               successVisible: true
