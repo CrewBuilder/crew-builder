@@ -66,8 +66,8 @@ export default class CreateCrew extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <FormControl type="text" name="name" value={this.state.name} placeholder="enter name" onChange={(e) => this.setState({name: e.target.value})}/> <br/>
-          <FormControl type="text" name="description" value={this.state.description} placeholder="description" onChange={(e) => this.setState({description: e.target.value})}/> <br/>
+          <FormControl type="text" name="name" value={this.state.name} placeholder="enter name" onChange={(e) => this.setState({name: e.target.value})} required/> <br/>
+          <FormControl type="text" name="description" value={this.state.description} placeholder="description" onChange={(e) => this.setState({description: e.target.value})} required/> <br/>
           <FormControl type="file" name="pic" onChange={(e) => this.setState({image: e.target.files[0]})}/><br/>
           <button>submit</button>
         </form>
