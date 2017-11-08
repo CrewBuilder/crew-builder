@@ -289,6 +289,30 @@ module.exports = {
       });
   },
 
+  ClaimReward: (reward_id, email, user_id, crew_id, points, cb) => {
+    let route = '/reward/claim';
+    let body = {
+      reward_id: reward_id,
+      email: email,
+      user_id: user_id,
+      crew_id: crew_id,
+      points: points
+    };
+    let options = putOptions;
+    options.body = JSON.stringify(body);
+    fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then((data) => {
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
+  },
+
   // Delete UserCrew: removes User from Crew
   DeleteUserCrew: (userId, crew_id, cb) => {
     let route = '/user/crews/';
