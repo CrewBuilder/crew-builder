@@ -7,9 +7,7 @@ import { getUserCrews, getUserTasks } from '../../utils/requests.jsx';
 import CreateCrew from '../forms/createCrew.jsx';
 import SearchResults from './searchView/searchResults.jsx';
 import CrewView from './crewView/crewView.jsx';
-// added
 import CrewLeaderView from './crewLeaderView/crewLeader.jsx';
-//
 
 export default class Main extends Component {
 
@@ -23,6 +21,7 @@ export default class Main extends Component {
         <Switch>
           <Route path="/dashboard/crews" render={(props) => (
             <CrewView {...props}
+              history={this.props.history}
               user={this.props.user}
               getCurrentCrews={this.props.getCurrentCrews}
               getUserTasks={this.props.getUserTasks}
@@ -35,6 +34,7 @@ export default class Main extends Component {
           )}/>
           <Route path="/dashboard/manage" render={(props) => (
             <CrewLeaderView {...props}
+              history={this.props.history}
               user={this.props.user}
               getCurrentCrews={this.props.getCurrentCrews}
               getUserTasks={this.props.getUserTasks}
@@ -50,6 +50,7 @@ export default class Main extends Component {
           )}/>
           <Route exact path="/dashboard/newcrew" render={(props) => (
             <CreateCrew {...props}
+              history={this.props.history}
               user={this.props.user}
               currentCrew={this.props.currentCrew}
               getCurrentCrews={this.props.getCurrentCrews}

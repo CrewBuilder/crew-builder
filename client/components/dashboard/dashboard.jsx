@@ -232,7 +232,6 @@ export default class Dashboard extends Component {
         <div />
       );
     } else {
-
       return (
         <div className='fadeIn-container component-container clearfix'>
           <Navbar
@@ -254,6 +253,7 @@ export default class Dashboard extends Component {
               </Col>
               <Col xs={12} sm={10} md={10} lg={9} className="clearfix outlineBox dashboard-container">
                 <Main
+                  history={this.props.history}
                   user={this.state.user}
                   getCurrentCrews={this.getCurrentCrews}
                   getUserTasks={this.getUserTasks}

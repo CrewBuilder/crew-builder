@@ -31,7 +31,8 @@ export default class CrewSummary extends Component {
           this.setState({
             showLeave: false
           });
-          this.props.getCurrentCrews();
+          this.props.history.push('/dashboard');
+          this.props.getCurrentCrews(this.props.user.id);
         }
       });
 

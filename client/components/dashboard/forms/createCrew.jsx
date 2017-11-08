@@ -50,7 +50,8 @@ export default class CreateCrew extends Component {
                 if (err) {
                   console.log('error in posting');
                 } else {
-                  window.location = '/';
+                  this.props.history.push('/dashboard');
+                  this.props.getCurrentCrews(this.props.user.id);
                 }
               });
             } else {
@@ -58,7 +59,8 @@ export default class CreateCrew extends Component {
                 if (err) {
                   console.log('error in posting');
                 } else {
-                  window.location = '/';
+                  this.props.history.push('/dashboard');
+                  this.props.getCurrentCrews(this.props.user.id);
                 }
               });
             }
@@ -78,7 +80,8 @@ export default class CreateCrew extends Component {
           if (err) {
             console.log('error in posting');
           } else {
-            window.location = '/';
+            this.props.history.push('/dashboard');
+            this.props.getCurrentCrews(this.props.user.id);
           }
         });
       }
