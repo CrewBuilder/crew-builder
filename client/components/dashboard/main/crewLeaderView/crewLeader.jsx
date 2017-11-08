@@ -43,6 +43,7 @@ export default class CrewLeaderView extends Component {
               currentCrew={this.props.currentCrew}
               getCrewMembers={this.getCrewMembers}
               crewMembers={this.state.crewMembers}
+              getCurrentCrews={this.props.getCurrentCrews}
             />
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Member Requests" eventKey="2">

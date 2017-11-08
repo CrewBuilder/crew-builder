@@ -335,6 +335,27 @@ module.exports = {
       });
   },
 
+  // Delete LeaderCrew: Deletes Crew from leader
+  DeleteLeaderCrew: (crew_id, cb) => {
+    let route = `/crew?crew_id=${crew_id}`;
+    let body = {
+      crew_id: crew_id
+    };
+    let options = deleteOptions;
+    options.body = JSON.stringify(body);
+    return fetch(route, options)
+      .then(response => {
+        return response.json();
+      })
+      .then((data) => {
+        cb(null, data);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
+        cb(error, null);
+      });
+  },
+
   DeleteTask: (taskId, cb) => {
     let route = `/tasks?taskId=${taskId}`;
     let body = {

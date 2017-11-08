@@ -134,7 +134,7 @@
   }
 ]
 
-###'/leader/tasks?crewId={CREW_ID}'
+###'/leader/tasks?crew_id={CREW_ID}'
 ###Leader gets a list of tasks that are completed but still need verification.
 #### Example Response from seed data user crewId=4
 [
