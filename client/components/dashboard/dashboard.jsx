@@ -75,7 +75,6 @@ export default class Dashboard extends Component {
             currentTasksToConfirm: [],
             currentCrewTasks: crewTasks
           });
-          console.log('STATE', this.state);
           // });
         });
       });
