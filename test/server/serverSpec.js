@@ -148,7 +148,7 @@ describe('Server and Client Are Active', function() {
       .send({
         name: 'Changed name'
       })
-      .expect(201)
+      .expect(200)
       .then(res => {
         return db.crew
           .findOne({
@@ -159,6 +159,25 @@ describe('Server and Client Are Active', function() {
       })
       .then(found => {
         expect(found.name).to.equal('Changed name');
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Deletes a crew', function(done) {
+    request(server)
+      .delete('/crew?crew_id=4')
+      .expect(202)
+      .then(res => {
+        return db.crew
+          .findOne({
+            where: {
+              id: 4
+            }
+          });
+      })
+      .then((found) => {
+        expect(!found).to.be.true;
         done();
       })
       .catch(err => done(err));
