@@ -186,4 +186,19 @@ describe('Server and Client Are Active', function() {
       })
       .catch(err => done(err));
   });
+
+  it('Responds with an empty array for a crew that has no tasks', function(done) {
+    db.crew
+      .create()
+      .then(created => {
+        return request(server)
+          .get(`/leader/tasks?crew_id=${created.id}`);
+      })
+      .then(res => {
+        expect(res.status).to.equal(200);
+        expect(res.body.length).to.equal(0);
+        done();
+      })
+      .catch(err => done(err));
+  });
 });
