@@ -11,10 +11,14 @@ export default class CrewSummary extends Component {
       showLeave: false
     };
     this.leaveCrewHandler = () => {
-      this.setState({showLeave: true});
+      this.setState({
+        showLeave: true
+      });
     };
     this.handleAlertDismiss = () => {
-      this.setState({showLeave: false});
+      this.setState({
+        showLeave: false
+      });
     };
 
     this.handleConfirmLeave = () => {
@@ -24,7 +28,9 @@ export default class CrewSummary extends Component {
         if (err) {
           console.log('Error', err);
         } else {
-          this.setState({showLeave: false});
+          this.setState({
+            showLeave: false
+          });
           this.props.getCurrentCrews();
         }
       });
@@ -32,8 +38,14 @@ export default class CrewSummary extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      showLeave: false
+    });
+  }
+
   render() {
-    const achievementLevel = this.props.currentCrew.achievement !== "none" ?
+    const achievementLevel = this.props.currentCrew.achievement !== 'none' ?
       `Your achievement level with this crew is ${this.props.currentCrew.achievement}` :
       `Complete some tasks to help the cause and gain achievements!`;
 

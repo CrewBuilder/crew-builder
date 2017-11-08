@@ -92,13 +92,13 @@ export default class Dashboard extends Component {
           console.log('Error', err);
         } else {
           crewRewards = rewards;
-          console.log('rewards',crewRewards);
+          // console.log('rewards',crewRewards);
         }
         GetUserTasks(this.state.user.id, crew.crew.id, (err, tasks) => {
           if (err) {
             console.log('ERROR:', err);
           } else {
-            console.log('Tasks', tasks);
+            // console.log('Tasks', tasks);
             userTasks = tasks.tasksInProgress;
             crewTasks = tasks.tasksAvailable;
           }
@@ -107,7 +107,7 @@ export default class Dashboard extends Component {
             currentCrewTasks: crewTasks,
             currentCrewRewards: rewards
           });
-          console.log('State', this.state);
+          // console.log('State', this.state);
         });
       });
     };
