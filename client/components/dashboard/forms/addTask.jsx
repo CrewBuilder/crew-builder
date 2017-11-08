@@ -62,15 +62,15 @@ export default class addTask extends Component {
         <form onSubmit={this.handleSubmit}>
           <FormGroup>
             <ControlLabel>Title</ControlLabel>
-            <FormControl type="text" placeholder="name of task" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
+            <FormControl type="text" placeholder="name of task" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} required/>
           </FormGroup>
           <FormGroup>
             <ControlLabel>Description</ControlLabel>
-            <FormControl componentClass="textarea" placeholder="tell your members what this task requires" value={this.state.description} onChange={(event) => this.setState({description: event.target.value})}/>
+            <FormControl componentClass="textarea" placeholder="tell your members what this task requires" value={this.state.description} onChange={(event) => this.setState({description: event.target.value})} required/>
           </FormGroup>
           <FormGroup validationState={this.getValidationState()}>
             <ControlLabel>Points</ControlLabel>
-            <FormControl type="number" value={this.state.points} value={this.state.points} onChange={(event) => this.setState({points: event.target.value})}/>
+            <FormControl type="number" value={this.state.points} value={this.state.points} onChange={(event) => this.setState({points: event.target.value})} required/>
             <ControlLabel>Limit</ControlLabel>
             <FormControl type="number" value={this.state.limit} value={this.state.limit} onChange={(event) => this.setState({limit: event.target.value})} />
           </FormGroup>
