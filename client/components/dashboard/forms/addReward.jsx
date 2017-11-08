@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap';
-// import { PostTask } from '../../utils/requests.jsx';
+import { PostReward } from '../../utils/requests.jsx';
 
 import moment from 'moment';
 import 'moment/locale/en-ca';
@@ -20,10 +20,8 @@ export default class addReward extends Component {
 
     this.show = (e) => {
       var date = moment(e);
-      this.setState({expiry: date.format()}, function(err, data) {
-        if (data) {
-          return data;
-        }
+      this.setState({
+        expiry: date.format()
       });
     };
 
@@ -35,13 +33,9 @@ export default class addReward extends Component {
       return null;
     };
 
-
-    this.reward = (e) => {
-      this.reward = e.target.value;
-    };
-
     this.handleSubmit = (e) => {
       e.preventDefault();
+      this.props.closeModal();
       // note: never set state in handleSubmit...
       let points = Number(this.state.points);
       let limit = Number(this.state.limit);
@@ -52,13 +46,12 @@ export default class addReward extends Component {
         limit: limit,
         expiry: this.state.expiry
       };
-      PostTask(obj, this.props.currentCrew.crew.id, function(err, data) {
+      // (reward, crew_id, cb)
+      PostReward(obj, this.props.currentCrew.crew.id, (err, data) => {
         if (err) {
-          console.log('error in posting reward');
-        }
-
-        if (data) {
-          props.getUserTasks(props.userId, props.currentCrew.crew.id);
+          console.log(err);
+        } else {
+          this.props.getCurrentRewards(this.props.currentCrew.crew.id);
         }
       });
     };

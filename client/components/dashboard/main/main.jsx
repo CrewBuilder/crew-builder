@@ -38,6 +38,7 @@ export default class Main extends Component {
               user={this.props.user}
               getCurrentCrews={this.props.getCurrentCrews}
               getUserTasks={this.props.getUserTasks}
+              getCrewTasks={this.props.getCrewTasks}
               currentCrew={this.props.currentCrew}
               currentCrewTasks={this.props.currentCrewTasks}
               currentCrewRewards={this.props.currentCrewRewards}

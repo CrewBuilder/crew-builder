@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Modal, Button, Glyphicon } from 'react-bootstrap';
 import AddReward from './../../forms/addReward.jsx';
-// import { DeleteTask, GetLeaderTasks } from '../../../utils/requests.jsx';
+import { DeleteReward } from '../../../utils/requests.jsx';
+
+import moment from 'moment';
+import 'moment/locale/en-ca';
 
 export default class ManageRewards extends Component {
   constructor(props) {
@@ -32,14 +35,6 @@ export default class ManageRewards extends Component {
       });
     };
 
-    this.func = () => {
-      if (this.state.newReward.length !== 0) {
-        this.props.userTasks.push({name: this.state.newReward});
-      }
-      // TODO:
-      // should update the newly added in database
-    };
-
     this.handleSelect = (reward) => {
       this.setState({reward: reward});
       this.show();
@@ -47,15 +42,14 @@ export default class ManageRewards extends Component {
 
     this.delete = (e) => {
       e.preventDefault();
-      // DeleteTask(this.state.task.id, function(err, done) {
-      //   if (err) {
-      //     console.log('problem in deleting');
-      //   }
-      //   if (done) {
-      //     props.getUserTasks(props.userId, props.currentCrew.crew.id);
-      //   }
-      // });
-      // this.close();
+      DeleteReward(this.state.reward.id, (err, done) => {
+        if (err) {
+          console.log(err);
+        } else {
+          this.props.getCurrentRewards(this.props.currentCrew.crew.id);
+        }
+      });
+      this.close();
     };
   }
 
@@ -73,7 +67,11 @@ export default class ManageRewards extends Component {
             Add Reward
           </Modal.Header>
           <Modal.Body>
-            <AddReward {...this.props}/>
+            <AddReward
+              {...this.props}
+              closeModal={this.close}
+              getCrewRewards={this.props.getCrewRewards}
+            />
           </Modal.Body>
         </Modal>
         <Modal show={this.state.displayModal} onHide={this.close}>
@@ -83,7 +81,7 @@ export default class ManageRewards extends Component {
           <Modal.Body>
             <h4>Points: {this.state.reward.points}</h4>
             <h4>Limit: {this.state.reward.limit}</h4>
-            <h4>Expires: {this.state.reward.expiry}</h4>
+            <h4>Expires: { moment(this.state.reward.expiry).format("MM/DD/YYYY") }</h4>
             <h4>Description</h4>
             <p>{this.state.reward.description}</p>
           </Modal.Body>
@@ -91,7 +89,6 @@ export default class ManageRewards extends Component {
             <Button onClick={this.delete}>Delete</Button>
           </Modal.Footer>
         </Modal>
-
       </div>
     );
   }
