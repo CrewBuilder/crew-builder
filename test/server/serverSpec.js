@@ -71,12 +71,12 @@ describe('Server and Client Are Active', function() {
       });
   });
 
-  it('Responds to GET: \'leader/tasks\' with a list of tasks in progress', function(done) {
+  it('Responds to GET: /leader/tasks with a list of tasks in progress', function(done) {
     request(server)
       .get('/leader/tasks?crew_id=13')
       .expect(200)
       .then(res => {
-        expect(res.body[0].taskName).to.equal('Tweet a link to our SoundCloud');
+        expect(res.body[0].name).to.equal('Tweet a link to our SoundCloud');
         expect(!res.body[1]).to.be.true;
         done();
       })
@@ -182,6 +182,21 @@ describe('Server and Client Are Active', function() {
       })
       .then((found) => {
         expect(!found).to.be.true;
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Responds with an empty array for a crew that has no tasks', function(done) {
+    db.crew
+      .create()
+      .then(created => {
+        return request(server)
+          .get(`/leader/tasks?crew_id=${created.id}`);
+      })
+      .then(res => {
+        expect(res.status).to.equal(200);
+        expect(res.body.length).to.equal(0);
         done();
       })
       .catch(err => done(err));

@@ -1,4 +1,5 @@
-const db = require('../index.js'); // Queries the User_Crew table, returns all of a User's crews by Id
+const db = require('../index.js');
+
 exports.getCrewsByUser = (id) => {
   return db.user.findOne({
     where: {
@@ -50,43 +51,4 @@ exports.leaveCrew = (userId, crew_id) => {
       user_id: userId
     }
   });
-};
-
-const parseData = (user) => {
-  let crews = user.crews;
-  let response = {
-    leader: [],
-    member: []
-  };
-  crews.forEach(crew => {
-
-    if (crew.user_crew.role === 'leader') {
-      response.leader.push({
-        points: crew.user_crew.points,
-        achievement: crew.user_crew.achievement,
-        role: crew.user_crew.role,
-        crew: {
-          id: crew.id,
-          name: crew.name,
-          description: crew.description,
-          image: crew.image
-        }
-      });
-
-    } else {
-      response.member.push({
-        points: crew.user_crew.points,
-        achievement: crew.user_crew.achievement,
-        role: crew.user_crew.role,
-        crew: {
-          id: crew.id,
-          name: crew.name,
-          description: crew.description,
-          image: crew.image
-        }
-      });
-    }
-  });
-
-  return response;
 };
