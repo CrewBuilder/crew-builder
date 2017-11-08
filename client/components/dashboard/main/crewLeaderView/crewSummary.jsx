@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { Media, Modal, ButtonGroup, Button, Image } from 'react-bootstrap';
-// import editForm from './../../forms/createCrew.jsx'
 import { Transformation } from 'cloudinary-react';
-
 import CreateCrew from './../../forms/createCrew.jsx';
-
-
 
 export default class crewLeaderSummary extends Component {
   constructor(props) {
@@ -26,7 +22,7 @@ export default class crewLeaderSummary extends Component {
     };
 
     this.checkMembers = () => {
-      this.props.getCrewMember(this.props.currentCrew.crew.id);
+      this.props.getCrewMembers(this.props.currentCrew.crew.id);
       this.setState({
         checkMembers: true,
         showModal: true
@@ -34,21 +30,12 @@ export default class crewLeaderSummary extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   // this.props.getCrewMember(this.props.currentCrew.crew.id);
-  //   console.log(this.props.currentCrew.crew.id);
-  // }
-
   render() {
     if (!this.props.currentCrew) {
       return (
         <div />
       );
     } else {
-    // console.log(this.props.currentCrew.crew.image, 'image')
-      // var str = this.props.currentCrew.crew.image;
-      // str = str.split('/');
-      // var publicId = str[str.length - 1];
       return (
         <div>
           <Media>
@@ -88,7 +75,7 @@ export default class crewLeaderSummary extends Component {
               Update
             </Modal.Header>
             <Modal.Body>
-              <CreateCrew name={this.props.currentCrew.crew.name} desc={this.props.currentCrew.crew.description}/>
+              <CreateCrew name={this.props.currentCrew.crew.name} desc={this.props.currentCrew.crew.description} />
             </Modal.Body>
           </Modal>
         </div>

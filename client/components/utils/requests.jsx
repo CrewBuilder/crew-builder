@@ -91,7 +91,6 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        console.log('Data', data);
         cb(null, data);
       })
       .catch((error) => {
@@ -184,7 +183,7 @@ module.exports = {
 
   // Lets leader post a new reward to their crew.
   PostReward: (reward, crew_id, cb) => {
-    let route = '/reward/';
+    let route = '/crew/rewards';
     let body = {
       name: reward.name,
       description: reward.description,
@@ -313,7 +312,27 @@ module.exports = {
   },
 
   DeleteTask: (taskId, cb) => {
-    let route = `${module.exports.host}tasks?taskId=${taskId}`;
+    let route = `/tasks?taskId=${taskId}`;
+    let body = {
+      taskId: taskId
+    };
+    let options = deleteOptions;
+    options.body = JSON.stringify(body);
+    return fetch(route, options)
+      .then(response => {
+        cb(null, response);
+      })
+      .catch((error) => {
+        console.log('err', error);
+        cb(error, null);
+      });
+  },
+
+  DeleteReward: (rewardId, cb) => {
+    let route = `/crew/rewards?reward_id=${rewardId}`;
+    let body = {
+      rewardId: rewardId
+    };
     let options = deleteOptions;
     options.body = JSON.stringify(body);
     return fetch(route, options)

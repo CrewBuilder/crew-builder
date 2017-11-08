@@ -22,7 +22,7 @@ export default class App extends Component {
         })
           .then((user) => {
             if (user === false) {
-              window.reload.location();
+              window.location.reload();
             } else {
               this.setState({
                 isLoggedIn: true
@@ -56,7 +56,7 @@ export default class App extends Component {
 
   render() {
 
-    if (!window.localStorage.getItem('id_token') || !this.state.isLoggedIn) {
+    if (!this.state.isLoggedIn || !window.localStorage.getItem('id_token')) {
       return (
         <div className="fadeIn-landing">
           <Switch>
@@ -65,6 +65,7 @@ export default class App extends Component {
                 changeLoginStatus={this.changeLoginStatus}
               />
             )}/>
+            <Redirect to="/" />
           </Switch>
         </div>
       );

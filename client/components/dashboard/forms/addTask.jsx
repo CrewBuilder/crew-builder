@@ -6,7 +6,6 @@ import moment from 'moment';
 import 'moment/locale/en-ca';
 import DateTime from 'react-datetime';
 // expect props from manageTasks, related to updation of current tasks
-// var DateTime = require('react-datetime');
 export default class addTask extends Component {
   constructor(props) {
     super(props);
@@ -20,10 +19,8 @@ export default class addTask extends Component {
 
     this.show = (e) => {
       var date = moment(e);
-      this.setState({expiry: date.format()}, function(err, data) {
-        if (data) {
-          return data;
-        }
+      this.setState({
+        expiry: date.format()
       });
     };
 
@@ -33,11 +30,6 @@ export default class addTask extends Component {
       if (!isNaN(Number(limitVal)) && !isNaN(Number(pointsVal))) return 'success';
       else if (isNaN(Number(limitVal)) || isNaN(Number(pointsVal))) return 'error';
       return null;
-    };
-
-
-    this.task = (e) => {
-      this.task = e.target.value;
     };
 
     this.handleSubmit = (e) => {
@@ -53,13 +45,11 @@ export default class addTask extends Component {
         limit: limit,
         expiry: this.state.expiry
       };
-      PostTask(obj, this.props.currentCrew.crew.id, function(err, data) {
+      PostTask(obj, this.props.currentCrew.crew.id, (err, data)=> {
         if (err) {
-          console.log('error in posting task');
-        }
-
-        if (data) {
-          props.getUserTasks(props.userId, props.currentCrew.crew.id);
+          console.log(err);
+        } else {
+          this.props.getCrewTasks(this.props.currentCrew.crew.id);
         }
       });
     };

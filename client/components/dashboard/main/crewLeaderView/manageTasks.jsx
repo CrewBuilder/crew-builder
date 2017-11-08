@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Modal, Button, Glyphicon } from 'react-bootstrap';
 import AddTask from './../../forms/addTask.jsx';
-import { DeleteTask, GetLeaderTasks } from '../../../utils/requests.jsx';
+import { DeleteTask } from '../../../utils/requests.jsx';
 
 import moment from 'moment';
 import 'moment/locale/en-ca';
@@ -35,14 +35,6 @@ export default class ManageTasks extends Component {
       });
     };
 
-    this.func = () => {
-      if (this.state.newTask.length !== 0) {
-        this.props.userTasks.push({name: this.state.newTask});
-      }
-      // TODO:
-      // should update the newly added in database
-    };
-
     this.handleSelect = (task) => {
       this.setState({task: task});
       this.show();
@@ -50,12 +42,11 @@ export default class ManageTasks extends Component {
 
     this.delete = (e) => {
       e.preventDefault();
-      DeleteTask(this.state.task.id, function(err, done) {
+      DeleteTask(this.state.task.id, (err, done) => {
         if (err) {
-          console.log('problem in deleting');
-        }
-        if (done) {
-          props.getUserTasks(props.userId, props.currentCrew.crew.id);
+          console.log(err);
+        } else {
+          this.props.getCrewTasks(this.props.currentCrew.crew.id);
         }
       });
       this.close();
@@ -82,6 +73,7 @@ export default class ManageTasks extends Component {
             <AddTask
               {...this.props}
               closeModal={this.close}
+              getCrewTasks={this.props.getCrewTasks}
             />
           </Modal.Body>
         </Modal>
@@ -100,7 +92,6 @@ export default class ManageTasks extends Component {
             <Button onClick={this.delete}>Delete</Button>
           </Modal.Footer>
         </Modal>
-
       </div>
     );
   }
