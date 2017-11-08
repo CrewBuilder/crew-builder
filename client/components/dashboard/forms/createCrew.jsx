@@ -23,10 +23,15 @@ export default class CreateCrew extends Component {
       var formData = new FormData();
       formData.append("picture", this.state.image);
 
-      var options = {
-        method: 'POST',
-        body: formData
+      let options = {
+       method: 'POST',
+       headers: {
+         'Accept': 'application/json, text/plain, */*',
+         'Content-Type': 'application/json',
+         'x-auth-token': localStorage.getItem('id_token')
+       }
       };
+
       console.log('options', options);
       fetch('/image', options)
         .then((res) => res.json())
@@ -46,6 +51,7 @@ export default class CreateCrew extends Component {
               console.log('error in posting');
             } else {
               this.props.getCurrentCrews(props.user.id);
+              window.location = '/';
             }
           });
         })
