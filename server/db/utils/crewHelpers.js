@@ -91,3 +91,14 @@ exports.editCrew = (req, res) => {
     .then(updated => res.status(200).send(updated))
     .catch(err => res.status(500).send(err));
 };
+
+exports.deleteCrew = (req, res) => {
+  db.crew
+    .destroy({
+      where: {
+        id: req.query.crew_id
+      }
+    })
+    .then(destroyed => res.sendStatus(202))
+    .catch(err => res.status(500).send(err));
+};

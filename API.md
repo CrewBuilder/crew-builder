@@ -281,6 +281,9 @@ TODO: for cleanup this should probably be changed to only accept a query string
 }
 sends back 202 with no data
 
+###/crew?crew_id={crew id}
+sends back 202 with no data
+
 ###'leader/tasks?taskId={TASK ID}'
 sends back 202 with no data
 

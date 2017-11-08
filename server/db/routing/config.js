@@ -21,6 +21,7 @@ const editCrew = require('./../utils/crewHelpers.js').editCrew;
 const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
 const deleteTask = require('./../utils/taskHelpers').deleteTask;
 const deleteReward = require('./../utils/rewardHelpers.js').destroyReward;
+const deleteCrew = require('./../utils/crewHelpers.js').deleteCrew;
 
 
 
@@ -215,6 +216,7 @@ router.delete('/tasks', (req, res) => {
 });
 
 router.delete('/crew/rewards', deleteReward);
+router.delete('/crew', deleteCrew);
 
 module.exports = router;
 
