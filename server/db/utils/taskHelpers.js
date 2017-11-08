@@ -26,11 +26,9 @@ exports.getUnverifiedTasks = (req, res) => {
     .catch(err => res.status(500).send(err));
 };
 
-// Allows task creation
 exports.postTask = (taskData, cb) => {
   db.task.create(taskData)
     .then(task => {
-      // Callback with task data
       return cb(null, task);
     })
     .catch(err => {
