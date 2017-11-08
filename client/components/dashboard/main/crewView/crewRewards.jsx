@@ -1,6 +1,6 @@
 // This component renders a list of rewards to be claimed
 import React, { Component } from 'react';
-import { Alert, Modal, ListGroup, ListGroupItem, Button, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
+import { Alert, Modal, ListGroup, ListGroupItem, Button, Form, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 import { claimReward } from '../../../utils/requests.jsx';
 
 
@@ -35,7 +35,8 @@ export default class CrewRewards extends Component {
       let points = this.state.selectedReward.points;
       let user_id = this.props.userId;
       let crew_id = this.state.crew.crew.id;
-      if (availablePoints >= points) {
+      let limit = this.state.selectedReward.limit;
+      if (availablePoints >= points && limit > 0) {
         ClaimReward(reward_id, email, user_id, crew_id, points, (err, res) => {
           if (res) {
             this.setState({
@@ -48,7 +49,6 @@ export default class CrewRewards extends Component {
           alertVisible: true,
         });
       }
-      // (reward_id, email, user_id, crew_id, points, cb)
     };
 
     this.handleAlertDismiss = () => {
@@ -70,7 +70,7 @@ export default class CrewRewards extends Component {
           </p>
         </Alert>
       );
-    } else if(this.state.successVisible) {
+    } else if (this.state.successVisible) {
       return (
         <Alert bsStyle="success" onDismiss={this.handleAlertDismiss}>
           <h4>You earned {this.state.selectedReward.name}!</h4>
@@ -95,15 +95,16 @@ export default class CrewRewards extends Component {
               </Modal.Header>
               <Modal.Body>
                 <h4>Points: {this.state.selectedReward.points}</h4>
+                <h4>Remaining: {this.state.selectedReward.limit}</h4>
                 <p>{this.state.selectedReward.description}</p>
-              </Modal.Body>
-              <Modal.Footer>
-                <form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit}>
                   <FormGroup>
-                    <ControlLabel>Email</ControlLabel>
+                    <ControlLabel>Email: </ControlLabel>
                     <FormControl type="text" placeholder="Your email" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})}/>
                   </FormGroup>
-                </form>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
                 <Button onClick={this.claimReward}>Claim this reward</Button>
                 <Button onClick={this.closeModal}>Close</Button>
               </Modal.Footer>
