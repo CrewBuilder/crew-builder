@@ -7,11 +7,16 @@ export default class MemberRequests extends Component {
 
     // need to get member requests data throgh props
     this.selectTaskCompleted = (task, confirm) => {
-      console.log('confirmTaskCompleted');
+      let task_id = task.id;
+      let crew_id = this.props.currentCrew.crew.id;
+      let points = task.points;
+      let user_id = task.user_tasks[0].user_id;
       if (confirm) {
-        this.props.handleMemberRequestVerification(task.id, confirm);
+        console.log('task', task);
+        this.props.handleMemberRequestVerification(task.id, confirm, user_id, task_id, points, crew_id);
       } else {
-        this.props.handleMemberRequestVerification(task.id);
+        // TODO: Revoke 'completion' of a task
+        // this.props.handleMemberRequestVerification(task.id, false, );
       }
     };
   }
