@@ -257,10 +257,15 @@
 
 ##PUT Endpoints
 ###'user/tasks'
-####req.body (request will know which action to do based on fields included)
+####All requests should trigger the 'Completed' field of user_task data row to be 'true'. Crew Leader sees all tasks which are 'Completed' but not 'Verified' and will verify them to award points.
+####req.body (request will know which action to do based on the state of 'verified')
 {
-  userTaskId: INT, unique identifier for the user_task selected
-  verified: BOOL, optional, only include for leader verification
+  crew_id: 1,
+  points: 100,
+  task_id: 40,
+  userTaskId: 18,
+  user_id: 16,
+  verified: false
 }
 
 ###'/crew?crew_id={crew id}'
@@ -269,7 +274,7 @@
   name: 'new name'
   description: 'new description'
 }
-etc, include any/all fields that need to be updated. CHeck to make sure you aren't sending null for any fields
+etc, include any/all fields that need to be updated. Check to make sure you aren't sending null for any fields
 
 ##DELETE Endpoints
 ### 'user/crews'

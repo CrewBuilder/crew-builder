@@ -28,11 +28,15 @@ export default class TasksInProgress extends Component {
     this.closeModal = () => {
       this.setState({ showModal: false });
     };
-
+    // user_id, task_id, points, and crew_id
     this.confirmTask = (e) => {
       e.preventDefault();
-      let taskId = this.state.focusUserTask.id;
-      UpdateTask(taskId, null, (err, data) => {
+      let userTaskId = this.state.focusUserTask.id;
+      let user_id = this.props.userId;
+      let task_id = this.state.focusTask.id;
+      let points = this.state.focusTask.points;
+      let crew_id = this.state.focusTask.crew_id;
+      UpdateTask(userTaskId, false, user_id, task_id, points, crew_id, (err, data) => {
         this.props.getUserTasks(this.props.userId, this.state.focusTask.crew_id);
       });
       this.closeModal();
@@ -47,10 +51,12 @@ export default class TasksInProgress extends Component {
       <div>
         <ListGroup>
           {this.props.userTasks.map((task, i) => {
-            return (<ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.name}
-              {(task.user_task.completed === true && task.user_task.verified === false) ? <Label bsStyle="warning" className="task-status-labels">Waiting approval...</Label> : ''}
-              {(task.user_task.completed === true && task.user_task.verified === true) ? <Label bsStyle="success" className="task-status-labels">Task Completed</Label> : ''}
-              </ListGroupItem>);
+            return (
+              <ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.name}
+                {(task.user_task.completed === true && task.user_task.verified === false) ? <Label bsStyle="warning" className="task-status-labels">Waiting approval...</Label> : ''}
+                {(task.user_task.completed === true && task.user_task.verified === true) ? <Label bsStyle="success" className="task-status-labels">Task Completed</Label> : ''}
+              </ListGroupItem>
+            );
           })}
         </ListGroup>
         <Modal show={this.state.showModal} onHide={this.closeModal}>
