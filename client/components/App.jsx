@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Link, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import Landing from './Landing.jsx';
 import Dashboard from './dashboard/dashboard.jsx';
-import Sidebar from './dashboard/sidebar.jsx';
 
-import { Init, CheckLogin, GetCurrentUser, Login, Logout } from './utils/auth.jsx';
+import { Init, GetCurrentUser } from './utils/auth.jsx';
 
+// main component for handling landing page/redirect to dashboard by checking login status
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -14,15 +14,16 @@ export default class App extends Component {
     this.state = {
       isLoggedIn: false
     };
-    // check auth with local token
-    this.authLogin = (callback) => {
+
+    // check auth through api using localStorage 'id_token'
+    this.authLogin = () => {
       let userCheck = window.localStorage.getItem('id_token');
       if (userCheck) {
         GetCurrentUser((res) => {
           return res;
         })
           .then((user) => {
-            if (user === false) {
+            if (!user) {
               window.location.reload();
             } else {
               this.setState({
@@ -46,11 +47,10 @@ export default class App extends Component {
         isLoggedIn: !this.state.isLoggedIn
       });
     };
-
   }
 
   componentDidMount() {
-    // Initializes facebook sdk
+    // Initializes facebook sdk and checks for login status
     Init();
     this.authLogin();
   }
@@ -58,7 +58,7 @@ export default class App extends Component {
   render() {
     if (!this.state.isLoggedIn || !window.localStorage.getItem('id_token')) {
       return (
-        <div className="fadeIn-landing">
+        <div>
           <Switch>
             <Route exact path="/" render={(props) => (
               <Landing {...props}
@@ -69,9 +69,7 @@ export default class App extends Component {
           </Switch>
         </div>
       );
-
     } else {
-
       return (
         <div className="fadeIn-container">
           <Switch>

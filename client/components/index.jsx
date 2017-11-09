@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
-import './datetime.css';
-import './styles.css';
+import './styles/datetime.css';
+import './styles/style.css';
 
 ReactDOM.render((
   <BrowserRouter>

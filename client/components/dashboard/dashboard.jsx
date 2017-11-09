@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
-import { Route, Link, Redirect, Switch } from 'react-router-dom';
-import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 import { GetCrewRewards, GetUserCrews, GetUserTasks, GetCrewTasks, GetAllCrews, GetLeaderTasks, UpdateTask } from '../utils/requests.jsx';
 
@@ -12,7 +10,6 @@ import Sidebar from './sidebar.jsx';
 import Main from './main/main.jsx';
 
 export default class Dashboard extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -275,7 +272,7 @@ export default class Dashboard extends Component {
 
             </Row>
           </Grid>
-          <div className="footer">&copy; 2017 CrewBuilder</div>
+          <div className="footer">&copy; 2017 CrewBuilder | <a href="https://github.com/CrewBuilder/crew-builder" rel="noopener noreferrer" target="_blank">GitHub</a></div>
         </div>
       );
     }
