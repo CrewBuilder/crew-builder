@@ -69,7 +69,9 @@ export default class CrewSummary extends Component {
                   <h4>Are you sure you want to leave?</h4>
                   <p>Once you leave a Crew you will forfeit any points you have earned.</p>
                   <p>
-                    <Button bsStyle="danger" onClick={this.handleConfirmLeave} href="/dashboard">Yes, I know I will lose my points</Button>
+                    <Button bsStyle="danger" onClick={this.handleConfirmLeave} href="/dashboard">
+                      Yes, I know I will lose my points
+                    </Button>
                     <span> or </span>
                     <Button onClick={this.handleAlertDismiss}>Nevermind</Button>
                   </p>
