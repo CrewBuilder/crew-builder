@@ -8,7 +8,6 @@ module.exports = {
     }
 
     let token = req.headers['x-auth-token'];
-    console.log(token);
     if (token) {
       return new Promise ((resolve, reject) => {
         jwt.verify(token, 'crew-bldr-secret', (err, decoded) => {
