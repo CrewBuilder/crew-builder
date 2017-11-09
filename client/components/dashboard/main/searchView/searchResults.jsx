@@ -14,6 +14,7 @@ export default class SearchResults extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       activePage: 1,
       rangeLow: 0,
@@ -31,7 +32,6 @@ export default class SearchResults extends Component {
           props.getCurrentCrews(userId);
         }
       });
-
     };
 
     // handle range of paginated items
@@ -42,7 +42,6 @@ export default class SearchResults extends Component {
         rangeHigh: (3 * eventKey)
       });
     };
-
   }
 
   // reset pagination on search
