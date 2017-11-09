@@ -10,6 +10,7 @@ import request from 'superagent';
 export default class CreateCrew extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       url: this.props.imageurl || '',
       name: this.props.name || '',
@@ -41,6 +42,7 @@ export default class CreateCrew extends Component {
             this.setState({
               url: data.message
             });
+
             var obj = {
               name: this.state.name,
               description: this.state.description,
@@ -70,7 +72,7 @@ export default class CreateCrew extends Component {
           })
           .catch((errors) => {
             console.log('Login Error: ', errors);
-          });
+        });
       } else {
         // no new image, so can bypass cloudinary and just send changes
         var obj = {
