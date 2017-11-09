@@ -12,7 +12,7 @@ export default class CrewLeaderView extends Component {
 
   constructor(props) {
     super(props);
-    // Needed props: currentCrewMembers, crewTasks, currentCrew, memberReq
+
     this.state = {
       crewMembers: []
     };
@@ -51,6 +51,8 @@ export default class CrewLeaderView extends Component {
             <MemberRequests
               currentTasksToConfirm={this.props.currentTasksToConfirm}
               handleMemberRequestVerification={this.props.handleMemberRequestVerification}
+              currentCrew={this.props.currentCrew}
+              setCurrentCrewLeader={this.props.setCurrentCrewLeader}
             />
           </Panel>
           <Panel collapsible defaultExpanded={true} header="Tasks" eventKey="3">

@@ -295,12 +295,17 @@ module.exports = {
       });
   },
 
-  UpdateTask: (userTaskId, verified = false, cb) => {
+  UpdateTask: (userTaskId, verified = false, user_id, task_id, points, crew_id, cb) => {
     let route = '/user/tasks/';
     let body = {
       userTaskId: userTaskId,
-      verified: verified
+      verified: verified,
+      user_id: user_id,
+      task_id: task_id,
+      points: points,
+      crew_id: crew_id
     };
+    console.log('Body', body);
     let options = putOptions;
     options.body = JSON.stringify(body);
     fetch(route, options)
