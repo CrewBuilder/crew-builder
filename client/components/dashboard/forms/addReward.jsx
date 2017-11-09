@@ -16,6 +16,7 @@ var valid = (current) => {
 export default class addReward extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       name : this.props.name || '',
       description: this.props.description || '',
