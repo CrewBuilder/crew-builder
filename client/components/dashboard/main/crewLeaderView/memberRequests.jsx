@@ -5,7 +5,7 @@ export default class MemberRequests extends Component {
   constructor(props) {
     super(props);
 
-    // need to get member requests data throgh props
+    // need to get member requests data through props
     this.selectTaskCompleted = (task, confirm) => {
       let task_id = task.id;
       let crew_id = this.props.currentCrew.crew.id;
