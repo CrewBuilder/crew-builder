@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cross-env DEV_MODE=test mocha test --recursive --exit",
     "start": "nodemon index.js",
-    "dev": "DEV_MODE=production&& npm run build",
+    "dev": "DEV_MODE=production npm run build",
     "windev": "SET DEV_MODE=production&& npm run build",
     "build": "webpack --watch"
   },
