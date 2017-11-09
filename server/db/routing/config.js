@@ -135,18 +135,7 @@ router.post('/crew/rewards', postReward, sendReward);
 /************************ PUT REQUESTS ************************/
 /**************************************************************/
 
-router.put('/user/tasks', (req, res) => {
-
-  let userTaskId = req.body.userTaskId;
-  let verified = req.body.verified || false;
-  updateTask(userTaskId, verified, (err, userCrew) => {
-    if (err) {
-      res.status(401).send(err);
-    } else {
-      res.status(200).send(userCrew);
-    }
-  });
-});
+router.put('/user/tasks', updateTask);
 
 router.put('/crew', editCrew);
 

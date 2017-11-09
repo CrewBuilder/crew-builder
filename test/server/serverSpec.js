@@ -275,4 +275,65 @@ describe('Server and Client Are Active', function() {
       })
       .catch(err => done(err));
   });
+
+  it('Updates a task as completed without adding any points', function(done) {
+    request(server)
+      .put('/user/tasks')
+      .send({
+        user_id: 5,
+        task_id: 28,
+        points: 250,
+        crew_id: 13
+      })
+      .expect(200)
+      .then(res => {
+        expect(res.body.user_id).to.equal(5);
+        expect(res.body.crew_id).to.equal(13);
+        expect(res.body.points).to.equal(0);
+        return db.user_task
+          .findOne({
+            where: {
+              user_id: 5,
+              task_id: 28
+            }
+          });
+      })
+      .then(found => {
+        expect(found.completed).to.be.true;
+        expect(found.verified).to.be.false;
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Updates a task and adds point when verifying a task', function(done) {
+    request(server)
+      .put('/user/tasks')
+      .send({
+        user_id: 2,
+        task_id: 13, // 150 points, crew 3
+        points: 150,
+        crew_id: 3,
+        verified: true
+      })
+      .expect(200)
+      .then(res => {
+        expect(res.body.user_id).to.equal(2);
+        expect(res.body.crew_id).to.equal(3);
+        expect(res.body.points).to.equal(150);
+        return db.user_task
+          .findOne({
+            where: {
+              user_id: 2,
+              task_id: 13
+            }
+          });
+      })
+      .then(found => {
+        expect(found.completed).to.be.true;
+        expect(found.verified).to.be.true;
+        done();
+      })
+      .catch(err => done(err));
+  });
 });
