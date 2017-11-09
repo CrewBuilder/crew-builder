@@ -60,22 +60,22 @@ export default class Dashboard extends Component {
           if (err) {
             console.log('ERROR:', err);
           } else {
-            // console.log('RESCREWTASKS', resCrewTasks);
+            console.log('RESCREWTASKS', resCrewTasks);
             crewTasks = resCrewTasks;
           }
-          // GetLeaderTasks(crew.crew.id, (err, resLeadTasks) => {
-          //   if (err) {
-          //     console.log('ERROR:', err);
-          //   } else {
-          //     console.log('RESLEADTASKS', resLeadTasks);
-          //     leaderTasks = resLeadTasks;
-          //   }
-          this.setState({
-            currentCrewRewards: rewards,
-            currentTasksToConfirm: [],
-            currentCrewTasks: crewTasks
+          GetLeaderTasks(crew.crew.id, (err, resLeadTasks) => {
+            if (err) {
+              console.log('ERROR:', err);
+            } else {
+              console.log('RESLEADTASKS', resLeadTasks);
+              leaderTasks = resLeadTasks;
+            }
+            this.setState({
+              currentCrewRewards: rewards,
+              currentTasksToConfirm: leaderTasks,
+              currentCrewTasks: crewTasks
+            });
           });
-          // });
         });
       });
     };

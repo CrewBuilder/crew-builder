@@ -124,8 +124,8 @@ body {
   font-weight: 700;
   text-align: center;
   padding: 30px;
-  margin-left: 12%;
-  margin-right: 12%;
+  margin-left: 20%;
+  margin-right: 20%;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -136,7 +136,19 @@ body {
   .carousel-inner>.item>img {
     height: 360px;
   }
+  .caption-text {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
 }
+
+@media (max-width: 440px) {
+  .caption-text {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+}
+
 
 /* NAVBAR */
 
