@@ -25,7 +25,7 @@ const deleteTask = require('./../utils/taskHelpers').deleteTask;
 const deleteReward = require('./../utils/rewardHelpers.js').destroyReward;
 const deleteCrew = require('./../utils/crewHelpers.js').deleteCrew;
 
-// router.use(require('../utils/authHelpers').verifyToken);
+router.use(require('../utils/authHelpers').verifyToken);
 
 /**************************************************************/
 /************************ GET REQUESTS ************************/

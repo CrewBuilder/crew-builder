@@ -29,7 +29,10 @@ export default class CreateCrew extends Component {
 
         let options = {
           method: 'POST',
-          body: formData
+          body: formData,
+          headers: {
+            'x-auth-token': localStorage.getItem('id_token')
+          }
         };
 
         fetch('/image', options)

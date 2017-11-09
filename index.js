@@ -54,7 +54,7 @@ app.get('*', (req, res) => {
 // CHECK PORT AND START SERVER
 const port = process.env.PORT || 3000;
 
-if (process.env.DEV_MODE === 'production') {
+if (process.env.DEV_MODE === 'production' || process.env.DEV_MODE === 'test') {
   app.listen(port, () => {
     console.log('SERVER STARTED: Listening on port:' + port);
   });

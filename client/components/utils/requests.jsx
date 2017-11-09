@@ -1,17 +1,20 @@
+const contentType = 'application/json; charset=UTF-8';
+const token = localStorage.getItem('id_token');
+
 const getOptions = {
   method: 'GET',
-  headers: new Headers({
-    'Content-Type': 'application/json',
-    'x-auth-token': localStorage.getItem('id_token')
-  })
+  headers: {
+    'Content-Type': contentType,
+    'x-auth-token': token
+  }
 };
 
 let postOptions = {
   method: 'POST',
   headers: {
     'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json',
-    'x-auth-token': localStorage.getItem('id_token')
+    'Content-Type': contentType,
+    'x-auth-token': token
   }
 };
 
@@ -19,8 +22,8 @@ const putOptions = {
   method: 'put',
   headers: {
     'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json',
-    'x-auth-token': localStorage.getItem('id_token')
+    'Content-Type': contentType,
+    'x-auth-token': token
   }
 };
 
@@ -28,8 +31,8 @@ const deleteOptions = {
   method: 'delete',
   headers: {
     'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json',
-    'x-auth-token': localStorage.getItem('id_token')
+    'Content-Type': contentType,
+    'x-auth-token': token
   }
 };
 module.exports = {
