@@ -8,6 +8,7 @@ import CreateCrew from '../forms/createCrew.jsx';
 import SearchResults from './searchView/searchResults.jsx';
 import CrewView from './crewView/crewView.jsx';
 import CrewLeaderView from './crewLeaderView/crewLeader.jsx';
+import Instructions from '../instructions.jsx';
 
 export default class Main extends Component {
 
@@ -19,6 +20,9 @@ export default class Main extends Component {
     return (
       <div>
         <Switch>
+          <Route exact path="/dashboard" render={(props) => (
+            <Instructions />
+          )}/>
           <Route path="/dashboard/crews" render={(props) => (
             <CrewView {...props}
               history={this.props.history}
