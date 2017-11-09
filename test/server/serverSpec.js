@@ -204,7 +204,8 @@ describe('Server and Client Are Active', function() {
             },
             email: 'ipjwilli@gmail.com',
             user_id: 1,
-            crew_id: 2
+            crew_id: 2,
+            crew_name: 'Iona\'s Crew'
           });
       })
       .then(res => {

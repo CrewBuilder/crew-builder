@@ -5,6 +5,7 @@ exports.sendReward = (req, res) => {
   let email = req.body.email;
   let user_id = req.body.user_id;
   let crew_id = req.body.crew_id;
+  let crew_name = req.body.crew_name;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -16,7 +17,7 @@ exports.sendReward = (req, res) => {
     from: '"CrewBuilder" <CrewBuilderDevTeam@gmail.com>',
     to: email,
     subject: 'Your CrewBuilder Reward is here!',
-    html: `<b><h2><strong>Congratulations!</strong></h2><div>You spent ${reward.points} to claim ${reward.name}</div><div>Thanks for being a great Crew Member!</div><div><strong>Love,</strong></div>\nThe CrewBuilder Team</b>`
+    html: `<b><h2><strong>Congratulations!</strong></h2><div>You spent ${reward.points} points to claim ${reward.name}</div><div>Thanks for being a great Crew Member!</div><div><strong>Love,</strong></div>\n${crew_name}</b>`
   };
 
   return new Promise((resolve, reject) => {

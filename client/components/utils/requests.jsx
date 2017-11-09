@@ -321,13 +321,14 @@ module.exports = {
       });
   },
 
-  ClaimReward: (reward, email, user_id, crew_id, cb) => {
+  ClaimReward: (reward, email, user_id, crew_id, crew_name, cb) => {
     let route = '/reward/claim';
     let body = {
       reward: reward,
       email: email,
       user_id: user_id,
-      crew_id: crew_id
+      crew_id: crew_id,
+      crew_name: crew_name
     };
     let options = putOptions;
     options.body = JSON.stringify(body);
