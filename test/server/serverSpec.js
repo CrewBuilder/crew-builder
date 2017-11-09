@@ -65,7 +65,7 @@ describe('Server and Client Are Active', function() {
   it('Removes the association between a user and a crew upon user request to delete', function(done) {
     request(server)
       .delete('/user/crews?id=1crew_id=4')
-      .expect(202)
+      .expect(204)
       .then(res => {
         expect(!res.body.length).to.be.true;
         done();
@@ -89,10 +89,10 @@ describe('Server and Client Are Active', function() {
       });
   });
 
-  it('Responds to DELETE: /tasks with a 202', function(done) {
+  it('Responds to DELETE: /tasks with a 204', function(done) {
     request(server)
       .delete('/tasks?taskId=4')
-      .expect(202)
+      .expect(204)
       .then(res => {
         done();
       })
@@ -124,7 +124,7 @@ describe('Server and Client Are Active', function() {
   it('Deletes a specified reward', function(done) {
     request(server)
       .delete('/crew/rewards?reward_id=1')
-      .expect(202)
+      .expect(204)
       .then(res => {
         return db.reward.findOne({
           where: {
@@ -153,7 +153,7 @@ describe('Server and Client Are Active', function() {
   it('Deletes a crew', function(done) {
     request(server)
       .delete('/crew?crew_id=4')
-      .expect(202)
+      .expect(204)
       .then(res => {
         return db.crew
           .findOne({

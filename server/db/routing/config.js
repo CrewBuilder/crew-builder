@@ -116,7 +116,7 @@ router.delete('/user/crews', (req, res) => {
   let crew_id = req.body.crew_id;
   leaveCrew(userId, crew_id)
     .then(deleted => {
-      res.sendStatus(202);
+      res.sendStatus(204);
     })
     .catch(err => {
       console.log(err);

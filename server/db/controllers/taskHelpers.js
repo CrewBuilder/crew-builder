@@ -52,7 +52,7 @@ module.exports = {
           id: task_id
         }
       })
-      .then(destroyed => res.sendStatus(202))
+      .then(destroyed => res.sendStatus(204))
       .catch(err => res.status(500).send(err));
   }
 };

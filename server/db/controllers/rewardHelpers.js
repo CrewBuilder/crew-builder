@@ -41,7 +41,7 @@ module.exports = {
           id: req.query.reward_id
         }
       })
-      .then(deleted => res.sendStatus(202))
+      .then(deleted => res.sendStatus(204))
       .catch(err => {
         if (err.SequelizeDatabaseError) {
           console.log('Delete reward error in Sequelize: ', err.SequelizeDatabaseError);
