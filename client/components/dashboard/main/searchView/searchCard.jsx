@@ -8,6 +8,7 @@ export default class SearchCard extends Component {
 
   constructor(props) {
     super(props);
+
     this.joinHandler = (e) => {
       e.preventDefault();
       this.props.joinCrew(this.props.crew);
