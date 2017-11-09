@@ -1,17 +1,21 @@
 const db = require('../index.js');
 
-exports.getCrewsByUser = (id) => {
-  return db.user.findOne({
-    where: {
-      id: id
-    },
-    include: [{
-      model: db.crew,
-      through: {
-        attributes: ['points', 'role', 'achievement']
-      }
-    }]
-  });
+exports.getCrewsByUser = (req, res) => {
+  let id = req.query.id;
+  return db.user
+    .findOne({
+      where: {
+        id: id
+      },
+      include: [{
+        model: db.crew,
+        through: {
+          attributes: ['points', 'role', 'achievement']
+        }
+      }]
+    })
+    .then(found => res.status(200).send(parseData(found)))
+    .catch(err => res.status(500).send(err));
 };
 
 exports.postUserCrew = (userId, crew_id, cb) => {
@@ -77,4 +81,43 @@ exports.claimReward = (req, res, next) => {
       console.log(err);
       res.sendStatus(500);
     });
+};
+
+const parseData = (user) => {
+  let crews = user.crews;
+  let response = {
+    leader: [],
+    member: []
+  };
+  crews.forEach(crew => {
+
+    if (crew.user_crew.role === 'leader') {
+      response.leader.push({
+        points: crew.user_crew.points,
+        achievement: crew.user_crew.achievement,
+        role: crew.user_crew.role,
+        crew: {
+          id: crew.id,
+          name: crew.name,
+          description: crew.description,
+          image: crew.image
+        }
+      });
+
+    } else {
+      response.member.push({
+        points: crew.user_crew.points,
+        achievement: crew.user_crew.achievement,
+        role: crew.user_crew.role,
+        crew: {
+          id: crew.id,
+          name: crew.name,
+          description: crew.description,
+          image: crew.image
+        }
+      });
+    }
+  });
+
+  return response;
 };

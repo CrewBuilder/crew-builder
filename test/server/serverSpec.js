@@ -342,4 +342,19 @@ describe('Server and Client Are Active', function() {
       })
       .catch(err => done(err));
   });
+
+  it('Responds with a list of all crews to which a user belongs', function(done) {
+    request(server)
+      .get('/user/crews?id=1')
+      .expect(200)
+      .then(res => {
+        expect(res.body.leader.length).to.equal(1);
+        expect(res.body.member.length).to.equal(14);
+        expect(res.body.leader[0].crew.id).to.equal(1);
+        expect(res.body.leader[0].role).to.equal('leader');
+        expect(res.body.member[0].role).to.equal('member');
+        done();
+      })
+      .catch(err => done(err));
+  });
 });
