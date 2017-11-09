@@ -31,7 +31,7 @@ export default class CrewRewards extends Component {
       this.setState({showModal: false});
       let reward = this.state.selectedReward;
       let email = this.state.email;
-      let availablePoints = this.state.crew.points;
+      let availablePoints = this.props.points;
       let points = this.state.selectedReward.points;
       let user_id = this.props.userId;
       let crew_id = this.state.crew.crew.id;
@@ -42,6 +42,7 @@ export default class CrewRewards extends Component {
             this.setState({
               successVisible: true
             });
+            this.props.spendPoints(points);
           }
         });
       } else {
@@ -52,9 +53,10 @@ export default class CrewRewards extends Component {
     };
 
     this.handleAlertDismiss = () => {
+      this.props.getCurrentCrews(this.props.userId);
       this.setState({
         alertVisible: false,
-        successVisible: false
+        successVisible: false,
       });
     };
   }

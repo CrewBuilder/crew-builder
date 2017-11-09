@@ -59,7 +59,7 @@ export default class CrewSummary extends Component {
             </Col>
             <Col xs={12} sm={12} md={8} lg={4} className="container-fluid">
               <h2>{this.props.currentCrew.crew.name}</h2>
-              <p><Badge>{this.props.currentCrew.role}</Badge><em> You have {this.props.currentCrew.points} points with this crew!</em></p>
+              <p><Badge>{this.props.currentCrew.role}</Badge><em> You have {this.props.points} points with this crew!</em></p>
               <p>{this.props.currentCrew.crew.description}</p>
               <p><strong>{achievementLevel}</strong></p>
             </Col>

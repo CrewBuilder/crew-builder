@@ -14,6 +14,15 @@ export default class CrewView extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      points: this.props.currentCrew.points
+    };
+    this.spendPoints = (value) => {
+      let calcPoints = this.state.points - value;
+      this.setState({
+        points: calcPoints
+      });
+    };
   }
 
   render() {
@@ -26,6 +35,7 @@ export default class CrewView extends Component {
               userId={this.props.user.id}
               currentCrew={this.props.currentCrew}
               getCurrentCrews={this.props.getCurrentCrews}
+              points={this.state.points}
             />
             <Social
               currentCrew={this.props.currentCrew}
@@ -52,6 +62,10 @@ export default class CrewView extends Component {
               userId={this.props.user.id}
               currentCrewRewards={this.props.currentCrewRewards}
               currentCrew={this.props.currentCrew}
+              setCurrentCrewMember={this.props.setCurrentCrewMember}
+              getCurrentCrews={this.props.getCurrentCrews}
+              spendPoints={this.spendPoints}
+              points={this.state.points}
             />
           </Panel>
         </PanelGroup>
