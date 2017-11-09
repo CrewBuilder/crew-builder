@@ -34,7 +34,7 @@ export default class MemberRequests extends Component {
                   <Button bsStyle="danger" onClick={() => this.selectTaskCompleted(task)}><Glyphicon glyph="remove" /> Reject</Button>
                 </ButtonGroup>
               </div>
-              <div className="member-request-text">{task.name}</div>
+              <div className="member-request-text">CrewMember: {task.user_tasks[0].user.facebook.DISPLAY_NAME} reqested completion of {task.name}</div>
             </ListGroupItem>
           )) }
         </ListGroup>
