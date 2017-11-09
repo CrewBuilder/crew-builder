@@ -8,6 +8,7 @@ export default class TasksAvailable extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       selectedTask: props.currentCrewTasks,
       showModal: false,
@@ -42,7 +43,6 @@ export default class TasksAvailable extends Component {
   }
 
   render() {
-
     return (
       <div>
         <div>
