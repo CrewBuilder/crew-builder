@@ -9,6 +9,7 @@ import 'moment/locale/en-ca';
 export default class ManageTasks extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showModal: false,
       displayModal: false,
