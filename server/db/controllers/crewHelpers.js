@@ -1,68 +1,72 @@
 const db = require('../index.js');
 
 // Allows crew creation
-exports.postCrew = (crewData, userId, cb) => {
-  //this query has been tested OK
-  let user = userId;
-  db.crew.create(crewData)
-    .then(crew => {
-      return crew.id;
-    })
-    .then(crew_id => {
-      db.user_crew.create({
-        crew_id: crew_id,
-        user_id: user,
-        points: 0,
-        achievement: 'none',
-        role: 'leader'
-      })
-        .then(crew => {
-          cb(null, crew);
+module.exports = {
+  postCrew(req, res) {
+    let crew = {
+      name: req.body.name,
+      description: req.body.description,
+      image: req.body.image
+    };
+    let user_id = req.body.user_id;
+    let newCrew;
+    db.crew
+      .create(crew)
+      .then(crew => {
+        newCrew = crew;
+        return db.user_crew.create({
+          crew_id: crew.id,
+          user_id: user_id,
+          role: 'leader'
         });
-    })
-    .catch(err => {
-      return cb(err, null);
-    });
-};
+      })
+      .then(crew => {
+        res.status(200).send(newCrew);
+      })
+      .catch(err => {
+        res.status(500).send(err);
+      });
+  },
 
-exports.searchCrews = (qs) => {
-  if (qs) {
-    qs = `%${qs}%`;
-    return db.crew.findAll({
-      where: {
-        $or: {
-          name: {
-            $iLike: qs
-          },
-          description: {
-            $iLike: qs
+  searchCrews(qs) {
+    if (qs) {
+      qs = `%${qs}%`;
+      return db.crew.findAll({
+        where: {
+          $or: {
+            name: {
+              $iLike: qs
+            },
+            description: {
+              $iLike: qs
+            }
           }
         }
-      }
-    });
-  } else {
-    return db.crew.findAll();
+      });
+    } else {
+      return db.crew.findAll();
+    }
+  },
+
+  editCrew(req, res) {
+    return db.crew
+      .update(req.body, {
+        where: {
+          id: req.query.crew_id
+        }
+      })
+      .then(updated => res.status(200).send(updated))
+      .catch(err => res.status(500).send(err));
+  },
+
+  deleteCrew(req, res) {
+    db.crew
+      .destroy({
+        where: {
+          id: req.query.crew_id
+        }
+      })
+      .then(destroyed => res.sendStatus(202))
+      .catch(err => res.status(500).send(err));
   }
-};
-
-exports.editCrew = (req, res) => {
-  return db.crew
-    .update(req.body, {
-      where: {
-        id: req.query.crew_id
-      }
-    })
-    .then(updated => res.status(200).send(updated))
-    .catch(err => res.status(500).send(err));
-};
-
-exports.deleteCrew = (req, res) => {
-  db.crew
-    .destroy({
-      where: {
-        id: req.query.crew_id
-      }
-    })
-    .then(destroyed => res.sendStatus(202))
-    .catch(err => res.status(500).send(err));
 };
