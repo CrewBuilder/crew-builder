@@ -357,4 +357,16 @@ describe('Server and Client Are Active', function() {
       })
       .catch(err => done(err));
   });
+
+  it('Responds with a list of tasks for a user', function(done) {
+    request(server)
+      .get('/user/tasks?id=2&crew_id=3')
+      .expect(200)
+      .then(res => {
+        expect(res.body.tasksInProgress.length).to.equal(1);
+        expect(res.body.tasksAvailable.length).to.equal(3);
+        done();
+      })
+      .catch(err => done(err));
+  });
 });

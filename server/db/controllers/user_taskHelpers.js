@@ -1,9 +1,13 @@
 const db = require('../index.js');
 
-exports.getTasksByUserCrew = (userId, crew_id, cb) => {
+exports.getTasksByUserCrew = (req, res) => {
+  let id = req.query.id;
+  let crew_id = req.query.crew_id;
   let tasksInProgress = [];
   db.user.findOne({
-    where: {id: userId},
+    where: {
+      id: id
+    },
     include: [{
       model: db.task,
       where: {crew_id: crew_id},
@@ -28,13 +32,14 @@ exports.getTasksByUserCrew = (userId, crew_id, cb) => {
       });
     })
     .then(tasks => {
-      return cb(null, {
+      res.status(200).send({
         tasksInProgress: tasksInProgress,
         tasksAvailable: tasks
       });
     })
     .catch(err => {
-      return cb(err, null);
+      console.log(err);
+      res.status(500).send(err);
     });
 };
 

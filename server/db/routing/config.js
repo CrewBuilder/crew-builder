@@ -33,17 +33,7 @@ const deleteCrew = require('./../controllers/crewHelpers.js').deleteCrew;
 
 router.get('/user/crews', getCrewsByUser);
 
-router.get('/user/tasks', (req, res) => {
-  let id = req.query.id;
-  let crew_id = req.query.crew_id;
-  getTasksByUserCrew(id, crew_id, (err, user) => {
-    if (err) {
-      res.status(401).send(err);
-    } else {
-      res.status(200).send(user);
-    }
-  });
-});
+router.get('/user/tasks', getTasksByUserCrew);
 
 router.get('/crew/tasks', getTasksByCrew);
 
