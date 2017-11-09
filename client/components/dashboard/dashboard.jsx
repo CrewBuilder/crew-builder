@@ -182,8 +182,7 @@ export default class Dashboard extends Component {
 
     // (userTaskId, verified = false, cb)
     this.handleMemberRequestVerification = (userTaskId, verified, user_id, task_id, points, crew_id) => {
-      let verifyTask = verified ? true : null;
-      UpdateTask(userTaskId, verifyTask, user_id, task_id, points, crew_id, (err, res) => {
+      UpdateTask(userTaskId, verified, user_id, task_id, points, crew_id, (err, res) => {
         if (err) {
           console.log('ERROR:', err);
         } else {
