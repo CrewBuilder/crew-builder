@@ -8,6 +8,7 @@ import { DeleteLeaderCrew } from '../../../utils/requests.jsx';
 export default class crewLeaderSummary extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showModal: false,
       editForm: false,
@@ -51,6 +52,7 @@ export default class crewLeaderSummary extends Component {
 
     this.handleConfirmDeleteCrew = () => {
       let crew_id = this.props.currentCrew.crew.id;
+
       DeleteLeaderCrew(crew_id, (err, data) => {
         if (err) {
           console.log('Error', err);
@@ -61,7 +63,6 @@ export default class crewLeaderSummary extends Component {
           this.props.getCurrentCrews(this.props.user.id);
         }
       });
-
     };
   }
 
