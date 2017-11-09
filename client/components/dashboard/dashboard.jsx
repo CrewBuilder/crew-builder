@@ -28,7 +28,7 @@ export default class Dashboard extends Component {
     this.crewSearch = (query) => {
       GetAllCrews(query, (err, res) => {
         if (err) {
-          console.log('ERROR:', err);
+          console.log('Error:', err);
         }
 
         this.setState({
@@ -48,23 +48,20 @@ export default class Dashboard extends Component {
       let leaderTasks = [];
       GetCrewRewards(crew.crew.id, (err, resCrewRewards) => {
         if (err) {
-          console.log('Error', err);
+          console.log('Error:', err);
         } else {
-          // console.log('RESCREWTASKS', resCrewRewards);
           rewards = resCrewRewards;
         }
         GetCrewTasks(crew.crew.id, (err, resCrewTasks) => {
           if (err) {
-            console.log('ERROR:', err);
+            console.log('Error:', err);
           } else {
-            console.log('RESCREWTASKS', resCrewTasks);
             crewTasks = resCrewTasks;
           }
           GetLeaderTasks(crew.crew.id, (err, resLeadTasks) => {
             if (err) {
-              console.log('ERROR:', err);
+              console.log('Error:', err);
             } else {
-              console.log('RESLEADTASKS', resLeadTasks);
               leaderTasks = resLeadTasks;
             }
             this.setState({
@@ -86,16 +83,14 @@ export default class Dashboard extends Component {
       let crewTasks = [];
       GetCrewRewards(crew.crew.id, (err, rewards) => {
         if (err) {
-          console.log('Error', err);
+          console.log('Error:', err);
         } else {
           crewRewards = rewards;
-          // console.log('rewards',crewRewards);
         }
         GetUserTasks(this.state.user.id, crew.crew.id, (err, tasks) => {
           if (err) {
-            console.log('ERROR:', err);
+            console.log('Error:', err);
           } else {
-            // console.log('Tasks', tasks);
             userTasks = tasks.tasksInProgress;
             crewTasks = tasks.tasksAvailable;
           }
@@ -104,7 +99,6 @@ export default class Dashboard extends Component {
             currentCrewTasks: crewTasks,
             currentCrewRewards: rewards
           });
-          // console.log('State', this.state);
         });
       });
     };
@@ -112,7 +106,7 @@ export default class Dashboard extends Component {
     this.getCurrentRewards = (crew_id) => {
       GetCrewRewards(crew_id, (err, res) => {
         if (err) {
-          console.log('ERROR:', err);
+          console.log('Error:', err);
           this.setState({
             currentCrewRewards: []
           });
@@ -127,7 +121,7 @@ export default class Dashboard extends Component {
     this.getCurrentCrews = (userId) => {
       GetUserCrews(userId, (err, res) => {
         if (err) {
-          console.log('ERROR:', err);
+          console.log('Error:', err);
           this.setState({
             userLeaderCrews: [],
             userMemberCrews: []
@@ -144,7 +138,7 @@ export default class Dashboard extends Component {
     this.getUserTasks = (userId, crew_id) => {
       GetUserTasks(userId, crew_id, (err, res) => {
         if (err) {
-          console.log('ERROR:', err);
+          console.log('Error:', err);
         }
 
         let userTasks, currentCrewTasks;
@@ -165,7 +159,7 @@ export default class Dashboard extends Component {
     this.getCrewTasks = (crew_id) => {
       GetCrewTasks(crew_id, (err, res) => {
         if (err) {
-          console.log('ERROR:', err);
+          console.log('Error:', err);
           this.setState({
             currentCrewTasks: []
           });
@@ -181,9 +175,8 @@ export default class Dashboard extends Component {
     this.handleMemberRequestVerification = (userTaskId, verified, user_id, task_id, points, crew_id) => {
       UpdateTask(userTaskId, verified, user_id, task_id, points, crew_id, (err, res) => {
         if (err) {
-          console.log('ERROR:', err);
+          console.log('Error:', err);
         } else {
-          console.log('OK HANDLED handleMemberRequestVerification');
           this.setCurrentCrewLeader(this.state.currentCrew);
         }
       });
@@ -198,7 +191,6 @@ export default class Dashboard extends Component {
       .then((user) => {
         if (user === false) {
           this.props.changeLoginStatus();
-          console.log('NOT LOGGED IN');
         } else {
           this.setState({
             user: user
@@ -212,7 +204,7 @@ export default class Dashboard extends Component {
 
         GetUserCrews(id, (err, res) => {
           if (err) {
-            console.log('ERROR:', err);
+            console.log('Error:', err);
           } else {
             this.setState({
               userLeaderCrews: res.leader,
@@ -221,7 +213,7 @@ export default class Dashboard extends Component {
           }
         });
       });
-    }
+  }
 
 
   render() {
