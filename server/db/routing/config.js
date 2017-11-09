@@ -56,16 +56,7 @@ router.get('/user/tasks', (req, res) => {
 
 router.get('/crew/tasks', getTasksByCrew);
 
-router.get('/crews', (req, res) => {
-  qs = req.query.qs || null;
-  searchCrews(qs)
-    .then(crews => {
-      res.status(200).send(crews);
-    })
-    .catch(err => {
-      res.status(401).send(err);
-    });
-});
+router.get('/crews', searchCrews);
 
 router.get('/leader/members', (req, res) => {
   let crew_id = req.query.crew_id;

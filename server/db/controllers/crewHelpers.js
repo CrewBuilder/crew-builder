@@ -28,23 +28,30 @@ module.exports = {
       });
   },
 
-  searchCrews(qs) {
+  searchCrews(req, res) {
+    qs = req.query.qs || null;
     if (qs) {
       qs = `%${qs}%`;
-      return db.crew.findAll({
-        where: {
-          $or: {
-            name: {
-              $iLike: qs
-            },
-            description: {
-              $iLike: qs
+      return db.crew
+        .findAll({
+          where: {
+            $or: {
+              name: {
+                $iLike: qs
+              },
+              description: {
+                $iLike: qs
+              }
             }
           }
-        }
-      });
+        })
+        .then(found => res.status(200).send(found))
+        .catch(err => res.status(500).send(err));
     } else {
-      return db.crew.findAll();
+      return db.crew
+        .findAll()
+        .then(found => res.status(200).send(found))
+        .catch(err => res.status(500).send(err));
     }
   },
 
