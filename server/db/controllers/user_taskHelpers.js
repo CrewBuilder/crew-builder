@@ -52,7 +52,7 @@ exports.postUserTask = (userId, taskId, cb) => {
 };
 
 exports.updateTask = (req, res) => {
-  let points, newPoints, updatedUserCrew;
+  let newPoints, updatedUserCrew;
   db.user_task
     .findOne({
       where: {
@@ -77,7 +77,7 @@ exports.updateTask = (req, res) => {
     })
     .then(userCrew => {
       updatedUserCrew = userCrew;
-      newPoints = req.body.verified ? userCrew.points + req.body.points : userCrew.points; // will only add points when being verified
+      newPoints = req.body.verified ? userCrew.points + req.body.points * 1 : userCrew.points; // will only add points when being verified
       return userCrew.update({
         points: newPoints
       });
