@@ -39,16 +39,7 @@ router.get('/crew/tasks', getTasksByCrew);
 
 router.get('/crews', searchCrews);
 
-router.get('/leader/members', (req, res) => {
-  let crew_id = req.query.crew_id;
-  getCrewMembers(crew_id, (err, members) => {
-    if (err) {
-      res.status(401).send('Could not claim task');
-    } else {
-      res.status(200).send(members);
-    }
-  });
-});
+router.get('/leader/members', getCrewMembers);
 
 router.get('/leader/tasks', getUnverifiedTasks);
 

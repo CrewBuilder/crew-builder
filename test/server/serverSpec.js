@@ -396,4 +396,16 @@ describe('Server and Client Are Active', function() {
       })
       .catch(err => done(err));
   });
+
+  it('Responds with a list of crew members', function(done) {
+    request(server)
+      .get('/leader/members?crew_id=1')
+      .expect(200)
+      .then(res => {
+        expect(res.body.length).to.equal(14);
+        expect(res.body[0].user).to.exist;
+        done();
+      })
+      .catch(err => done(err));
+  });
 });

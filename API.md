@@ -118,7 +118,7 @@
   image: "http://www.celebratewithstringsattached.com/uploads/3/5/4/6/3546135/1090860.jpg"
 }]
 
-###'/leader/members?crewId={CREW_ID}'
+###'/leader/members?crew_id={CREW_ID}'
 ###Leader gets a list of Users
 ####Response
 [
@@ -131,6 +131,7 @@
     role: "leader",
     updatedAt: "2017-10-27T23:58:30.663Z",
     user_id: 1
+    user: {user data}
   }
 ]
 

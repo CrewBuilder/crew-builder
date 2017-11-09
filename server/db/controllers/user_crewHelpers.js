@@ -34,18 +34,20 @@ exports.postUserCrew = (userId, crew_id, cb) => {
     });
 };
 
-exports.getCrewMembers = (crew_id, cb) => {
-  db.user_crew.findAll({
-    where: {
-      crew_id: crew_id
-    }
-  })
-    .then(members => {
-      cb(null, members);
+exports.getCrewMembers = (req, res) => {
+  let crew_id = req.query.crew_id;
+  return db.user_crew
+    .findAll({
+      where: {
+        crew_id: crew_id,
+        role: 'member'
+      },
+      include: [{
+        model: db.user
+      }]
     })
-    .catch(err => {
-      cb(err, null);
-    });
+    .then(members => res.status(200).send(members))
+    .catch(err => res.status(500).send(err));
 };
 
 exports.leaveCrew = (userId, crew_id) => {
