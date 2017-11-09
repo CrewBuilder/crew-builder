@@ -7,14 +7,17 @@ export default class CrewSummary extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       showLeave: false
     };
+
     this.leaveCrewHandler = () => {
       this.setState({
         showLeave: true
       });
     };
+
     this.handleAlertDismiss = () => {
       this.setState({
         showLeave: false
@@ -35,7 +38,6 @@ export default class CrewSummary extends Component {
           this.props.getCurrentCrews(this.props.user.id);
         }
       });
-
     };
   }
 
