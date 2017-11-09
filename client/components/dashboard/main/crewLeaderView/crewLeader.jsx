@@ -28,12 +28,10 @@ export default class CrewLeaderView extends Component {
         }
       });
     };
-
   }
 
 
   render() {
-
     return (
       <div className="cover-background">
         <PanelGroup>

@@ -8,6 +8,7 @@ import { DeleteLeaderCrew } from '../../../utils/requests.jsx';
 export default class crewLeaderSummary extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showModal: false,
       editForm: false,
@@ -51,6 +52,7 @@ export default class crewLeaderSummary extends Component {
 
     this.handleConfirmDeleteCrew = () => {
       let crew_id = this.props.currentCrew.crew.id;
+
       DeleteLeaderCrew(crew_id, (err, data) => {
         if (err) {
           console.log('Error', err);
@@ -61,7 +63,6 @@ export default class crewLeaderSummary extends Component {
           this.props.getCurrentCrews(this.props.user.id);
         }
       });
-
     };
   }
 
@@ -143,15 +144,3 @@ export default class crewLeaderSummary extends Component {
     }
   }
 }
-
-
-// when you click on list members it should pop over a model showing all the current members
-
-// when you click on a edit profile it should popover a model, which is actually our createcrew form to update and change
-
-
-// <p onClick={() => this.setState({showModal: true})}>list members</p>
-// <p onClick={this.open}>Edit crew profile</p>
-
-
-// <Button onClick={() => this.setState({showModal: true})}>Show Members</Button>

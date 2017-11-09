@@ -10,6 +10,7 @@ export default class TasksInProgress extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       focusTask: props.userTasks,
       focusUserTask: props.userTasks,
@@ -41,9 +42,6 @@ export default class TasksInProgress extends Component {
       });
       this.closeModal();
     };
-
-
-
   }
 
   render() {
@@ -53,8 +51,10 @@ export default class TasksInProgress extends Component {
           {this.props.userTasks.map((task, i) => {
             return (
               <ListGroupItem onClick={() => this.openModal(task)} key={i}>{task.name}
-                {(task.user_task.completed === true && task.user_task.verified === false) ? <Label bsStyle="warning" className="task-status-labels">Waiting approval...</Label> : ''}
-                {(task.user_task.completed === true && task.user_task.verified === true) ? <Label bsStyle="success" className="task-status-labels">Task Completed</Label> : ''}
+                {(task.user_task.completed === true && task.user_task.verified === false) ?
+                  <Label bsStyle="warning" className="task-status-labels">Waiting approval...</Label> : ''}
+                {(task.user_task.completed === true && task.user_task.verified === true) ?
+                  <Label bsStyle="success" className="task-status-labels">Task Completed</Label> : ''}
               </ListGroupItem>
             );
           })}
@@ -70,8 +70,7 @@ export default class TasksInProgress extends Component {
                 <h4>Expires: {this.state.focusTaskExpiry}</h4>
               </div>
               <h4>Completed? {(this.state.focusUserTask.completed === true) ? <span>Yes</span> :
-                <span>No <Button onClick={(e) => this.confirmTask(e)} >Click to request completion</Button></span>
-              }
+                <span>No <Button onClick={(e) => this.confirmTask(e)} >Click to request completion</Button></span>}
               </h4>
             </div>
             <h4>Description</h4>
@@ -81,8 +80,6 @@ export default class TasksInProgress extends Component {
             <Button onClick={this.closeModal}>Close</Button>
           </Modal.Footer>
         </Modal>
-
-
       </div>
     );
   }

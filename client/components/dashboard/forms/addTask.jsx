@@ -16,6 +16,7 @@ var valid = (current) => {
 export default class addTask extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       name : this.props.name || '',
       description: this.props.description || '',
@@ -52,6 +53,7 @@ export default class addTask extends Component {
         limit: limit,
         expiry: this.state.expiry
       };
+
       PostTask(obj, this.props.currentCrew.crew.id, (err, data)=> {
         if (err) {
           console.log(err);

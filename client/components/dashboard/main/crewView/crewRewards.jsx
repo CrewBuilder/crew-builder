@@ -8,6 +8,7 @@ export default class CrewRewards extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       selectedReward: props.currentCrewRewards,
       showModal: false,

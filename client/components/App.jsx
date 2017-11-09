@@ -10,6 +10,7 @@ import { Init, CheckLogin, GetCurrentUser, Login, Logout } from './utils/auth.js
 export default class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isLoggedIn: false
     };
@@ -55,7 +56,6 @@ export default class App extends Component {
   }
 
   render() {
-
     if (!this.state.isLoggedIn || !window.localStorage.getItem('id_token')) {
       return (
         <div className="fadeIn-landing">

@@ -20,6 +20,7 @@ export default class Social extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       shareUrl: 'https://crew-builder.herokuapp.com/'
     };

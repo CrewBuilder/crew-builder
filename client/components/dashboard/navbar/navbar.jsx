@@ -8,6 +8,7 @@ export default class NavBar extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       searchQuery: ''
     };
@@ -39,7 +40,6 @@ export default class NavBar extends Component {
     this.submitBrowse = () => {
       this.props.crewSearch('');
     };
-
   }
 
   render() {

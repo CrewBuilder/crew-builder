@@ -4,6 +4,7 @@ import {Jumbotron, Button, Carousel, Modal} from 'react-bootstrap';
 export default class Instructions extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showModal: false
     }
@@ -12,13 +13,13 @@ export default class Instructions extends Component {
       this.setState({
         showModal: true
       })
-    }
+    };
 
     this.close = () => {
       this.setState({
         showModal: false
       })
-    }
+    };
   }
 
   render() {

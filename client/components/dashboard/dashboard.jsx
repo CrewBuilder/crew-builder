@@ -208,9 +208,11 @@ export default class Dashboard extends Component {
           });
           return user;
         }
-      }).then((userId) => {
+      })
+      .then((userId) => {
         // get user crews using userId.id
         let id = userId.id;
+
         GetUserCrews(id, (err, res) => {
           if (err) {
             console.log('ERROR:', err);
@@ -222,7 +224,7 @@ export default class Dashboard extends Component {
           }
         });
       });
-  }
+    }
 
 
   render() {
