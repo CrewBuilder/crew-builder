@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { NavLink } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, FormGroup, FormControl, Button, NavItem, Nav, NavDropdown, MenuItem, Glyphicon } from 'react-bootstrap';
+import { Tab, Col, Navbar, FormGroup, FormControl, Button, NavItem, Nav, NavDropdown, MenuItem, Glyphicon } from 'react-bootstrap';
 
 export default class NavBar extends Component {
 
@@ -44,7 +44,7 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <div>
+      <div className="navigation">
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
@@ -70,12 +70,14 @@ export default class NavBar extends Component {
                 </NavLink>
               </form>
             </Navbar.Form>
+            <Col smHidden={true} mdHidden={true} lgHidden={true}>
+            <Tab.Container id="top-tabs-example" defaultActiveKey={1}>
             <Nav pullRight>
               <NavDropdown eventKey={1} title="Crews I Follow" id="dropdown" >
                 {this.props.userMemberCrews.map((container, i) => {
                   return (
                     <MenuItem eventKey={i} key={i}>
-                      <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={1 + i/10} onClick={() => this.props.setCurrentCrewMember(container)}>
+                      <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={() => this.props.setCurrentCrewMember(container)}>
                         <ul>
                           <NavItem componentClass="span" activeKey={container.crew.id}
                             value={container.crew.name}
@@ -94,6 +96,8 @@ export default class NavBar extends Component {
                 <MenuItem eventKey={2.1} onClick={this.handleClickLogout} className="navbar-logout">Logout <Glyphicon className="logout-glyph" glyph="off" /></MenuItem>
               </NavDropdown>
             </Nav>
+            </Tab.Container>
+            </Col>
           </Navbar.Collapse>
         </Navbar>
       </div>

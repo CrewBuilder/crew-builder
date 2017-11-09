@@ -78,6 +78,7 @@ export default class Dashboard extends Component {
     };
 
     this.setCurrentCrewMember = (crew) => {
+      console.log('CREW', crew);
       this.setState({
         currentCrew: crew
       });
@@ -244,7 +245,7 @@ export default class Dashboard extends Component {
           />
           <Grid>
             <Row className="show-grid clearfix">
-              <Col xs={10} sm={2} md={2} lg={3} className="outlineBox sidebar-container">
+              <Col xsHidden={true} sm={2} md={2} lg={3} className="outlineBox sidebar-container">
                 <Sidebar
                   user={this.state.user}
                   userLeaderCrews={this.state.userLeaderCrews}
