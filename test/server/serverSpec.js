@@ -150,28 +150,6 @@ describe('Server and Client Are Active', function() {
       .catch(err => done(err));
   });
 
-  it('Updates crew information', function(done) {
-    request(server)
-      .put('/crew?crew_id=4')
-      .send({
-        name: 'Changed name'
-      })
-      .expect(200)
-      .then(res => {
-        return db.crew
-          .findOne({
-            where: {
-              id: 4
-            }
-          });
-      })
-      .then(found => {
-        expect(found.name).to.equal('Changed name');
-        done();
-      })
-      .catch(err => done(err));
-  });
-
   it('Deletes a crew', function(done) {
     request(server)
       .delete('/crew?crew_id=4')
@@ -332,6 +310,33 @@ describe('Server and Client Are Active', function() {
       .then(found => {
         expect(found.completed).to.be.true;
         expect(found.verified).to.be.true;
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Edits crew information', function(done) {
+    let body = {
+      name: 'New Crew 1 name',
+      description: 'New crew 1 description',
+      image: 'new crew 1 image',
+    };
+    request(server)
+      .put('/crew?crew_id=1')
+      .send(body)
+      .expect(200)
+      .then(res => {
+        return db.crew
+          .findOne({
+            where: {
+              id: 1
+            }
+          });
+      })
+      .then(found => {
+        expect(found.name).to.equal(body.name);
+        expect(found.description).to.equal(body.description);
+        expect(found.image).to.equal(body.image);
         done();
       })
       .catch(err => done(err));

@@ -57,13 +57,19 @@ module.exports = {
 
   editCrew(req, res) {
     return db.crew
-      .update(req.body, {
+      .findOne({
         where: {
           id: req.query.crew_id
         }
       })
+      .then(found => {
+        return found.update(req.body);
+      })
       .then(updated => res.status(200).send(updated))
-      .catch(err => res.status(500).send(err));
+      .catch(err => {
+        console.log(err);
+        res.status(500).send(err);
+      });
   },
 
   deleteCrew(req, res) {
