@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { NavLink } from 'react-router-dom';
-
+import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, FormGroup, FormControl, Button, NavItem, Nav, NavDropdown, MenuItem, Glyphicon } from 'react-bootstrap';
 
 export default class NavBar extends Component {
@@ -71,9 +71,27 @@ export default class NavBar extends Component {
               </form>
             </Navbar.Form>
             <Nav pullRight>
-              <NavDropdown eventKey={1} title={<img className="avatar" src={this.props.user.facebook.IMAGE_URL} height="30" width="30"/>} id="dropdown">
+              <NavDropdown eventKey={1} title="Crews I Follow" id="dropdown" >
+                {this.props.userMemberCrews.map((container, i) => {
+                  return (
+                    <MenuItem eventKey={i} key={i}>
+                      <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={1 + i/10} onClick={() => this.props.setCurrentCrewMember(container)}>
+                        <ul>
+                          <NavItem componentClass="span" activeKey={container.crew.id}
+                            value={container.crew.name}
+                            key={container.crew.id}
+                            className="sidebar-crew-name">
+                            {container.crew.name}
+                          </NavItem>
+                        </ul>
+                      </LinkContainer>
+                    </MenuItem>
+                  );
+                })}
+              </NavDropdown>
+              <NavDropdown eventKey={2} title={<img className="avatar" src={this.props.user.facebook.IMAGE_URL} height="30" width="30"/>} id="dropdown">
                 <small> Logged in as {this.props.user.facebook.DISPLAY_NAME}</small>
-                <MenuItem eventKey={1.1} onClick={this.handleClickLogout} className="navbar-logout">Logout <Glyphicon className="logout-glyph" glyph="off" /></MenuItem>
+                <MenuItem eventKey={2.1} onClick={this.handleClickLogout} className="navbar-logout">Logout <Glyphicon className="logout-glyph" glyph="off" /></MenuItem>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

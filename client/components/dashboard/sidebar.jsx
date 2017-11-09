@@ -60,6 +60,7 @@ export default class Sidebar extends Component {
               </span>
             </Col>
           </Row>
+
         </Tab.Container>
       </div>
     );
