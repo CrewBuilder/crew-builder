@@ -3,11 +3,11 @@ require('dotenv').config();
 const expect = require('chai').expect;
 const seed = require('../../../server/db/seed.js');
 const db = require('../../../server/db/index.js');
-const crewHelpers = require('../../../server/db/utils/crewHelpers.js');
-const taskHelpers = require('../../../server/db/utils/taskHelpers.js');
-const user_crewHelpers = require('../../../server/db/utils/user_crewHelpers.js');
-const user_taskHelpers = require('../../../server/db/utils/user_taskHelpers.js');
-const userHelpers = require('../../../server/db/utils/userHelpers.js');
+const crewHelpers = require('../../../server/db/controllers/crewHelpers.js');
+const taskHelpers = require('../../../server/db/controllers/taskHelpers.js');
+const user_crewHelpers = require('../../../server/db/controllers/user_crewHelpers.js');
+const user_taskHelpers = require('../../../server/db/controllers/user_taskHelpers.js');
+const userHelpers = require('../../../server/db/controllers/userHelpers.js');
 
 xdescribe('Postgres crewbuilder db', function() {
 

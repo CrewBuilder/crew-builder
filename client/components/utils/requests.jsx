@@ -135,13 +135,13 @@ module.exports = {
   },
 
   // Lets user create a Crew for which they will serve as leader
-  PostCrew: (crew, userId, cb) => {
+  PostCrew: (crew, user_id, cb) => {
     let route = '/crew/';
     let body = {
       name: crew.name,
       description: crew.description,
       image: crew.image,
-      userId: userId
+      user_id: user_id
     };
     let options = postOptions;
     options.body = JSON.stringify(body);

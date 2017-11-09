@@ -1,31 +1,31 @@
 const express = require('express');
 const router = express.Router();
 
-const getCrewsByUser = require('./../utils/user_crewHelpers.js').getCrewsByUser;
-const getTasksByUserCrew = require('./../utils/user_taskHelpers.js').getTasksByUserCrew;
-const getTasksByCrew = require('./../utils/taskHelpers.js').getTasksByCrew;
-const searchCrews = require('./../utils/crewHelpers.js').searchCrews;
-const getCrewMembers = require('./../utils/user_crewHelpers.js').getCrewMembers;
-const getUnverifiedTasks = require('./../utils/taskHelpers.js').getUnverifiedTasks;
-const getRewardsByCrew = require('./../utils/rewardHelpers.js').getRewardsByCrew;
+const getCrewsByUser = require('./../controllers/user_crewHelpers.js').getCrewsByUser;
+const getTasksByUserCrew = require('./../controllers/user_taskHelpers.js').getTasksByUserCrew;
+const getTasksByCrew = require('./../controllers/taskHelpers.js').getTasksByCrew;
+const searchCrews = require('./../controllers/crewHelpers.js').searchCrews;
+const getCrewMembers = require('./../controllers/user_crewHelpers.js').getCrewMembers;
+const getUnverifiedTasks = require('./../controllers/taskHelpers.js').getUnverifiedTasks;
+const getRewardsByCrew = require('./../controllers/rewardHelpers.js').getRewardsByCrew;
 
-const postTask = require('./../utils/taskHelpers.js').postTask;
-const postCrew = require('./../utils/crewHelpers.js').postCrew;
-const postUserCrew = require('./../utils/user_crewHelpers.js').postUserCrew;
-const postUserTask = require('./../utils/user_taskHelpers.js').postUserTask;
-const postReward = require('./../utils/rewardHelpers.js').createReward;
+const postTask = require('./../controllers/taskHelpers.js').postTask;
+const postCrew = require('./../controllers/crewHelpers.js').postCrew;
+const postUserCrew = require('./../controllers/user_crewHelpers.js').postUserCrew;
+const postUserTask = require('./../controllers/user_taskHelpers.js').postUserTask;
+const postReward = require('./../controllers/rewardHelpers.js').createReward;
 
-const updateTask = require('./../utils/user_taskHelpers.js').updateTask;
-const editCrew = require('./../utils/crewHelpers.js').editCrew;
-const claimReward = require('./../utils/user_crewHelpers.js').claimReward;
-const sendReward = require('../utils/nodemailerHelpers.js').sendReward;
+const updateTask = require('./../controllers/user_taskHelpers.js').updateTask;
+const editCrew = require('./../controllers/crewHelpers.js').editCrew;
+const claimReward = require('./../controllers/user_crewHelpers.js').claimReward;
+const sendReward = require('../controllers/nodemailerHelpers.js').sendReward;
 
-const leaveCrew = require('./../utils/user_crewHelpers').leaveCrew;
-const deleteTask = require('./../utils/taskHelpers').deleteTask;
-const deleteReward = require('./../utils/rewardHelpers.js').destroyReward;
-const deleteCrew = require('./../utils/crewHelpers.js').deleteCrew;
+const leaveCrew = require('./../controllers/user_crewHelpers').leaveCrew;
+const deleteTask = require('./../controllers/taskHelpers').deleteTask;
+const deleteReward = require('./../controllers/rewardHelpers.js').destroyReward;
+const deleteCrew = require('./../controllers/crewHelpers.js').deleteCrew;
 
-// router.use(require('../utils/authHelpers').verifyToken);
+// router.use(require('../controllers/authHelpers').verifyToken);
 
 /**************************************************************/
 /************************ GET REQUESTS ************************/
@@ -103,21 +103,7 @@ router.post('/task', (req, res) => {
   });
 });
 
-router.post('/crew', (req, res) => {
-  let crew = {
-    name: req.body.name,
-    description: req.body.description,
-    image: req.body.image
-  };
-  let userId = req.body.userId;
-  postCrew(crew, userId, (err, crew) => {
-    if (err) {
-      res.status(401).send('Could not post crew');
-    } else {
-      res.status(200).send(crew);
-    }
-  });
-});
+router.post('/crew', postCrew);
 
 router.post('/user/crews', (req, res) => {
   let userId = req.body.userId;

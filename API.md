@@ -199,9 +199,7 @@
   name: 'Les Maurice',
   description: 'Milwaukee rock reggae band',
   image: 'http://www.les-maurice.com/image.jpg',
-  id: 31,
-  createdAt: "2017-10-28T03:13:05.289Z",
-  updatedAt: "2017-10-28T03:13:05.289Z"
+  user_id: 3
 }
 
 ###'/task'
