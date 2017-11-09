@@ -30,6 +30,7 @@ export default class Main extends Component {
               userTasks={this.props.userTasks}
               getCurrentRewards={this.props.getCurrentRewards}
               currentCrewRewards={this.props.currentCrewRewards}
+              setCurrentCrewMember={this.props.setCurrentCrewMember}
             />
           )}/>
           <Route path="/dashboard/manage" render={(props) => (

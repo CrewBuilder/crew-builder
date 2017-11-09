@@ -1,7 +1,7 @@
 // This component renders a list of rewards to be claimed
 import React, { Component } from 'react';
 import { Alert, Modal, ListGroup, ListGroupItem, Button, Form, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
-import { claimReward } from '../../../utils/requests.jsx';
+import { ClaimReward } from '../../../utils/requests.jsx';
 
 
 export default class CrewRewards extends Component {
@@ -31,17 +31,18 @@ export default class CrewRewards extends Component {
       this.setState({showModal: false});
       let reward = this.state.selectedReward;
       let email = this.state.email;
-      let availablePoints = this.state.crew.points;
+      let availablePoints = this.props.points;
       let points = this.state.selectedReward.points;
       let user_id = this.props.userId;
       let crew_id = this.state.crew.crew.id;
       let limit = this.state.selectedReward.limit;
       if (availablePoints >= points && limit > 0) {
-        ClaimReward(reward, email, user_id, crew_id, points, (err, res) => {
+        ClaimReward(reward, email, user_id, crew_id, (err, res) => {
           if (res) {
             this.setState({
               successVisible: true
             });
+            this.props.spendPoints(points);
           }
         });
       } else {
@@ -52,9 +53,10 @@ export default class CrewRewards extends Component {
     };
 
     this.handleAlertDismiss = () => {
+      this.props.getCurrentCrews(this.props.userId);
       this.setState({
         alertVisible: false,
-        successVisible: false
+        successVisible: false,
       });
     };
   }
