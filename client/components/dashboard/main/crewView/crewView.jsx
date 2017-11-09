@@ -14,9 +14,11 @@ export default class CrewView extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       points: this.props.currentCrew.points
     };
+
     this.spendPoints = (value) => {
       let calcPoints = this.state.points - value;
       this.setState({
