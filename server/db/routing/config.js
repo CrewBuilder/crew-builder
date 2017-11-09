@@ -30,39 +30,19 @@ const deleteCrew = require('./../controllers/crewHelpers.js').deleteCrew;
 /**************************************************************/
 /************************ GET REQUESTS ************************/
 /**************************************************************/
-
 router.get('/user/crews', getCrewsByUser);
-
 router.get('/user/tasks', getTasksByUserCrew);
-
 router.get('/crew/tasks', getTasksByCrew);
-
 router.get('/crews', searchCrews);
-
 router.get('/leader/members', getCrewMembers);
-
 router.get('/leader/tasks', getUnverifiedTasks);
-
 router.get('/crew/rewards', getRewardsByCrew);
 /***************************************************************/
 /************************ POST REQUESTS ************************/
 /***************************************************************/
-
 router.post('/task', postTask);
-
 router.post('/crew', postCrew);
-
-router.post('/user/crews', (req, res) => {
-  let userId = req.body.userId;
-  let crew_id = req.body.crew_id;
-  postUserCrew(userId, crew_id, (err, userCrew) => {
-    if (err) {
-      res.status(401).send('Could not join crew');
-    } else {
-      res.status(200).send(userCrew);
-    }
-  });
-});
+router.post('/user/crews', postUserCrew);
 
 router.post('/user/tasks', postUserTask);
 

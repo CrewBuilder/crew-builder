@@ -408,4 +408,34 @@ describe('Server and Client Are Active', function() {
       })
       .catch(err => done(err));
   });
+
+  it('Creates a new row in user_crews when a user joins a crew', function(done) {
+    let crew_id;
+    db.crew
+      .create()
+      .then(created => {
+        crew_id = created.id;
+        return request(server)
+          .post('/user/crews')
+          .send({
+            userId: 1,
+            crew_id: crew_id
+          });
+      })
+      .then(res => {
+        expect(res.status).to.equal(201);
+        return db.user_crew
+          .findOne({
+            where: {
+              user_id: 1,
+              crew_id: crew_id
+            }
+          });
+      })
+      .then(found => {
+        expect(!!found).to.be.true;
+        done();
+      })
+      .catch(err => done(err));
+  });
 });

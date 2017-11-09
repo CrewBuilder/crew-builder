@@ -18,20 +18,18 @@ exports.getCrewsByUser = (req, res) => {
     .catch(err => res.status(500).send(err));
 };
 
-exports.postUserCrew = (userId, crew_id, cb) => {
-  db.user_crew.create({
+exports.postUserCrew = (req, res) => {
+  let userId = req.body.userId;
+  let crew_id = req.body.crew_id;
+  return db.user_crew.create({
     user_id: userId,
     crew_id: crew_id,
     points: 0,
     achievement: 'none',
     role: 'member'
   })
-    .then(userCrew => {
-      cb(null, userCrew);
-    })
-    .catch(err => {
-      cb(err, null);
-    });
+    .then(userCrew => res.status(201).send(userCrew))
+    .catch(err => res.status(500).send(err));
 };
 
 exports.getCrewMembers = (req, res) => {
