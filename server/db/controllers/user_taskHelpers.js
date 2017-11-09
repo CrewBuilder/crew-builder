@@ -51,36 +51,42 @@ exports.postUserTask = (userId, taskId, cb) => {
     });
 };
 
-exports.updateTask = (userTaskId, verified, cb) => {
-  let points, newPoints, userId, crew_id, taskId;
-  db.user_task.findOne({ where: {id: userTaskId}})
-    .then((userTask) => {
-      userTask.completed = true;
-      userTask.verified = verified;
-      return userTask.save();
+exports.updateTask = (req, res) => {
+  let newPoints, updatedUserCrew;
+  db.user_task
+    .findOne({
+      where: {
+        user_id: req.body.user_id,
+        task_id: req.body.task_id
+      }
     })
-    .then(userTask => {
-      userId = userTask.user_id;
-      taskId = userTask.task_id;
-      return db.task.findOne({where: {id: taskId}});
-    })
-    .then(task => {
-      points = task.points;
-      crew_id = task.crew_id;
-      return db.user_crew.findOne({where: {user_id: userId, crew_id: crew_id}});
-    })
-    .then(userCrew => {
-
-      newPoints = verified ? userCrew.points + points : userCrew.points; //will only add points when being verified
-      return db.user_crew.update({points: newPoints}, {where: {user_id: userId, crew_id: crew_id}});
+    .then(found => {
+      return found.update({
+        completed: true,
+        verified: req.body.verified || false
+      });
     })
     .then(updated => {
-      return db.user_crew.findOne({where: {user_id: userId, crew_id: crew_id}});
+      return db.user_crew
+        .findOne({
+          where: {
+            user_id: req.body.user_id,
+            crew_id: req.body.crew_id
+          }
+        });
     })
     .then(userCrew => {
-      cb(null, userCrew);
+      updatedUserCrew = userCrew;
+      newPoints = req.body.verified ? userCrew.points + req.body.points * 1 : userCrew.points; // will only add points when being verified
+      return userCrew.update({
+        points: newPoints
+      });
+    })
+    .then(updated => {
+      res.status(200).send(updatedUserCrew);
     })
     .catch(err => {
-      cb(err, null);
+      console.log(err);
+      res.status(500).send(err);
     });
 };

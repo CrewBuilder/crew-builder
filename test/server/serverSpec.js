@@ -25,6 +25,10 @@ describe('Server and Client Are Active', function() {
       .expect(200, done);
   });
 
+  it('Connects to the database', function() {
+    return db.sequelize.authenticate();
+  });
+
   it('Responds with index.html at root path', function(done) {
     request(server)
       .get('/')
@@ -146,28 +150,6 @@ describe('Server and Client Are Active', function() {
       .catch(err => done(err));
   });
 
-  it('Updates crew information', function(done) {
-    request(server)
-      .put('/crew?crew_id=4')
-      .send({
-        name: 'Changed name'
-      })
-      .expect(200)
-      .then(res => {
-        return db.crew
-          .findOne({
-            where: {
-              id: 4
-            }
-          });
-      })
-      .then(found => {
-        expect(found.name).to.equal('Changed name');
-        done();
-      })
-      .catch(err => done(err));
-  });
-
   it('Deletes a crew', function(done) {
     request(server)
       .delete('/crew?crew_id=4')
@@ -203,6 +185,7 @@ describe('Server and Client Are Active', function() {
   });
 
   it('Sends email and Deletes points for a claimed reward', function(done) {
+    this.timeout(3000);
     db.user_crew
       .update({
         points: 500
@@ -221,13 +204,12 @@ describe('Server and Client Are Active', function() {
             },
             email: 'ipjwilli@gmail.com',
             user_id: 1,
-            crew_id: 2
+            crew_id: 2,
+            crew_name: 'Iona\'s Crew'
           });
       })
       .then(res => {
         expect(res.status).to.equal(200);
-      })
-      .then(() => {
         return db.user_crew
           .findOne({
             where: {
@@ -238,6 +220,124 @@ describe('Server and Client Are Active', function() {
       })
       .then(found => {
         expect(found.points).to.equal(400);
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Posts a new crew', function(done) {
+    let body = {
+      name: 'New Crew',
+      description: 'New description',
+      image: 'new image',
+      user_id: 1
+    };
+    request(server)
+      .post('/crew')
+      .send(body)
+      .expect(200)
+      .then(res => {
+        expect(res.body.name).to.equal(body.name);
+        expect(res.body.description).to.equal(body.description);
+        expect(res.body.image).to.equal('new image');
+        return db.user_crew
+          .findOne({
+            where: {
+              user_id: body.user_id,
+              crew_id: res.body.id
+            }
+          });
+      })
+      .then(found => {
+        expect(found.role).to.equal('leader');
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Updates a task as completed without adding any points', function(done) {
+    request(server)
+      .put('/user/tasks')
+      .send({
+        user_id: 5,
+        task_id: 28,
+        points: 250,
+        crew_id: 13
+      })
+      .expect(200)
+      .then(res => {
+        expect(res.body.user_id).to.equal(5);
+        expect(res.body.crew_id).to.equal(13);
+        expect(res.body.points).to.equal(0);
+        return db.user_task
+          .findOne({
+            where: {
+              user_id: 5,
+              task_id: 28
+            }
+          });
+      })
+      .then(found => {
+        expect(found.completed).to.be.true;
+        expect(found.verified).to.be.false;
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Updates a task and adds point when verifying a task', function(done) {
+    request(server)
+      .put('/user/tasks')
+      .send({
+        user_id: 2,
+        task_id: 13, // 150 points, crew 3
+        points: 150,
+        crew_id: 3,
+        verified: true
+      })
+      .expect(200)
+      .then(res => {
+        expect(res.body.user_id).to.equal(2);
+        expect(res.body.crew_id).to.equal(3);
+        expect(res.body.points).to.equal(150);
+        return db.user_task
+          .findOne({
+            where: {
+              user_id: 2,
+              task_id: 13
+            }
+          });
+      })
+      .then(found => {
+        expect(found.completed).to.be.true;
+        expect(found.verified).to.be.true;
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Edits crew information', function(done) {
+    let body = {
+      name: 'New Crew 1 name',
+      description: 'New crew 1 description',
+      image: 'new crew 1 image',
+    };
+    request(server)
+      .put('/crew?crew_id=1')
+      .send(body)
+      .expect(200)
+      .then(res => {
+        return db.crew
+          .findOne({
+            where: {
+              id: 1
+            }
+          });
+      })
+      .then(found => {
+        expect(found.name).to.equal(body.name);
+        expect(found.description).to.equal(body.description);
+        expect(found.image).to.equal(body.image);
         done();
       })
       .catch(err => done(err));

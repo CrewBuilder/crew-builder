@@ -4,8 +4,8 @@ let express = require('express');
 let router = express.Router();
 let passport = require('passport');
 let User = require('./../../db/models/User.js');
-let upsertFbUser = require('./../../db/utils/userHelpers.js').upsertFbUser;
-let findUserById = require('./../../db/utils/userHelpers.js').findUserById;
+let upsertFbUser = require('./../../db/controllers/userHelpers.js').upsertFbUser;
+let findUserById = require('./../../db/controllers/userHelpers.js').findUserById;
 
 // Hashes a unique JWT for our user
 let createToken = (auth) => {

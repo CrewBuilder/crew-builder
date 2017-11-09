@@ -135,13 +135,13 @@ module.exports = {
   },
 
   // Lets user create a Crew for which they will serve as leader
-  PostCrew: (crew, userId, cb) => {
+  PostCrew: (crew, user_id, cb) => {
     let route = '/crew/';
     let body = {
       name: crew.name,
       description: crew.description,
       image: crew.image,
-      userId: userId
+      user_id: user_id
     };
     let options = postOptions;
     options.body = JSON.stringify(body);
@@ -321,13 +321,14 @@ module.exports = {
       });
   },
 
-  ClaimReward: (reward, email, user_id, crew_id, cb) => {
+  ClaimReward: (reward, email, user_id, crew_id, crew_name, cb) => {
     let route = '/reward/claim';
     let body = {
       reward: reward,
       email: email,
       user_id: user_id,
-      crew_id: crew_id
+      crew_id: crew_id,
+      crew_name: crew_name
     };
     let options = putOptions;
     options.body = JSON.stringify(body);
