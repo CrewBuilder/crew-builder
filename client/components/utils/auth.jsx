@@ -1,12 +1,4 @@
-//TODO:
-// -confirm promises handle the fetch get requests
-// -check if myHeaders is required for Login or if access_token is all that is isRequired
-// -cors support needed client side or will npm cors handle that?
-// -add dynamic localhost/process.env.PORT access for fetch requests
-
-// authResponse will be null or undefined if not there
-// status "connected" OR IT WILL BE "unknown" IF NOT LOGGED IN
-
+// handles FB init of sdk, login through FB, and retrieve user data
 module.exports = {
   // initialize Facebook SDK
   Init: () => {
@@ -39,14 +31,7 @@ module.exports = {
       }
     });
   },
-  // check login status either 'connected' OR 'unknown'
-  CheckLogin: () => {
-    return new Promise((resolve, reject) => {
-      FB.getLoginStatus((response) => {
-        response.status === 'connected' ? resolve(response) : reject(response);
-      });
-    });
-  },
+
   // trigger FB login dialog popup and auth with /auth/facebook API route
   // add localStorage 'id_token'
   Login: (cb) => {
@@ -83,19 +68,7 @@ module.exports = {
       }, {scope: 'public_profile,email'})
     });
   },
-  // logout via FB method and removing localStorage 'id_token'
-  Logout: () => {
-    // LOOK INTO LOGGING OUT VIA FACEBOOK SERVER SIDE LATER
 
-    // return new Promise((resolve, reject) => {
-    //   FB.logout((response) => {
-    //     localStorage.removeItem('id_token');
-    //     response.authResponse ? resolve(response) : reject(response);
-    //   });
-    // });
-    localStorage.removeItem('id_token');
-    // REDIRECT
-  },
   // check current user from /auth/me API route
   GetCurrentUser: () => {
     let options = {
