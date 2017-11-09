@@ -369,4 +369,31 @@ describe('Server and Client Are Active', function() {
       })
       .catch(err => done(err));
   });
+
+  it('Creates a row in user_tasks when a user claims a task', function(done) {
+    request(server)
+      .post('/user/tasks')
+      .send({
+        userId: 1,
+        taskId: 3
+      })
+      .expect(201)
+      .then(res => {
+        return db.user_task
+          .findOne({
+            where: {
+              user_id: 1,
+              task_id: 3
+            }
+          });
+      })
+      .then(found => {
+        expect(found.user_id).to.equal(1);
+        expect(found.task_id).to.equal(3);
+        expect(found.completed).to.be.false;
+        expect(found.verified).to.be.false;
+        done();
+      })
+      .catch(err => done(err));
+  });
 });

@@ -73,17 +73,7 @@ router.post('/user/crews', (req, res) => {
   });
 });
 
-router.post('/user/tasks', (req, res) => {
-  let userId = req.body.userId;
-  let taskId = req.body.taskId;
-  postUserTask(userId, taskId, (err, userTask) => {
-    if (err) {
-      res.status(401).send(err);
-    } else {
-      res.status(200).send(userTask);
-    }
-  });
-});
+router.post('/user/tasks', postUserTask);
 
 router.post('/crew/rewards', postReward, sendReward);
 

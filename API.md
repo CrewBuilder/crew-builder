@@ -239,7 +239,7 @@
 ####req.body
 {
   taskId: 87,
-  userID: 2
+  userId: 2
 }
 
 ###'/user/rewards'
