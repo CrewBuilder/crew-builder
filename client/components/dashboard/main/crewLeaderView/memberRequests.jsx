@@ -9,12 +9,11 @@ export default class MemberRequests extends Component {
     this.selectTaskCompleted = (task, confirm) => {
       let task_id = task.id;
       let crew_id = this.props.currentCrew.crew.id;
-      let crew_name = this.props.currentCrew.name;
       let points = task.points;
       let user_id = task.user_tasks[0].user_id;
       if (confirm) {
         console.log('task', task);
-        this.props.handleMemberRequestVerification(task.id, confirm, user_id, task_id, points, crew_id, crew_name);
+        this.props.handleMemberRequestVerification(task.id, confirm, user_id, task_id, points, crew_id);
       } else {
         // TODO: Revoke 'completion' of a task
         // this.props.handleMemberRequestVerification(task.id, false, );
