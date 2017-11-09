@@ -143,15 +143,3 @@ export default class crewLeaderSummary extends Component {
     }
   }
 }
-
-
-// when you click on list members it should pop over a model showing all the current members
-
-// when you click on a edit profile it should popover a model, which is actually our createcrew form to update and change
-
-
-// <p onClick={() => this.setState({showModal: true})}>list members</p>
-// <p onClick={this.open}>Edit crew profile</p>
-
-
-// <Button onClick={() => this.setState({showModal: true})}>Show Members</Button>
