@@ -7,32 +7,32 @@ export default class Instructions extends Component {
 
     this.state = {
       showModal: false
-    }
+    };
 
     this.open = () => {
       this.setState({
         showModal: true
-      })
+      });
     };
 
     this.close = () => {
       this.setState({
         showModal: false
-      })
+      });
     };
   }
 
   render() {
     return (
       <div className="vertical-center">
-        <Jumbotron className="landing-container">
-          <img src="http://res.cloudinary.com/sarikonda/image/upload/crewbuilder.png"/>
+        <Jumbotron className="landing-container instructions-container">
+          <img className="instructions-img-title" src="http://res.cloudinary.com/sarikonda/image/upload/crewbuilder.png"/>
           <Button bsStyle="success" onClick={this.open}> Click this button to get started</Button>
         </Jumbotron>
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>
-              Instructions
+              Welcome to Crew Builder!
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -42,7 +42,7 @@ export default class Instructions extends Component {
                 <img src="http://res.cloudinary.com/sarikonda/image/upload/browse.png"/>
                 <Carousel.Caption>
                   <h3>Browse</h3>
-                  <p>Hit the browse button or search for crew to join!</p>
+                  <p className="instructions-text">Hit the browse button or search for crew to join!</p>
                 </Carousel.Caption>
               </Carousel.Item>
 
@@ -50,7 +50,7 @@ export default class Instructions extends Component {
                 <img src="http://res.cloudinary.com/sarikonda/image/upload/crewMemberView.png"/>
                 <Carousel.Caption>
                   <h3>Crew Member View</h3>
-                  <p>Once the tasks are done, Claim them and get Cool Rewards!</p>
+                  <p className="instructions-text">Once the tasks are done, Claim them and get Cool Rewards!</p>
                 </Carousel.Caption>
               </Carousel.Item>
 
@@ -58,7 +58,7 @@ export default class Instructions extends Component {
                 <img src="http://res.cloudinary.com/sarikonda/image/upload/createCrew.png"/>
                 <Carousel.Caption>
                   <h3>Create Crew</h3>
-                  <p>Enter the details and lead a Crew!</p>
+                  <p className="instructions-text">Enter the details and lead a Crew!</p>
                 </Carousel.Caption>
               </Carousel.Item>
 
@@ -66,7 +66,7 @@ export default class Instructions extends Component {
                 <img src="http://res.cloudinary.com/sarikonda/image/upload/Leader%20View.png"/>
                 <Carousel.Caption>
                   <h3>Crew Leader View</h3>
-                  <p>Manage the Crew, Confirm or Reject Member Tasks</p>
+                  <p className="instructions-text">Manage the Crew, Confirm or Reject Member Tasks</p>
                 </Carousel.Caption>
               </Carousel.Item>
 
@@ -74,7 +74,7 @@ export default class Instructions extends Component {
                 <img src="http://res.cloudinary.com/sarikonda/image/upload/addtask.png"/>
                 <Carousel.Caption>
                   <h3>Manage Tasks</h3>
-                  <p>Create, delete Tasks and Rewards</p>
+                  <p className="instructions-text">Create, delete Tasks and Rewards</p>
                 </Carousel.Caption>
               </Carousel.Item>
 
@@ -82,7 +82,6 @@ export default class Instructions extends Component {
           </Modal.Body>
         </Modal>
       </div>
-    )
+    );
   }
 }
-

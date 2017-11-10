@@ -1,6 +1,6 @@
 // here crew_leader will create a new crew, just a basic layoout... we can change it with react bootstrap later
 import React, { Component } from 'react';
-import { FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import { FormControl, FormGroup, Button } from 'react-bootstrap';
 import { PostCrew, EditCrew } from '../../utils/requests.jsx';
 import { Image, CloudinaryContext, Transformation} from 'cloudinary-react';
 import Dropzone from 'react-dropzone';
@@ -72,7 +72,7 @@ export default class CreateCrew extends Component {
           })
           .catch((errors) => {
             console.log('Login Error: ', errors);
-        });
+          });
       } else {
         // no new image, so can bypass cloudinary and just send changes
         var obj = {
@@ -103,14 +103,14 @@ export default class CreateCrew extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <FormControl type="text" name="name" value={this.state.name} placeholder="enter name" onChange={(e) => this.setState({name: e.target.value})} required/> <br/>
-          <FormControl type="text" name="description" value={this.state.description} placeholder="description" onChange={(e) => this.setState({description: e.target.value})} required/> <br/>
+        <form className="create-crew-form" onSubmit={this.handleSubmit}>
+          <FormControl type="text" name="name" value={this.state.name} placeholder="enter crew name" onChange={(e) => this.setState({name: e.target.value})} required/> <br/>
+          <FormControl className="create-crew-description" componentClass="textarea" type="text" name="description" value={this.state.description} placeholder="crew description - be as descriptive as possible" onChange={(e) => this.setState({description: e.target.value})} required/> <br/>
           <FormControl type="file" name="pic" onChange={(e) => this.setState({
             image: e.target.files[0],
             imagechanged: true
           })} /><br/>
-          <button>submit</button>
+          <Button type="submit">Create Crew</Button>
         </form>
       </div>
     );
