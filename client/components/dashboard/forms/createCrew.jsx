@@ -110,7 +110,7 @@ export default class CreateCrew extends Component {
             image: e.target.files[0],
             imagechanged: true
           })} /><br/>
-          <button type="submit">Create Crew</button>
+          <button type="submit">Submit</button>
         </form>
       </div>
     );
