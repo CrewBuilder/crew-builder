@@ -48,13 +48,17 @@ exports.getCrewMembers = (req, res) => {
     .catch(err => res.status(500).send(err));
 };
 
-exports.leaveCrew = (userId, crew_id) => {
+exports.leaveCrew = (req, res) => {
+  let user_id = req.body.id;
+  let crew_id = req.body.crew_id;
   return db.user_crew.destroy({
     where: {
       crew_id: crew_id,
-      user_id: userId
+      user_id: user_id
     }
-  });
+  })
+    .then(destroyed => res.sendStatus(204))
+    .catch(err => res.status(500).send(err));
 };
 
 exports.claimReward = (req, res, next) => {

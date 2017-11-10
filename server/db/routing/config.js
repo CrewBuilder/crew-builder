@@ -43,9 +43,7 @@ router.get('/crew/rewards', getRewardsByCrew);
 router.post('/task', postTask);
 router.post('/crew', postCrew);
 router.post('/user/crews', postUserCrew);
-
 router.post('/user/tasks', postUserTask);
-
 router.post('/crew/rewards', postReward, sendReward);
 
 /**************************************************************/
@@ -53,60 +51,16 @@ router.post('/crew/rewards', postReward, sendReward);
 /**************************************************************/
 
 router.put('/user/tasks', updateTask);
-
 router.put('/crew', editCrew);
-
 router.put('/reward/claim', claimReward, sendReward);
 
 /*****************************************************************/
 /************************ DELETE REQUESTS ************************/
 /*****************************************************************/
 
-router.delete('/user/crews', (req, res) => {
-  let userId = req.body.id;
-  let crew_id = req.body.crew_id;
-  leaveCrew(userId, crew_id)
-    .then(deleted => {
-      res.sendStatus(204);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(401).send(err);
-    });
-});
-
+router.delete('/user/crews', leaveCrew);
 router.delete('/tasks', deleteTask);
-
 router.delete('/crew/rewards', deleteReward);
 router.delete('/crew', deleteCrew);
 
 module.exports = router;
-
-
-const parseUnverifiedTasks = (tasks) =>{
-  return new Promise((resolve, reject) => {
-    let parsedTasks = [ ];
-    for (let i = 0; i < tasks.length; i++) {
-      let task = tasks[i];
-      for (let j = 0; j < task.user_tasks.length; j++) {
-        let user = task.user_tasks[j].user;
-        let profile = JSON.parse(user.facebook);
-        parsedTasks.push({
-          taskId: task.id,
-          taskName: task.name,
-          taskDescription: task.description,
-          points: task.points,
-          expiry: task.expiry,
-          userId: user.id,
-          userName: profile.DISPLAY_NAME,
-          userEmail: profile.EMAIL,
-          userImg: profile.IMAGE_URL,
-          userTaskId: task.user_tasks[j].id
-        });
-      }
-      if (i === tasks.length - 1) {
-        resolve(parsedTasks);
-      }
-    }
-  });
-};
