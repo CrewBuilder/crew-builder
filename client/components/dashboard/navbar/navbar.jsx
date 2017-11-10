@@ -110,13 +110,13 @@ export default class NavBar extends Component {
                   );
                 })}
               </Nav>
-              <Nav>
-                <NavDropdown eventKey={2} title={<img className="avatar" src={this.props.user.facebook.IMAGE_URL} height="30" width="30"/>} id="dropdown">
-                  <small> Logged in as {this.props.user.facebook.DISPLAY_NAME}</small>
-                  <MenuItem eventKey={2.1} onClick={this.handleClickLogout} className="navbar-logout">Logout <Glyphicon className="logout-glyph" glyph="off" /></MenuItem>
-                </NavDropdown>
-              </Nav>
             </Col>
+            <Nav pullRight>
+              <NavDropdown eventKey={2} title={<img className="avatar" src={this.props.user.facebook.IMAGE_URL} height="30" width="30"/>} id="dropdown">
+                <small> Logged in as {this.props.user.facebook.DISPLAY_NAME}</small>
+                <MenuItem eventKey={2.1} onClick={this.handleClickLogout} className="navbar-logout">Logout <Glyphicon className="logout-glyph" glyph="off" /></MenuItem>
+              </NavDropdown>
+            </Nav>
           </Navbar.Collapse>
         </Navbar>
       </div>
