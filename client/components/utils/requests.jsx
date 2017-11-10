@@ -295,10 +295,10 @@ module.exports = {
       });
   },
 
-  UpdateTask: (userTaskId, verified = false, user_id, task_id, points, crew_id, cb) => {
+  UpdateTask: (user_task_id, verified = false, user_id, task_id, points, crew_id, cb) => {
     let route = '/user/tasks/';
     let body = {
-      userTaskId: userTaskId,
+      user_task_id: user_task_id,
       verified: verified,
       user_id: user_id,
       task_id: task_id,
