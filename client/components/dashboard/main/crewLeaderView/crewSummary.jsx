@@ -117,7 +117,8 @@ export default class crewLeaderSummary extends Component {
             </Modal.Header>
             <Modal.Body>
               <CreateCrew
-                user={this.props.userId}
+                history={this.props.history}
+                user={this.props.user}
                 name={this.props.currentCrew.crew.name}
                 desc={this.props.currentCrew.crew.description}
                 imageurl={this.props.currentCrew.crew.image}

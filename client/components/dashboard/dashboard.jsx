@@ -75,7 +75,6 @@ export default class Dashboard extends Component {
     };
 
     this.setCurrentCrewMember = (crew) => {
-      console.log('CREW', crew);
       this.setState({
         currentCrew: crew
       });

@@ -46,6 +46,7 @@ module.exports = {
             })
           };
 
+          localStorage.removeItem('id_token');
           fetch('/auth/facebook/', options)
             .then((data) => {
               var token = data.headers.get('x-auth-token');
