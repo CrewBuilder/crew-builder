@@ -81,7 +81,7 @@ describe('Server and Client Are Active', function() {
       .expect(200)
       .then(res => {
         expect(res.body.length).to.equal(1);
-        expect(res.body[0].taskName).to.equal('Tweet a link to our SoundCloud');
+        expect(res.body[0].task_name).to.equal('Tweet a link to our SoundCloud');
         done();
       })
       .catch(err =>{
@@ -374,8 +374,8 @@ describe('Server and Client Are Active', function() {
     request(server)
       .post('/user/tasks')
       .send({
-        userId: 1,
-        taskId: 3
+        user_id: 1,
+        task_id: 3
       })
       .expect(201)
       .then(res => {
@@ -418,7 +418,7 @@ describe('Server and Client Are Active', function() {
         return request(server)
           .post('/user/crews')
           .send({
-            userId: 1,
+            user_id: 1,
             crew_id: crew_id
           });
       })
