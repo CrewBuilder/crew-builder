@@ -54,7 +54,7 @@ export default class TasksInProgress extends Component {
                 {(task.user_task.completed === true && task.user_task.verified === false) ?
                   <Label bsStyle="warning" className="task-status-labels">Waiting approval...</Label> : ''}
                 {(task.user_task.completed === true && task.user_task.verified === true) ?
-                  <Label bsStyle="success" className="task-status-labels">Task Completed</Label> : ''}
+                  <Label bsStyle="success" className="task-status-labels">Task Approved</Label> : ''}
               </ListGroupItem>
             );
           })}

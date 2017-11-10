@@ -35,7 +35,7 @@ export default class CrewLeaderView extends Component {
     return (
       <div className="cover-background">
         <PanelGroup>
-          <Panel collapsible defaultExpanded={true} header="Crew Summary" eventKey="1">
+          <Panel collapsible defaultExpanded={true} header="Manage Crew" eventKey="1">
             <CrewSummary
               history={this.props.history}
               userId={this.props.user.id}

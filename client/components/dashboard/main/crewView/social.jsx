@@ -24,10 +24,6 @@ export default class Social extends Component {
     this.state = {
       shareUrl: 'https://crew-builder.herokuapp.com/'
     };
-
-    this.test = () => {
-      console.log('test');
-    };
   }
 
   render() {
@@ -44,7 +40,6 @@ export default class Social extends Component {
               <FacebookShareButton
                 url={this.state.shareUrl}
                 quote={fbLongQuote}
-                onClick={this.test}
                 className="social-share-button">
                 <FacebookIcon
                   size={48}
