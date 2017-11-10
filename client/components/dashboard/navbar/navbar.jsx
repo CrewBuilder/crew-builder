@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import { NavLink } from 'react-router-dom';
-
-import { Navbar, FormGroup, FormControl, Button, NavItem, Nav, NavDropdown, MenuItem, Glyphicon } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Col, Navbar, FormGroup, FormControl, Button, NavItem, Nav, NavDropdown, MenuItem, Glyphicon } from 'react-bootstrap';
 
 export default class NavBar extends Component {
 
@@ -44,8 +44,8 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar>
+      <div className="navigation">
+        <Navbar collapseOnSelect={true} >
           <Navbar.Header>
             <Navbar.Brand>
               <a href="/"><img className="navbar-logo" src="./images/logo.png" /></a>
@@ -70,12 +70,53 @@ export default class NavBar extends Component {
                 </NavLink>
               </form>
             </Navbar.Form>
-            <Nav pullRight>
-              <NavDropdown eventKey={1} title={<img className="avatar" src={this.props.user.facebook.IMAGE_URL} height="30" width="30"/>} id="dropdown">
-                <small> Logged in as {this.props.user.facebook.DISPLAY_NAME}</small>
-                <MenuItem eventKey={1.1} onClick={this.handleClickLogout} className="navbar-logout">Logout <Glyphicon className="logout-glyph" glyph="off" /></MenuItem>
-              </NavDropdown>
-            </Nav>
+            <Col smHidden={true} mdHidden={true} lgHidden={true}>
+            <h4 className="sidebar-heading">My Crews:</h4>
+              <Nav bsStyle="pills" stacked>
+                {this.props.userLeaderCrews.map((container) => {
+                  return (
+                    <LinkContainer to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={() => this.props.setCurrentCrewLeader(container)}>
+                      <NavItem activeKey={container.crew.id}
+                        value={container.crew.name}
+                        key={container.crew.id}
+                        className="sidebar-crew-name">
+                        {container.crew.name}
+                      </NavItem>
+                    </LinkContainer>
+                  );
+                })}
+
+                <LinkContainer to={'/dashboard/newcrew'} key='createCrew' >
+                  <NavItem activeKey='createCrew'
+                    value='createCrew'
+                    key='createCrew'
+                    className="sidebar-crew-name">
+                    <Glyphicon glyph="plus" /> create new crew
+                  </NavItem>
+                </LinkContainer>
+              </Nav>
+              <h4 className="sidebar-heading">Crews I Follow:</h4>
+              <Nav bsStyle="pills" stacked>
+                {this.props.userMemberCrews.map((container, i) => {
+                  return (
+                    <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={() => this.props.setCurrentCrewMember(container)}>
+                      <NavItem activeKey={container.crew.id}
+                        value={container.crew.name}
+                        key={container.crew.id}
+                        className="sidebar-crew-name">
+                        {container.crew.name}
+                      </NavItem>
+                    </LinkContainer>
+                  );
+                })}
+              </Nav>
+              <Nav>
+                <NavDropdown eventKey={2} title={<img className="avatar" src={this.props.user.facebook.IMAGE_URL} height="30" width="30"/>} id="dropdown">
+                  <small> Logged in as {this.props.user.facebook.DISPLAY_NAME}</small>
+                  <MenuItem eventKey={2.1} onClick={this.handleClickLogout} className="navbar-logout">Logout <Glyphicon className="logout-glyph" glyph="off" /></MenuItem>
+                </NavDropdown>
+              </Nav>
+            </Col>
           </Navbar.Collapse>
         </Navbar>
       </div>

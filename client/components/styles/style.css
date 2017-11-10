@@ -180,6 +180,10 @@ body {
   }
 }
 
+.navigation {
+  @include clearfix;
+}
+
 /* DASHBOARD */
 
 .dashboard-container {

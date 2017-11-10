@@ -5,7 +5,7 @@ import { GetCrewRewards, GetUserCrews, GetUserTasks, GetCrewTasks, GetAllCrews, 
 
 import { GetCurrentUser } from '../utils/auth.jsx';
 
-import Navbar from './navbar/navbar.jsx';
+import NavBar from './navbar/navbar.jsx';
 import Sidebar from './sidebar.jsx';
 import Main from './main/main.jsx';
 
@@ -75,6 +75,7 @@ export default class Dashboard extends Component {
     };
 
     this.setCurrentCrewMember = (crew) => {
+      console.log('CREW', crew);
       this.setState({
         currentCrew: crew
       });
@@ -224,15 +225,19 @@ export default class Dashboard extends Component {
     } else {
       return (
         <div className='fadeIn-container component-container clearfix'>
-          <Navbar
+          <NavBar
             history={this.props.history}
             user={this.state.user}
             crewSearch={this.crewSearch}
             changeLoginStatus={this.props.changeLoginStatus}
+            setCurrentCrewMember={this.setCurrentCrewMember}
+            setCurrentCrewLeader={this.setCurrentCrewLeader}
+            userLeaderCrews={this.state.userLeaderCrews}
+            userMemberCrews={this.state.userMemberCrews}
           />
           <Grid>
             <Row className="show-grid clearfix">
-              <Col xs={10} sm={2} md={2} lg={3} className="outlineBox sidebar-container">
+              <Col xsHidden={true} sm={2} md={2} lg={3} className="outlineBox sidebar-container">
                 <Sidebar
                   user={this.state.user}
                   userLeaderCrews={this.state.userLeaderCrews}
