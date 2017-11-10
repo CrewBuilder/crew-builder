@@ -24,6 +24,7 @@ export default class App extends Component {
         })
           .then((user) => {
             if (!user) {
+              window.localStorage.removeItem('id_token');
               window.location.reload();
             } else {
               this.setState({

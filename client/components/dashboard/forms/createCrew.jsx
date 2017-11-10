@@ -1,6 +1,6 @@
 // here crew_leader will create a new crew, just a basic layoout... we can change it with react bootstrap later
 import React, { Component } from 'react';
-import { FormControl, FormGroup, Button } from 'react-bootstrap';
+import { FormControl, FormGroup } from 'react-bootstrap';
 import { PostCrew, EditCrew } from '../../utils/requests.jsx';
 import { Image, CloudinaryContext, Transformation} from 'cloudinary-react';
 import Dropzone from 'react-dropzone';
@@ -110,7 +110,7 @@ export default class CreateCrew extends Component {
             image: e.target.files[0],
             imagechanged: true
           })} /><br/>
-          <Button type="submit">Create Crew</Button>
+          <button type="submit">Create Crew</button>
         </form>
       </div>
     );

@@ -305,7 +305,6 @@ module.exports = {
       points: points,
       crew_id: crew_id
     };
-    console.log('Body', body);
     let options = putOptions;
     options.body = JSON.stringify(body);
     fetch(route, options)

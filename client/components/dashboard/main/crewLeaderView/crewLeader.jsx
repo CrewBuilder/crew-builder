@@ -39,6 +39,7 @@ export default class CrewLeaderView extends Component {
             <CrewSummary
               history={this.props.history}
               userId={this.props.user.id}
+              user={this.props.user}
               currentCrew={this.props.currentCrew}
               getCrewMembers={this.getCrewMembers}
               crewMembers={this.state.crewMembers}
