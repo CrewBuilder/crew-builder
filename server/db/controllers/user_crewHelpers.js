@@ -19,10 +19,10 @@ exports.getCrewsByUser = (req, res) => {
 };
 
 exports.postUserCrew = (req, res) => {
-  let userId = req.body.userId;
+  let user_id = req.body.user_id;
   let crew_id = req.body.crew_id;
   return db.user_crew.create({
-    user_id: userId,
+    user_id: user_id,
     crew_id: crew_id,
     points: 0,
     achievement: 'none',

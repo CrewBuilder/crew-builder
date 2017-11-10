@@ -74,16 +74,16 @@ const parseUnverifiedTasks = (tasks) =>{
         let user = task.user_tasks[j].user;
         let profile = JSON.parse(user.facebook);
         parsedTasks.push({
-          taskId: task.id,
-          taskName: task.name,
-          taskDescription: task.description,
+          task_id: task.id,
+          task_name: task.name,
+          task_description: task.description,
           points: task.points,
           expiry: task.expiry,
-          userId: user.id,
-          userName: profile.DISPLAY_NAME,
-          userEmail: profile.EMAIL,
-          userImg: profile.IMAGE_URL,
-          userTaskId: task.user_tasks[j].id
+          user_id: user.id,
+          user_name: profile.DISPLAY_NAME,
+          user_email: profile.EMAIL,
+          user_image: profile.IMAGE_URL,
+          user_task_id: task.user_tasks[j].id
         });
       }
       if (i === tasks.length - 1) {

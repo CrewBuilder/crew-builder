@@ -118,8 +118,8 @@ export default class Dashboard extends Component {
       });
     };
 
-    this.getCurrentCrews = (userId) => {
-      GetUserCrews(userId, (err, res) => {
+    this.getCurrentCrews = (user_id) => {
+      GetUserCrews(user_id, (err, res) => {
         if (err) {
           console.log('Error:', err);
           this.setState({
@@ -135,8 +135,8 @@ export default class Dashboard extends Component {
       });
     };
 
-    this.getUserTasks = (userId, crew_id) => {
-      GetUserTasks(userId, crew_id, (err, res) => {
+    this.getUserTasks = (user_id, crew_id) => {
+      GetUserTasks(user_id, crew_id, (err, res) => {
         if (err) {
           console.log('Error:', err);
         }
@@ -198,9 +198,9 @@ export default class Dashboard extends Component {
           return user;
         }
       })
-      .then((userId) => {
-        // get user crews using userId.id
-        let id = userId.id;
+      .then((user_id) => {
+        // get user crews using user_id.id
+        let id = user_id.id;
 
         GetUserCrews(id, (err, res) => {
           if (err) {

@@ -45,11 +45,11 @@ module.exports = {
   },
 
   postUserTask(req, res) {
-    let userId = req.body.userId;
-    let taskId = req.body.taskId;
+    let user_id = req.body.user_id;
+    let task_id = req.body.task_id;
     db.user_task.create({
-      user_id: userId,
-      task_id: taskId,
+      user_id: user_id,
+      task_id: task_id,
     })
       .then(userTask => res.status(201).send(userTask))
       .catch(err => res.status(500).send(err));
