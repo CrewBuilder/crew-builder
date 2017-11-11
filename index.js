@@ -4,7 +4,7 @@ const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const fbRouting = require('./server/auth/utils/facebookTokens.js');
+const fbRouting = require('./server/auth/utils/tokens.js');
 const modelRouting = require('./server/db/routing/config.js');
 const cors = require('cors');
 const passportConfig = require('./server/auth/passport.js');
@@ -66,11 +66,9 @@ if (process.env.DEV_MODE === 'production' || process.env.DEV_MODE === 'test') {
 }
 
 app.post('/image', upload.single('picture'), function(req, res, next) {
-  // console.log(req.file)
   if (req.file) {
     cloudinary.v2.uploader.upload(req.file.path, {public_id: req.file.originalname},
       function(error, result) {
-        // console.log(result)
         res.json({success: true, message: result.secure_url});
       });
   } else {
