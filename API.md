@@ -1,9 +1,12 @@
-#API Documentation
+> # API Documentation
+##Getting started
+###API is protected by token autorization. API will only respond if headers include a proper 'x-auth-token'. This is a JSON webtoken (JWT) created when a Facebook authenticated User logs in.
 
 ##GET Endpoints
 
 ###'/user/crews?id={USER_ID}'
 ####Response
+```JSON
 {
   leader: [
     {
@@ -33,10 +36,12 @@
     }
   ]
 }
+```
 
 ###'/user/tasks?id={USER_ID}&crewId={CREW_ID}'
 ###User GETs task data to be shown in Crew View. NOTE: 'id' field in response refers to Task id.
 ####Response
+```JSON
 {
   tasksInProgress: [
     {
@@ -66,10 +71,11 @@
     }
   ]
 }
-
+```
 ###'/crew/rewards?crewId={CREW_ID}'
 ###Returns all rewards for a crew. Used in CrewView and LeaderCrewView.
 ####Response
+```JSON
 [
   {
     id: 9,
@@ -83,10 +89,11 @@
     updatedAt: '2017-10-27T23:58:30.556Z'
   }
 ]
-
+```
 ###'/crew/rewards?crewId={CREW_ID}'
 ###Returns all tasks for a crew. Used in LeaderCrewView.
 ####Response
+```JSON
 [
   {
     id: 9,
@@ -100,10 +107,11 @@
     updatedAt: '2017-10-27T23:58:30.556Z'
   }
 ]
-
+```
 ###'/crews?qs={search string}'
 ###Returns all crews, query string is optional and can also be set to null to return all crews
 ####Response
+```JSON
 [{
   createdAt: "2017-10-27T23:58:30.538Z",
   id: 1,
@@ -117,10 +125,11 @@
     that gets people dancing.",
   image: "http://www.celebratewithstringsattached.com/uploads/3/5/4/6/3546135/1090860.jpg"
 }]
-
+```
 ###'/leader/members?crewId={CREW_ID}'
 ###Leader gets a list of Users
 ####Response
+```JSON
 [
   {
     achievement: "none",
@@ -133,10 +142,11 @@
     user_id: 1
   }
 ]
-
+```
 ###'/leader/tasks?crew_id={CREW_ID}'
 ###Leader gets a list of tasks that are completed but still need verification.
 #### Example Response from seed data user crewId=4
+```JSON
 [
     {
         "taskId": 65,
@@ -161,9 +171,10 @@
         "userTaskId": 24
     }
 ]
-
+```
 ###'/crew/rewards?crewId={CREW_ID}'
 #### Example Response
+```JSON
 [
     {
         "id": 1,
@@ -188,23 +199,25 @@
         "crew_id": 3
     }
 ]
-
+```
 
 ##POST Endpoints
 
 ###'/crew'
 ###Leader starts a new crew, creates new crew, creates corresponding user_crew row
 ####req.body (also response)
+```JSON
 {
   name: 'Les Maurice',
   description: 'Milwaukee rock reggae band',
   image: 'http://www.les-maurice.com/image.jpg',
   user_id: 3
 }
-
+```
 ###'/task'
 ###Leader adds task to Crew. Only Leader of Crew should be able to do this.
 ####req.body
+```JSON
 {
   name: STRING,
   description: STRING,
@@ -213,10 +226,11 @@
   expiry: DATE,
   crew_id: INT
 }
-
+```
 ###'/reward'
 ###Leader adds reward to Crew. Only Leader of Crew should be able to do this.
 ####req.body
+```JSON
 {
   name: STRING,
   description: STRING,
@@ -225,25 +239,28 @@
   expiry: DATE,
   crew_id: INT
 }
-
+```
 ###'/user/crews'
 ###Member joins a crew, creates corresponding user_crew row
 ####req.body
+```JSON
 {
   crewId: 2,
   userId: 4
 }
-
+```
 ###'/user/tasks'
 ###User adds a task to the user_task join table. Task must be connected to the appropriate Crew.
 ####req.body
+```JSON
 {
   taskId: 87,
   userID: 2
 }
-
+```
 ###'/user/rewards'
 ####req.body
+```JSON
 {
   name: 'T-shirt',
   description: 'get a crew T-shirt',
@@ -252,11 +269,12 @@
   expiry: new Date() + 1000,
   crew_id: 4
 }
-
+```
 ##PUT Endpoints
 ###'user/tasks'
 ####All requests should trigger the 'Completed' field of user_task data row to be 'true'. Crew Leader sees all tasks which are 'Completed' but not 'Verified' and will verify them to award points.
 ####req.body (request will know which action to do based on the state of 'verified')
+```JSON
 {
   crew_id: 1,
   points: 100,
@@ -265,23 +283,26 @@
   user_id: 16,
   verified: false
 }
-
+```
 ###'/crew?crew_id={crew id}'
 ####req.body
+```JSON
 {
   name: 'new name'
   description: 'new description'
 }
 etc, include any/all fields that need to be updated. Check to make sure you aren't sending null for any fields
-
+```
 ##DELETE Endpoints
 ### 'user/crews'
 TODO: for cleanup this should probably be changed to only accept a query string
 ####req.body
+```JSON
 {
   userId: INT, user id
   crewId: INT, crew id
 }
+```
 sends back 202 with no data
 
 ###/crew?crew_id={crew id}

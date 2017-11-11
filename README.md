@@ -34,6 +34,9 @@
 #### Create environment variables for Facebook:
 > FB_CLIENT_ID=123456789012345
 > FB_SECRET=73hakf83jf8sjj30skkf9a88s83qqa
+#### Set up an email account and Create environment variables for Nodemailer
+NODEMAILER_CLIENT_ID=rewards@organization.com
+NODEMAILER_PASSWORD=password1
 
 ## Requirements
 
@@ -78,6 +81,7 @@ View the project roadmap [here](https://github.com/CrewBuilder/crew-builder/issu
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See [API.md](API.md) for API documentation and overview.
 
 ## MIT License
 
