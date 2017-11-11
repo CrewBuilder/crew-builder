@@ -73,7 +73,7 @@ module.exports = {
   },
 
   deleteCrew(req, res) {
-    db.crew
+    return db.crew
       .destroy({
         where: {
           id: req.query.crew_id
