@@ -73,13 +73,13 @@ module.exports = {
   },
 
   deleteCrew(req, res) {
-    db.crew
+    return db.crew
       .destroy({
         where: {
           id: req.query.crew_id
         }
       })
-      .then(destroyed => res.sendStatus(202))
+      .then(destroyed => res.sendStatus(204))
       .catch(err => res.status(500).send(err));
   }
 };

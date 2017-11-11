@@ -7,13 +7,13 @@ export default class MemberRequests extends Component {
 
     // need to get member requests data through props
     this.selectTaskCompleted = (task, confirm) => {
-      let task_id = task.id;
+      let task_id = task.task_id;
       let crew_id = this.props.currentCrew.crew.id;
       let points = task.points;
-      let user_id = task.user_tasks[0].user_id;
+      let user_id = task.user_id;
       if (confirm) {
         console.log('task', task);
-        this.props.handleMemberRequestVerification(task.id, confirm, user_id, task_id, points, crew_id);
+        this.props.handleMemberRequestVerification(task.user_task_id, confirm, user_id, task_id, points, crew_id);
       } else {
         // TODO: Revoke 'completion' of a task
         // this.props.handleMemberRequestVerification(task.id, false, );
@@ -34,7 +34,7 @@ export default class MemberRequests extends Component {
                   <Button bsStyle="danger" onClick={() => this.selectTaskCompleted(task)}><Glyphicon glyph="remove" /> Reject</Button>
                 </ButtonGroup>
               </div>
-              <div className="member-request-text">CrewMember: {task.user_tasks[0].user.facebook.DISPLAY_NAME} reqested completion of {task.name}</div>
+              <div className="member-request-text">CrewMember: {task.user_name} requested completion of {task.task_name}</div>
             </ListGroupItem>
           )) }
         </ListGroup>

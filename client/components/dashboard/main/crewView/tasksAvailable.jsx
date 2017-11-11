@@ -29,14 +29,14 @@ export default class TasksAvailable extends Component {
 
     this.claimTask = () => {
       this.setState({showModal: false});
-      let userId = props.userId;
+      let user_id = props.userId;
       let task = this.state.selectedTask.id;
-      ClaimATask(userId, task, (err, data) => {
+      ClaimATask(user_id, task, (err, data) => {
         if (err) {
           console.log('Error', err);
         } else {
           console.log('Data', data);
-          this.props.getUserTasks(userId, this.state.selectedTask.crew_id);
+          this.props.getUserTasks(user_id, this.state.selectedTask.crew_id);
         }
       });
     };

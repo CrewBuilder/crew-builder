@@ -1,56 +1,64 @@
 const db = require('../index.js');
 
-exports.getCrewsByUser = (id) => {
-  return db.user.findOne({
-    where: {
-      id: id
-    },
-    include: [{
-      model: db.crew,
-      through: {
-        attributes: ['points', 'role', 'achievement']
-      }
-    }]
-  });
+exports.getCrewsByUser = (req, res) => {
+  let id = req.query.id;
+  return db.user
+    .findOne({
+      where: {
+        id: id
+      },
+      include: [{
+        model: db.crew,
+        through: {
+          attributes: ['points', 'role', 'achievement']
+        }
+      }]
+    })
+    .then(found => res.status(200).send(parseData(found)))
+    .catch(err => res.status(500).send(err));
 };
 
-exports.postUserCrew = (userId, crew_id, cb) => {
-  db.user_crew.create({
-    user_id: userId,
+exports.postUserCrew = (req, res) => {
+  let user_id = req.body.user_id;
+  let crew_id = req.body.crew_id;
+  return db.user_crew.create({
+    user_id: user_id,
     crew_id: crew_id,
     points: 0,
     achievement: 'none',
     role: 'member'
   })
-    .then(userCrew => {
-      cb(null, userCrew);
-    })
-    .catch(err => {
-      cb(err, null);
-    });
+    .then(userCrew => res.status(201).send(userCrew))
+    .catch(err => res.status(500).send(err));
 };
 
-exports.getCrewMembers = (crew_id, cb) => {
-  db.user_crew.findAll({
-    where: {
-      crew_id: crew_id
-    }
-  })
-    .then(members => {
-      cb(null, members);
+exports.getCrewMembers = (req, res) => {
+  let crew_id = req.query.crew_id;
+  return db.user_crew
+    .findAll({
+      where: {
+        crew_id: crew_id,
+        role: 'member'
+      },
+      include: [{
+        model: db.user
+      }]
     })
-    .catch(err => {
-      cb(err, null);
-    });
+    .then(members => res.status(200).send(members))
+    .catch(err => res.status(500).send(err));
 };
 
-exports.leaveCrew = (userId, crew_id) => {
+exports.leaveCrew = (req, res) => {
+  let user_id = req.body.id;
+  let crew_id = req.body.crew_id;
   return db.user_crew.destroy({
     where: {
       crew_id: crew_id,
-      user_id: userId
+      user_id: user_id
     }
-  });
+  })
+    .then(destroyed => res.sendStatus(204))
+    .catch(err => res.status(500).send(err));
 };
 
 exports.claimReward = (req, res, next) => {
@@ -77,4 +85,43 @@ exports.claimReward = (req, res, next) => {
       console.log(err);
       res.sendStatus(500);
     });
+};
+
+const parseData = (user) => {
+  let crews = user.crews;
+  let response = {
+    leader: [],
+    member: []
+  };
+  crews.forEach(crew => {
+
+    if (crew.user_crew.role === 'leader') {
+      response.leader.push({
+        points: crew.user_crew.points,
+        achievement: crew.user_crew.achievement,
+        role: crew.user_crew.role,
+        crew: {
+          id: crew.id,
+          name: crew.name,
+          description: crew.description,
+          image: crew.image
+        }
+      });
+
+    } else {
+      response.member.push({
+        points: crew.user_crew.points,
+        achievement: crew.user_crew.achievement,
+        role: crew.user_crew.role,
+        crew: {
+          id: crew.id,
+          name: crew.name,
+          description: crew.description,
+          image: crew.image
+        }
+      });
+    }
+  });
+
+  return response;
 };

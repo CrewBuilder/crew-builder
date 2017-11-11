@@ -39,8 +39,8 @@ module.exports = {
 
 
   // Returns all of current user's crews. Will be rendered in sidebar view.
-  GetUserCrews: (userId, cb) => {
-    let route = `/user/crews?id=${userId}`;
+  GetUserCrews: (user_id, cb) => {
+    let route = `/user/crews?id=${user_id}`;
     return fetch(route, getOptions)
       .then((response) => {
         return response.json();
@@ -55,8 +55,8 @@ module.exports = {
   },
 
   // Returns all of current user's tasks for selected crew.
-  GetUserTasks: (userId, crew_id, cb) => {
-    let route = `/user/tasks?id=${userId}&crew_id=${crew_id}`;
+  GetUserTasks: (user_id, crew_id, cb) => {
+    let route = `/user/tasks?id=${user_id}&crew_id=${crew_id}`;
     return fetch(route, getOptions)
     // TODO: test the data format of these API requests
       .then((response) => {
@@ -159,13 +159,13 @@ module.exports = {
   },
 
   // Lets leader edit crew from leader view
-  EditCrew: (crew_id, crew, userId, cb) => {
+  EditCrew: (crew_id, crew, user_id, cb) => {
     let route = `/crew?crew_id=${crew_id}`;
     let body = {
       name: crew.name,
       description: crew.description,
       image: crew.image,
-      userId: userId
+      user_id: user_id
     };
     let options = putOptions;
     options.body = JSON.stringify(body);
@@ -252,10 +252,10 @@ module.exports = {
   },
 
   // POSTs a new relation of User to Crew. User joins selected Crew.
-  JoinACrew: (userId, crew_id, cb) => {
+  JoinACrew: (user_id, crew_id, cb) => {
     let route = '/user/crews/';
     let body = {
-      userId: userId,
+      user_id: user_id,
       crew_id: crew_id
     };
     let options = postOptions;
@@ -274,11 +274,11 @@ module.exports = {
   },
 
   // POSTs a new relation of User to Task. User claims selected Task
-  ClaimATask: (userId, taskId, cb) => {
+  ClaimATask: (user_id, task_id, cb) => {
     let route = '/user/tasks/';
     let body = {
-      userId: userId,
-      taskId: taskId
+      user_id: user_id,
+      task_id: task_id
     };
     let options = postOptions;
     options.body = JSON.stringify(body);
@@ -295,10 +295,10 @@ module.exports = {
       });
   },
 
-  UpdateTask: (userTaskId, verified = false, user_id, task_id, points, crew_id, cb) => {
+  UpdateTask: (user_task_id, verified = false, user_id, task_id, points, crew_id, cb) => {
     let route = '/user/tasks/';
     let body = {
-      userTaskId: userTaskId,
+      user_task_id: user_task_id,
       verified: verified,
       user_id: user_id,
       task_id: task_id,
@@ -345,10 +345,10 @@ module.exports = {
   },
 
   // Delete UserCrew: removes User from Crew
-  DeleteUserCrew: (userId, crew_id, cb) => {
+  DeleteUserCrew: (user_id, crew_id, cb) => {
     let route = '/user/crews/';
     let body = {
-      id: userId,
+      id: user_id,
       crew_id: crew_id
     };
     let options = deleteOptions;
@@ -387,10 +387,10 @@ module.exports = {
       });
   },
 
-  DeleteTask: (taskId, cb) => {
-    let route = `/tasks?taskId=${taskId}`;
+  DeleteTask: (task_id, cb) => {
+    let route = `/tasks?task_id=${task_id}`;
     let body = {
-      taskId: taskId
+      task_id: task_id
     };
     let options = deleteOptions;
     options.body = JSON.stringify(body);

@@ -65,7 +65,7 @@ describe('Server and Client Are Active', function() {
   it('Removes the association between a user and a crew upon user request to delete', function(done) {
     request(server)
       .delete('/user/crews?id=1crew_id=4')
-      .expect(202)
+      .expect(204)
       .then(res => {
         expect(!res.body.length).to.be.true;
         done();
@@ -80,8 +80,8 @@ describe('Server and Client Are Active', function() {
       .get('/leader/tasks?crew_id=13')
       .expect(200)
       .then(res => {
-        expect(res.body[0].name).to.equal('Tweet a link to our SoundCloud');
-        expect(!res.body[1]).to.be.true;
+        expect(res.body.length).to.equal(1);
+        expect(res.body[0].task_name).to.equal('Tweet a link to our SoundCloud');
         done();
       })
       .catch(err =>{
@@ -89,10 +89,10 @@ describe('Server and Client Are Active', function() {
       });
   });
 
-  it('Responds to DELETE: /tasks with a 202', function(done) {
+  it('Responds to DELETE: /tasks with a 204', function(done) {
     request(server)
       .delete('/tasks?taskId=4')
-      .expect(202)
+      .expect(204)
       .then(res => {
         done();
       })
@@ -124,7 +124,7 @@ describe('Server and Client Are Active', function() {
   it('Deletes a specified reward', function(done) {
     request(server)
       .delete('/crew/rewards?reward_id=1')
-      .expect(202)
+      .expect(204)
       .then(res => {
         return db.reward.findOne({
           where: {
@@ -153,7 +153,7 @@ describe('Server and Client Are Active', function() {
   it('Deletes a crew', function(done) {
     request(server)
       .delete('/crew?crew_id=4')
-      .expect(202)
+      .expect(204)
       .then(res => {
         return db.crew
           .findOne({
@@ -338,6 +338,102 @@ describe('Server and Client Are Active', function() {
         expect(found.name).to.equal(body.name);
         expect(found.description).to.equal(body.description);
         expect(found.image).to.equal(body.image);
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Responds with a list of all crews to which a user belongs', function(done) {
+    request(server)
+      .get('/user/crews?id=1')
+      .expect(200)
+      .then(res => {
+        expect(res.body.leader.length).to.equal(1);
+        expect(res.body.member.length).to.equal(14);
+        expect(res.body.leader[0].crew.id).to.equal(1);
+        expect(res.body.leader[0].role).to.equal('leader');
+        expect(res.body.member[0].role).to.equal('member');
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Responds with a list of tasks for a user', function(done) {
+    request(server)
+      .get('/user/tasks?id=2&crew_id=3')
+      .expect(200)
+      .then(res => {
+        expect(res.body.tasksInProgress.length).to.equal(1);
+        expect(res.body.tasksAvailable.length).to.equal(3);
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Creates a row in user_tasks when a user claims a task', function(done) {
+    request(server)
+      .post('/user/tasks')
+      .send({
+        user_id: 1,
+        task_id: 3
+      })
+      .expect(201)
+      .then(res => {
+        return db.user_task
+          .findOne({
+            where: {
+              user_id: 1,
+              task_id: 3
+            }
+          });
+      })
+      .then(found => {
+        expect(found.user_id).to.equal(1);
+        expect(found.task_id).to.equal(3);
+        expect(found.completed).to.be.false;
+        expect(found.verified).to.be.false;
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Responds with a list of crew members', function(done) {
+    request(server)
+      .get('/leader/members?crew_id=1')
+      .expect(200)
+      .then(res => {
+        expect(res.body.length).to.equal(14);
+        expect(res.body[0].user).to.exist;
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('Creates a new row in user_crews when a user joins a crew', function(done) {
+    let crew_id;
+    db.crew
+      .create()
+      .then(created => {
+        crew_id = created.id;
+        return request(server)
+          .post('/user/crews')
+          .send({
+            user_id: 1,
+            crew_id: crew_id
+          });
+      })
+      .then(res => {
+        expect(res.status).to.equal(201);
+        return db.user_crew
+          .findOne({
+            where: {
+              user_id: 1,
+              crew_id: crew_id
+            }
+          });
+      })
+      .then(found => {
+        expect(!!found).to.be.true;
         done();
       })
       .catch(err => done(err));

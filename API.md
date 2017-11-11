@@ -140,6 +140,7 @@
     role: "leader",
     updatedAt: "2017-10-27T23:58:30.663Z",
     user_id: 1
+    user: {user data}
   }
 ]
 ```
@@ -255,7 +256,7 @@
 ```JSON
 {
   taskId: 87,
-  userID: 2
+  userId: 2
 }
 ```
 ###'/user/rewards'

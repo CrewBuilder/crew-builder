@@ -23,13 +23,13 @@ export default class SearchResults extends Component {
     // Expect 'props' to contain 'crews'
     this.joinCrew = (crew) => {
       let crew_id = crew.id;
-      let userId = this.props.user.id;
-      JoinACrew(userId, crew_id, (err, data) => {
+      let user_id = this.props.user.id;
+      JoinACrew(user_id, crew_id, (err, data) => {
         if (err) {
           console.log('Error', err);
         } else {
           // console.log('Data', data);
-          props.getCurrentCrews(userId);
+          props.getCurrentCrews(user_id);
         }
       });
     };
