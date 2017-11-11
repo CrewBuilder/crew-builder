@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-
 import { LinkContainer } from 'react-router-bootstrap';
-
-import { MenuItem, NavDropdown, Navbar, Row, Col, Nav, NavItem, Tab, TagContainer, TabContent, TabPane, Label, Button, Glyphicon } from 'react-bootstrap';
+import { Row, Col, Nav, NavItem, Tab, Glyphicon } from 'react-bootstrap';
 
 export default class Sidebar extends Component {
-
   constructor(props) {
     super(props);
     // Expect 'props' to contain 'user', 'userCrews', and 'handleCrewClick' function which sets current crew in main view
@@ -22,7 +19,10 @@ export default class Sidebar extends Component {
                 <Nav bsStyle="pills" stacked>
                   {this.props.userLeaderCrews.map((container) => {
                     return (
-                      <LinkContainer to={`/dashboard/manage/${container.crew.id}`} key={container.crew.id} onClick={() => this.props.setCurrentCrewLeader(container)}>
+                      <LinkContainer
+                        to={`/dashboard/manage/${container.crew.id}`}
+                        key={container.crew.id}
+                        onClick={() => this.props.setCurrentCrewLeader(container)}>
                         <NavItem activeKey={container.crew.id}
                           value={container.crew.name}
                           key={container.crew.id}
@@ -33,7 +33,9 @@ export default class Sidebar extends Component {
                     );
                   })}
 
-                  <LinkContainer to={'/dashboard/newcrew'} key='createCrew' >
+                  <LinkContainer
+                    to={'/dashboard/newcrew'}
+                    key='createCrew' >
                     <NavItem activeKey='createCrew'
                       value='createCrew'
                       key='createCrew'
@@ -46,7 +48,10 @@ export default class Sidebar extends Component {
                 <Nav bsStyle="pills" stacked>
                   {this.props.userMemberCrews.map((container, i) => {
                     return (
-                      <LinkContainer to={`/dashboard/crews/${container.crew.id}`} key={i} onClick={() => this.props.setCurrentCrewMember(container)}>
+                      <LinkContainer
+                        to={`/dashboard/crews/${container.crew.id}`}
+                        key={i}
+                        onClick={() => this.props.setCurrentCrewMember(container)}>
                         <NavItem activeKey={container.crew.id}
                           value={container.crew.name}
                           key={container.crew.id}
@@ -60,13 +65,9 @@ export default class Sidebar extends Component {
               </span>
             </Col>
           </Row>
-
         </Tab.Container>
       </div>
     );
   }
 }
-
-
-
 

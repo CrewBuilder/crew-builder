@@ -4,10 +4,7 @@ import CrewSummary from './crewSummary.jsx';
 import TasksInProgress from './tasksInProgress.jsx';
 import TasksAvailable from './tasksAvailable.jsx';
 import CrewRewards from './crewRewards.jsx';
-
-import { Panel, PanelGroup, ResponsiveEmbed } from 'react-bootstrap';
-// Compares userTasks to crewTasks => sends to tasksInProgress and tasksAvailable respectively
-
+import { Panel, PanelGroup } from 'react-bootstrap';
 import Social from './social.jsx';
 
 export default class CrewView extends Component {

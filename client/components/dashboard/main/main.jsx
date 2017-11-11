@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link, Redirect, Switch } from 'react-router-dom';
-
-import {GetCurrentUser} from '../../utils/auth.jsx';
-import { getUserCrews, getUserTasks } from '../../utils/requests.jsx';
-
+import { Route, Switch } from 'react-router-dom';
 import CreateCrew from '../forms/createCrew.jsx';
 import SearchResults from './searchView/searchResults.jsx';
 import CrewView from './crewView/crewView.jsx';
@@ -11,7 +7,6 @@ import CrewLeaderView from './crewLeaderView/crewLeader.jsx';
 import Instructions from '../instructions.jsx';
 
 export default class Main extends Component {
-
   constructor(props) {
     super(props);
   }

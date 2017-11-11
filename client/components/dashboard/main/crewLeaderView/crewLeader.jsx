@@ -5,11 +5,11 @@ import {Panel, PanelGroup} from 'react-bootstrap';
 import MemberRequests from './memberRequests.jsx';
 import ManageTasks from './manageTasks.jsx';
 import ManageRewards from './manageRewards.jsx';
-
 import { GetCrewMembers } from '../../../utils/requests.jsx';
+// debug flag for dev error tracking
+const debug = false;
 
 export default class CrewLeaderView extends Component {
-
   constructor(props) {
     super(props);
 
@@ -20,7 +20,9 @@ export default class CrewLeaderView extends Component {
     this.getCrewMembers = (crew_id) => {
       GetCrewMembers(crew_id, (err, res) => {
         if (err) {
-          console.log('ERROR:', err);
+          if (debug) {
+            console.log('Error:', err);
+          }
         } else {
           this.setState({
             crewMembers: res
@@ -29,7 +31,6 @@ export default class CrewLeaderView extends Component {
       });
     };
   }
-
 
   render() {
     return (
