@@ -3,8 +3,6 @@ let expressJwt = require('express-jwt');
 let express = require('express');
 let router = express.Router();
 let passport = require('passport');
-let User = require('./../../db/models/User.js');
-let upsertFbUser = require('./../../db/controllers/userHelpers.js').upsertFbUser;
 let findUserById = require('./../../db/controllers/userHelpers.js').findUserById;
 
 // Hashes a unique JWT for our user
@@ -20,7 +18,7 @@ let createToken = (auth) => {
 let generateToken = (req, res, next) => {
   req.token = createToken(req.auth);
   next();
-}
+};
 
 // Sends token to client
 let sendToken = (req, res) => {
@@ -35,23 +33,25 @@ let authenticate = expressJwt({
   getToken: (req) => {
     if (req.headers['x-auth-token']) {
       return req.headers['x-auth-token'];
-    } else return null;
+    } else {
+      return null;
+    }
   }
 });
 
 // Handles /auth route for facebook
 router.route('/auth/facebook')
-.post(passport.authenticate('facebook-token', {session: false}), (req, res, next) => {
-  if (!req.user) {
-    return res.status(401, 'User not authenticated');
-  } else {
-    req.auth = {
-      id: req.user.id
-    };
-    next();
-  }
+  .post(passport.authenticate('facebook-token', {session: false}), (req, res, next) => {
+    if (!req.user) {
+      return res.status(401, 'User not authenticated');
+    } else {
+      req.auth = {
+        id: req.user.id
+      };
+      next();
+    }
 
-}, generateToken, sendToken);
+  }, generateToken, sendToken);
 
 // Returns User data by id
 let getCurrentUser = (req, res, next) => {
@@ -63,7 +63,7 @@ let getCurrentUser = (req, res, next) => {
       next();
     }
   });
-}
+};
 
 let getOne = (req, res) => {
   let user = req.user;
@@ -73,10 +73,10 @@ let getOne = (req, res) => {
   //delete user['__v'];
 
   res.json(user);
-}
+};
 
 // Expects req.user.id to be defined. Queries DB and returns the User's data
 router.route('/auth/me')
-.get(authenticate, getCurrentUser, getOne);
+  .get(authenticate, getCurrentUser, getOne);
 
 module.exports = router;

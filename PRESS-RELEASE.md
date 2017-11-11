@@ -18,6 +18,10 @@
   > "This project was inspired by a brilliant local musician with years of experience mobilizing and engaging his fan base to keep his creative vision economically viable." -Iona Olive, CrewBuilder Product Owner
 
 ## Our customers say ##
-  > CrewBuilder has really increased our exposure to our fans!
+  > CrewBuilder has really increased our exposure to our fans and supporters!
 ## How to Get Started ##
   > Sign up with Facebook and find a Crew to support. If you need support sign up your own Crew!
+
+
+Crew Leaders of small organizations (non-profit, community, or creative) can use Crew Builder to strategize promotion of their brand/agenda and to offer opportunities to contribute.
+Crew Members, who are fans, volunteers, and supporters, earn rewards by helping out their Crew(s) of choice.
