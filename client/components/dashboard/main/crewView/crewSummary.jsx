@@ -2,9 +2,10 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Image, Button, Alert, Badge } from 'react-bootstrap';
 import { DeleteUserCrew } from '../../../utils/requests.jsx';
+// debug flag for dev error tracking
+const debug = false;
 
 export default class CrewSummary extends Component {
-
   constructor(props) {
     super(props);
 
@@ -29,7 +30,9 @@ export default class CrewSummary extends Component {
       let crew_id = this.props.currentCrew.crew.id;
       DeleteUserCrew(user_id, crew_id, (err, data) => {
         if (err) {
-          console.log('Error', err);
+          if (debug) {
+            console.log('Error:', err);
+          }
         } else {
           this.setState({
             showLeave: false
@@ -66,15 +69,14 @@ export default class CrewSummary extends Component {
               <p><strong>{achievementLevel}</strong></p>
             </Col>
             <Col xs={12} sm={8} md={5} lg={2} className="container-fluid">
-              <div>
+              <div className="alert-leave-crew">
                 {(this.state.showLeave === true) ? <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>
                   <h4>Are you sure you want to leave?</h4>
-                  <p>Once you leave a Crew you will forfeit any points you have earned.</p>
+                  <p>Once you leave a Crew you will forfeit any points you have earned with this crew.</p>
                   <p>
                     <Button bsStyle="danger" onClick={this.handleConfirmLeave} href="/dashboard">
-                      Yes, I know I will lose my points
+                      Yes, I agree
                     </Button>
-                    <span> or </span>
                     <Button onClick={this.handleAlertDismiss}>Nevermind</Button>
                   </p>
                 </Alert> : <Button onClick={this.leaveCrewHandler} > Leave </Button> }

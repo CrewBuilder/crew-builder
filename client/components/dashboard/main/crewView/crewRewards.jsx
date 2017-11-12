@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { Alert, Modal, ListGroup, ListGroupItem, Button, Form, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 import { ClaimReward } from '../../../utils/requests.jsx';
 
-
 export default class CrewRewards extends Component {
-
   constructor(props) {
     super(props);
 

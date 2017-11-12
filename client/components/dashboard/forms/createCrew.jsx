@@ -1,11 +1,9 @@
-// here crew_leader will create a new crew, just a basic layoout... we can change it with react bootstrap later
+// create a new crew with form and POST to API, or edit crew and PUT to API
 import React, { Component } from 'react';
 import { FormControl, FormGroup } from 'react-bootstrap';
 import { PostCrew, EditCrew } from '../../utils/requests.jsx';
-import { Image, CloudinaryContext, Transformation} from 'cloudinary-react';
-import Dropzone from 'react-dropzone';
-import cloudinary from 'cloudinary-core';
-import request from 'superagent';
+// debug flag for dev error tracking
+const debug = false;
 
 export default class CreateCrew extends Component {
   constructor(props) {
@@ -23,8 +21,7 @@ export default class CreateCrew extends Component {
     this.handleSubmit = (e) => {
       e.preventDefault();
 
-      // check if image changed - edit or new post?
-      if (this.state.imagechanged) {
+      if (this.state.imagechanged || this.state.url === '') {
         var formData = new FormData();
         formData.append('picture', this.state.image);
 
@@ -53,7 +50,9 @@ export default class CreateCrew extends Component {
             if (this.props.newCrew) {
               PostCrew(obj, this.props.user.id, (err, data) => {
                 if (err) {
-                  console.log('error in posting');
+                  if (debug) {
+                    console.log('Error:', err);
+                  }
                 } else {
                   this.props.history.push('/dashboard');
                   this.props.getCurrentCrews(this.props.user.id);
@@ -62,7 +61,9 @@ export default class CreateCrew extends Component {
             } else {
               EditCrew(this.props.id, obj, this.props.user, (err, data) => {
                 if (err) {
-                  console.log('error in posting');
+                  if (debug) {
+                    console.log('Error:', err);
+                  }
                 } else {
                   this.props.history.push('/dashboard');
                   this.props.getCurrentCrews(this.props.user.id);
@@ -71,8 +72,11 @@ export default class CreateCrew extends Component {
             }
           })
           .catch((errors) => {
-            console.log('Login Error: ', errors);
+            if (debug) {
+              console.log('Error:', errors);
+            }
           });
+
       } else {
         // no new image, so can bypass cloudinary and just send changes
         var obj = {
@@ -83,7 +87,9 @@ export default class CreateCrew extends Component {
 
         EditCrew(this.props.id, obj, this.props.user, (err, data) => {
           if (err) {
-            console.log('error in posting');
+            if (debug) {
+              console.log('Error:', err);
+            }
           } else {
             this.props.history.push('/dashboard');
             this.props.getCurrentCrews(this.props.user.id);
@@ -91,7 +97,6 @@ export default class CreateCrew extends Component {
         });
       }
     };
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -104,12 +109,36 @@ export default class CreateCrew extends Component {
     return (
       <div>
         <form className="create-crew-form" onSubmit={this.handleSubmit}>
-          <FormControl type="text" name="name" value={this.state.name} placeholder="enter crew name" onChange={(e) => this.setState({name: e.target.value})} required/> <br/>
-          <FormControl className="create-crew-description" componentClass="textarea" type="text" name="description" value={this.state.description} placeholder="crew description - be as descriptive as possible" onChange={(e) => this.setState({description: e.target.value})} required/> <br/>
-          <FormControl type="file" name="pic" onChange={(e) => this.setState({
-            image: e.target.files[0],
-            imagechanged: true
-          })} /><br/>
+          <FormControl
+            type="text"
+            name="name"
+            value={this.state.name}
+            placeholder="enter crew name"
+            onChange={(e) => this.setState({
+              name: e.target.value
+            })}
+            required />
+          <br/>
+          <FormControl
+            className="create-crew-description"
+            componentClass="textarea"
+            type="text"
+            name="description"
+            value={this.state.description}
+            placeholder="crew description - be as descriptive as possible"
+            onChange={(e) => this.setState({
+              description: e.target.value
+            })}
+            required />
+          <br/>
+          <FormControl
+            type="file"
+            name="pic"
+            onChange={(e) => this.setState({
+              image: e.target.files[0],
+              imagechanged: true
+            })} />
+          <br/>
           <button type="submit">Submit</button>
         </form>
       </div>
